@@ -1,0 +1,102 @@
+{
+  "properties" : { },
+  "id" : "ffb6988226d14e6789cc30193e008183",
+  "script" : null,
+  "groupId" : "67b2ce258e24491194b74992958c74aa",
+  "name" : "获取菜单tree",
+  "createTime" : 1634724871168,
+  "updateTime" : 1634724871168,
+  "lock" : "0",
+  "method" : "GET",
+  "path" : "/tree",
+  "parameters" : [ ],
+  "option" : "[]",
+  "requestBody" : "{\r\n\t\r\n}",
+  "headers" : [ ],
+  "paths" : [ ],
+  "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1634309660370,\n    \"executeTime\": null\n}",
+  "description" : null,
+  "requestBodyDefinition" : null,
+  "responseBodyDefinition" : {
+    "name" : "",
+    "value" : "",
+    "description" : "",
+    "required" : false,
+    "dataType" : "Object",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : "",
+    "error" : "",
+    "expression" : "",
+    "children" : [ {
+      "name" : "code",
+      "value" : "402",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Integer",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "message",
+      "value" : "凭证已过期",
+      "description" : "",
+      "required" : false,
+      "dataType" : "String",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "data",
+      "value" : "null",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Object",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "timestamp",
+      "value" : "1634309660370",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Long",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "executeTime",
+      "value" : "null",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Object",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    } ]
+  },
+  "optionMap" : { }
+}
+================================
+var toTree = (list,pid) => select t.*,toTree(list,t.id) children from list t where t.pid = pid
+var list = toTree(db.select('select id,name,pid,is_show,url,sort,permission,desc_ribe from sys_menu where is_del = 0 order by sort'),'0')
+
+return {
+    list: list,
+    total: list.getLength()
+}
