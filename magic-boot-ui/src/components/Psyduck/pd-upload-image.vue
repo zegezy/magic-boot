@@ -210,7 +210,7 @@ export default {
       this.urls.forEach(url => {
         newUrls.push(encodeURI(url))
       })
-      this.$get('file/resort', { urls: this.newUrls.join(',') })
+      this.$get('file/resort', { urls: newUrls.join(',') })
     },
     onExceed() {
       this.$message({
@@ -247,12 +247,14 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.el-upload {
+<style scoped>
+.vue-draggable >>> .el-upload {
   width: 100%;
   height: 100%;
 }
+</style>
 
+<style lang="scss" scoped>
 // 上传按钮
 .uploadIcon {
   width: 100%;

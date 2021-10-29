@@ -5,7 +5,7 @@
   "groupId" : "5c36bdc1de454d6e9d1a464d87c96091",
   "name" : "获取所有配置",
   "createTime" : null,
-  "updateTime" : 1635043799494,
+  "updateTime" : 1635490462052,
   "lock" : "0",
   "method" : "GET",
   "path" : "/list",
@@ -93,19 +93,8 @@
   "optionMap" : { }
 }
 ================================
+import 'org.psyduck.common.utils.WebUtils'
+
 return {
-    filePrefix: '1',
-    upload: {
-        // oss,disk（磁盘）
-        type: 'disk',
-        dir: 'D:/psyduck/',
-        oss: {
-            endpoint: '',
-            accessKeyId: '',
-            accessKeySecret: '',
-            bucketName: '',
-            // https,http
-            transportProtocol: ''
-        }
-    }
+    filePrefix: WebUtils.getUeditorPrefix()
 }
