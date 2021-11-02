@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 20/10/2021 18:05:27
+ Date: 02/11/2021 14:09:08
 */
 
 SET NAMES utf8mb4;
@@ -82,7 +82,7 @@ INSERT INTO `magic_api_file` VALUES ('/magic-api/api/后台/菜单管理/根据�
 INSERT INTO `magic_api_file` VALUES ('/magic-api/api/后台/角色管理/删除.ms', '{\r\n  \"properties\" : { },\r\n  \"id\" : \"633b78b93bba43fba785c71c1c18d7f7\",\r\n  \"script\" : null,\r\n  \"groupId\" : \"89130d496f6f467c88b22ae4a7f688eb\",\r\n  \"name\" : \"删除\",\r\n  \"createTime\" : null,\r\n  \"updateTime\" : 1634310154239,\r\n  \"lock\" : \"0\",\r\n  \"method\" : \"POST\",\r\n  \"path\" : \"/delete\",\r\n  \"parameters\" : [ ],\r\n  \"option\" : \"[]\",\r\n  \"requestBody\" : \"\",\r\n  \"headers\" : [ ],\r\n  \"paths\" : [ ],\r\n  \"responseBody\" : null,\r\n  \"description\" : null,\r\n  \"requestBodyDefinition\" : null,\r\n  \"responseBodyDefinition\" : null,\r\n  \"optionMap\" : { }\r\n}\r\n================================\r\nreturn db.table(\"sys_role\").logic().where().eq(\"id\",id).delete();');
 INSERT INTO `magic_api_file` VALUES ('/magic-api/api/后台/角色管理/保存.ms', '{\r\n  \"properties\" : { },\r\n  \"id\" : \"f9a5956afdfd4492966b1a3c04dbadf6\",\r\n  \"script\" : null,\r\n  \"groupId\" : \"89130d496f6f467c88b22ae4a7f688eb\",\r\n  \"name\" : \"保存\",\r\n  \"createTime\" : null,\r\n  \"updateTime\" : 1634310868316,\r\n  \"lock\" : \"0\",\r\n  \"method\" : \"POST\",\r\n  \"path\" : \"/save\",\r\n  \"parameters\" : [ ],\r\n  \"option\" : \"[{\\\"name\\\":\\\"\\\",\\\"value\\\":\\\"\\\",\\\"description\\\":\\\"\\\"}]\",\r\n  \"requestBody\" : \"\",\r\n  \"headers\" : [ ],\r\n  \"paths\" : [ ],\r\n  \"responseBody\" : null,\r\n  \"description\" : null,\r\n  \"requestBodyDefinition\" : null,\r\n  \"responseBodyDefinition\" : null,\r\n  \"optionMap\" : {\r\n    \"\" : \"\"\r\n  }\r\n}\r\n================================\r\nvar role = {\r\n    type,\r\n    name,\r\n    sort,\r\n    id\r\n}\r\ndb.table(\"sys_role\").primary(\"id\").saveOrUpdate(role);\r\nif(id){\r\n    db.table(\"sys_role_menu\").where().eq(\"role_id\",id).delete()\r\n}\r\nfor(menuId in menus.split(\',\')){\r\n    db.table(\"sys_role_menu\").column(\"menu_id\",menuId).column(\"role_id\", id).insert();\r\n}');
 INSERT INTO `magic_api_file` VALUES ('/magic-api/api/后台/用户管理/列表.ms', '{\r\n  \"properties\" : { },\r\n  \"id\" : \"4399f2eb199b46448aa98682fe792667\",\r\n  \"script\" : null,\r\n  \"groupId\" : \"4f0230049d7e4f39b1e0897cc0f46f9a\",\r\n  \"name\" : \"列表\",\r\n  \"createTime\" : null,\r\n  \"updateTime\" : 1634311475701,\r\n  \"lock\" : \"0\",\r\n  \"method\" : \"GET\",\r\n  \"path\" : \"/list\",\r\n  \"parameters\" : [ ],\r\n  \"option\" : \"[]\",\r\n  \"requestBody\" : \"\",\r\n  \"headers\" : [ ],\r\n  \"paths\" : [ ],\r\n  \"responseBody\" : null,\r\n  \"description\" : null,\r\n  \"requestBodyDefinition\" : null,\r\n  \"responseBodyDefinition\" : null,\r\n  \"optionMap\" : { }\r\n}\r\n================================\r\nreturn db.page(\"\"\"\r\n    select\r\n        su.id,\r\n        su.username,\r\n        su.name,\r\n        su.is_login,\r\n        su.phone,\r\n        su.create_date\r\n    from sys_user su\r\n    where su.is_del = 0\r\n    ?{username, and su.username like concat(\'%\',#{username},\'%\')}\r\n    ?{name, and su.name like concat(\'%\',#{name},\'%\')}\r\n    ?{isLogin, and su.is_login = #{isLogin}}\r\n    order by ${orderBy || \'su.create_date desc\'}\r\n\"\"\")');
-INSERT INTO `magic_api_file` VALUES ('/magic-api/api/后台/用户管理/保存.ms', '{\r\n  \"properties\" : { },\r\n  \"id\" : \"877918736c764253a85d0780cbd5f763\",\r\n  \"script\" : null,\r\n  \"groupId\" : \"4f0230049d7e4f39b1e0897cc0f46f9a\",\r\n  \"name\" : \"保存\",\r\n  \"createTime\" : null,\r\n  \"updateTime\" : 1634722600454,\r\n  \"lock\" : \"0\",\r\n  \"method\" : \"POST\",\r\n  \"path\" : \"/save\",\r\n  \"parameters\" : [ ],\r\n  \"option\" : \"[]\",\r\n  \"requestBody\" : \"\",\r\n  \"headers\" : [ ],\r\n  \"paths\" : [ ],\r\n  \"responseBody\" : null,\r\n  \"description\" : null,\r\n  \"requestBodyDefinition\" : null,\r\n  \"responseBodyDefinition\" : null,\r\n  \"optionMap\" : { }\r\n}\r\n================================\r\nimport \'cn.dev33.satoken.secure.SaSecureUtil\';\r\n\r\nvar user = {\r\n    id,\r\n    name,\r\n    username,\r\n    password: SaSecureUtil.sha256(password),\r\n    phone,\r\n    isLogin\r\n}\r\ndb.table(\"sys_user\").primary(\"id\").saveOrUpdate(user)\r\nif(id){\r\n    db.update(\"\"\"\r\n        delete from sys_user_role where user_id = #{id}\r\n    \"\"\")\r\n}\r\nfor(roleId in roles.split(\',\')){\r\n    db.table(\"sys_user_role\").column(\'userId\', id).column(\"roleId\", roleId).insert()\r\n}');
+INSERT INTO `magic_api_file` VALUES ('/magic-api/api/后台/用户管理/保存.ms', '{\r\n  \"properties\" : { },\r\n  \"id\" : \"877918736c764253a85d0780cbd5f763\",\r\n  \"script\" : null,\r\n  \"groupId\" : \"4f0230049d7e4f39b1e0897cc0f46f9a\",\r\n  \"name\" : \"保存\",\r\n  \"createTime\" : null,\r\n  \"updateTime\" : 1634724604615,\r\n  \"lock\" : \"0\",\r\n  \"method\" : \"POST\",\r\n  \"path\" : \"/save\",\r\n  \"parameters\" : [ ],\r\n  \"option\" : \"[]\",\r\n  \"requestBody\" : \"\",\r\n  \"headers\" : [ ],\r\n  \"paths\" : [ ],\r\n  \"responseBody\" : null,\r\n  \"description\" : null,\r\n  \"requestBodyDefinition\" : null,\r\n  \"responseBodyDefinition\" : null,\r\n  \"optionMap\" : { }\r\n}\r\n================================\r\nimport \'cn.dev33.satoken.secure.SaSecureUtil\';\r\n\r\nvar user = {\r\n    id,\r\n    name,\r\n    username,\r\n    password: SaSecureUtil.sha256(password),\r\n    phone,\r\n    isLogin\r\n}\r\ndb.table(\"sys_user\").primary(\"id\").saveOrUpdate(user)\r\nif(id){\r\n    db.update(\"\"\"\r\n        delete from sys_user_role where user_id = #{id}\r\n    \"\"\")\r\n}\r\nfor(roleId in roles.split(\',\')){\r\n    db.table(\"sys_user_role\").column(\'userId\', id).column(\"roleId\", roleId).insert()\r\n}');
 
 -- ----------------------------
 -- Table structure for sys_dict
@@ -106,12 +106,15 @@ CREATE TABLE `sys_dict`  (
 -- ----------------------------
 -- Records of sys_dict
 -- ----------------------------
+INSERT INTO `sys_dict` VALUES ('0b362906fb9e498198a4ebb6dafdf3dc', '2', '0', '1', 40, 0, '1', '2021-10-20 21:23:46', NULL, NULL, '3');
 INSERT INTO `sys_dict` VALUES ('1b3954d567a5457f94a539297d457b40', '3', '1', '1', 2, 1, NULL, NULL, NULL, NULL, '4');
 INSERT INTO `sys_dict` VALUES ('3c393981-9ddd-40b2-8c19-85f0a9d9a98f', '组织机构类型', '0', 'office_type', 30, 0, '1', '2021-04-22 21:30:30', '1', '2021-04-30 22:17:27', '');
 INSERT INTO `sys_dict` VALUES ('4b9b4a7e-25a1-4efa-ab9a-a004f203f1f4', '1', '1', 'aaa', 40, 1, '1', '2021-05-26 22:16:33', '1', '2021-05-26 22:16:33', '');
 INSERT INTO `sys_dict` VALUES ('4e0a75e9c9124d29a5464cb635e18494', 's8', '1', 's8', 1, 1, NULL, NULL, NULL, NULL, 's8');
+INSERT INTO `sys_dict` VALUES ('6665e64ef1764d64b253480863ab98ad', '2', '1', '1', 40, 1, '1', '2021-10-20 21:23:32', NULL, NULL, '3');
 INSERT INTO `sys_dict` VALUES ('684fc15bf8694998891eca72bf1b11e9', '企业', '1', 'organ', 1, 1, NULL, NULL, NULL, NULL, '企业');
 INSERT INTO `sys_dict` VALUES ('7368897911294388aded978c1763d0f6', '1', '1', '1', 0, 1, NULL, NULL, NULL, NULL, '1');
+INSERT INTO `sys_dict` VALUES ('81b36e6ce3d34eb3be9f8378327f0851', '2', '0', '1', 40, 1, '1', '2021-10-20 21:15:45', NULL, NULL, '3');
 INSERT INTO `sys_dict` VALUES ('9177b87f926f44eda662f8390ad3b3f1', '企业状态', '1', 'organ1', 1, 1, NULL, NULL, NULL, NULL, '企业');
 INSERT INTO `sys_dict` VALUES ('94a362e6d8214d93a9c9200ee326ecee', '3', '1', '1', 2, 1, NULL, NULL, NULL, NULL, '4');
 INSERT INTO `sys_dict` VALUES ('95ec2cc79fc647efb941167113c3a089', '3', '1', '1', 2, 1, NULL, NULL, NULL, NULL, '4');
@@ -162,6 +165,7 @@ INSERT INTO `sys_dict_items` VALUES ('ac1ee828-62e1-42fd-9d18-cf37203855b2', '12
 INSERT INTO `sys_dict_items` VALUES ('f19152f4-dd72-4509-a350-af70d802dcdf', '1', '1', '4b9b4a7e-25a1-4efa-ab9a-a004f203f1f4', 10, 1, '1', '2021-05-26 22:16:41', '1', '2021-05-26 22:16:41', '');
 INSERT INTO `sys_dict_items` VALUES ('6a127863-8130-48be-88bf-e5179f5c33e6', '2', '2', '4b9b4a7e-25a1-4efa-ab9a-a004f203f1f4', 20, 1, '1', '2021-05-26 22:18:40', '1', '2021-05-26 22:18:40', '');
 INSERT INTO `sys_dict_items` VALUES ('56aee220-cb12-4bb2-8453-84ee49672193', '3', '3', '4b9b4a7e-25a1-4efa-ab9a-a004f203f1f4', 30, 1, '1', '2021-05-26 22:18:49', '1', '2021-05-26 22:18:49', '');
+INSERT INTO `sys_dict_items` VALUES ('793324bd4f23486a850b1f284cb73415', '2', '1', '0b362906fb9e498198a4ebb6dafdf3dc', 10, 1, '1', '2021-10-20 21:23:54', NULL, NULL, '3');
 
 -- ----------------------------
 -- Table structure for sys_file
@@ -185,12 +189,14 @@ CREATE TABLE `sys_file`  (
 -- Records of sys_file
 -- ----------------------------
 INSERT INTO `sys_file` VALUES ('035ca025-281c-4b7e-a4f7-afe5f0f9996d', 'userfiles/2021-06-18/09eeb3d40111431aa6e35326aaa10966.jpg', 1, NULL, NULL, 0, '1', '2021-06-18 22:04:53', '1', '2021-06-18 22:04:53');
+INSERT INTO `sys_file` VALUES ('040828f72f2e4ff5af4adced0aad0825', 'userfiles/2021-10-29/fb31d8f9bb604bb3b22de419e6deb7c9/护坡工艺.png', 1, NULL, NULL, 0, '1', '2021-10-29 14:34:25', NULL, NULL);
 INSERT INTO `sys_file` VALUES ('0a8c97ad-65e6-44d1-8015-6c9b84d83533', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/upload/2021-06-04/168891533fab4d5686e7ac23d1b944b5/TAJ.jpg', 2, NULL, NULL, 0, '1', '2021-06-04 00:19:26', '1', '2021-06-04 00:19:26');
 INSERT INTO `sys_file` VALUES ('0df6aca8-fddb-4f64-8f9d-8c2c03442084', 'https://huifeng666.oss-cn-beijing.aliyuncs.com//userfiles/2021-06-04/', NULL, NULL, NULL, 0, '1', '2021-06-04 00:45:18', '1', '2021-06-04 00:45:18');
 INSERT INTO `sys_file` VALUES ('11926bd0-99bc-4b2c-951d-4192d1485e3e', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/userfiles/2021-06-04/a2d74fe35347412a888231a8ef62f725.jpg', 1, NULL, NULL, 1, '1', '2021-06-04 00:48:52', '1', '2021-06-04 00:49:51');
 INSERT INTO `sys_file` VALUES ('136cdef4-f5a5-45db-8b52-ecb14f4decd1', 'userfiles/2021-07-08/dc7b4b4e6a2645b890d7a1f77cdcc2ec/TAJ.jpg', 1, NULL, NULL, 0, '1', '2021-07-08 22:26:47', '1', '2021-07-08 22:26:47');
 INSERT INTO `sys_file` VALUES ('147ecb9a-0c9c-4d0c-a35a-6542d30e59ca', 'userfiles/2021-07-08\\b0c57b5364364a5786617956fb554984\\', 1, NULL, NULL, 0, '1', '2021-07-08 22:05:24', '1', '2021-07-08 22:05:24');
 INSERT INTO `sys_file` VALUES ('166d37df-3c40-4d34-a394-4b0181530901', 'userfiles/2021-07-08\\00da6e6ad71b4fb9b2b26791dfbab515\\', 1, NULL, NULL, 0, '1', '2021-07-08 22:09:00', '1', '2021-07-08 22:09:00');
+INSERT INTO `sys_file` VALUES ('1f6b00ba220c4ffcb76ff73716aaa38c', 'userfiles/2021-10-29/37e82f512d6049e3ac73738b8e315419/护坡工艺.png', 1, NULL, NULL, 0, '1', '2021-10-29 14:28:38', NULL, NULL);
 INSERT INTO `sys_file` VALUES ('212354e2-3f9b-41da-9406-9b8a288abe0a', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/upload/2021-06-04/2717f8866a0c475387c4aab35d648ee8/blob', 1, NULL, NULL, 0, '1', '2021-06-04 00:25:27', '1', '2021-06-04 00:25:28');
 INSERT INTO `sys_file` VALUES ('219d54f2-bdde-4d1a-9700-8c33be2cc967', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/userfiles/2021-06-04/82989579f7604118a46921d990437e71.png', 3, NULL, NULL, 1, '1', '2021-06-04 00:49:51', '1', '2021-06-04 00:49:51');
 INSERT INTO `sys_file` VALUES ('26b60120-c756-4121-992f-6ad146aff10c', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/userfiles/2021-06-04/1194ff204ca74bebb455db653950b63a.jpg', 2, NULL, NULL, 1, '1', '2021-06-04 00:48:52', '1', '2021-06-04 00:49:51');
@@ -200,26 +206,36 @@ INSERT INTO `sys_file` VALUES ('2d2aadd7-f008-4af3-b285-ea88a9e9ea43', 'userfile
 INSERT INTO `sys_file` VALUES ('321d4f2b-9d5c-4ed0-aaac-c3826a4e9b9f', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/userfiles/2021-06-12/bbf474834b3f40869604a4859da7cfa0.jpg', 1, NULL, NULL, 0, '1', '2021-06-12 14:49:13', '1', '2021-06-12 14:49:13');
 INSERT INTO `sys_file` VALUES ('323a0106-f048-4e74-a484-5f1fc813d2d5', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/userfiles/2021-06-12/04f107059ca949f0a74b78de68fd4199.jpg', 1, NULL, NULL, 0, '1', '2021-06-12 14:25:18', '1', '2021-06-12 14:25:18');
 INSERT INTO `sys_file` VALUES ('3433c770-2f30-4b80-9962-539f45e98bdc', 'userfiles/2021-06-04/58ec5f00746b4b3093b7ff54665b82cc.jpg', 2, NULL, NULL, 0, '1', '2021-06-04 00:44:36', '1', '2021-06-04 00:44:36');
+INSERT INTO `sys_file` VALUES ('35c506cc63d1479da8abbf925df2411a', 'userfiles/2021-10-29/8f85877785ce4461bc55ee1ee4bea9ab/护坡工艺.png', 1, NULL, NULL, 0, '1', '2021-10-29 14:29:53', NULL, NULL);
 INSERT INTO `sys_file` VALUES ('36846406-5a56-46d9-89c1-ff9b15a077bc', 'userfiles/2021-06-04/bd7797c740214f50b7d3bebbb998f0ef.jpg', 1, NULL, NULL, 0, '1', '2021-06-04 00:33:59', '1', '2021-06-04 00:34:00');
 INSERT INTO `sys_file` VALUES ('378b3974-8596-4ee7-aba9-9250b7bdadb3', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/upload/2021-06-04/04dc670eada04fec8db68fef73eae866/QQ图片20210416173834.jpg', 2, NULL, NULL, 0, '1', '2021-06-04 00:30:32', '1', '2021-06-04 00:31:15');
 INSERT INTO `sys_file` VALUES ('3eb3f348-1b4b-4e9a-82de-896e32addf4e', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/upload/2021-06-04/d270bae8a4034e68993b13320724f1e2/QQ图片20210416173834.jpg', 2, NULL, NULL, 0, '1', '2021-06-04 00:13:50', '1', '2021-06-04 00:13:50');
 INSERT INTO `sys_file` VALUES ('4216e18e-75f8-443d-9ca5-2ee69d95e1da', 'userfiles/2021-07-08\\6373cbe4300e49c89657253d176b12b2\\', 1, NULL, NULL, 1, '1', '2021-07-08 22:07:02', '1', '2021-07-08 22:07:02');
 INSERT INTO `sys_file` VALUES ('427faa9c-ece4-4008-a24d-8cb8ba9c518e', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/upload/2021-06-04/919e189d991c4946a84345e0efe1a521/QQ图片20210416173834.jpg', 1, NULL, NULL, 1, '1', '2021-06-04 00:24:52', '1', '2021-06-04 00:24:52');
+INSERT INTO `sys_file` VALUES ('42f2384865a84499bb4f100ccdd1c9a7', 'userfiles/2021-10-24/84e991f4a1054af486ccc20762565612/护坡工艺.png', NULL, NULL, NULL, 0, '1', '2021-10-24 19:49:01', NULL, NULL);
+INSERT INTO `sys_file` VALUES ('46540bfd23f1423f848d22418ffdbadb', 'userfiles/2021-10-24/431fe0660cca407dbc5f6ce1b2f26c0f/护坡工艺.png', NULL, NULL, NULL, 0, '1', '2021-10-24 19:59:43', NULL, NULL);
 INSERT INTO `sys_file` VALUES ('4661a45f-e7dd-416e-a24b-159d33d4a1da', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/userfiles/2021-06-18/b0c6550b85c24d77ada299c9a7dfeba7.jpg', 1, NULL, NULL, 0, '1', '2021-06-18 22:06:32', '1', '2021-06-18 22:06:33');
 INSERT INTO `sys_file` VALUES ('4c8db411-0a3a-4d96-a7f5-be178d58a862', 'https://huifeng666.oss-cn-beijing.aliyuncs.com//userfiles/2021-06-04/', NULL, NULL, NULL, 0, '1', '2021-06-04 00:45:18', '1', '2021-06-04 00:45:18');
+INSERT INTO `sys_file` VALUES ('4e6db4e2f46941edab168aa4c6c76cba', 'userfiles/2021-10-29/844a552a43b64e66ab4f68cba4f10b33/护坡工艺.png', NULL, NULL, NULL, 0, '1', '2021-10-29 14:23:25', NULL, NULL);
 INSERT INTO `sys_file` VALUES ('52c47b6a-a551-45df-8280-dc845a0a7692', 'userfiles/2021-06-12/092ca59fb40d4647b1355c66af78c901.jpg', 1, NULL, NULL, 0, '1', '2021-06-12 14:50:17', '1', '2021-06-12 14:50:17');
+INSERT INTO `sys_file` VALUES ('5a5f33cae7ce4cb0857e22cfd6199dcb', 'userfiles/2021-10-24/43dc47ca5bc0433fbce964c576301846/护坡工艺.png', NULL, NULL, NULL, 0, '1', '2021-10-24 19:52:30', NULL, NULL);
+INSERT INTO `sys_file` VALUES ('5baa93f80ef646fb9a36d0ff43715eca', 'userfiles/2021-10-29/e180478dd6464481be96a75d01826f96/护坡工艺.png', 1, NULL, NULL, 0, '1', '2021-10-29 14:27:33', NULL, NULL);
 INSERT INTO `sys_file` VALUES ('5c83b4d2-a700-44fc-be1a-e7d59f7a1dd7', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/userfiles/2021-06-04/99375264f6f24f949215179f55bb02ff.jpg', 1, NULL, NULL, 1, '1', '2021-06-04 00:50:28', '1', '2021-06-04 00:50:32');
+INSERT INTO `sys_file` VALUES ('5fbeb99ff8594a57a126a7f590da8bd4', 'userfiles/2021-10-29/a29bf7ee8f4c43c09ad9153b52e80d02/护坡工艺.png', 1, '6bd93c350fc347c6aa2cd796f4ba9e9e', '营业执照', 0, '1', '2021-10-29 14:29:15', NULL, NULL);
 INSERT INTO `sys_file` VALUES ('61380723-aef8-4ae4-8188-ec7d776f9468', 'userfiles/2021-06-04/13809ac92ba5425cb754842bb8095ab6.png', 3, NULL, NULL, 0, '1', '2021-06-04 00:55:42', '1', '2021-06-04 00:55:46');
 INSERT INTO `sys_file` VALUES ('6272fbbc-d120-4aca-99a9-41bdf30805e0', 'userfiles/2021-07-08/5a1fdf687ded4a06a25fbcf193685455/TAJ.jpg', 1, NULL, NULL, 1, '1', '2021-07-08 22:53:18', '1', '2021-07-08 22:53:20');
 INSERT INTO `sys_file` VALUES ('6605a020-6ec8-4867-92b5-90fe9621fa62', 'userfiles/2021-07-08\\7ec6883c723a438d8a113a4a1ba1f1c5\\blob', 1, 'e4dd45e62c8d46fc93caa96824e04cab', '营业执照', 0, '1', '2021-07-08 22:21:39', '1', '2021-07-08 22:21:39');
 INSERT INTO `sys_file` VALUES ('6ab8faad-cbfa-4ef5-9fe4-5004f82f3f54', 'userfiles/2021-06-18/7cda59680c6944f9aaa13a98f1b12c37.jpg', 1, NULL, NULL, 0, '1', '2021-06-18 22:08:53', '1', '2021-06-18 22:08:53');
 INSERT INTO `sys_file` VALUES ('700d9788-933b-42f1-9b1b-c8ca9399ed4d', 'userfiles/2021-07-08/6510418e476d44789419d2e3bf052119/blob', 1, NULL, NULL, 0, '1', '2021-07-08 22:24:36', '1', '2021-07-08 22:24:37');
 INSERT INTO `sys_file` VALUES ('775a3648-e8ae-425a-9cda-089e7dec35d3', 'userfiles/2021-07-08/39a240eb33cc4252a65ec57f323cc397/TAJ.jpg', 2, NULL, NULL, 1, '1', '2021-07-08 22:53:20', '1', '2021-07-08 22:53:20');
+INSERT INTO `sys_file` VALUES ('7d9528de86f24a498ce5268fdc0acdc1', 'userfiles/2021-10-29/2753c8b5f6cc49b996a6463a415a7043/护坡工艺.png', NULL, NULL, NULL, 0, '1', '2021-10-29 14:26:05', NULL, NULL);
 INSERT INTO `sys_file` VALUES ('830d3ca1-5063-49b7-84e4-eecb2eeb4c6f', 'userfiles/2021-07-08\\cd98396025e24f8d8d77abc8fac0cef4\\blob', 1, NULL, NULL, 0, '1', '2021-07-08 22:21:15', '1', '2021-07-08 22:21:15');
 INSERT INTO `sys_file` VALUES ('83304013-8bba-41ef-9319-f3d89317af9e', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/userfiles/2021-06-04/ffe314dcc4a34a77892fab660284ca26.png', 2, NULL, NULL, 1, '1', '2021-06-04 00:50:30', '1', '2021-06-04 00:50:32');
+INSERT INTO `sys_file` VALUES ('85cc7886503941e8b3ff2e9bffa0f23b', 'userfiles/2021-10-29/8accce979140463b90a69acb1983814f/护坡工艺.png', 1, NULL, NULL, 0, '1', '2021-10-29 14:34:37', NULL, NULL);
 INSERT INTO `sys_file` VALUES ('90597b9b-9fa1-4479-9ad2-8c0925f66dc9', 'userfiles/2021-06-04/96da7329ae1b4df8b8fce4d6a9e5ef30.png', 2, NULL, NULL, 0, '1', '2021-06-04 00:52:20', '1', '2021-06-04 00:55:10');
 INSERT INTO `sys_file` VALUES ('91398b4e-3997-49ed-943a-26accc5fd2d6', 'userfiles/2021-06-04/082ccf731eb545d987400bd2995624a7.jpg', 3, NULL, NULL, 0, '1', '2021-06-04 00:52:20', '1', '2021-06-04 00:55:10');
 INSERT INTO `sys_file` VALUES ('9207a47b-3ae1-48e5-b0b1-883e2ed6924b', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/upload/2021-06-04/7fd527d49ecd4284aff0e3b2982c8502/QQ图片20210416173834.jpg', 3, NULL, NULL, 0, '1', '2021-06-04 00:31:14', '1', '2021-06-04 00:31:15');
+INSERT INTO `sys_file` VALUES ('95e78a26742a4723a8a7fa57ce4a9ea7', 'userfiles/2021-10-29/3e646c6de9ce4e7c98877bfc1a167b36/5dc42c5fedc65.jpg', 2, NULL, NULL, 0, '1', '2021-10-29 14:34:39', NULL, NULL);
 INSERT INTO `sys_file` VALUES ('b2b8a03a-44cd-4f5f-894b-d1131ae92241', 'userfiles/2021-06-04/33cfffcc46dd4e1e92d6bbff9dfadb1a.jpg', 2, NULL, NULL, 0, '1', '2021-06-04 00:34:00', '1', '2021-06-04 00:34:00');
 INSERT INTO `sys_file` VALUES ('b42e55b2-aa5f-49de-8289-9179fedd5514', 'userfiles/2021-07-08\\1f5235f38ddb492a960e574b0939fce3\\blob', 1, NULL, NULL, 0, '1', '2021-07-08 22:10:58', '1', '2021-07-08 22:10:58');
 INSERT INTO `sys_file` VALUES ('b480f270-5bdf-4586-835e-1841795754d4', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/upload/2021-06-04/1241ddd38a3e42bf9662bcb8c9418ae7/TAJ.jpg', 1, NULL, NULL, 0, '1', '2021-06-04 00:13:50', '1', '2021-06-04 00:13:50');
@@ -228,6 +244,7 @@ INSERT INTO `sys_file` VALUES ('c14eb966-0854-4107-8a4c-607b268b13cd', 'userfile
 INSERT INTO `sys_file` VALUES ('d4653e75-4b2c-4729-af49-30cff14b2429', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/userfiles/2021-06-04/80e5697c43ac4591a79e2e6433f7c9b2.jpg', 2, NULL, NULL, 1, '1', '2021-06-04 00:50:21', '1', '2021-06-04 00:50:23');
 INSERT INTO `sys_file` VALUES ('d5a288ac-2d77-48c4-85dd-f2de3bef1701', 'userfiles/2021-06-04/35d6817fa50e462fad99d278dcee0e74.jpg', 1, NULL, NULL, 0, '1', '2021-06-04 00:55:42', '1', '2021-06-04 00:55:46');
 INSERT INTO `sys_file` VALUES ('d7f5e40f-18c1-4370-86e0-745c8fa11b2e', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/upload/2021-06-04/0e307be11ade49108986f9aa0d181ced/QQ图片20210416173834.jpg', 1, NULL, NULL, 0, '1', '2021-06-04 00:19:03', '1', '2021-06-04 00:19:26');
+INSERT INTO `sys_file` VALUES ('e04e14db97174a8da09455ab45dac1d9', 'userfiles/2021-10-29/3f757d1900304b628e89d1f2978beb01/护坡工艺.png', 1, NULL, NULL, 0, '1', '2021-10-29 14:29:28', NULL, NULL);
 INSERT INTO `sys_file` VALUES ('e0ba4ad1-65f3-4ac3-a8fe-a8b15e7e8126', 'userfiles/2021-07-08/abecb58e6c904f86a7681e220622a8cc/TAJ.jpg', 1, NULL, NULL, 1, '1', '2021-07-08 22:56:02', '1', '2021-07-08 22:56:02');
 INSERT INTO `sys_file` VALUES ('e2cd6253-e2d1-4db1-996c-627959deed64', 'userfiles/2021-07-08/e5dd2ff057094f37988b9f14d982468c/TAJ.jpg', 1, NULL, NULL, 1, '1', '2021-07-08 22:52:55', '1', '2021-07-08 22:52:55');
 INSERT INTO `sys_file` VALUES ('e3a00749-2d9a-4c53-bf38-44c9b6863696', 'userfiles/2021-07-08\\c4c2022df51b4333b0031ecd28aae117\\', 1, NULL, NULL, 1, '1', '2021-07-08 22:04:59', '1', '2021-07-08 22:04:59');
@@ -235,6 +252,7 @@ INSERT INTO `sys_file` VALUES ('e8f5211f-b22e-4de0-9cc8-a54b4aa0ccf1', 'userfile
 INSERT INTO `sys_file` VALUES ('ebe0c2f0-5b8c-41c2-9be7-166b169e1468', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/upload/2021-06-04/84d0685d28774149b9df6a3cdc0e4366/blob', 2, NULL, NULL, 1, '1', '2021-06-04 00:24:20', '1', '2021-06-04 00:24:20');
 INSERT INTO `sys_file` VALUES ('ebed2ad1-8be5-4bcb-8ca5-6b82dbc15c0e', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/userfiles/2021-06-04/8e3c16ca4d114aeabbe392dec8a9e39d.png', 3, NULL, NULL, 1, '1', '2021-06-04 00:50:23', '1', '2021-06-04 00:50:23');
 INSERT INTO `sys_file` VALUES ('f781d2f5-0e3e-4b3c-b6fc-742fd67a8bba', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/upload/2021-06-04/a530b5133cf14929ab5c4ebdedd99a82/QQ图片20210416173834.jpg', 1, NULL, NULL, 1, '1', '2021-06-04 00:24:17', '1', '2021-06-04 00:24:20');
+INSERT INTO `sys_file` VALUES ('f80cc24424dc45708863ea399c42e1bb', 'userfiles/2021-10-29/0e491b760bb447a99067b234f4846431/护坡工艺.png', 1, NULL, NULL, 0, '1', '2021-10-29 14:29:38', NULL, NULL);
 INSERT INTO `sys_file` VALUES ('fcef4240-a1da-4fdd-8eba-7cd42d2b601f', 'https://huifeng666.oss-cn-beijing.aliyuncs.com/upload/2021-06-04/7c9cf4642877453b86783fc654dc64b4/TAJ.jpg', 1, NULL, NULL, 0, '1', '2021-06-04 00:30:32', '1', '2021-06-04 00:31:15');
 INSERT INTO `sys_file` VALUES ('fed35e7d-47ab-4795-b8d4-63cb101df704', 'userfiles/2021-07-08/3afe3c9abbe94fe9a31580fdba7e5c8c/TAJ.jpg', 1, NULL, NULL, 0, '1', '2021-07-08 22:31:01', '1', '2021-07-08 22:31:01');
 
@@ -424,8 +442,12 @@ CREATE TABLE `sys_user`  (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', 'admin', '管理员', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', '1', '13888888888', 0, NULL, 0, NULL, '2020-05-15 22:25:20', '352203037d942140926eb0ea10a04a56', '2021-01-11 16:55:44');
-INSERT INTO `sys_user` VALUES ('c5232f1b558d49f98a448827912838e7', 'test1', '1', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', NULL, '1', 0, NULL, 0, '1', '2021-10-20 18:04:51', NULL, NULL);
-INSERT INTO `sys_user` VALUES ('ff0add8572864b328980b2e31f071d05', 'test', '2', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', NULL, '4', 0, NULL, 0, '1', '2021-10-20 18:00:02', '1', '2021-10-20 18:01:04');
+INSERT INTO `sys_user` VALUES ('58406a1c08dc4f6aabc44295fba7f1b4', 'test1', '1', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', NULL, '1', 0, NULL, 1, '1', '2021-10-20 19:55:35', NULL, NULL);
+INSERT INTO `sys_user` VALUES ('674a3aa6b1ea4d91a1f72e7879d415c3', 'test1', 'test1', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', NULL, '1', 0, NULL, 1, '1', '2021-10-20 19:38:20', NULL, NULL);
+INSERT INTO `sys_user` VALUES ('b4550781c41e401695838372384b8cd3', 'test1', '1', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', NULL, '1', 0, NULL, 1, '1', '2021-10-20 20:03:04', NULL, NULL);
+INSERT INTO `sys_user` VALUES ('bd06c115ff80418d9d7968eff48d1c6a', 'test', '1', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', NULL, '1', 0, NULL, 1, '1', '2021-10-20 20:02:58', NULL, NULL);
+INSERT INTO `sys_user` VALUES ('c5232f1b558d49f98a448827912838e7', 'test1', '1', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', NULL, '1', 0, NULL, 1, '1', '2021-10-20 18:04:51', NULL, NULL);
+INSERT INTO `sys_user` VALUES ('ff0add8572864b328980b2e31f071d05', 'test', '2', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', NULL, '4', 0, NULL, 1, '1', '2021-10-20 18:00:02', '1', '2021-10-20 18:01:04');
 
 -- ----------------------------
 -- Table structure for sys_user_code
@@ -466,5 +488,9 @@ INSERT INTO `sys_user_role` VALUES ('1382275268005437442', '1');
 INSERT INTO `sys_user_role` VALUES (NULL, '1');
 INSERT INTO `sys_user_role` VALUES ('ff0add8572864b328980b2e31f071d05', '1');
 INSERT INTO `sys_user_role` VALUES (NULL, '1');
+INSERT INTO `sys_user_role` VALUES (NULL, '1');
+INSERT INTO `sys_user_role` VALUES ('58406a1c08dc4f6aabc44295fba7f1b4', '1');
+INSERT INTO `sys_user_role` VALUES ('bd06c115ff80418d9d7968eff48d1c6a', '1');
+INSERT INTO `sys_user_role` VALUES ('b4550781c41e401695838372384b8cd3', '1');
 
 SET FOREIGN_KEY_CHECKS = 1;
