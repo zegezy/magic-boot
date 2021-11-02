@@ -5,6 +5,8 @@ server:
     min-response-size: 128
 
 spring:
+  profiles:
+    active: dev
   servlet:
     multipart:
       max-file-size: 200MB

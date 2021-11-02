@@ -5,7 +5,7 @@
   "groupId" : "5c36bdc1de454d6e9d1a464d87c96091",
   "name" : "获取所有配置",
   "createTime" : null,
-  "updateTime" : 1635490462052,
+  "updateTime" : 1635576982955,
   "lock" : "0",
   "method" : "GET",
   "path" : "/list",
@@ -93,7 +93,7 @@
   "optionMap" : { }
 }
 ================================
-import 'org.psyduck.common.utils.WebUtils'
+import 'org.ssssssss.magicboot.utils.WebUtils'
 
 return {
     filePrefix: WebUtils.getUeditorPrefix()

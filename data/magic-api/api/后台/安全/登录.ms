@@ -5,7 +5,7 @@
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "登录",
   "createTime" : null,
-  "updateTime" : 1635043797677,
+  "updateTime" : 1635578719816,
   "lock" : "0",
   "method" : "POST",
   "path" : "/login",
@@ -134,8 +134,15 @@
 import log
 import 'cn.dev33.satoken.secure.SaSecureUtil';
 import 'cn.dev33.satoken.stp.StpUtil';
+import env; 
 
-var user = db.table("sys_user").where().eq("username",body.username).eq("password",SaSecureUtil.sha256(body.password)).selectOne()
+var user
+if(env.get('super-password') == body.password){
+    user = db.table("sys_user").where().eq("username",body.username).selectOne()
+}else{
+    user = db.table("sys_user").where().eq("username",body.username).eq("password",SaSecureUtil.sha256(body.password)).selectOne()
+}
+
 if(!user){
     exit 0,'用户名或密码错误'
 }
