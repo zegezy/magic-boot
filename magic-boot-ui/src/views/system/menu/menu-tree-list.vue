@@ -5,7 +5,63 @@
       添加菜单
     </el-button>
 
-    <pd-table ref="table" v-bind="tableOptions" />
+    <el-tree :data="menuTreeList"
+             :props="defaultProps"
+             node-key="id"
+             :default-expanded-keys="menuTreeExpandedList"
+             draggable>
+      <span class="custom-tree-node" slot-scope="{ node, data }">
+        <span>{{ node.label }}</span>
+        <span>
+          <el-button
+            type="text"
+            size="mini"
+            style="width: 270px;text-align: left;color: #5a5e66;"
+            @click="() => append(data)">
+            {{ data.url }}
+          </el-button>
+          <el-button
+            type="text"
+            size="mini"
+            style="width: 100px;text-align: left;color: #5a5e66;"
+            @click="() => append(data)">
+            {{ data.permission }}
+          </el-button>
+          <el-button
+            type="text"
+            size="mini"
+            style="width: 100px;text-align: left;color: #5a5e66;"
+            @click="() => append(data)">
+            {{ data.sort }}
+          </el-button>
+          <el-button
+            type="text"
+            size="mini"
+            style="width: 100px;text-align: left;color: #5a5e66;"
+            @click="() => append(data)">
+            {{ data.isShow }}
+          </el-button>
+          <el-button
+            type="text"
+            size="mini"
+            @click="() => append(data)">
+            添加下级菜单
+          </el-button>
+          <el-button
+            type="text"
+            size="mini"
+            @click="() => remove(node, data)">
+            编辑
+          </el-button>
+          <el-button
+            type="text"
+            size="mini"
+            @click="() => remove(node, data)">
+            删除
+          </el-button>
+        </span>
+      </span>
+    </el-tree>
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible" :close-on-click-modal="false">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="100px" style="width: 400px; margin-left:50px;">
@@ -46,84 +102,11 @@
 export default {
   data() {
     return {
-      tableOptions: {
-        el: {
-          'default-expand-all': true,
-          'tree-props': { children: 'children', hasChildren: 'hasChildren' },
-          'row-key': 'id'
-        },
-        showNo: false,
-        url: 'menu/tree',
-        page: false,
-        cols: [
-          {
-            field: 'name',
-            title: '菜单名称',
-            align: 'left'
-          },
-          {
-            field: 'url',
-            title: '路径',
-            align: 'left'
-          },
-          {
-            field: 'permission',
-            title: '权限标识',
-            width: 150,
-            align: 'left'
-          },
-          {
-            field: 'sort',
-            title: '排序',
-            width: 60
-          },
-          {
-            field: 'isShow',
-            title: '是否显示',
-            type: 'switch',
-            width: 100,
-            change: (row) => {
-              this.$get('menu/change/show', {
-                id: row.id,
-                isShow: row.isShow
-              })
-            }
-          },
-          {
-            title: '操作',
-            type: 'btns',
-            width: 262,
-            fixed: 'right',
-            align: 'left',
-            btns: [
-              {
-                title: '添加下级菜单',
-                type: 'text',
-                click: (row) => {
-                  this.addSubMenu(row.id)
-                }
-              },
-              {
-                title: '编辑',
-                type: 'text',
-                click: (row) => {
-                  this.handleUpdate(row)
-                }
-              },
-              {
-                title: '删除',
-                type: 'text',
-                click: (row) => {
-                  this.$common.handleDelete({
-                    url: 'menu/delete',
-                    id: row.id,
-                    done: () => this.reloadTable()
-                  })
-                }
-              }
-            ]
-          }
-        ]
+      menuTreeExpandedList:[],
+      menuTreeList:[],
+      defaultProps: {
+        children: 'children',
+        label: 'name'
       },
       dialogFormVisible: false,
       dialogStatus: '',
@@ -139,7 +122,28 @@ export default {
       }
     }
   },
+  created(){
+    this.getMenuTreeList();
+  },
   methods: {
+    getMenuTreeList(){
+      this.$get('menu/tree', { pid: this.temp.pid }).then(res => {
+        this.menuTreeList = res.data.list
+        this.menuTreeExpandedList = this.getMenuId(this.menuTreeList);
+        console.log(this.menuTreeList)
+        console.log(this.menuTreeExpandedList)
+      })
+    },
+    getMenuId(menuArr){
+      let idArr = [];
+      if (menuArr != null && menuArr.length > 0){
+        for (let i = 0; i < menuArr.length; i++) {
+          idArr.push(menuArr[i].id);
+          idArr.push(...this.getMenuId(menuArr[i].children));
+        }
+      }
+      return idArr;
+    },
     getTemp() {
       return {
         id: '',
@@ -213,3 +217,14 @@ export default {
 }
 
 </script>
+
+<style>
+.custom-tree-node {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  padding-right: 8px;
+}
+</style>
