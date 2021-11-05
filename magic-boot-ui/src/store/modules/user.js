@@ -6,7 +6,8 @@ import { resetRouter } from '@/router'
 const getDefaultState = () => {
   return {
     token: getToken(),
-    name: ''
+    name: '',
+    username: ''
   }
 }
 
@@ -21,6 +22,9 @@ const mutations = {
   },
   SET_NAME: (state, name) => {
     state.name = name
+  },
+  SET_USERNAME: (state, username) => {
+    state.username = username
   }
 }
 
@@ -33,7 +37,7 @@ const actions = {
         const { data } = response
         commit('SET_TOKEN', data)
         setToken(data)
-        resolve()
+        resolve(data)
       }).catch(error => {
         reject(error)
       })
@@ -54,6 +58,7 @@ const actions = {
         }
         Vue.prototype.$authorities = authorities_
         commit('SET_NAME', data.name)
+        commit('SET_USERNAME', data.username)
         resolve()
       }).catch(error => {
         reject(error)

@@ -1,6 +1,6 @@
 
 import axios from 'axios'
-import { Message } from 'element-ui'
+import { Message, MessageBox } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/scripts/auth'
 
@@ -51,6 +51,23 @@ service.interceptors.response.use(
       var duration = 5
       if (res.code === 402) {
         duration = 1
+        MessageBox.prompt('凭证已过期，请输入密码重新登录', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '退出',
+          inputType: 'password'
+        }).then(({ value }) => {
+          store.dispatch('user/login', {
+            username: store.getters.username,
+            password: value
+          }).then((res) => {
+            console.log(res)
+          })
+        }).catch(() => {
+          store.dispatch('user/logout').then(() => {
+            location.reload()
+          })
+        })
+        return
       }
       if (isShowMsg === false) {
         Message({
