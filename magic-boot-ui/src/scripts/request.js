@@ -1,4 +1,3 @@
-
 import axios from 'axios'
 import { Message, MessageBox } from 'element-ui'
 import store from '@/store'
@@ -45,51 +44,55 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
-    const res = response.data
-    // if the custom code is not 1, it is judged as an error.
-    if (res.code !== 200) {
-      var duration = 5
-      if (res.code === 402) {
-        duration = 1
-        MessageBox.prompt('凭证已过期，请输入密码重新登录', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '退出',
-          inputType: 'password'
-        }).then(({ value }) => {
-          store.dispatch('user/login', {
-            username: store.getters.username,
-            password: value
-          }).then((res) => {
-            console.log(res)
-          })
-        }).catch(() => {
-          store.dispatch('user/logout').then(() => {
-            location.reload()
-          })
-        })
-        return
-      }
-      if (isShowMsg === false) {
-        Message({
-          message: res.message || 'Error',
-          type: 'error',
-          duration: duration * 1000,
-          showClose: true,
-          onClose: function() {
-            isShowMsg = false
-            if (res.code === 402) {
-              store.dispatch('user/logout').then(() => {
-                location.reload()
-              })
+    return new Promise((reslove, reject) => {
+      const res = response.data
+      if (res.code !== 200) {
+        var duration = 5
+        if (res.code === 402) {
+          duration = 1
+          MessageBox.prompt(`当前账号：${store.getters.username}凭证已过期，请输入密码重新登录`, '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '退出',
+            inputType: 'password',
+            closeOnClickModal: false,
+            beforeClose: (action, instance, done) => {
+              if (action === 'confirm') {
+                store.dispatch('user/login', {
+                  username: store.getters.username,
+                  password: instance.inputValue
+                }).then((res) => {
+                  if (res) {
+                    done()
+                    service(response.config).then(ret => reslove(ret))
+                  }
+                })
+              } else if (action === 'cancel') {
+                store.dispatch('user/logout').then(() => {
+                  location.reload()
+                })
+              } else {
+                done()
+              }
             }
-          }
-        })
-        isShowMsg = true
+          })
+        }
+        if (isShowMsg === false && res.code !== 402) {
+          Message({
+            message: res.message || 'Error',
+            type: 'error',
+            duration: duration * 1000,
+            showClose: true,
+            onClose: function() {
+              isShowMsg = false
+            }
+          })
+          isShowMsg = true
+          // reslove(res)
+        }
+      } else {
+        reslove(res)
       }
-      return Promise.reject(new Error(res.message || 'Error'))
-    } else {
-      return res
-    }
+    })
   },
   error => {
     // console.log('err' + error) // for debug
