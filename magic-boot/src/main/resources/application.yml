@@ -7,6 +7,9 @@ server:
 spring:
   profiles:
     active: dev
+    include:
+      - online
+      - quartz
   servlet:
     multipart:
       max-file-size: 200MB
@@ -15,9 +18,9 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   datasource:
-    url: jdbc:mysql://localhost:3307/magic-boot?useSSL=false&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/magic-boot?useSSL=false&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF8&autoReconnect=true&serverTimezone=Asia/Shanghai
     username: root
-    password: root
+    password: "********"
 
 upload:
   # oss,disk（磁盘）
