@@ -44,6 +44,11 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
+    if (response.config.url.indexOf('user/info') !== -1 && response.data.code === 402) {
+      store.dispatch('user/logout').then(() => {
+        location.reload()
+      })
+    }
     return new Promise((reslove, reject) => {
       const res = response.data
       if (res.code !== 200) {
