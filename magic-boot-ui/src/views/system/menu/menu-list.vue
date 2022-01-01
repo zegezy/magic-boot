@@ -1,17 +1,18 @@
-<style scoped>
-.icon-btn >>> i{
-  font-size: 25px;
-}
-</style>
-
 <template>
   <div class="app-container">
 
-    <el-button class="filter-item" style="margin-bottom:10px;" type="primary" icon="el-icon-edit" @click="addSubMenu('0')">
-      添加菜单
-    </el-button>
+    <div class="filter-container">
+      <el-form :inline="true">
+        <el-form-item label="搜索菜单名称">
+          <el-input v-model="searchValue" @input="searchMenu"></el-input>
+        </el-form-item>
+        <el-button class="filter-item" style="margin-bottom:10px;" type="primary" icon="el-icon-edit" @click="addSubMenu('0')">
+          添加菜单
+        </el-button>
+      </el-form>
+    </div>
 
-    <pd-table ref="table" v-bind="tableOptions" />
+    <pd-table ref="table" v-bind="tableOptions" v-if="menuData && menuData.length > 0" />
 
     <pd-dialog ref="menuFormDialog" width="800px" :title="textMap[dialogStatus]" @confirm-click="save()">
       <template #content>
@@ -63,6 +64,8 @@ export default {
   components: { MenuIcons },
   data() {
     return {
+      menuData: [],
+      searchValue: '',
       tableOptions: {
         el: {
           'default-expand-all': true,
@@ -70,13 +73,13 @@ export default {
           'row-key': 'id'
         },
         showNo: false,
-        url: 'menu/tree',
         page: false,
         cols: [
           {
             field: 'name',
             title: '菜单名称',
-            align: 'left'
+            align: 'left',
+            type: 'html'
           },
           {
             field: 'url',
@@ -88,6 +91,15 @@ export default {
             title: '权限标识',
             width: 150,
             align: 'left'
+          },
+          {
+            field: 'icon',
+            title: '图标',
+            width: 45,
+            align: 'left',
+            templet: (row) => {
+              return this.generateIconCode(row.icon)
+            }
           },
           {
             field: 'sort',
@@ -156,7 +168,34 @@ export default {
       }
     }
   },
+  mounted() {
+    this.reloadTable()
+  },
   methods: {
+    searchMenu() {
+      this.$set(this.tableOptions, 'data', this.recursionSearch(this.$common.copyNew(this.menuData), this.searchValue))
+    },
+    recursionSearch(data, text){
+      var searchData = []
+      for(var i in data){
+        var treeNode = data[i]
+        var children = treeNode.children
+        if(children && children.length > 0){
+          var childrenSearch = this.recursionSearch(children, text)
+          treeNode.children = childrenSearch && childrenSearch.length > 0 ? childrenSearch : treeNode.children
+          if(treeNode.name.indexOf(text) != -1 || childrenSearch.length > 0){
+            treeNode.name = treeNode.name.replace(text, `<font color="#FAA353">${text}</font>`)
+            searchData.push(treeNode)
+          }
+        }else{
+          if(treeNode.name.indexOf(text) != -1){
+            treeNode.name = treeNode.name.replace(text, `<font color="#FAA353">${text}</font>`)
+            searchData.push(treeNode)
+          }
+        }
+      }
+      return searchData
+    },
     generateIconCode(symbol) {
       return `<svg style="width: 20px;height: 20px" aria-hidden="true" class="svg-icon disabled"><use href="#icon-${symbol}"></use></svg>`
     },
@@ -217,7 +256,10 @@ export default {
       })
     },
     reloadTable() {
-      this.$refs.table.reloadList()
+      this.$get('menu/tree').then(res => {
+        this.menuData = res.data.list
+        this.$set(this.tableOptions, 'data', this.menuData)
+      })
     },
     handleUpdate(row) {
       for (var t in this.temp) {

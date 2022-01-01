@@ -29,6 +29,7 @@
         </template>
       </div>
       <el-image v-else-if="col.type === 'image'" :src="scope.row[col.field]" :preview-src-list="[scope.row[col.field]]" />
+      <span v-else-if="col.type === 'html'" v-html="scope.row[col.field]"></span>
       <span v-else-if="col.click">
         <a style="color: blue" @click="col.click(scope.row)">{{ scope.row[col.field] }}</a>
       </span>

@@ -121,12 +121,8 @@ common.objAssign = (obj1, obj2) => {
   }
 }
 
-common.copyNewObject = (obj) => {
-  var newObj = {}
-  for (var key in obj) {
-    newObj[key] = obj[key]
-  }
-  return newObj
+common.copyNew = (obj) => {
+  return JSON.parse(JSON.stringify(obj))
 }
 
 common.getParam = (data) => {
