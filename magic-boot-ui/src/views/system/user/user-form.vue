@@ -34,10 +34,6 @@
 export default {
   name: 'UserForm',
   props: {
-    visible: {
-      type: Boolean,
-      default: false
-    },
     dialogStatus: {
       type: String,
       default: ''
@@ -51,24 +47,6 @@ export default {
       roles: [],
       selectRoles: [],
       temp: this.getTemp()
-    }
-  },
-  computed: {
-    dialogVisible: {
-      get() {
-        return this.visible
-      },
-      set(val) {
-        this.$emit('update:visible', val)
-      }
-    }
-  },
-  watch: {
-    visible(newVal) {
-      this.temp = this.getTemp()
-      this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
-      })
     }
   },
   created() {
@@ -88,6 +66,12 @@ export default {
         isLogin: 0,
         roles: []
       }
+    },
+    resetTemp() {
+      this.temp = this.getTemp()
+      this.$nextTick(() => {
+        this.$refs['dataForm'].clearValidate()
+      })
     },
     save() {
       this.$refs['dataForm'].validate((valid) => {

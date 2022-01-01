@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-el-drag-dialog :fullscreen="fullscreen" :width="width" :title="title || textMap[status]" :visible.sync="dialogVisible" :close-on-click-modal="false" @opened="opened">
+  <el-dialog v-el-drag-dialog :fullscreen="fullscreen" :width="width" :title="title" :visible.sync="dialogVisible" :close-on-click-modal="false" @opened="opened">
     <template v-if="content">
       {{ content }}
     </template>
@@ -19,15 +19,7 @@
 export default {
   name: 'PdDialog',
   props: {
-    visible: {
-      type: Boolean,
-      default: false
-    },
     title: {
-      type: String,
-      default: ''
-    },
-    status: {
       type: String,
       default: ''
     },
@@ -51,20 +43,7 @@ export default {
   },
   data() {
     return {
-      textMap: {
-        update: '修改',
-        create: '添加'
-      }
-    }
-  },
-  computed: {
-    dialogVisible: {
-      get() {
-        return this.visible
-      },
-      set(val) {
-        this.$emit('update:visible', val)
-      }
+      dialogVisible: false
     }
   },
   created() {
@@ -81,6 +60,12 @@ export default {
   methods: {
     confirmClick() {
       this.$emit('confirm-click')
+    },
+    show() {
+      this.dialogVisible = true
+    },
+    hide() {
+      this.dialogVisible = false
     }
   }
 }

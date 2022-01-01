@@ -12,7 +12,7 @@ import org.ssssssss.magicboot.vo.Result;
  * 定时任务控制器
  */
 @Slf4j
-@Controller
+//@Controller
 @RequestMapping("/job")
 public class ScheduledTasksController {
 

@@ -1,3 +1,9 @@
+<style scoped>
+.icon-btn >>> i{
+  font-size: 25px;
+}
+</style>
+
 <template>
   <div class="app-container">
 
@@ -7,43 +13,54 @@
 
     <pd-table ref="table" v-bind="tableOptions" />
 
-    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible" :close-on-click-modal="false">
-      <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="100px" style="width: 400px; margin-left:50px;">
-        <el-form-item label="菜单名称" prop="name">
-          <el-input v-model="temp.name" />
-        </el-form-item>
-        <el-form-item label="菜单链接" prop="url">
-          <el-input v-model="temp.url" />
-        </el-form-item>
-        <el-form-item label="权限标识" prop="permission">
-          <el-input v-model="temp.permission" />
-        </el-form-item>
-        <el-form-item label="排序" prop="sort">
-          <el-input v-model="temp.sort" />
-        </el-form-item>
-        <el-form-item label="描述">
-          <el-input v-model="temp.descRibe" :autosize="{ minRows: 4, maxRows: 6}" type="textarea" />
-        </el-form-item>
-        <el-form-item label="是否显示">
-          <el-checkbox v-model="temp.isShow">显示</el-checkbox>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">
-          关闭
-        </el-button>
-        <el-button type="primary" @click="save()">
-          确认
-        </el-button>
-      </div>
-    </el-dialog>
+    <pd-dialog ref="menuFormDialog" width="800px" :title="textMap[dialogStatus]" @confirm-click="save()">
+      <template #content>
+        <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="100px" style="width: 600px; margin-left:50px;">
+          <el-form-item label="菜单名称" prop="name">
+            <el-input v-model="temp.name" />
+          </el-form-item>
+          <el-form-item label="菜单链接" prop="url">
+            <el-input v-model="temp.url" />
+          </el-form-item>
+          <el-form-item label="权限标识" prop="permission">
+            <el-input v-model="temp.permission" />
+          </el-form-item>
+          <el-form-item label="图标" prop="icon">
+            <a @click="openIcons">
+              <el-input placeholder="请选择图标" v-model="temp.icon" class="input-with-select">
+                <el-button class="icon-btn" slot="append">
+                  <i v-html="generateIconCode(temp.icon)"></i>
+                </el-button>
+              </el-input>
+            </a>
+          </el-form-item>
+          <el-form-item label="排序" prop="sort">
+            <el-input v-model="temp.sort" />
+          </el-form-item>
+          <el-form-item label="描述">
+            <el-input v-model="temp.descRibe" :autosize="{ minRows: 4, maxRows: 6}" type="textarea" />
+          </el-form-item>
+          <el-form-item label="是否显示">
+            <el-checkbox v-model="temp.isShow">显示</el-checkbox>
+          </el-form-item>
+        </el-form>
+      </template>
+    </pd-dialog>
+
+    <pd-dialog ref="iconDialog">
+      <template #content>
+        <menu-icons :select-icon="selectIcon" />
+      </template>
+    </pd-dialog>
 
   </div>
 </template>
 
 <script>
+import MenuIcons from './menu-icons'
 
 export default {
+  components: { MenuIcons },
   data() {
     return {
       tableOptions: {
@@ -140,6 +157,16 @@ export default {
     }
   },
   methods: {
+    generateIconCode(symbol) {
+      return `<svg style="width: 20px;height: 20px" aria-hidden="true" class="svg-icon disabled"><use href="#icon-${symbol}"></use></svg>`
+    },
+    selectIcon(symbol) {
+      this.$set(this.temp, 'icon', symbol)
+      this.$refs.iconDialog.hide()
+    },
+    openIcons() {
+      this.$refs.iconDialog.show()
+    },
     getTemp() {
       return {
         id: '',
@@ -149,7 +176,8 @@ export default {
         sort: 0,
         descRibe: '',
         isShow: true,
-        pid: ''
+        pid: '',
+        icon: ''
       }
     },
     resetTemp() {
@@ -166,7 +194,7 @@ export default {
       this.temp.id = this.$common.uuid()
       this.getSort()
       this.dialogStatus = 'create'
-      this.dialogFormVisible = true
+      this.$refs.menuFormDialog.show()
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
@@ -177,7 +205,7 @@ export default {
           this.temp.isShow = this.temp.isShow === true ? 1 : 0
           this.$post('menu/save', this.temp).then(() => {
             this.reloadTable()
-            this.dialogFormVisible = false
+            this.$refs.menuFormDialog.hide()
             this.$notify({
               title: '成功',
               message: (this.dialogStatus === 'create' ? '创建' : '修改') + '成功',
@@ -204,7 +232,7 @@ export default {
         }
       }
       this.dialogStatus = 'update'
-      this.dialogFormVisible = true
+      this.$refs.menuFormDialog.show()
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })

@@ -28,9 +28,9 @@
 
     <pd-table ref="table" v-bind="tableOptions" @selection-change="selectionChange" />
 
-    <pd-dialog :visible.sync="dialogFormVisible" @confirm-click="$refs.userForm.save()">
+    <pd-dialog ref="userFormDialog" @confirm-click="$refs.userForm.save()">
       <template #content>
-        <user-form ref="userForm" :visible.sync="dialogFormVisible" :dialog-status="dialogStatus" @reload-table="reloadTable" />
+        <user-form ref="userForm" :dialog-status="dialogStatus" @reload-table="reloadTable" />
       </template>
     </pd-dialog>
 
@@ -116,7 +116,6 @@ export default {
           }
         ]
       },
-      dialogFormVisible: false,
       dialogStatus: '',
       downloadLoading: false,
       ids: []
@@ -131,11 +130,12 @@ export default {
     },
     handleCreate() {
       this.dialogStatus = 'create'
-      this.dialogFormVisible = true
+      this.$refs.userFormDialog.show()
+      this.$nextTick(() => { this.$refs.userForm.resetTemp() })
     },
     handleUpdate(row) {
       this.dialogStatus = 'update'
-      this.dialogFormVisible = true
+      this.$refs.userFormDialog.show()
       this.$nextTick(() => {
         this.$refs['userForm'].getInfo(row)
       })
