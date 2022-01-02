@@ -17,6 +17,9 @@
     <pd-dialog ref="menuFormDialog" width="800px" :title="textMap[dialogStatus]" @confirm-click="save()">
       <template #content>
         <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="100px" style="width: 600px; margin-left:50px;">
+          <el-form-item label="上级菜单" prop="pid">
+            <treeselect v-model="temp.pid" :options="menuTree" />
+          </el-form-item>
           <el-form-item label="菜单名称" prop="name">
             <el-input v-model="temp.name" />
           </el-form-item>
@@ -59,12 +62,15 @@
 
 <script>
 import MenuIcons from './menu-icons'
+import Treeselect from '@riophae/vue-treeselect'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
 export default {
-  components: { MenuIcons },
+  components: { MenuIcons, Treeselect },
   data() {
     return {
       menuData: [],
+      menuTree: [],
       searchValue: '',
       tableOptions: {
         el: {
@@ -164,6 +170,7 @@ export default {
       listConfigDialogVisible: false,
       formConfigDialogVisible: false,
       rules: {
+        pid: [{ required: true, message: '请选择上级菜单', trigger: 'change' }],
         name: [{ required: true, message: '请输入菜单名称', trigger: 'change' }]
       }
     }
@@ -171,9 +178,67 @@ export default {
   mounted() {
     this.reloadTable()
   },
+  watch: {
+    menuData() {
+      this.menuTree = [{
+        label: '根节点',
+        id: '0',
+        children: this.genMenuTree(this.menuData)
+      }]
+    }
+  },
   methods: {
+    isChildren(children, id) {
+      var result = false
+      for(var i in children) {
+        var chi = children[i]
+        if(chi.id == id){
+          result = true
+        }
+        if(chi.children && children.length > 0){
+          if(this.isChildren(chi.children, id)){
+            result = true
+          }
+        }
+      }
+      return result
+    },
+    queryChildren(children, id) {
+      var result = []
+      for(var i in children){
+        var chi = children[i]
+        if(chi.id == id){
+          if(chi.children && chi.children.length > 0){
+            result = chi.children
+          }
+        }else{
+          var qc = this.queryChildren(chi.children, id)
+          if(qc.length > 0){
+            result = qc
+          }
+        }
+      }
+      return result
+    },
+    genMenuTree(children) {
+      var menuTree = []
+      for(var i in children){
+        var chi = {}
+        chi.label = children[i].name
+        chi.id = children[i].id
+        if(children[i].children && children[i].children.length > 0){
+          chi.children = this.genMenuTree(children[i].children)
+        }
+        menuTree.push(chi)
+      }
+      return menuTree
+    },
     searchMenu() {
-      this.$set(this.tableOptions, 'data', this.recursionSearch(this.$common.copyNew(this.menuData), this.searchValue))
+      if(this.searchValue){
+        this.$set(this.tableOptions, 'data', this.recursionSearch(this.$common.copyNew(this.menuData), this.searchValue))
+      }else{
+        this.$set(this.tableOptions, 'data', this.menuData)
+      }
     },
     recursionSearch(data, text){
       var searchData = []
@@ -241,6 +306,24 @@ export default {
     save() {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
+          if(this.temp.pid == this.temp.id){
+            this.$notify({
+              title: '失败',
+              message: '上级菜单不能选当前菜单',
+              type: 'error',
+              duration: 2000
+            })
+            return
+          }
+          if(this.isChildren(this.queryChildren(this.menuData, this.temp.id), this.temp.pid)){
+            this.$notify({
+              title: '失败',
+              message: '上级菜单不能选当前菜单子级',
+              type: 'error',
+              duration: 2000
+            })
+            return
+          }
           this.temp.isShow = this.temp.isShow === true ? 1 : 0
           this.$post('menu/save', this.temp).then(() => {
             this.reloadTable()
@@ -273,6 +356,7 @@ export default {
           this.temp[t] = row[t]
         }
       }
+      this.temp.name = this.temp.name.replaceAll(/<font.*?>(.*?)<\/font>/g,'$1')
       this.dialogStatus = 'update'
       this.$refs.menuFormDialog.show()
       this.$nextTick(() => {

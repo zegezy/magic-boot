@@ -126,6 +126,7 @@ export default {
       this.ids = columns.map(it => it['id']).join(',')
     },
     reloadTable() {
+      this.$refs.userFormDialog.hide()
       this.$refs.table.reloadList()
     },
     handleCreate() {

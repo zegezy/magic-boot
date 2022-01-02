@@ -16,7 +16,7 @@
 
     <pd-table ref="table" v-bind="tableOptions" />
 
-    <pd-dialog :visible.sync="dialogFormVisible" @confirm-click="save()">
+    <pd-dialog ref="roleFormDialog" @confirm-click="save()">
       <template #content>
         <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="120px" style="width: 400px; margin-left:50px;">
           <el-form-item label="角色名称" prop="name">
@@ -108,7 +108,6 @@ export default {
         name: '',
         menus: []
       },
-      dialogFormVisible: false,
       dialogStatus: '',
       textMap: {
         update: '修改',
@@ -141,7 +140,7 @@ export default {
       this.cancelSelectMenu()
       this.resetTemp()
       this.dialogStatus = 'create'
-      this.dialogFormVisible = true
+      this.$refs.roleFormDialog.show()
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
@@ -157,7 +156,7 @@ export default {
           this.temp.menus = this.selectMenus.join(',')
           this.$post('role/save', this.temp).then((response) => {
             this.reloadTable()
-            this.dialogFormVisible = false
+            this.$refs.roleFormDialog.hide()
             this.$notify({
               title: '成功',
               message: (this.dialogStatus === 'create' ? '创建' : '修改') + '成功',
@@ -188,7 +187,7 @@ export default {
         }
       })
       this.dialogStatus = 'update'
-      this.dialogFormVisible = true
+      this.$refs.roleFormDialog.show()
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
