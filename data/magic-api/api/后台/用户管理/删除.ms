@@ -5,7 +5,7 @@
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "删除",
   "createTime" : null,
-  "updateTime" : 1634731401903,
+  "updateTime" : 1641218486141,
   "lock" : "0",
   "method" : "POST",
   "path" : "/delete",
@@ -21,7 +21,10 @@
   "optionMap" : { }
 }
 ================================
+import org.ssssssss.magicapi.cache.SqlCache
+
 for(userId in id.split(',')){
+    SqlCache.delete(`permissions:${userId}`)
     db.table("sys_user").logic().where().eq("id",userId).delete();
 }
 return true

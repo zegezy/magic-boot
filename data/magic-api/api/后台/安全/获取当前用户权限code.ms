@@ -4,8 +4,8 @@
   "script" : null,
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "获取当前用户权限code",
-  "createTime" : 1634724871163,
-  "updateTime" : 1634724871163,
+  "createTime" : null,
+  "updateTime" : 1641276424757,
   "lock" : "0",
   "method" : "POST",
   "path" : "/permissions",
@@ -14,7 +14,7 @@
   "requestBody" : "{\r\n\t\r\n}",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [\n        \"role:view\",\n        \"role:save\",\n        \"role:delete\",\n        \"menu:delete\",\n        \"office:office:list\",\n        \"office:office:save\",\n        \"office:office:delete\",\n        \"dict:items:delete\",\n        \"sys:test:aaa\",\n        \"dict:delete\",\n        \"dict:items\",\n        \"dict:save\",\n        \"user:save\",\n        \"dict:view\",\n        \"user:delete\",\n        \"menu:save\",\n        \"dict:items:save\"\n    ],\n    \"timestamp\": 1634092982336,\n    \"executeTime\": 25\n}",
+  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [\"sys:test:aaa\", \"menu:save\", \"menu:delete\", \"office:office:list\", \"office:office:save\", \"office:office:delete\", \"role:view\", \"role:save\", \"role:delete\", \"user:save\", \"user:delete\", \"dict:view\", \"dict:save\", \"dict:delete\", \"dict:items\", \"dict:items:save\", \"dict:items:delete\"],\n    \"timestamp\": 1641199273283,\n    \"executeTime\": 1\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -65,7 +65,7 @@
       "expression" : "",
       "children" : [ {
         "name" : "",
-        "value" : "role:view",
+        "value" : "sys:test:aaa",
         "description" : "",
         "required" : false,
         "dataType" : "String",
@@ -78,7 +78,7 @@
       } ]
     }, {
       "name" : "timestamp",
-      "value" : "1634092982336",
+      "value" : "1641199273283",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -90,10 +90,10 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "25",
+      "value" : "1",
       "description" : "",
       "required" : false,
-      "dataType" : "Integer",
+      "dataType" : "Object",
       "type" : null,
       "defaultValue" : null,
       "validateType" : "",
@@ -110,7 +110,7 @@
 import 'cn.dev33.satoken.stp.StpUtil';
 
 var userId = StpUtil.getLoginId()
-return db.select("""
+return db.cache(`permissions:${userId}`).select("""
     SELECT DISTINCT
         sm.permission
     FROM

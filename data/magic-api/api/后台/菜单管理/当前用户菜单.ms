@@ -5,16 +5,16 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "当前用户菜单",
   "createTime" : null,
-  "updateTime" : 1641016811595,
+  "updateTime" : 1641279378685,
   "lock" : "0",
   "method" : "POST",
   "path" : "/current/menus",
   "parameters" : [ ],
   "option" : "[]",
-  "requestBody" : "",
+  "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1641016803295,\n    \"executeTime\": null\n}",
+  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [{\n        \"id\": \"b1851d1b13594e71840103c11a37a669\",\n        \"name\": \"系统设置\",\n        \"pid\": \"0\",\n        \"isShow\": 1,\n        \"url\": \"/system\",\n        \"sort\": 10,\n        \"icon\": \"settings\",\n        \"component\": \"Layout\",\n        \"path\": \"/system\",\n        \"meta\": {\n            \"title\": \"系统设置\",\n            \"icon\": \"settings\"\n        },\n        \"redirect\": \"noRedirect\",\n        \"alwaysShow\": true,\n        \"children\": [{\n            \"id\": \"39be13ef6f0745568c80bf35202ddb2b\",\n            \"name\": \"菜单管理\",\n            \"pid\": \"b1851d1b13594e71840103c11a37a669\",\n            \"isShow\": 1,\n            \"url\": \"/system/menu/menu-list\",\n            \"sort\": 10,\n            \"icon\": \"menu\",\n            \"component\": \"/system/menu/menu-list\",\n            \"path\": \"/system/menu/menu-list\",\n            \"meta\": {\n                \"title\": \"菜单管理\",\n                \"icon\": \"menu\"\n            }\n        }, {\n            \"id\": \"8e9455740091486c914495cfb0c7faa5\",\n            \"name\": \"角色管理\",\n            \"pid\": \"b1851d1b13594e71840103c11a37a669\",\n            \"isShow\": 1,\n            \"url\": \"/system/role/role-list\",\n            \"sort\": 40,\n            \"icon\": \"role\",\n            \"component\": \"/system/role/role-list\",\n            \"path\": \"/system/role/role-list\",\n            \"meta\": {\n                \"title\": \"角色管理\",\n                \"icon\": \"role\"\n            }\n        }, {\n            \"id\": \"06b8a427e4cd4c1ba11752070f565f20\",\n            \"name\": \"用户管理\",\n            \"pid\": \"b1851d1b13594e71840103c11a37a669\",\n            \"isShow\": 1,\n            \"url\": \"/system/user/user-list\",\n            \"sort\": 50,\n            \"icon\": \"user\",\n            \"component\": \"/system/user/user-list\",\n            \"path\": \"/system/user/user-list\",\n            \"meta\": {\n                \"title\": \"用户管理\",\n                \"icon\": \"user\"\n            }\n        }, {\n            \"id\": \"c5f407478c4e4c9cbcdbee6389d2c909\",\n            \"name\": \"数据字典\",\n            \"pid\": \"b1851d1b13594e71840103c11a37a669\",\n            \"isShow\": 1,\n            \"url\": \"/system/dict/dict-list\",\n            \"sort\": 60,\n            \"icon\": \"dict\",\n            \"component\": \"/system/dict/dict-list\",\n            \"path\": \"/system/dict/dict-list\",\n            \"meta\": {\n                \"title\": \"数据字典\",\n                \"icon\": \"dict\"\n            }\n        }]\n    }, {\n        \"id\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n        \"name\": \"一些例子\",\n        \"pid\": \"0\",\n        \"isShow\": 1,\n        \"url\": \"/examples\",\n        \"sort\": 20,\n        \"icon\": \"examples\",\n        \"component\": \"Layout\",\n        \"path\": \"/examples\",\n        \"meta\": {\n            \"title\": \"一些例子\",\n            \"icon\": \"examples\"\n        },\n        \"redirect\": \"noRedirect\",\n        \"alwaysShow\": true,\n        \"children\": [{\n            \"id\": \"dc332875-831e-4937-86ff-0c7420915ce9\",\n            \"name\": \"三级联动\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/three-linkage\",\n            \"sort\": 10,\n            \"icon\": \"\",\n            \"component\": \"/examples/three-linkage\",\n            \"path\": \"/examples/three-linkage\",\n            \"meta\": {\n                \"title\": \"三级联动\",\n                \"icon\": \"\"\n            }\n        }, {\n            \"id\": \"f09410d5-5043-4164-9f68-8d135de71b29\",\n            \"name\": \"上传文件\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/upload-file\",\n            \"sort\": 20,\n            \"icon\": \"\",\n            \"component\": \"/examples/upload-file\",\n            \"path\": \"/examples/upload-file\",\n            \"meta\": {\n                \"title\": \"上传文件\",\n                \"icon\": \"\"\n            }\n        }, {\n            \"id\": \"74c852ea-be4b-4533-b146-cfbd776045d5\",\n            \"name\": \"富文本\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/ueditor-example\",\n            \"sort\": 30,\n            \"icon\": \"\",\n            \"component\": \"/examples/ueditor-example\",\n            \"path\": \"/examples/ueditor-example\",\n            \"meta\": {\n                \"title\": \"富文本\",\n                \"icon\": \"\"\n            }\n        }, {\n            \"id\": \"91bdb7d742a64a8c8a8fdc6d3bb61581\",\n            \"name\": \"可编辑表格\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/editor-table\",\n            \"sort\": 40,\n            \"icon\": \"\",\n            \"component\": \"/examples/editor-table\",\n            \"path\": \"/examples/editor-table\",\n            \"meta\": {\n                \"title\": \"可编辑表格\",\n                \"icon\": \"\"\n            }\n        }, {\n            \"id\": \"0ca23f378d794b23b935d6045bb54915\",\n            \"name\": \"页面设计\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/page-design\",\n            \"sort\": 50,\n            \"icon\": \"\",\n            \"component\": \"/examples/page-design\",\n            \"path\": \"/examples/page-design\",\n            \"meta\": {\n                \"title\": \"页面设计\",\n                \"icon\": \"\"\n            }\n        }, {\n            \"id\": \"2664b76cb2904227bce5b0f7d1dd6e7b\",\n            \"name\": \"下拉框\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/select-example\",\n            \"sort\": 60,\n            \"icon\": \"\",\n            \"component\": \"/examples/select-example\",\n            \"path\": \"/examples/select-example\",\n            \"meta\": {\n                \"title\": \"下拉框\",\n                \"icon\": \"\"\n            }\n        }]\n    }, {\n        \"id\": \"f481f745ef8f40deae861b57390f9130\",\n        \"name\": \"测试\",\n        \"pid\": \"0\",\n        \"isShow\": 1,\n        \"url\": null,\n        \"sort\": 30,\n        \"icon\": null,\n        \"component\": \"Layout\",\n        \"path\": \"/\",\n        \"meta\": {\n            \"title\": \"测试\",\n            \"icon\": null\n        },\n        \"redirect\": \"noRedirect\",\n        \"alwaysShow\": true,\n        \"children\": [{\n            \"id\": \"2c0dfae696b84994981461231dd82599\",\n            \"name\": \"1\",\n            \"pid\": \"f481f745ef8f40deae861b57390f9130\",\n            \"isShow\": 1,\n            \"url\": null,\n            \"sort\": 40,\n            \"icon\": null,\n            \"component\": \"Layout\",\n            \"path\": \"/\",\n            \"meta\": {\n                \"title\": \"1\",\n                \"icon\": null\n            },\n            \"redirect\": \"noRedirect\",\n            \"alwaysShow\": true,\n            \"children\": [{\n                \"id\": \"def5a6402307471498447e17e48daf32\",\n                \"name\": \"1-1\",\n                \"pid\": \"2c0dfae696b84994981461231dd82599\",\n                \"isShow\": 1,\n                \"url\": null,\n                \"sort\": 10,\n                \"icon\": null,\n                \"component\": \"Layout\",\n                \"path\": \"/\",\n                \"meta\": {\n                    \"title\": \"1-1\",\n                    \"icon\": null\n                },\n                \"redirect\": \"noRedirect\",\n                \"alwaysShow\": true,\n                \"children\": [{\n                    \"id\": \"dc2fc72b7b584cb4a1027a9abcce4269\",\n                    \"name\": \"1-1-1\",\n                    \"pid\": \"def5a6402307471498447e17e48daf32\",\n                    \"isShow\": 1,\n                    \"url\": null,\n                    \"sort\": 10,\n                    \"icon\": null,\n                    \"component\": \"Layout\",\n                    \"path\": \"/\",\n                    \"meta\": {\n                        \"title\": \"1-1-1\",\n                        \"icon\": null\n                    },\n                    \"redirect\": \"noRedirect\",\n                    \"alwaysShow\": true,\n                    \"children\": [{\n                        \"id\": \"740eb175bb004427a91deecfe6551c78\",\n                        \"name\": \"1-1-1-1\",\n                        \"pid\": \"dc2fc72b7b584cb4a1027a9abcce4269\",\n                        \"isShow\": 1,\n                        \"url\": null,\n                        \"sort\": 10,\n                        \"icon\": null,\n                        \"component\": \"Layout\",\n                        \"path\": \"/\",\n                        \"meta\": {\n                            \"title\": \"1-1-1-1\",\n                            \"icon\": null\n                        }\n                    }]\n                }, {\n                    \"id\": \"4bf506637f094a38903345c906ca13f9\",\n                    \"name\": \"1-1-2\",\n                    \"pid\": \"def5a6402307471498447e17e48daf32\",\n                    \"isShow\": 1,\n                    \"url\": null,\n                    \"sort\": 20,\n                    \"icon\": null,\n                    \"component\": \"Layout\",\n                    \"path\": \"/\",\n                    \"meta\": {\n                        \"title\": \"1-1-2\",\n                        \"icon\": null\n                    }\n                }]\n            }, {\n                \"id\": \"3922bbc556b64e08b2caf77ee5690f1a\",\n                \"name\": \"1-2\",\n                \"pid\": \"2c0dfae696b84994981461231dd82599\",\n                \"isShow\": 1,\n                \"url\": null,\n                \"sort\": 30,\n                \"icon\": null,\n                \"component\": \"Layout\",\n                \"path\": \"/\",\n                \"meta\": {\n                    \"title\": \"1-2\",\n                    \"icon\": null\n                }\n            }]\n        }, {\n            \"id\": \"eb2f8b86ad994986862a705168da875b\",\n            \"name\": \"测试2\",\n            \"pid\": \"f481f745ef8f40deae861b57390f9130\",\n            \"isShow\": 1,\n            \"url\": null,\n            \"sort\": 40,\n            \"icon\": null,\n            \"component\": \"Layout\",\n            \"path\": \"/\",\n            \"meta\": {\n                \"title\": \"测试2\",\n                \"icon\": null\n            }\n        }]\n    }],\n    \"timestamp\": 1641276761756,\n    \"executeTime\": 7\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -30,7 +30,7 @@
     "expression" : "",
     "children" : [ {
       "name" : "code",
-      "value" : "402",
+      "value" : "200",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -42,7 +42,7 @@
       "children" : [ ]
     }, {
       "name" : "message",
-      "value" : "凭证已过期",
+      "value" : "success",
       "description" : "",
       "required" : false,
       "dataType" : "String",
@@ -54,19 +54,367 @@
       "children" : [ ]
     }, {
       "name" : "data",
-      "value" : "null",
+      "value" : "",
       "description" : "",
       "required" : false,
-      "dataType" : "Object",
+      "dataType" : "Array",
       "type" : null,
       "defaultValue" : null,
       "validateType" : "",
       "error" : "",
       "expression" : "",
-      "children" : [ ]
+      "children" : [ {
+        "name" : "",
+        "value" : "",
+        "description" : "",
+        "required" : false,
+        "dataType" : "Object",
+        "type" : null,
+        "defaultValue" : null,
+        "validateType" : "",
+        "error" : "",
+        "expression" : "",
+        "children" : [ {
+          "name" : "id",
+          "value" : "b1851d1b13594e71840103c11a37a669",
+          "description" : "",
+          "required" : false,
+          "dataType" : "String",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        }, {
+          "name" : "name",
+          "value" : "系统设置",
+          "description" : "",
+          "required" : false,
+          "dataType" : "String",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        }, {
+          "name" : "pid",
+          "value" : "0",
+          "description" : "",
+          "required" : false,
+          "dataType" : "String",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        }, {
+          "name" : "isShow",
+          "value" : "1",
+          "description" : "",
+          "required" : false,
+          "dataType" : "Integer",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        }, {
+          "name" : "url",
+          "value" : "/system",
+          "description" : "",
+          "required" : false,
+          "dataType" : "String",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        }, {
+          "name" : "sort",
+          "value" : "10",
+          "description" : "",
+          "required" : false,
+          "dataType" : "Integer",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        }, {
+          "name" : "icon",
+          "value" : "settings",
+          "description" : "",
+          "required" : false,
+          "dataType" : "String",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        }, {
+          "name" : "component",
+          "value" : "Layout",
+          "description" : "",
+          "required" : false,
+          "dataType" : "String",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        }, {
+          "name" : "path",
+          "value" : "/system",
+          "description" : "",
+          "required" : false,
+          "dataType" : "String",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        }, {
+          "name" : "meta",
+          "value" : "",
+          "description" : "",
+          "required" : false,
+          "dataType" : "Object",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ {
+            "name" : "title",
+            "value" : "系统设置",
+            "description" : "",
+            "required" : false,
+            "dataType" : "String",
+            "type" : null,
+            "defaultValue" : null,
+            "validateType" : "",
+            "error" : "",
+            "expression" : "",
+            "children" : [ ]
+          }, {
+            "name" : "icon",
+            "value" : "settings",
+            "description" : "",
+            "required" : false,
+            "dataType" : "String",
+            "type" : null,
+            "defaultValue" : null,
+            "validateType" : "",
+            "error" : "",
+            "expression" : "",
+            "children" : [ ]
+          } ]
+        }, {
+          "name" : "redirect",
+          "value" : "noRedirect",
+          "description" : "",
+          "required" : false,
+          "dataType" : "String",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        }, {
+          "name" : "alwaysShow",
+          "value" : "true",
+          "description" : "",
+          "required" : false,
+          "dataType" : "Boolean",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        }, {
+          "name" : "children",
+          "value" : "",
+          "description" : "",
+          "required" : false,
+          "dataType" : "Array",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ {
+            "name" : "",
+            "value" : "",
+            "description" : "",
+            "required" : false,
+            "dataType" : "Object",
+            "type" : null,
+            "defaultValue" : null,
+            "validateType" : "",
+            "error" : "",
+            "expression" : "",
+            "children" : [ {
+              "name" : "id",
+              "value" : "39be13ef6f0745568c80bf35202ddb2b",
+              "description" : "",
+              "required" : false,
+              "dataType" : "String",
+              "type" : null,
+              "defaultValue" : null,
+              "validateType" : "",
+              "error" : "",
+              "expression" : "",
+              "children" : [ ]
+            }, {
+              "name" : "name",
+              "value" : "菜单管理",
+              "description" : "",
+              "required" : false,
+              "dataType" : "String",
+              "type" : null,
+              "defaultValue" : null,
+              "validateType" : "",
+              "error" : "",
+              "expression" : "",
+              "children" : [ ]
+            }, {
+              "name" : "pid",
+              "value" : "b1851d1b13594e71840103c11a37a669",
+              "description" : "",
+              "required" : false,
+              "dataType" : "String",
+              "type" : null,
+              "defaultValue" : null,
+              "validateType" : "",
+              "error" : "",
+              "expression" : "",
+              "children" : [ ]
+            }, {
+              "name" : "isShow",
+              "value" : "1",
+              "description" : "",
+              "required" : false,
+              "dataType" : "Integer",
+              "type" : null,
+              "defaultValue" : null,
+              "validateType" : "",
+              "error" : "",
+              "expression" : "",
+              "children" : [ ]
+            }, {
+              "name" : "url",
+              "value" : "/system/menu/menu-list",
+              "description" : "",
+              "required" : false,
+              "dataType" : "String",
+              "type" : null,
+              "defaultValue" : null,
+              "validateType" : "",
+              "error" : "",
+              "expression" : "",
+              "children" : [ ]
+            }, {
+              "name" : "sort",
+              "value" : "10",
+              "description" : "",
+              "required" : false,
+              "dataType" : "Integer",
+              "type" : null,
+              "defaultValue" : null,
+              "validateType" : "",
+              "error" : "",
+              "expression" : "",
+              "children" : [ ]
+            }, {
+              "name" : "icon",
+              "value" : "menu",
+              "description" : "",
+              "required" : false,
+              "dataType" : "String",
+              "type" : null,
+              "defaultValue" : null,
+              "validateType" : "",
+              "error" : "",
+              "expression" : "",
+              "children" : [ ]
+            }, {
+              "name" : "component",
+              "value" : "/system/menu/menu-list",
+              "description" : "",
+              "required" : false,
+              "dataType" : "String",
+              "type" : null,
+              "defaultValue" : null,
+              "validateType" : "",
+              "error" : "",
+              "expression" : "",
+              "children" : [ ]
+            }, {
+              "name" : "path",
+              "value" : "/system/menu/menu-list",
+              "description" : "",
+              "required" : false,
+              "dataType" : "String",
+              "type" : null,
+              "defaultValue" : null,
+              "validateType" : "",
+              "error" : "",
+              "expression" : "",
+              "children" : [ ]
+            }, {
+              "name" : "meta",
+              "value" : "",
+              "description" : "",
+              "required" : false,
+              "dataType" : "Object",
+              "type" : null,
+              "defaultValue" : null,
+              "validateType" : "",
+              "error" : "",
+              "expression" : "",
+              "children" : [ {
+                "name" : "title",
+                "value" : "菜单管理",
+                "description" : "",
+                "required" : false,
+                "dataType" : "String",
+                "type" : null,
+                "defaultValue" : null,
+                "validateType" : "",
+                "error" : "",
+                "expression" : "",
+                "children" : [ ]
+              }, {
+                "name" : "icon",
+                "value" : "menu",
+                "description" : "",
+                "required" : false,
+                "dataType" : "String",
+                "type" : null,
+                "defaultValue" : null,
+                "validateType" : "",
+                "error" : "",
+                "expression" : "",
+                "children" : [ ]
+              } ]
+            } ]
+          } ]
+        } ]
+      } ]
     }, {
       "name" : "timestamp",
-      "value" : "1641016803295",
+      "value" : "1641276761756",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -78,7 +426,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "null",
+      "value" : "7",
       "description" : "",
       "required" : false,
       "dataType" : "Object",
@@ -96,8 +444,9 @@
 import 'cn.dev33.satoken.stp.StpUtil';
 
 var userId = StpUtil.getLoginId()
+
 var menus = db.select("""
-    SELECT DISTINCT
+    select
         sm.id,
         sm.name,
         sm.pid,
@@ -105,12 +454,14 @@ var menus = db.select("""
         sm.url,
         sm.sort,
         sm.icon
-    FROM
-        sys_menu sm
-        left JOIN sys_role_menu srm ON sm.id = srm.menu_id
-        left JOIN sys_user_role sur ON sur.role_id = srm.role_id
-        left JOIN sys_user su ON su.id = sur.user_id 
-        ?{userId != '1', AND su.id = #{userId}} and su.is_del = 0 where sm.is_del = 0 and sm.is_show = 1 order by sort
+    from sys_menu sm where 1=1
+    ?{userId != '1',
+        and sm.id in (
+            select menu_id from sys_role_menu where role_id in (
+                select role_id from sys_user_role where user_id = #{userId}
+            )
+        )
+    } and sm.is_del = '0' and sm.is_show = 1 order by sm.sort
 """)
 
 for(menu in menus){

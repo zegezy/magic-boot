@@ -4,14 +4,14 @@
   "script" : null,
   "groupId" : "89130d496f6f467c88b22ae4a7f688eb",
   "name" : "删除",
-  "createTime" : 1634724871175,
-  "updateTime" : 1634724871175,
+  "createTime" : null,
+  "updateTime" : 1641276685001,
   "lock" : "0",
   "method" : "POST",
   "path" : "/delete",
   "parameters" : [ ],
   "option" : "[]",
-  "requestBody" : "",
+  "requestBody" : "{\r\n\t\r\n}",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
@@ -21,4 +21,9 @@
   "optionMap" : { }
 }
 ================================
+import '@get:/role/cache/delete' as cacheDelete
+var roleId = id
+cacheDelete()
+
+db.table("sys_role_menu").where().eq("role_id",id).delete()
 return db.table("sys_role").logic().where().eq("id",id).delete();

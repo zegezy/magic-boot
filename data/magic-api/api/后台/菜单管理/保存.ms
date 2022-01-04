@@ -4,8 +4,8 @@
   "script" : null,
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "保存",
-  "createTime" : 1634724871170,
-  "updateTime" : 1634724871170,
+  "createTime" : null,
+  "updateTime" : 1641219427227,
   "lock" : "0",
   "method" : "POST",
   "path" : "/save",
@@ -23,4 +23,12 @@
   }
 }
 ================================
+import org.ssssssss.magicapi.cache.SqlCache;
+import '@get:/menu/cache/delete' as cacheDelete;
+
+SqlCache.delete('permissions:1')
+if(data.id){
+    var menuId = data.id
+    cacheDelete();
+}
 return db.table("sys_menu").primary("id").saveOrUpdate(data);

@@ -4,21 +4,110 @@
   "script" : null,
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "删除",
-  "createTime" : 1634724871164,
-  "updateTime" : 1634724871164,
+  "createTime" : null,
+  "updateTime" : 1641276678116,
   "lock" : "0",
   "method" : "POST",
   "path" : "/delete",
-  "parameters" : [ ],
+  "parameters" : [ {
+    "name" : "id",
+    "value" : "b1851d1b13594e71840103c11a37a669",
+    "description" : "",
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  } ],
   "option" : "[]",
-  "requestBody" : "",
+  "requestBody" : "{\r\n\t\r\n}",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : null,
+  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": null,\n    \"timestamp\": 1641201245421,\n    \"executeTime\": 7\n}",
   "description" : null,
   "requestBodyDefinition" : null,
-  "responseBodyDefinition" : null,
+  "responseBodyDefinition" : {
+    "name" : "",
+    "value" : "",
+    "description" : "",
+    "required" : false,
+    "dataType" : "Object",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : "",
+    "error" : "",
+    "expression" : "",
+    "children" : [ {
+      "name" : "code",
+      "value" : "200",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Integer",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "message",
+      "value" : "success",
+      "description" : "",
+      "required" : false,
+      "dataType" : "String",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "data",
+      "value" : "null",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Object",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "timestamp",
+      "value" : "1641201245421",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Long",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "executeTime",
+      "value" : "7",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Integer",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    } ]
+  },
   "optionMap" : { }
 }
 ================================
+import '@get:/menu/cache/delete' as cacheDelete;
+var menuId = id
+cacheDelete();
+
+db.table('sys_role_menu').where().eq("menu_id",id).delete();
 return db.table("sys_menu").logic().where().eq("id",id).delete();

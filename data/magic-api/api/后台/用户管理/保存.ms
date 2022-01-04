@@ -5,7 +5,7 @@
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "保存",
   "createTime" : null,
-  "updateTime" : 1634730816739,
+  "updateTime" : 1641261914841,
   "lock" : "0",
   "method" : "POST",
   "path" : "/save",
@@ -22,21 +22,24 @@
 }
 ================================
 import 'cn.dev33.satoken.secure.SaSecureUtil';
+import org.ssssssss.magicapi.cache.SqlCache
 
+password = password ? SaSecureUtil.sha256(password) : ''
 var user = {
     id,
     name,
     username,
-    password: SaSecureUtil.sha256(password),
+    password: password,
     phone,
     isLogin
 }
 if(id){
+    SqlCache.delete(`permissions:${id}`)
     db.update("""
         delete from sys_user_role where user_id = #{id}
     """)
 }
 id = db.table("sys_user").primary("id").saveOrUpdate(user)
 for(roleId in roles.split(',')){
-    db.table("sys_user_role").column('userId', id).column("roleId", roleId).insert()
+    db.table("sys_user_role").column('user_id', id).column("role_id", roleId).insert()
 }
