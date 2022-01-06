@@ -5,7 +5,7 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "当前用户菜单",
   "createTime" : null,
-  "updateTime" : 1641279378685,
+  "updateTime" : 1641482674575,
   "lock" : "0",
   "method" : "POST",
   "path" : "/current/menus",
@@ -453,7 +453,8 @@ var menus = db.select("""
         sm.is_show,
         sm.url,
         sm.sort,
-        sm.icon
+        sm.icon,
+        sm.keep_alive
     from sys_menu sm where 1=1
     ?{userId != '1',
         and sm.id in (
@@ -470,6 +471,7 @@ for(menu in menus){
     menu.meta = {}
     menu.meta.title = menu.name
     menu.meta.icon = menu.icon
+    menu.meta.keepAlive = (menu.keepAlive == '1' ? true : false)
 }
 var nodes = menus.toMap(it => it.id)
 nodes.each((key, node) => {

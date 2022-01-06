@@ -11,20 +11,21 @@
         <el-button class="filter-item" type="primary" icon="el-icon-search" @click="reloadTable">
           搜索
         </el-button>
-        <el-button v-permission="'user:save'" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
-          添加
+        <el-button :loading="downloadLoading" class="filter-item" icon="el-icon-delete" @click="tableOptions.where = {}">
+          清空
         </el-button>
-        <el-button :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
+        <el-button :loading="downloadLoading" class="filter-item" icon="el-icon-download" @click="handleDownload">
           导出
         </el-button>
       </el-form>
     </div>
 
-    <hr>
-    <el-row style="margin-bottom: 6px">
-      <pd-button plain :request-url="'user/delete'" :btn-type="'delete'" :request-data="{ id: ids }" :after-handler="reloadTable" />
+    <el-row style="margin-bottom: 15px">
+      <el-button v-permission="'user:save'" class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">
+        添加
+      </el-button>
+      <pd-button :el="{ plain: true }" :request-url="'user/delete'" :btn-type="'delete'" :request-data="{ id: ids }" :after-handler="reloadTable" />
     </el-row>
-    <hr>
 
     <pd-table ref="table" v-bind="tableOptions" @selection-change="selectionChange" />
 

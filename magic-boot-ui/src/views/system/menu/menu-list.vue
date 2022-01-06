@@ -3,50 +3,83 @@
 
     <div class="filter-container">
       <el-form :inline="true">
-        <el-form-item label="搜索菜单名称">
-          <el-input v-model="searchValue" @input="searchMenu"></el-input>
+        <el-form-item label="菜单搜索">
+          <el-input v-model="searchValue" @input="searchMenu" placeholder="菜单名称、链接、权限标识" style="width: 200px"></el-input>
         </el-form-item>
-        <el-button class="filter-item" style="margin-bottom:10px;" type="primary" icon="el-icon-edit" @click="addSubMenu('0')">
-          添加菜单
+        <el-button class="filter-item" type="primary" icon="el-icon-search" @click="searchMenu">
+          搜索
+        </el-button>
+        <el-button class="filter-item" icon="el-icon-delete" @click="() => { this.searchValue = ''; searchMenu() }">
+          清空
         </el-button>
       </el-form>
     </div>
+
+    <el-row style="margin-bottom: 5px">
+      <el-button class="filter-item" style="margin-bottom:10px;" type="primary" icon="el-icon-edit" @click="addSubMenu('0')">
+        添加菜单
+      </el-button>
+    </el-row>
 
     <pd-table ref="table" v-bind="tableOptions" v-if="menuData && menuData.length > 0" />
 
     <pd-dialog ref="menuFormDialog" width="800px" :title="textMap[dialogStatus]" @confirm-click="save()">
       <template #content>
-        <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="100px" style="width: 600px; margin-left:50px;">
-          <el-form-item label="上级菜单" prop="pid">
-            <treeselect v-model="temp.pid" :options="menuTree" />
-          </el-form-item>
+        <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px" style="width: 600px; margin-left:50px;">
+          <el-row :gutter="24">
+            <el-col :span="12">
+              <el-form-item label="菜单类型" prop="type">
+                <el-radio-group v-model="temp.type" size="small">
+                  <el-radio-button label="menu">菜单</el-radio-button>
+                  <el-radio-button label="button">按钮</el-radio-button>
+                </el-radio-group>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="上级菜单" prop="pid">
+                <treeselect v-model="temp.pid" :options="menuTree" />
+              </el-form-item>
+            </el-col>
+          </el-row>
           <el-form-item label="菜单名称" prop="name">
             <el-input v-model="temp.name" />
           </el-form-item>
-          <el-form-item label="菜单链接" prop="url">
+          <el-form-item label="菜单链接" prop="url" v-if="temp.type == 'menu'">
             <el-input v-model="temp.url" />
           </el-form-item>
           <el-form-item label="权限标识" prop="permission">
             <el-input v-model="temp.permission" />
           </el-form-item>
-          <el-form-item label="图标" prop="icon">
-            <a @click="openIcons">
-              <el-input placeholder="请选择图标" v-model="temp.icon" class="input-with-select">
-                <el-button class="icon-btn" slot="append">
-                  <i v-html="generateIconCode(temp.icon)"></i>
-                </el-button>
-              </el-input>
-            </a>
-          </el-form-item>
-          <el-form-item label="排序" prop="sort">
-            <el-input v-model="temp.sort" />
-          </el-form-item>
-          <el-form-item label="描述">
-            <el-input v-model="temp.descRibe" :autosize="{ minRows: 4, maxRows: 6}" type="textarea" />
-          </el-form-item>
-          <el-form-item label="是否显示">
-            <el-checkbox v-model="temp.isShow">显示</el-checkbox>
-          </el-form-item>
+          <el-row :gutter="24">
+            <el-col :span="12">
+              <el-form-item label="图标" prop="icon" v-if="temp.type == 'menu'">
+                <a @click="openIcons">
+                  <el-input placeholder="请选择图标" v-model="temp.icon" class="input-with-select">
+                    <el-button class="icon-btn" slot="append">
+                      <i v-html="generateIconCode(temp.icon)"></i>
+                    </el-button>
+                  </el-input>
+                </a>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="排序" prop="sort">
+                <el-input-number v-model="temp.sort" controls-position="right" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="24">
+            <el-col :span="12">
+              <el-form-item label="是否显示" v-if="temp.type == 'menu'">
+                <el-switch v-model="temp.isShow" :active-value="1" :inactive-value="0"></el-switch>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="是否缓存" v-if="temp.type == 'menu'">
+                <el-switch v-model="temp.keepAlive" :active-value="1" :inactive-value="0"></el-switch>
+              </el-form-item>
+            </el-col>
+          </el-row>
         </el-form>
       </template>
     </pd-dialog>
@@ -90,13 +123,15 @@ export default {
           {
             field: 'url',
             title: '路径',
-            align: 'left'
+            align: 'left',
+            type: 'html'
           },
           {
             field: 'permission',
             title: '权限标识',
             width: 150,
-            align: 'left'
+            align: 'left',
+            type: 'html'
           },
           {
             field: 'icon',
@@ -118,9 +153,21 @@ export default {
             type: 'switch',
             width: 100,
             change: (row) => {
-              this.$get('menu/change/show', {
+              this.$get('menu/change', {
                 id: row.id,
                 isShow: row.isShow
+              })
+            }
+          },
+          {
+            field: 'keepAlive',
+            title: '是否缓存',
+            type: 'switch',
+            width: 100,
+            change: (row) => {
+              this.$get('menu/change', {
+                id: row.id,
+                keepAlive: row.keepAlive
               })
             }
           },
@@ -172,13 +219,26 @@ export default {
       rules: {
         pid: [{ required: true, message: '请选择上级菜单', trigger: 'change' }],
         name: [{ required: true, message: '请输入菜单名称', trigger: 'change' }]
-      }
+      },
+      searchTimeout: ''
     }
   },
   mounted() {
     this.reloadTable()
   },
   watch: {
+    'temp.type'(type) {
+      for (var t in this.getTemp()) {
+        if(t != 'type'){
+          this.temp[t] = row[t]
+        }
+      }
+      if(type == 'menu'){
+        this.temp.isShow = 1
+      }else{
+        this.temp.isShow = 0
+      }
+    },
     menuData() {
       this.menuTree = [{
         label: '根节点',
@@ -234,11 +294,15 @@ export default {
       return menuTree
     },
     searchMenu() {
-      if(this.searchValue){
-        this.$set(this.tableOptions, 'data', this.recursionSearch(this.$common.copyNew(this.menuData), this.searchValue))
-      }else{
-        this.$set(this.tableOptions, 'data', this.menuData)
-      }
+      var _this = this
+      clearTimeout(this.searchTimeout)
+      this.searchTimeout = setTimeout(() => {
+        if(_this.searchValue){
+          _this.$set(_this.tableOptions, 'data', _this.recursionSearch(_this.$common.copyNew(_this.menuData), _this.searchValue))
+        }else{
+          _this.$set(_this.tableOptions, 'data', _this.menuData)
+        }
+      },1000)
     },
     recursionSearch(data, text){
       var searchData = []
@@ -248,21 +312,28 @@ export default {
         if(children && children.length > 0){
           var childrenSearch = this.recursionSearch(children, text)
           treeNode.children = childrenSearch && childrenSearch.length > 0 ? childrenSearch : treeNode.children
-          if(treeNode.name.indexOf(text) != -1 || childrenSearch.length > 0){
-            treeNode.name = treeNode.name.replace(text, `<font color="#FAA353">${text}</font>`)
-            searchData.push(treeNode)
-          }
+          this.treeNodeReplace(searchData, treeNode, text, childrenSearch)
         }else{
-          if(treeNode.name.indexOf(text) != -1){
-            treeNode.name = treeNode.name.replace(text, `<font color="#FAA353">${text}</font>`)
-            searchData.push(treeNode)
-          }
+          this.treeNodeReplace(searchData, treeNode, text)
         }
       }
       return searchData
     },
+    treeNodeReplace(searchData, treeNode, text, childrenSearch){
+      var exist = false
+      var fields = ['name', 'url', 'permission']
+      fields.forEach((f) => {
+        if(treeNode[f] && treeNode[f].indexOf(text) != -1){
+          treeNode[f] = treeNode[f].replace(text, `<font color="#FAA353">${text}</font>`)
+          exist = true
+        }
+      })
+      if(exist || (childrenSearch && childrenSearch.length > 0)){
+        searchData.push(treeNode)
+      }
+    },
     generateIconCode(symbol) {
-      return `<svg style="width: 20px;height: 20px" aria-hidden="true" class="svg-icon disabled"><use href="#icon-${symbol}"></use></svg>`
+      return `<svg style="width: 20px;height: 20px;fill: #999" aria-hidden="true" class="svg-icon disabled"><use href="#icon-${symbol}"></use></svg>`
     },
     selectIcon(symbol) {
       this.$set(this.temp, 'icon', symbol)
@@ -279,9 +350,11 @@ export default {
         permission: '',
         sort: 0,
         descRibe: '',
-        isShow: true,
+        isShow: 1,
         pid: '',
-        icon: ''
+        icon: '',
+        type: 'menu',
+        keepAlive: 1
       }
     },
     resetTemp() {
@@ -324,7 +397,6 @@ export default {
             })
             return
           }
-          this.temp.isShow = this.temp.isShow === true ? 1 : 0
           this.$post('menu/save', this.temp).then(() => {
             this.reloadTable()
             this.$refs.menuFormDialog.hide()
@@ -346,16 +418,9 @@ export default {
     },
     handleUpdate(row) {
       for (var t in this.temp) {
-        if (t === 'isShow') {
-          if (row[t] === 1) {
-            this.temp[t] = true
-          } else {
-            this.temp[t] = false
-          }
-        } else {
-          this.temp[t] = row[t]
-        }
+        this.temp[t] = row[t]
       }
+      this.temp.type = this.temp.url ? 'menu' : 'button'
       this.temp.name = this.temp.name.replaceAll(/<font.*?>(.*?)<\/font>/g,'$1')
       this.dialogStatus = 'update'
       this.$refs.menuFormDialog.show()
