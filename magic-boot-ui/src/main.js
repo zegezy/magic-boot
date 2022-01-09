@@ -22,6 +22,9 @@ Vue.use(elDragDialog)
 import common from '@/scripts/common'
 Vue.prototype.$common = common
 
+import treeTable from '@/scripts/treeTable'
+Vue.prototype.$treeTable = treeTable
+
 import request from '@/scripts/request'
 Vue.prototype.$request = request
 Vue.prototype.$post = (url, data) => request.post(url, data, {

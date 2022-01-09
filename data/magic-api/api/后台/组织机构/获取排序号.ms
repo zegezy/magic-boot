@@ -1,11 +1,11 @@
 {
   "properties" : { },
-  "id" : "4f966df34dbe41ff8b9941da4671eb2d",
+  "id" : "f6e998eaff2c49be807fcb38a1a7d55b",
   "script" : null,
-  "groupId" : "67b2ce258e24491194b74992958c74aa",
+  "groupId" : "8295fc13678d4144bf7363c465247a50",
   "name" : "获取排序号",
   "createTime" : null,
-  "updateTime" : 1641732167291,
+  "updateTime" : 1641732159522,
   "lock" : "0",
   "method" : "GET",
   "path" : "/sort",
@@ -34,5 +34,5 @@
 }
 ================================
 return db.selectInt("""
-    select max(sort) + 10 from sys_menu where pid = #{pid} and is_del = '0'
+    select max(sort) + 10 from sys_office where pid = #{pid} and is_del = '0'
 """) || 10;

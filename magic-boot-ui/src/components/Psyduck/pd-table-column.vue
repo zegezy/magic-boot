@@ -23,7 +23,7 @@
       />
       <div v-else-if="col.type == 'btns'">
         <template v-for="btn in col.btns">
-          <el-button v-if="btn.if === undefined ? true : btn.if(scope.row)" :key="btn.title" v-permission="btn.permission" :type="btn.type" :size="btn.size || 'mini'" :class="btn.class" @click="btn.click(scope.row, scope.$index)">
+          <el-button v-if="btn.if === undefined ? true : btn.if(scope.row)" :icon="btn.icon" :key="btn.title" v-permission="btn.permission" :type="btn.type" :size="btn.size || 'mini'" :class="btn.class" @click="btn.click(scope.row, scope.$index)">
             {{ btn.title }}
           </el-button>
         </template>
