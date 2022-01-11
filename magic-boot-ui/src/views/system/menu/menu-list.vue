@@ -1,9 +1,3 @@
-<style>
-.el-input-number .el-input__inner{
-  text-align: left;
-}
-</style>
-
 <template>
   <div class="app-container">
 
@@ -21,8 +15,8 @@
       </el-form>
     </div>
 
-    <el-row style="margin-bottom: 5px">
-      <el-button class="filter-item" style="margin-bottom:10px;" type="primary" icon="el-icon-edit" @click="addSubMenu('0')">
+    <el-row class="toolbar-container">
+      <el-button class="filter-item" type="primary" icon="el-icon-edit" @click="addSubMenu('0')">
         添加菜单
       </el-button>
       <el-button type="primary" icon="el-icon-sort" plain @click="expand">展开/折叠</el-button>
@@ -30,74 +24,9 @@
 
     <pd-table ref="table" v-bind="tableOptions" v-if="menuData && menuData.length > 0 && refreshTable" />
 
-    <pd-dialog ref="menuFormDialog" width="1050px" :title="textMap[dialogStatus]" @confirm-click="save()">
+    <pd-dialog ref="menuFormDialog" width="1050px" :title="textMap[dialogStatus]" @confirm-click="$refs.menuForm.save()">
       <template #content>
-        <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px" style="width: 900px; margin-left:50px;">
-          <el-row :gutter="24">
-            <el-col :span="12">
-              <el-form-item label="菜单类型" prop="type">
-                <el-radio-group v-model="menuType" size="small">
-                  <el-radio-button label="menu">菜单</el-radio-button>
-                  <el-radio-button label="button">按钮</el-radio-button>
-                </el-radio-group>
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item label="上级菜单" prop="pid">
-                <treeselect v-model="temp.pid" :options="menuTree" />
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-form-item label="菜单名称" prop="name">
-            <el-input v-model="temp.name" />
-          </el-form-item>
-          <el-form-item label="菜单链接" prop="url" v-if="menuType == 'menu'">
-            <el-input v-model="temp.url" />
-          </el-form-item>
-          <el-form-item label="权限标识" prop="permission" v-if="menuType == 'button'">
-            <el-input v-model="temp.permission" />
-          </el-form-item>
-          <el-row :gutter="24">
-            <el-col :span="6">
-              <el-form-item label="排序" prop="sort">
-                <el-input-number v-model="temp.sort" controls-position="right" />
-              </el-form-item>
-            </el-col>
-            <el-col :span="6">
-              <el-form-item label="选择图标" prop="icon" v-if="menuType == 'menu'">
-                <a @click="openIcons">
-                  <el-input v-model="temp.icon" class="input-with-select">
-                    <el-button class="icon-btn" slot="append">
-                      <i v-html="generateIconCode(temp.icon)"></i>
-                    </el-button>
-                  </el-input>
-                </a>
-              </el-form-item>
-            </el-col>
-            <el-col :span="6">
-              <el-form-item label="菜单显示" v-if="menuType == 'menu'">
-                <el-radio-group v-model="temp.isShow" size="small">
-                  <el-radio-button label="1">显示</el-radio-button>
-                  <el-radio-button label="0">不显示</el-radio-button>
-                </el-radio-group>
-              </el-form-item>
-            </el-col>
-            <el-col :span="6">
-              <el-form-item label="路由缓存" v-if="menuType == 'menu'">
-                <el-radio-group v-model="temp.keepAlive" size="small">
-                  <el-radio-button label="1">缓存</el-radio-button>
-                  <el-radio-button label="0">不缓存</el-radio-button>
-                </el-radio-group>
-              </el-form-item>
-            </el-col>
-          </el-row>
-        </el-form>
-      </template>
-    </pd-dialog>
-
-    <pd-dialog ref="iconDialog">
-      <template #content>
-        <menu-icons :select-icon="selectIcon" />
+        <menu-form ref="menuForm" :menu-tree="menuTree" @reload-table="reloadTable" />
       </template>
     </pd-dialog>
 
@@ -105,18 +34,16 @@
 </template>
 
 <script>
-import MenuIcons from './menu-icons'
-import Treeselect from '@riophae/vue-treeselect'
-import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+import MenuForm from './menu-form'
 
 export default {
-  components: { MenuIcons, Treeselect },
+  name: 'MenuList',
+  components: { MenuForm },
   data() {
     return {
-      menuType: 'menu',
       refreshTable: true,
-      menuData: [],
       menuTree: [],
+      menuData: [],
       searchValue: '',
       tableOptions: {
         el: {
@@ -258,18 +185,10 @@ export default {
           }
         ]
       },
-      dialogFormVisible: false,
       dialogStatus: '',
       textMap: {
         update: '修改',
         create: '添加'
-      },
-      temp: this.getTemp(),
-      listConfigDialogVisible: false,
-      formConfigDialogVisible: false,
-      rules: {
-        pid: [{ required: true, message: '请选择上级菜单', trigger: 'change' }],
-        name: [{ required: true, message: '请输入菜单名称', trigger: 'change' }]
       },
       searchTimeout: ''
     }
@@ -278,23 +197,11 @@ export default {
     this.reloadTable()
   },
   watch: {
-    menuType(type) {
-      for (var t in this.getTemp()) {
-        if(t != 'type'){
-          this.temp[t] = row[t]
-        }
-      }
-      if(type == 'menu'){
-        this.temp.isShow = 1
-      }else{
-        this.temp.isShow = 0
-      }
-    },
     menuData() {
       this.menuTree = [{
         label: '根节点',
         id: '0',
-        children: this.$treeTable.genMenuTree(this.menuData)
+        children: this.$treeTable.genTree(this.menuData)
       }]
     }
   },
@@ -317,108 +224,29 @@ export default {
         }
       },1000)
     },
-    generateIconCode(symbol) {
-      return `<svg style="width: 20px;height: 20px;fill: #999" aria-hidden="true" class="svg-icon disabled"><use href="#icon-${symbol}"></use></svg>`
-    },
-    selectIcon(symbol) {
-      this.$set(this.temp, 'icon', symbol)
-      this.$refs.iconDialog.hide()
-    },
-    openIcons() {
-      this.$refs.iconDialog.show()
-    },
-    getTemp() {
-      return {
-        id: '',
-        name: '',
-        url: '',
-        permission: '',
-        sort: 0,
-        descRibe: '',
-        isShow: 1,
-        pid: '',
-        icon: '',
-        keepAlive: 1
-      }
-    },
-    resetTemp() {
-      this.temp = this.getTemp()
-    },
-    getSort() {
-      this.$get('menu/sort', { pid: this.temp.pid }).then(res => {
-        this.temp.sort = res.data
-      })
-    },
     addSubMenu(id) {
-      this.resetTemp()
-      this.temp.pid = id
-      this.temp.id = this.$common.uuid()
-      this.getSort()
       this.dialogStatus = 'create'
       this.$refs.menuFormDialog.show()
       this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
-      })
-    },
-    save() {
-      this.$refs['dataForm'].validate((valid) => {
-        if (valid) {
-          if(this.temp.pid == this.temp.id){
-            this.$notify({
-              title: '失败',
-              message: '上级菜单不能选当前菜单',
-              type: 'error',
-              duration: 2000
-            })
-            return
-          }
-          if(this.$treeTable.isChildren(this.$treeTable.queryChildren(this.menuData, this.temp.id), this.temp.pid)){
-            this.$notify({
-              title: '失败',
-              message: '上级菜单不能选当前菜单子级',
-              type: 'error',
-              duration: 2000
-            })
-            return
-          }
-          if(this.menuType == 'menu'){
-            this.temp.permission = ''
-          }else{
-            this.temp.isShow = 1
-            this.temp.keepAlive = 1
-            this.temp.icon = ''
-            this.temp.url = ''
-          }
-          this.$post('menu/save', this.temp).then(() => {
-            this.reloadTable()
-            this.$refs.menuFormDialog.hide()
-            this.$notify({
-              title: '成功',
-              message: (this.dialogStatus === 'create' ? '创建' : '修改') + '成功',
-              type: 'success',
-              duration: 2000
-            })
-          })
-        }
+        this.$refs.menuForm.addSubMenu(id)
       })
     },
     reloadTable() {
+      this.$refs.menuFormDialog.hide()
       this.$get('menu/tree').then(res => {
         this.menuData = res.data.list
         this.$set(this.tableOptions, 'data', this.menuData)
       })
     },
     handleUpdate(row) {
-      for (var t in this.temp) {
-        this.temp[t] = row[t]
-      }
-      this.menuType = this.temp.url ? 'menu' : 'button'
-      this.temp.name = this.temp.name.replaceAll(/<font.*?>(.*?)<\/font>/g,'$1')
       this.dialogStatus = 'update'
       this.$refs.menuFormDialog.show()
       this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
+        this.$refs.menuForm.getInfo(row);
       })
+    },
+    generateIconCode(symbol) {
+      return `<svg style="width: 20px;height: 20px;fill: #999" aria-hidden="true" class="svg-icon disabled"><use href="#icon-${symbol}"></use></svg>`
     }
   }
 }
