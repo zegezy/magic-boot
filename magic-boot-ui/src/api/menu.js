@@ -7,16 +7,6 @@ export function getMenuTree() {
   })
 }
 
-export function getMenusByRoleId(roleId) {
-  return request({
-    url: 'menu/by/role',
-    method: 'get',
-    params: {
-      roleId
-    }
-  })
-}
-
 export function getCurrentUserMenu() {
   return request({
     url: 'menu/current/menus',

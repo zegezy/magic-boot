@@ -7,7 +7,7 @@
       </span>
     </div>
     <logo v-if="showLogo" :collapse="isCollapse" />
-    <el-form>
+    <el-form v-if="!isCollapse">
       <el-form-item>
         <treeselect
           style="width: 90%;margin: 0px 5%"
@@ -99,20 +99,10 @@ export default {
   mounted() {
     this.$get('menu/search').then(res => {
       this.menuTree = res.data.list
-      this.deleteEmptyChildren(this.menuTree)
+      this.$treeTable.deleteEmptyChildren(this.menuTree)
     })
   },
   methods: {
-    deleteEmptyChildren(children) {
-      for(var i in children){
-        var chi = children[i]
-        if(chi.children && chi.children.length == 0){
-          delete chi.children
-        }else{
-          this.deleteEmptyChildren(chi.children)
-        }
-      }
-    },
     selectMenu(node) {
       if(node.url){
         this.$router.push({ path: node.url })

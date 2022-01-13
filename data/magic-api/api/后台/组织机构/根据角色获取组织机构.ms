@@ -1,32 +1,20 @@
 {
   "properties" : { },
-  "id" : "9f4ebd1f444341c593a3d2a79d1a3356",
+  "id" : "dd6fd96602cb4905b5c2d79f584ab0a0",
   "script" : null,
-  "groupId" : "67b2ce258e24491194b74992958c74aa",
-  "name" : "根据角色获取菜单",
+  "groupId" : "8295fc13678d4144bf7363c465247a50",
+  "name" : "根据角色获取组织机构",
   "createTime" : null,
-  "updateTime" : 1642080927004,
+  "updateTime" : 1642080922495,
   "lock" : "0",
   "method" : "GET",
   "path" : "/by/role",
-  "parameters" : [ {
-    "name" : "roleId",
-    "value" : "4d80f40315f747768d5b14095a0a7336",
-    "description" : "",
-    "required" : false,
-    "dataType" : "String",
-    "type" : null,
-    "defaultValue" : null,
-    "validateType" : null,
-    "error" : null,
-    "expression" : null,
-    "children" : null
-  } ],
+  "parameters" : [ ],
   "option" : "[]",
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [\"b1851d1b13594e71840103c11a37a669\", \"39be13ef6f0745568c80bf35202ddb2b\", \"414e5d31-fe05-4e69-9983-217c10b9740a\", \"d7e5280a2a8f4fb3b9e2f4a3e3093a38\", \"833b204d5f2c402190bfca677421cfeb\"],\n    \"timestamp\": 1642080903333,\n    \"executeTime\": 4\n}",
+  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [],\n    \"timestamp\": 1642080916671,\n    \"executeTime\": 90\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -75,22 +63,10 @@
       "validateType" : "",
       "error" : "",
       "expression" : "",
-      "children" : [ {
-        "name" : "",
-        "value" : "b1851d1b13594e71840103c11a37a669",
-        "description" : "",
-        "required" : false,
-        "dataType" : "Object",
-        "type" : null,
-        "defaultValue" : null,
-        "validateType" : "",
-        "error" : "",
-        "expression" : "",
-        "children" : [ ]
-      } ]
+      "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1642080903333",
+      "value" : "1642080916671",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -102,7 +78,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "4",
+      "value" : "90",
       "description" : "",
       "required" : false,
       "dataType" : "Object",
@@ -118,5 +94,5 @@
 }
 ================================
 return db.select("""
-    select menu_id id from sys_role_menu where role_id = #{roleId}
+    select office_id id from sys_role_office where role_id = #{roleId}
 """).map(it => it.id)

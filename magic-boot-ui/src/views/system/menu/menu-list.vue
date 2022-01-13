@@ -209,9 +209,7 @@ export default {
     expand(){
       this.refreshTable = false
       this.tableOptions.el["default-expand-all"] = !this.tableOptions.el["default-expand-all"]
-      this.$nextTick(() => {
-        this.refreshTable = true
-      })
+      this.$nextTick(() => this.refreshTable = true)
     },
     searchMenu() {
       var _this = this

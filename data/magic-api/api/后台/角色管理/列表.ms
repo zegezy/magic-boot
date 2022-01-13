@@ -4,8 +4,8 @@
   "script" : null,
   "groupId" : "89130d496f6f467c88b22ae4a7f688eb",
   "name" : "列表",
-  "createTime" : 1634724871177,
-  "updateTime" : 1634724871177,
+  "createTime" : null,
+  "updateTime" : 1642061119644,
   "lock" : "0",
   "method" : "GET",
   "path" : "/list",
@@ -156,6 +156,6 @@
 }
 ================================
 return db.page("""
-    select id, name from sys_role where is_del = 0
+    select id, name, code, permission, desc_ribe from sys_role where is_del = 0
     ?{name, and name like concat('%',#{name},'%')}
 """)

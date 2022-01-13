@@ -5,7 +5,7 @@
   "groupId" : "89130d496f6f467c88b22ae4a7f688eb",
   "name" : "保存",
   "createTime" : null,
-  "updateTime" : 1641215973180,
+  "updateTime" : 1642081039231,
   "lock" : "0",
   "method" : "POST",
   "path" : "/save",
@@ -26,6 +26,9 @@
 import '@get:/role/cache/delete' as cacheDelete
 
 var role = {
+    code,
+    permission,
+    descRibe,
     type,
     name,
     sort,
@@ -39,4 +42,11 @@ if(id){
 id = db.table("sys_role").primary("id").saveOrUpdate(role);
 for(menuId in menus.split(',')){
     db.table("sys_role_menu").column("menu_id",menuId).column("role_id", id).insert();
+}
+if(offices && permission == 1){
+    for(officeId in offices.split(',')){
+        db.table("sys_role_office").column("office_id",officeId).column("role_id", id).insert();
+    }
+}else{
+    db.table("sys_role_office").where().eq("role_id",id).delete()
 }

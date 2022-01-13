@@ -5,7 +5,7 @@
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "登录",
   "createTime" : null,
-  "updateTime" : 1641276726183,
+  "updateTime" : 1642080684959,
   "lock" : "0",
   "method" : "POST",
   "path" : "/login",
@@ -17,7 +17,7 @@
   "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": \"565504aa-ecfa-4c0d-a22f-d35732672708\",\n    \"timestamp\": 1641276642379,\n    \"executeTime\": 13\n}",
   "description" : null,
   "requestBodyDefinition" : {
-    "name" : "",
+    "name" : "root",
     "value" : "",
     "description" : "",
     "required" : false,
