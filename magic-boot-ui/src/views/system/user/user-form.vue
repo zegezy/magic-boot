@@ -12,6 +12,9 @@
     <el-form-item label="手机号" prop="phone">
       <el-input v-model="temp.phone" />
     </el-form-item>
+    <el-form-item label="选择机构" prop="officeId">
+      <treeselect v-model="temp.officeId" :options="officeTree" :disable-branch-nodes="true" :show-count="true" placeholder="请选择组织机构" />
+    </el-form-item>
     <el-form-item label="禁止登录" prop="isLogin">
       <template>
         <el-switch
@@ -30,9 +33,12 @@
 </template>
 
 <script>
+import Treeselect from '@riophae/vue-treeselect'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
 export default {
   name: 'UserForm',
+  components: { Treeselect },
   props: {
     dialogStatus: {
       type: String,
@@ -46,10 +52,15 @@ export default {
       },
       roles: [],
       selectRoles: [],
-      temp: this.getTemp()
+      temp: this.getTemp(),
+      officeTree: []
     }
   },
   created() {
+    this.$get('user/offices').then(res => {
+      this.officeTree = res.data.list
+      this.$treeTable.deleteEmptyChildren(this.officeTree)
+    })
     this.$get('role/list?size=999999').then(response => {
       const { data } = response
       this.roles = data.list
@@ -64,7 +75,8 @@ export default {
         password: '',
         phone: '',
         isLogin: 0,
-        roles: []
+        roles: [],
+        officeId: null
       }
     },
     resetTemp() {

@@ -50,6 +50,17 @@ treeTable.genTree = (children) => {
   return treeData
 }
 
+treeTable.deleteEmptyChildren = (children) => {
+  for(var i in children){
+    var chi = children[i]
+    if(chi.children && chi.children.length == 0){
+      delete chi.children
+    }else{
+      treeTable.deleteEmptyChildren(chi.children)
+    }
+  }
+}
+
 treeTable.recursionSearch = (fields, data, text) => {
   var searchData = []
   for(var i in data){

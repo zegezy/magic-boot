@@ -5,7 +5,7 @@
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "保存",
   "createTime" : null,
-  "updateTime" : 1641261914841,
+  "updateTime" : 1642085497821,
   "lock" : "0",
   "method" : "POST",
   "path" : "/save",
@@ -31,7 +31,8 @@ var user = {
     username,
     password: password,
     phone,
-    isLogin
+    isLogin,
+    officeId
 }
 if(id){
     SqlCache.delete(`permissions:${id}`)
