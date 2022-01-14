@@ -5,7 +5,7 @@
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "所有机构",
   "createTime" : null,
-  "updateTime" : 1642085289368,
+  "updateTime" : 1642134606249,
   "lock" : "0",
   "method" : "GET",
   "path" : "/offices",
@@ -14,7 +14,7 @@
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"list\": [{\n            \"id\": \"4c37a80226134bce8bc91c8fc04a7d2f\",\n            \"label\": \"马小东公司\",\n            \"pid\": \"0\",\n            \"children\": [{\n                \"id\": \"81b5493cdb31477f9ceea85b2cd08f15\",\n                \"label\": \"马小东子公司\",\n                \"pid\": \"4c37a80226134bce8bc91c8fc04a7d2f\",\n                \"children\": null\n            }, {\n                \"id\": \"31b365008f994e93850186126fce87cb\",\n                \"label\": \"马小东子公司2\",\n                \"pid\": \"4c37a80226134bce8bc91c8fc04a7d2f\",\n                \"children\": null\n            }]\n        }, {\n            \"id\": \"935126327e2a4f90b3f485f818f61ea5\",\n            \"label\": \"吕金泽公司\",\n            \"pid\": \"0\",\n            \"children\": [{\n                \"id\": \"1ae0299fc79b43c6b0ae2e14756ec41a\",\n                \"label\": \"吕金泽子公司\",\n                \"pid\": \"935126327e2a4f90b3f485f818f61ea5\",\n                \"children\": null\n            }]\n        }],\n        \"total\": 2\n    },\n    \"timestamp\": 1642085263335,\n    \"executeTime\": 52\n}",
+  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"list\": [{\n            \"id\": \"4c37a80226134bce8bc91c8fc04a7d2f\",\n            \"label\": \"<font color=\\\"yellow\\\">马小东公司</font>\",\n            \"pid\": \"0\",\n            \"children\": [{\n                \"id\": \"81b5493cdb31477f9ceea85b2cd08f15\",\n                \"label\": \"<font color=\\\"yellow\\\">马小东子公司</font>\",\n                \"pid\": \"4c37a80226134bce8bc91c8fc04a7d2f\",\n                \"children\": []\n            }, {\n                \"id\": \"31b365008f994e93850186126fce87cb\",\n                \"label\": \"<font color=\\\"yellow\\\">马小东子公司2</font>\",\n                \"pid\": \"4c37a80226134bce8bc91c8fc04a7d2f\",\n                \"children\": []\n            }]\n        }, {\n            \"id\": \"935126327e2a4f90b3f485f818f61ea5\",\n            \"label\": \"<font color=\\\"yellow\\\">吕金泽公司</font>\",\n            \"pid\": \"0\",\n            \"children\": [{\n                \"id\": \"1ae0299fc79b43c6b0ae2e14756ec41a\",\n                \"label\": \"<font color=\\\"yellow\\\">吕金泽子公司</font>\",\n                \"pid\": \"935126327e2a4f90b3f485f818f61ea5\",\n                \"children\": []\n            }]\n        }],\n        \"total\": 2\n    },\n    \"timestamp\": 1642134574553,\n    \"executeTime\": 5\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -99,7 +99,7 @@
             "children" : [ ]
           }, {
             "name" : "label",
-            "value" : "马小东公司",
+            "value" : "<font color=\\\"yellow\\\">马小东公司</font>",
             "description" : "",
             "required" : false,
             "dataType" : "String",
@@ -157,7 +157,7 @@
                 "children" : [ ]
               }, {
                 "name" : "label",
-                "value" : "马小东子公司",
+                "value" : "<font color=\\\"yellow\\\">马小东子公司</font>",
                 "description" : "",
                 "required" : false,
                 "dataType" : "String",
@@ -181,10 +181,10 @@
                 "children" : [ ]
               }, {
                 "name" : "children",
-                "value" : "null",
+                "value" : "",
                 "description" : "",
                 "required" : false,
-                "dataType" : "Object",
+                "dataType" : "Array",
                 "type" : null,
                 "defaultValue" : null,
                 "validateType" : "",
@@ -210,7 +210,7 @@
       } ]
     }, {
       "name" : "timestamp",
-      "value" : "1642085263335",
+      "value" : "1642134574553",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -222,7 +222,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "52",
+      "value" : "5",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",

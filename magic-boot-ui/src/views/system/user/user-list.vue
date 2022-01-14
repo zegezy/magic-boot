@@ -12,17 +12,11 @@
 <template>
   <div class="app-container">
     <div class="left">
-      <pd-tree url="office/tree" :el="{ 'expand-on-click-node': false }" :checked="false" @node-click="nodeClick(arguments)" />
+      <pd-tree url="office/tree" :el="{ 'expand-on-click-node': false,'show-checkbox': true }" :search="true" :checked="false" @check-change="checkChange" />
     </div>
     <div class="right">
       <div class="filter-container">
         <el-form :inline="true">
-          <el-form-item label="组织机构">
-            <el-input v-model="officeName" placeholder="组织机构" style="width: 200px;" class="filter-item" />
-          </el-form-item>
-          <el-button class="filter-item" icon="el-icon-delete" @click="resetOffice">
-            清除
-          </el-button>
           <el-form-item label="登录名称">
             <el-input v-model="tableOptions.where.username" placeholder="登录名称" style="width: 200px;" class="filter-item" />
           </el-form-item>
@@ -89,6 +83,10 @@ export default {
             sortable: 'custom'
           },
           {
+            field: 'officeName',
+            title: '所属机构'
+          },
+          {
             field: 'phone',
             title: '手机号',
             width: 200,
@@ -98,7 +96,7 @@ export default {
             field: 'isLogin',
             title: '禁止登录',
             type: 'switch',
-            width: 200,
+            width: 100,
             change: (row) => {
               this.$get('/user/change/login/status', {
                 id: row.id,
@@ -142,25 +140,16 @@ export default {
       },
       dialogStatus: '',
       downloadLoading: false,
-      ids: [],
-      officeName: ''
+      ids: []
     }
   },
   methods: {
     reset() {
       this.tableOptions.where = {}
-      this.officeName = ''
       this.$nextTick(() => this.reloadTable())
     },
-    resetOffice() {
-      this.officeName = ''
-      this.tableOptions.where.officeId = ''
-      this.reloadTable()
-    },
-    nodeClick(nodes) {
-      var node = nodes[0]
-      this.officeName = node.name
-      this.tableOptions.where.officeId = node.id
+    checkChange(values) {
+      this.tableOptions.where.officeId = values
       this.reloadTable()
     },
     selectionChange(columns) {
