@@ -61,27 +61,29 @@ treeTable.deleteEmptyChildren = (children) => {
   }
 }
 
-treeTable.recursionSearch = (fields, data, text) => {
+treeTable.recursionSearch = (fields, data, text, html) => {
   var searchData = []
   for(var i in data){
     var treeNode = data[i]
     var children = treeNode.children
     if(children && children.length > 0){
-      var childrenSearch = treeTable.recursionSearch(fields, children, text)
+      var childrenSearch = treeTable.recursionSearch(fields, children, text, html)
       treeNode.children = childrenSearch && childrenSearch.length > 0 ? childrenSearch : treeNode.children
-      treeTable.treeNodeReplace(fields, searchData, treeNode, text, childrenSearch)
+      treeTable.treeNodeReplace(fields, searchData, treeNode, text, childrenSearch, html)
     }else{
-      treeTable.treeNodeReplace(fields, searchData, treeNode, text)
+      treeTable.treeNodeReplace(fields, searchData, treeNode, text, null, html)
     }
   }
   return searchData
 }
 
-treeTable.treeNodeReplace = (fields, searchData, treeNode, text, childrenSearch) => {
+treeTable.treeNodeReplace = (fields, searchData, treeNode, text, childrenSearch, html) => {
   var exist = false
   fields.forEach((f) => {
     if(treeNode[f] && treeNode[f].indexOf(text) != -1){
-      treeNode[f] = treeNode[f].replace(text, `<font color="#FAA353">${text}</font>`)
+      if(html){
+        treeNode[f] = treeNode[f].replace(text, `<font color="#FAA353">${text}</font>`)
+      }
       exist = true
     }
   })

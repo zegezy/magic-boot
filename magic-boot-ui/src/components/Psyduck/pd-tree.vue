@@ -1,11 +1,16 @@
 <template>
   <div>
-    <el-button v-if="expand" type="primary" size="mini" icon="el-icon-sort" plain @click="doExpand">展开/折叠</el-button>
-    <el-button v-if="checked" type="primary" size="mini" icon="el-icon-check" plain @click="() => { treeAllChecked = !treeAllChecked; checkedAll(treeData, treeAllChecked) }">全选/全不选</el-button>
+    <div>
+      <el-button v-if="expand" type="primary" size="mini" icon="el-icon-sort" plain @click="doExpand">展开/折叠</el-button>
+      <el-button v-if="checked" type="primary" size="mini" icon="el-icon-check" plain @click="() => { treeAllChecked = !treeAllChecked; checkedAll(searchData, treeAllChecked) }">全选/全不选</el-button>
+    </div>
+    <div style="margin: 5px 0px;" v-if="search">
+      <el-input v-model="searchValue" @input="searchTree" style="width: 90%" />
+    </div>
     <el-tree
       v-if="refreshTree"
       ref="tree"
-      :data="treeData"
+      :data="searchData"
       v-bind="el"
       node-key="id"
       :default-expand-all="defaultExpandAll"
@@ -49,12 +54,16 @@ export default {
     checked: {
       type: Boolean,
       default: true
+    },
+    search: {
+      type: Boolean,
+      default: false
     }
   },
   watch: {
     async selectValues() {
       await this.loadTreeData()
-      this.checkedAll(this.treeData, false)
+      this.checkedAll(this.searchData, false)
       var values = this.selectValues.split(',');
       for(var i in values){
         this.$refs.tree.setChecked(values[i], true, false)
@@ -64,19 +73,28 @@ export default {
   data() {
     return {
       treeData: [],
+      searchData: [],
       defaultProps: {
         children: 'children',
         label: 'name'
       },
       defaultExpandAll: true,
       refreshTree: true,
-      treeAllChecked: false
+      treeAllChecked: false,
+      searchValue: ''
     }
   },
   async created() {
     await this.loadTreeData()
   },
   methods: {
+    searchTree() {
+      if(this.searchValue){
+        this.searchData = this.$treeTable.recursionSearch(['name'], this.$common.copyNew(this.treeData), this.searchValue, false)
+      }else{
+        this.searchData = this.treeData
+      }
+    },
     doExpand() {
       this.refreshTree = false
       this.defaultExpandAll = !this.defaultExpandAll
@@ -86,6 +104,7 @@ export default {
       if(this.treeData.length == 0){
         await this.$get(this.url, this.params).then((res) => {
           this.treeData = res.data.list
+          this.searchData = this.treeData
         })
       }
     },
@@ -99,6 +118,7 @@ export default {
         selectMenus.push(checkedNodes[i].id)
       }
       this.$emit('update:select-values', selectMenus.join(','))
+      this.$emit('check-change', selectMenus.join(','))
     },
     nodeClick(param1, param2, param3){
       this.$emit('node-click', param1, param2, param3)
