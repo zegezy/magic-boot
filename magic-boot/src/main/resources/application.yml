@@ -36,6 +36,7 @@ upload:
 
 magic-api:
   web: /magic/web
+  show-sql: true #配置打印SQL
   sql-column-case: camel
   page-config:
     page: current

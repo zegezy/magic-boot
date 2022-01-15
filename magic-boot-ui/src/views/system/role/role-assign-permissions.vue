@@ -19,7 +19,7 @@ export default {
   },
   created() {
     this.$get('menu/by/role',{ roleId: this.id }).then(res => {
-      this.menus = res.data.map((row) => row.id).join(',')
+      this.menus = res.data.join(',')
     })
   },
   methods: {
