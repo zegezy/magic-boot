@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-el-drag-dialog :fullscreen="fullscreen" :width="width" :title="title" :visible.sync="dialogVisible" :close-on-click-modal="false" @opened="opened">
+  <el-dialog v-el-drag-dialog :fullscreen="fullscreen" :width="width" :title="title" :visible.sync="dialogVisible" :close-on-click-modal="false" :append-to-body="true" @opened="opened">
     <template v-if="content">
       {{ content }}
     </template>
