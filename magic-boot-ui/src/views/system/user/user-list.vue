@@ -12,7 +12,7 @@
 <template>
   <div class="app-container">
     <div class="left">
-      <pd-tree url="office/tree" :el="{ 'expand-on-click-node': false,'show-checkbox': true }" :search="true" :checked="false" @check-change="checkChange" />
+      <pd-tree url="office/tree" :el="{ 'expand-on-click-node': false,'show-checkbox': true }" :expand="false" :search="true" search-width="100%" :checked="false" @check-change="checkChange" />
     </div>
     <div class="right">
       <div class="filter-container">
@@ -44,12 +44,14 @@
 
       <pd-table ref="table" v-bind="tableOptions" @selection-change="selectionChange" />
 
-      <pd-dialog ref="userFormDialog" @confirm-click="$refs.userForm.save()">
+      <pd-dialog ref="userFormDialog" @confirm-click="$refs.userForm.save()" width="40%">
         <template #content>
           <user-form ref="userForm" :dialog-status="dialogStatus" @reload-table="reloadTable" />
         </template>
       </pd-dialog>
     </div>
+
+    <div class="clear"></div>
 
   </div>
 </template>

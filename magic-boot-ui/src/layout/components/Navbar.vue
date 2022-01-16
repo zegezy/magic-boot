@@ -17,6 +17,7 @@
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
           <img src="@/assets/psyduck.png" class="user-avatar">
+          <span style="font-size: 14px">{{ $store.getters.username }}({{ $store.getters.name }})</span>
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
@@ -128,12 +129,12 @@ export default {
       margin-right: 30px;
 
       .avatar-wrapper {
-        margin-top: 5px;
         position: relative;
 
         .user-avatar {
           cursor: pointer;
           border-radius: 10px;
+          vertical-align: middle;
         }
 
         .el-icon-caret-bottom {

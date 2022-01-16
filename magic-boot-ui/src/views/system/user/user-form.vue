@@ -1,5 +1,11 @@
+<style>
+.el-input-number .el-input__inner{
+  text-align: left;
+}
+</style>
+
 <template>
-  <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="120px" style="width: 400px; margin-left:50px;">
+  <el-form ref="dataForm" :inline="true" :rules="rules" :model="temp" label-position="right" label-width="120px">
     <el-form-item label="登录名称" prop="username">
       <el-input v-model="temp.username" />
     </el-form-item>

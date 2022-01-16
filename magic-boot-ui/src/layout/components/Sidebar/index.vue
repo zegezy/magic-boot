@@ -7,18 +7,6 @@
       </span>
     </div>
     <logo v-if="showLogo" :collapse="isCollapse" />
-    <el-form v-if="!isCollapse">
-      <el-form-item>
-        <treeselect
-          style="width: 90%;margin: 0px 5%"
-          :options="menuTree"
-          placeholder="输入菜单名称搜索查找"
-          :disable-branch-nodes="true"
-          :show-count="true"
-          @select="selectMenu"
-        />
-      </el-form-item>
-    </el-form>
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="activeMenu"
@@ -37,11 +25,8 @@
 </template>
 
 <style scoped>
-  .el-form-item--small.el-form-item{
-    margin-bottom: 0px;
-  }
   .el-scrollbar >>> .el-scrollbar__wrap{
-    height: calc(100% - 60px - 36px)
+    height: calc(100% - 60px)
   }
   .logo-title {
     color:white;
@@ -50,7 +35,7 @@
     line-height: 60px;
     text-align: center;
     font-weight: 300;
-    /*box-shadow: 0px -1px 5px 0px #000;*/
+    box-shadow: 0px -1px 5px 0px #000;
     z-index: 1;
     position: relative;
   }
@@ -61,12 +46,10 @@ import { mapGetters } from 'vuex'
 import Logo from './Logo'
 import SidebarItem from './SidebarItem'
 import variables from '@/styles/variables.scss'
-import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
-import treeTable from "@/scripts/treeTable";
 
 export default {
-  components: { SidebarItem, Logo, Treeselect },
+  components: { SidebarItem, Logo },
   computed: {
     ...mapGetters([
       'permission_routes',
@@ -94,19 +77,6 @@ export default {
   data() {
     return {
       menuTree: []
-    }
-  },
-  mounted() {
-    this.$get('menu/search').then(res => {
-      this.menuTree = res.data.list
-      this.$treeTable.deleteEmptyChildren(this.menuTree)
-    })
-  },
-  methods: {
-    selectMenu(node) {
-      if(node.url){
-        this.$router.push({ path: node.url })
-      }
     }
   }
 }

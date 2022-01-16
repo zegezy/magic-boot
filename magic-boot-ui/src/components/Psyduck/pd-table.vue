@@ -27,6 +27,8 @@
         </template>
       </pd-table-column>
 
+      <el-empty :description="emptyText" slot="empty" />
+
     </el-table>
     <pagination v-show="total > 0 && page" :total="total || 0" :page.sync="listCurrent" :limit.sync="limit" @pagination="handlerPagination" />
   </div>
@@ -88,6 +90,10 @@ export default {
       default: () => {
         return []
       }
+    },
+    emptyText: {
+      type: String,
+      default: '暂无数据'
     }
   },
   data() {

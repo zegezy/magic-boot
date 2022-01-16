@@ -66,7 +66,7 @@
       </template>
     </pd-dialog>
 
-    <pd-dialog ref="assignPermissionsDialog" @confirm-click="$refs.assignPermissions.save()">
+    <pd-dialog ref="assignPermissionsDialog" width="40%" @confirm-click="$refs.assignPermissions.save()">
       <template #content>
         <role-assign-permissions ref="assignPermissions" :key="Math.random()" :id="temp.id" @close="() => { $refs.assignPermissionsDialog.hide(); temp.id = '' }" />
       </template>

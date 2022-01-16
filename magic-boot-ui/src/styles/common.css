@@ -11,3 +11,6 @@ body {
 .toolbar-container{
   margin-bottom: 10px
 }
+.clear{
+  clear: both;
+}

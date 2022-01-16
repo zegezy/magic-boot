@@ -5,7 +5,7 @@
       <el-button v-if="checked" type="primary" size="mini" icon="el-icon-check" plain @click="() => { treeAllChecked = !treeAllChecked; checkedAll(searchData, treeAllChecked) }">全选/全不选</el-button>
     </div>
     <div style="margin: 5px 0px;" v-if="search">
-      <el-input v-model="searchValue" @input="searchTree" style="width: 90%" />
+      <el-input v-model="searchValue" placeholder="输入关键字进行过滤" @input="searchTree" :style="{ width: searchWidth }" />
     </div>
     <el-tree
       v-if="refreshTree"
@@ -58,6 +58,10 @@ export default {
     search: {
       type: Boolean,
       default: false
+    },
+    searchWidth: {
+      type: String,
+      default: '230px'
     }
   },
   watch: {
