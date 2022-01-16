@@ -52,7 +52,7 @@
           <el-row :gutter="24">
             <el-col :span="12">
               <el-form-item label="菜单权限" prop="menus">
-                <pd-tree ref="tree" :el="{ 'show-checkbox': true }" max-height="320px" url="menu/tree" :select-values.sync="temp.menus" />
+                <pd-tree ref="tree" :el="{ 'show-checkbox': true }" max-height="320px" url="menu/tree" :search="true" :select-values.sync="temp.menus" />
               </el-form-item>
             </el-col>
             <el-col :span="12">
