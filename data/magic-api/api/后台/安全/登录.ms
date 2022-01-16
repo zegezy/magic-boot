@@ -5,19 +5,19 @@
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "登录",
   "createTime" : null,
-  "updateTime" : 1642080684959,
+  "updateTime" : 1642321889536,
   "lock" : "0",
   "method" : "POST",
   "path" : "/login",
   "parameters" : [ ],
   "option" : "[{\"name\":\"require_login\",\"value\":\"false\",\"description\":\"该接口需要登录才允许访问\"}]",
-  "requestBody" : "{\r\n    \"username\": \"test\",\r\n    \"password\": \"1\"\r\n}",
+  "requestBody" : "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"1\"\r\n}",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": \"565504aa-ecfa-4c0d-a22f-d35732672708\",\n    \"timestamp\": 1641276642379,\n    \"executeTime\": 13\n}",
+  "responseBody" : "{\n    \"code\": 0,\n    \"message\": \"用户名或密码错误\",\n    \"data\": null,\n    \"timestamp\": 1642321857211,\n    \"executeTime\": 3\n}",
   "description" : null,
   "requestBodyDefinition" : {
-    "name" : "root",
+    "name" : "",
     "value" : "",
     "description" : "",
     "required" : false,
@@ -29,7 +29,7 @@
     "expression" : "",
     "children" : [ {
       "name" : "username",
-      "value" : "test",
+      "value" : "admin",
       "description" : "",
       "required" : false,
       "dataType" : "String",
@@ -66,7 +66,7 @@
     "expression" : "",
     "children" : [ {
       "name" : "code",
-      "value" : "200",
+      "value" : "0",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -78,7 +78,7 @@
       "children" : [ ]
     }, {
       "name" : "message",
-      "value" : "success",
+      "value" : "用户名或密码错误",
       "description" : "",
       "required" : false,
       "dataType" : "String",
@@ -90,7 +90,7 @@
       "children" : [ ]
     }, {
       "name" : "data",
-      "value" : "565504aa-ecfa-4c0d-a22f-d35732672708",
+      "value" : "null",
       "description" : "",
       "required" : false,
       "dataType" : "Object",
@@ -102,7 +102,7 @@
       "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1641276642379",
+      "value" : "1642321857211",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -114,7 +114,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "13",
+      "value" : "3",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
