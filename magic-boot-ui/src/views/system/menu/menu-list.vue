@@ -220,7 +220,7 @@ export default {
         }else{
           _this.$set(_this.tableOptions, 'data', _this.menuData)
         }
-      },1000)
+      },500)
     },
     addSubMenu(id) {
       this.dialogStatus = 'create'
