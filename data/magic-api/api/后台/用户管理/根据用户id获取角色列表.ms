@@ -5,7 +5,7 @@
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "根据用户id获取角色列表",
   "createTime" : null,
-  "updateTime" : 1634730972184,
+  "updateTime" : 1642773983120,
   "lock" : "0",
   "method" : "GET",
   "path" : "/roles",
@@ -23,10 +23,10 @@
     "children" : null
   } ],
   "option" : "[]",
-  "requestBody" : "",
+  "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1634729977953,\n    \"executeTime\": null\n}",
+  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [],\n    \"timestamp\": 1642773977670,\n    \"executeTime\": 2\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -42,7 +42,7 @@
     "expression" : "",
     "children" : [ {
       "name" : "code",
-      "value" : "402",
+      "value" : "200",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -54,7 +54,7 @@
       "children" : [ ]
     }, {
       "name" : "message",
-      "value" : "凭证已过期",
+      "value" : "success",
       "description" : "",
       "required" : false,
       "dataType" : "String",
@@ -66,10 +66,10 @@
       "children" : [ ]
     }, {
       "name" : "data",
-      "value" : "null",
+      "value" : "",
       "description" : "",
       "required" : false,
-      "dataType" : "Object",
+      "dataType" : "Array",
       "type" : null,
       "defaultValue" : null,
       "validateType" : "",
@@ -78,7 +78,7 @@
       "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1634729977953",
+      "value" : "1642773977670",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -90,7 +90,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "null",
+      "value" : "2",
       "description" : "",
       "required" : false,
       "dataType" : "Object",

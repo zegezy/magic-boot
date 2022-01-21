@@ -1,6 +1,7 @@
 <style scoped>
 .left{
-  width: 20%;
+  width: calc(20% - 20px);
+  margin-right: 20px;
   float: left;
 }
 .right{

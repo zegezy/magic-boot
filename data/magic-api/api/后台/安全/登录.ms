@@ -5,7 +5,7 @@
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "登录",
   "createTime" : null,
-  "updateTime" : 1642321889536,
+  "updateTime" : 1642773955109,
   "lock" : "0",
   "method" : "POST",
   "path" : "/login",

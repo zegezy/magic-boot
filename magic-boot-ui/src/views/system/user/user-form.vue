@@ -1,39 +1,46 @@
-<style>
-.el-input-number .el-input__inner{
-  text-align: left;
-}
-</style>
-
 <template>
-  <el-form ref="dataForm" :inline="true" :rules="rules" :model="temp" label-position="right" label-width="120px">
-    <el-form-item label="登录名称" prop="username">
-      <el-input v-model="temp.username" />
-    </el-form-item>
-    <el-form-item label="姓名/昵称" prop="name">
-      <el-input v-model="temp.name" />
-    </el-form-item>
-    <el-form-item label="密码" prop="password">
-      <el-input v-model="temp.password" type="password" />
-    </el-form-item>
-    <el-form-item label="手机号" prop="phone">
-      <el-input v-model="temp.phone" />
-    </el-form-item>
-    <el-form-item label="组织机构" prop="officeId">
-      <treeselect v-model="temp.officeId" :options="officeTree" :show-count="true" placeholder="请选择组织机构" />
-    </el-form-item>
-    <el-form-item label="禁止登录" prop="isLogin">
-      <template>
-        <el-switch
-          v-model="temp.isLogin"
-          :active-value="1"
-          :inactive-value="0"
-        />
-      </template>
-    </el-form-item>
-    <el-form-item label="选择角色">
-      <el-checkbox-group v-model="selectRoles" size="small">
-        <el-checkbox v-for="role in roles" :key="role.id" :label="role.id">{{ role.name }}</el-checkbox>
-      </el-checkbox-group>
+  <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px">
+    <el-row :gutter="24">
+      <el-col :span="12">
+        <el-form-item label="登录名称" prop="username">
+          <el-input v-model="temp.username" autocomplete="new-password" />
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="姓名/昵称" prop="name">
+          <el-input v-model="temp.name" autocomplete="new-password" />
+        </el-form-item>
+      </el-col>
+    </el-row>
+    <el-row :gutter="24">
+      <el-col :span="12">
+        <el-form-item label="密码" prop="password">
+          <el-input v-model="temp.password" type="password" autocomplete="new-password" />
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="手机号" prop="phone">
+          <el-input v-model="temp.phone" />
+        </el-form-item>
+      </el-col>
+    </el-row>
+    <el-row :gutter="24">
+      <el-col :span="12">
+        <el-form-item label="组织机构" prop="officeId">
+          <treeselect v-model="temp.officeId" :options="officeTree" :show-count="true" placeholder="请选择组织机构" />
+        </el-form-item>
+      </el-col>
+      <el-col :span="12">
+        <el-form-item label="选择角色" prop="roles">
+          <pd-select v-model="temp.roles" url="role/list?size=999999" labelField="name" valueField="id" :el="{ multiple: true }" />
+        </el-form-item>
+      </el-col>
+    </el-row>
+    <el-form-item label="登录状态" prop="isLogin">
+      <el-radio-group v-model="temp.isLogin" size="small">
+        <el-radio-button label="0">有效</el-radio-button>
+        <el-radio-button label="1">锁定</el-radio-button>
+      </el-radio-group>
     </el-form-item>
   </el-form>
 </template>
@@ -54,10 +61,10 @@ export default {
   data() {
     return {
       rules: {
-        username: [{ required: true, message: '请输入登录名称', trigger: 'change' }]
+        username: [{ required: true, message: '请输入登录名称', trigger: 'change' }],
+        roles: [{ required: true, message: '请选择角色', trigger: 'change' }],
+        officeId: [{ required: true, message: '请选择组织机构', trigger: 'change' }]
       },
-      roles: [],
-      selectRoles: [],
       temp: this.getTemp(),
       officeTree: []
     }
@@ -66,10 +73,6 @@ export default {
     this.$get('user/offices').then(res => {
       this.officeTree = res.data.list
       this.$treeTable.deleteEmptyChildren(this.officeTree)
-    })
-    this.$get('role/list?size=999999').then(response => {
-      const { data } = response
-      this.roles = data.list
     })
   },
   methods: {
@@ -81,7 +84,7 @@ export default {
         password: '',
         phone: '',
         isLogin: 0,
-        roles: [],
+        roles: '',
         officeId: null
       }
     },
@@ -94,7 +97,6 @@ export default {
     save() {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          this.temp.roles = this.selectRoles.join(',')
           this.$request({
             url: 'user/save',
             method: 'post',
@@ -120,7 +122,7 @@ export default {
       }
       this.$get('user/roles', { userId: this.temp.id }).then((response) => {
         const { data } = response
-        this.selectRoles = data
+        this.temp.roles = data.join(',')
       })
     }
   }
