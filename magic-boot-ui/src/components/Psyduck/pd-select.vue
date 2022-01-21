@@ -120,7 +120,7 @@ export default {
         this.listConcat(this.handlerData(this.data))
       } else if (this.url) {
         this.$get(this.url, this.params).then(res => {
-          this.listConcat(this.handlerData(res.data))
+          this.listConcat(this.handlerData(res.data.list))
         })
       } else {
         this.listConcat(this.$common.getDictType(this.type))

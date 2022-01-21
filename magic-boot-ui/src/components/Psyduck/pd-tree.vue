@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div>
+    <div style="margin-bottom: 5px;" v-if="expand || checked">
       <el-button v-if="expand" type="primary" size="mini" icon="el-icon-sort" plain @click="doExpand">展开/折叠</el-button>
       <el-button v-if="checked" type="primary" size="mini" icon="el-icon-check" plain @click="() => { treeAllChecked = !treeAllChecked; checkedAll(searchData, treeAllChecked) }">全选/全不选</el-button>
     </div>
-    <div style="margin: 5px 0px;" v-if="search">
+    <div style="margin-bottom: 5px;" v-if="search">
       <el-input v-model="searchValue" placeholder="输入关键字进行过滤" @input="searchTree" :style="{ width: searchWidth }" />
     </div>
     <el-tree
