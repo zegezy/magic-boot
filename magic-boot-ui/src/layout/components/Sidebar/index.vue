@@ -1,10 +1,8 @@
 <template>
   <div :class="{'has-logo':showLogo}">
     <div class="logo-title">
-      <img src="@/assets/psyduck.png" style="vertical-align: middle">
-      <span v-if="!isCollapse">
-        magic-boot
-      </span>
+      <img v-if="!isCollapse" src="@/assets/magic-boot.svg" style="height: 30px; vertical-align: middle;" />
+      <img v-if="isCollapse" src="@/assets/magic-boot.png" style="vertical-align: middle; width: 28px">
     </div>
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
