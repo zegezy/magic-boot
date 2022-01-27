@@ -9,7 +9,6 @@ spring:
     active: dev
     include:
       - online
-      - quartz
   servlet:
     multipart:
       max-file-size: 200MB
@@ -20,7 +19,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/magic-boot?useSSL=false&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF8&autoReconnect=true&serverTimezone=Asia/Shanghai
     username: root
-    password: "********"
+    password: root
 
 upload:
   # oss,disk（磁盘）
@@ -45,7 +44,7 @@ magic-api:
     enable: true  #开启缓存，默认是不开启的
     ttl: 3600000 #有效期1小时，默认-1 即永不过期
   resource:
-    location: data/magic-api
+    location: classpath:data/magic-api
   response-code-config:
     success: 200 #执行成功的code值
     invalid: 400 #参数验证未通过的code值

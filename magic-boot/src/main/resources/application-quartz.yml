@@ -1,6 +1,0 @@
-spring:
-  quartz:
-    job-store-type: jdbc
-    jdbc:
-      initialize-schema: always
-      schema: classpath:schema/tables_mysql.sql
