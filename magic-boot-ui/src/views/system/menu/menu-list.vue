@@ -24,7 +24,7 @@
 
     <pd-table ref="table" v-bind="tableOptions" v-if="menuData && menuData.length > 0 && refreshTable" />
 
-    <pd-dialog ref="menuFormDialog" width="1050px" :title="textMap[dialogStatus]" @confirm-click="$refs.menuForm.save()">
+    <pd-dialog ref="menuFormDialog" width="1050px" :title="dialogTitle" @confirm-click="$refs.menuForm.save()">
       <template #content>
         <menu-form ref="menuForm" :menu-tree="menuTree" @reload-table="reloadTable" />
       </template>
@@ -185,11 +185,7 @@ export default {
           }
         ]
       },
-      dialogStatus: '',
-      textMap: {
-        update: '修改',
-        create: '添加'
-      },
+      dialogTitle: '',
       searchTimeout: ''
     }
   },
@@ -223,7 +219,7 @@ export default {
       },500)
     },
     addSubMenu(id) {
-      this.dialogStatus = 'create'
+      this.dialogTitle = '添加'
       this.$refs.menuFormDialog.show()
       this.$nextTick(() => {
         this.$refs.menuForm.addSubMenu(id)
@@ -237,7 +233,7 @@ export default {
       })
     },
     handleUpdate(row) {
-      this.dialogStatus = 'update'
+      this.dialogTitle = '修改'
       this.$refs.menuFormDialog.show()
       this.$nextTick(() => {
         this.$refs.menuForm.getInfo(row);

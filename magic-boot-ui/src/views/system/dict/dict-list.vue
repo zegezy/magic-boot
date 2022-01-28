@@ -19,37 +19,33 @@
 
     <pd-table ref="table" v-bind="tableOptions" />
 
-    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible" :close-on-click-modal="false" width="700px">
-      <el-form ref="dataForm" :inline="true" :rules="rules" :model="temp" label-position="right" label-width="100px" style="margin-left: 20px">
-        <el-form-item label="字典类型" prop="dictType">
-          <pd-select v-model="temp.dictType" type="dict_type" width="185px" />
-        </el-form-item>
-        <el-form-item label="类型" prop="type">
-          <el-input v-model="temp.type" />
-        </el-form-item>
-        <el-form-item label="排序" prop="sort">
-          <el-input v-model="temp.sort" />
-        </el-form-item>
-        <el-form-item label="描述" prop="descRibe">
-          <el-input v-model="temp.descRibe" />
-        </el-form-item>
-        <el-form-item label="备注" prop="remarks">
-          <el-input v-model="temp.remarks" />
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">
-          关闭
-        </el-button>
-        <el-button type="primary" @click="save()">
-          确认
-        </el-button>
-      </div>
-    </el-dialog>
+    <pd-dialog ref="dictDialog" :title="dialogTitle" width="700px" @confirm-click="save()">
+      <template #content>
+        <el-form ref="dataForm" :inline="true" :rules="rules" :model="temp" label-position="right" label-width="100px" style="margin-left: 20px">
+          <el-form-item label="字典类型" prop="dictType">
+            <pd-select v-model="temp.dictType" type="dict_type" width="185px" />
+          </el-form-item>
+          <el-form-item label="类型" prop="type">
+            <el-input v-model="temp.type" />
+          </el-form-item>
+          <el-form-item label="排序" prop="sort">
+            <el-input v-model="temp.sort" />
+          </el-form-item>
+          <el-form-item label="描述" prop="descRibe">
+            <el-input v-model="temp.descRibe" />
+          </el-form-item>
+          <el-form-item label="备注" prop="remarks">
+            <el-input v-model="temp.remarks" />
+          </el-form-item>
+        </el-form>
+      </template>
+    </pd-dialog>
 
-    <el-dialog v-el-drag-dialog title="字典项" :visible.sync="dictItemsVisible" :close-on-click-modal="false" width="1400px">
-      <dict-items :dict-id.sync="dictId" />
-    </el-dialog>
+    <pd-dialog ref="dictItemsDialog" title="字典项" width="1400px">
+      <template #content>
+        <dict-items :dict-id.sync="dictId" />
+      </template>
+    </pd-dialog>
 
   </div>
 </template>
@@ -130,7 +126,7 @@ export default {
                 title: '字典项',
                 type: 'primary',
                 click: (row) => {
-                  this.dictItemsVisible = true
+                  this.$refs.dictItemsDialog.show()
                   this.dictId = row.id
                 }
               }
@@ -140,21 +136,13 @@ export default {
       },
       dictId: '',
       temp: this.getTemp(),
-      dialogFormVisible: false,
-      dictItemsVisible: false,
-      dialogStatus: '',
-      textMap: {
-        update: '修改',
-        create: '添加'
-      },
-      pvData: [],
+      dialogTitle: '',
       rules: {
         dictType: [{ required: true, message: '请输入标签', trigger: 'change' }],
         type: [{ required: true, message: '请输入类型', trigger: 'change' }],
         sort: [{ required: true, message: '请输入排序', trigger: 'change' }],
         descRibe: [{ required: true, message: '请输入描述', trigger: 'change' }]
-      },
-      downloadLoading: false
+      }
     }
   },
   methods: {
@@ -179,8 +167,8 @@ export default {
     handleCreate() {
       this.temp = this.getTemp()
       this.getSort()
-      this.dialogStatus = 'create'
-      this.dialogFormVisible = true
+      this.dialogTitle = '添加'
+      this.$refs.dictDialog.show()
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
@@ -190,10 +178,10 @@ export default {
         if (valid) {
           this.$post('dict/save', this.temp).then((response) => {
             this.temp.id = response.data
-            this.dialogFormVisible = false
+            this.$refs.dictDialog.hide()
             this.$notify({
               title: '成功',
-              message: (this.dialogStatus === 'create' ? '创建' : '修改') + '成功',
+              message: this.dialogTitle + '成功',
               type: 'success',
               duration: 2000
             })
@@ -205,8 +193,8 @@ export default {
     },
     handleUpdate(row) {
       this.$common.objAssign(this.temp, row)
-      this.dialogStatus = 'update'
-      this.dialogFormVisible = true
+      this.dialogTitle = '修改'
+      this.$refs.dictDialog.show()
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })

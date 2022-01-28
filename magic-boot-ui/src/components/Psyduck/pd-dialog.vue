@@ -1,16 +1,15 @@
 <template>
   <el-dialog v-el-drag-dialog :fullscreen="fullscreen" :width="width" :title="title" :visible.sync="dialogVisible" :close-on-click-modal="false" :append-to-body="true" @opened="opened">
-    <template v-if="content">
-      {{ content }}
-    </template>
-    <slot v-else name="content" />
+    <slot name="content" />
     <div slot="footer" class="dialog-footer">
-      <el-button @click="dialogVisible = false">
-        关闭
-      </el-button>
-      <el-button type="primary" @click="confirmClick">
-        确认
-      </el-button>
+      <slot name="btns">
+        <el-button @click="dialogVisible = false">
+          关闭
+        </el-button>
+        <el-button type="primary" @click="confirmClick">
+          确认
+        </el-button>
+      </slot>
     </div>
   </el-dialog>
 </template>
@@ -22,11 +21,6 @@ export default {
     title: {
       type: String,
       default: ''
-    },
-    content: {
-      type: String,
-      default: '',
-      require: false
     },
     width: {
       type: String,

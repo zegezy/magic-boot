@@ -22,7 +22,7 @@
 
     <pd-table ref="table" v-bind="tableOptions" />
 
-    <pd-dialog ref="roleFormDialog" @confirm-click="save()">
+    <pd-dialog ref="roleFormDialog" :title="dialogTitle" width="1000px" @confirm-click="save()">
       <template #content>
         <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="120px" style="width: 900px;">
           <el-row :gutter="24">
@@ -66,7 +66,7 @@
       </template>
     </pd-dialog>
 
-    <pd-dialog ref="assignPermissionsDialog" width="40%" @confirm-click="$refs.assignPermissions.save()">
+    <pd-dialog ref="assignPermissionsDialog" title="分配权限" width="750" @confirm-click="$refs.assignPermissions.save()">
       <template #content>
         <role-assign-permissions ref="assignPermissions" :key="Math.random()" :id="temp.id" @close="() => { $refs.assignPermissionsDialog.hide(); temp.id = '' }" />
       </template>
@@ -163,12 +163,8 @@ export default {
           }
         ]
       },
+      dialogTitle: '',
       temp: this.getTemp(),
-      dialogStatus: '',
-      textMap: {
-        update: '修改',
-        create: '添加'
-      },
       rules: {
         name: [{ required: true, message: '请输入角色名称', trigger: 'change' }],
         code: [{ required: true, message: '请输入角色编码', trigger: 'change' }]
@@ -203,7 +199,7 @@ export default {
     },
     handleCreate() {
       this.resetTemp()
-      this.dialogStatus = 'create'
+      this.dialogTitle = '添加'
       this.$refs.roleFormDialog.show()
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
@@ -217,7 +213,7 @@ export default {
             this.$refs.roleFormDialog.hide()
             this.$notify({
               title: '成功',
-              message: (this.dialogStatus === 'create' ? '创建' : '修改') + '成功',
+              message: this.dialogTitle + '成功',
               type: 'success',
               duration: 2000
             })
@@ -235,7 +231,7 @@ export default {
       this.$get('office/by/role',{ roleId: row.id }).then(res => {
         this.temp.offices = res.data.join(',')
       })
-      this.dialogStatus = 'update'
+      this.dialogTitle = '修改'
       this.$refs.roleFormDialog.show()
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()

@@ -30,7 +30,7 @@
 
     <pd-table ref="table" v-bind="tableOptions" v-if="officeData && officeData.length > 0 && refreshTable" />
 
-    <pd-dialog ref="officeFormDialog" width="1050px" :title="textMap[dialogStatus]" @confirm-click="save()">
+    <pd-dialog ref="officeFormDialog" width="1050px" :title="dialogTitle" @confirm-click="save()">
       <template #content>
         <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px" style="width: 900px; margin-left:50px;">
           <el-row :gutter="24">
@@ -184,18 +184,13 @@ export default {
           }
         ]
       },
-      dialogFormVisible: false,
-      dialogStatus: '',
-      textMap: {
-        update: '修改',
-        create: '添加'
-      },
+      dialogTitle: '',
       temp: this.getTemp(),
-      listConfigDialogVisible: false,
-      formConfigDialogVisible: false,
       rules: {
+        type: [{ required: true, message: '请选择机构类型', trigger: 'change' }],
         pid: [{ required: true, message: '请选择上级机构', trigger: 'change' }],
-        name: [{ required: true, message: '请输入机构名称', trigger: 'change' }]
+        name: [{ required: true, message: '请输入机构名称', trigger: 'change' }],
+        code: [{ required: true, message: '请输入机构编码', trigger: 'change' }]
       },
       searchTimeout: ''
     }
@@ -254,7 +249,7 @@ export default {
       this.temp.pid = id
       this.temp.id = this.$common.uuid()
       this.getSort()
-      this.dialogStatus = 'create'
+      this.dialogTitle = '添加'
       this.$refs.officeFormDialog.show()
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
@@ -286,7 +281,7 @@ export default {
             this.$refs.officeFormDialog.hide()
             this.$notify({
               title: '成功',
-              message: (this.dialogStatus === 'create' ? '创建' : '修改') + '成功',
+              message: dialogTitle + '成功',
               type: 'success',
               duration: 2000
             })
@@ -305,7 +300,7 @@ export default {
         this.temp[t] = row[t]
       }
       this.temp.name = this.temp.name.replaceAll(/<font.*?>(.*?)<\/font>/g,'$1')
-      this.dialogStatus = 'update'
+      this.dialogTitle = '修改'
       this.$refs.officeFormDialog.show()
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()

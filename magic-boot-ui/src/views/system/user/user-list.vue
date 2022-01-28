@@ -45,9 +45,9 @@
 
       <pd-table ref="table" v-bind="tableOptions" @selection-change="selectionChange" />
 
-      <pd-dialog ref="userFormDialog" @confirm-click="$refs.userForm.save()" width="40%">
+      <pd-dialog ref="userFormDialog" :title="dialogTitle" @confirm-click="$refs.userForm.save()" width="770px">
         <template #content>
-          <user-form ref="userForm" :dialog-status="dialogStatus" @reload-table="reloadTable" />
+          <user-form ref="userForm" :dialog-status="dialogTitle" @reload-table="reloadTable" />
         </template>
       </pd-dialog>
     </div>
@@ -141,7 +141,7 @@ export default {
           }
         ]
       },
-      dialogStatus: '',
+      dialogTitle: '',
       downloadLoading: false,
       ids: []
     }
@@ -163,12 +163,12 @@ export default {
       this.$refs.table.reloadList()
     },
     handleCreate() {
-      this.dialogStatus = 'create'
+      this.dialogTitle = '添加'
       this.$refs.userFormDialog.show()
       this.$nextTick(() => { this.$refs.userForm.resetTemp() })
     },
     handleUpdate(row) {
-      this.dialogStatus = 'update'
+      this.dialogTitle = '修改'
       this.$refs.userFormDialog.show()
       this.$nextTick(() => {
         this.$refs.userForm.getInfo(row)

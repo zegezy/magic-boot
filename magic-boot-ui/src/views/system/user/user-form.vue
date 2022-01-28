@@ -53,7 +53,7 @@ export default {
   name: 'UserForm',
   components: { Treeselect },
   props: {
-    dialogStatus: {
+    dialogTitle: {
       type: String,
       default: ''
     }
@@ -105,7 +105,7 @@ export default {
             this.dialogVisible = false
             this.$notify({
               title: '成功',
-              message: (this.dialogStatus === 'create' ? '创建' : '修改') + '成功',
+              message: this.dialogTitle + '成功',
               type: 'success',
               duration: 2000
             })

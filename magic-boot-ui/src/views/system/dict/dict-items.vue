@@ -19,30 +19,24 @@
 
     <pd-table ref="table" v-bind="tableOptions" />
 
-    <el-dialog v-el-drag-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible" :modal="false" :close-on-click-modal="false" width="700px">
-      <el-form ref="dataForm" :inline="true" :rules="rules" :model="temp" label-position="right" label-width="100px" style="margin-left: 20px">
-        <el-form-item label="标签名" prop="label">
-          <el-input v-model="temp.label" />
-        </el-form-item>
-        <el-form-item label="值" prop="value">
-          <el-input v-model="temp.value" />
-        </el-form-item>
-        <el-form-item label="排序" prop="sort">
-          <el-input v-model="temp.sort" />
-        </el-form-item>
-        <el-form-item label="备注" prop="remarks">
-          <el-input v-model="temp.remarks" />
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">
-          关闭
-        </el-button>
-        <el-button type="primary" @click="save()">
-          确认
-        </el-button>
-      </div>
-    </el-dialog>
+    <pd-dialog ref="formDialog" :title="dialogTitle" width="700px" @confirm-click="save">
+      <template #content>
+        <el-form ref="dataForm" :inline="true" :rules="rules" :model="temp" label-position="right" label-width="100px" style="margin-left: 20px">
+          <el-form-item label="标签名" prop="label">
+            <el-input v-model="temp.label" />
+          </el-form-item>
+          <el-form-item label="值" prop="value">
+            <el-input v-model="temp.value" />
+          </el-form-item>
+          <el-form-item label="排序" prop="sort">
+            <el-input v-model="temp.sort" />
+          </el-form-item>
+          <el-form-item label="备注" prop="remarks">
+            <el-input v-model="temp.remarks" />
+          </el-form-item>
+        </el-form>
+      </template>
+    </pd-dialog>
 
   </div>
 </template>
@@ -115,12 +109,7 @@ export default {
           }
         ]
       },
-      textMap: {
-        update: '修改',
-        create: '添加'
-      },
-      dialogFormVisible: false,
-      dialogStatus: '',
+      dialogTitle: '',
       rules: {
         value: [{ required: true, message: '请输入值', trigger: 'change' }],
         label: [{ required: true, message: '请输入标签名', trigger: 'change' }],
@@ -162,8 +151,8 @@ export default {
     handleCreate() {
       this.temp = this.getTemp()
       this.getSort()
-      this.dialogStatus = 'create'
-      this.dialogFormVisible = true
+      this.dialogTitle = '添加'
+      this.$refs.formDialog.show()
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
@@ -172,10 +161,10 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           this.$post('dict/items/save', this.temp).then(() => {
-            this.dialogFormVisible = false
+            this.$refs.formDialog.hide()
             this.$notify({
               title: '成功',
-              message: (this.dialogStatus === 'create' ? '创建' : '修改') + '成功',
+              message: this.dialogTitle + '成功',
               type: 'success',
               duration: 2000
             })
@@ -187,8 +176,8 @@ export default {
     },
     handleUpdate(row) {
       this.$common.objAssign(this.temp, row)
-      this.dialogStatus = 'update'
-      this.dialogFormVisible = true
+      this.dialogTitle = '修改'
+      this.$refs.formDialog.show()
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
