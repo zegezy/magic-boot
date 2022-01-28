@@ -7,16 +7,26 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 export const constantRoutes = [
-
+  {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/redirect/index')
+      }
+    ]
+  },
   {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
     children: [{
       path: 'dashboard',
-      name: 'Dashboard',
+      name: '首页',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '首页', icon: 'home', noCache: false }
+      meta: { title: '首页', icon: 'home', noCache: false, affix: true }
     }]
   },
 
