@@ -1,5 +1,5 @@
 <template>
-  <pd-tree ref="tree" :el="{ 'show-checkbox': true }" url="menu/tree" :search="true" search-width="230px" :select-values.sync="menus" />
+  <mb-tree ref="tree" :el="{ 'show-checkbox': true }" url="menu/tree" :search="true" search-width="230px" :select-values.sync="menus" />
 </template>
 
 <script>

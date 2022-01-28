@@ -1,6 +1,6 @@
 <template>
   <div>
-    <pd-ueditor v-model="content" />
+    <mb-ueditor v-model="content" />
     <button @click="getContent">获取内容</button>
   </div>
 </template>

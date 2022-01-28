@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-select v-if="pdType === 'select'" v-model="selectValue" v-bind="el" :style="{ width }" placeholder="请选择" filterable clearable>
+    <el-select v-if="mbType === 'select'" v-model="selectValue" v-bind="el" :style="{ width }" placeholder="请选择" filterable clearable>
       <el-option
         v-for="item in selectList"
         :key="item.value"
@@ -8,7 +8,7 @@
         :value="item.value"
       />
     </el-select>
-    <el-radio-group v-if="pdType === 'radio'" v-model="selectValue">
+    <el-radio-group v-if="mbType === 'radio'" v-model="selectValue">
       <el-radio v-for="item in selectList" :key="item.value" :label="item.value">
         {{ item.label }}
       </el-radio>
@@ -19,7 +19,7 @@
 <script>
 
 export default {
-  name: 'PdSelect',
+  name: 'MbSelect',
   model: {
     prop: 'value',
     event: 'change'
@@ -61,7 +61,7 @@ export default {
       type: String,
       default: 'value'
     },
-    pdType: {
+    mbType: {
       type: String,
       default: 'select'
     },

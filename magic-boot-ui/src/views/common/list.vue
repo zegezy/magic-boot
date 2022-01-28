@@ -4,7 +4,7 @@
       <el-form :inline="true">
         <el-form-item v-for="col in queryOptions.cols" :key="col.field" :label="col.title">
           <el-input v-if="col.type === 'input'" v-model="tableOptions.where[col.field]" v-bind="col.el" :placeholder="'请输入'+col.title" :style="col.style" />
-          <pd-select v-else-if="col.type === 'select'" v-model="tableOptions.where[col.field]" v-bind="col.el" width="100%" />
+          <mb-select v-else-if="col.type === 'select'" v-model="tableOptions.where[col.field]" v-bind="col.el" width="100%" />
         </el-form-item>
         <el-form-item v-for="(btn, i) in queryOptions.btns" :key="i">
           <el-button v-if="btn.type == 'query'" class="filter-item" type="primary" icon="el-icon-search" @click="reloadTable">
@@ -24,7 +24,7 @@
           <el-button v-if="btn.btnType == 'add'" class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">
             添加
           </el-button>
-          <pd-button
+          <mb-button
             v-else
             :el="btn.el || {}"
             :request-url="btn.request.url"
@@ -41,13 +41,13 @@
       <hr>
     </template>
 
-    <pd-table ref="table" v-bind="tableOptions" @selection-change="selectionChange" />
+    <mb-table ref="table" v-bind="tableOptions" @selection-change="selectionChange" />
 
-    <pd-dialog :params="formParams" v-bind="formConfig && formConfig.dialog" :visible.sync="dialogFormVisible" @confirm-click="$refs.inputForm.save()">
+    <mb-dialog :params="formParams" v-bind="formConfig && formConfig.dialog" :visible.sync="dialogFormVisible" @confirm-click="$refs.inputForm.save()">
       <template #content>
         <common-form ref="inputForm" v-bind="formConfig" :visible.sync="dialogFormVisible" :dialog-status="dialogStatus" @reload-table="reloadTable" />
       </template>
-    </pd-dialog>
+    </mb-dialog>
 
   </div>
 </template>

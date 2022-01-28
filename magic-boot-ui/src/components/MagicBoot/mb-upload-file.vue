@@ -22,7 +22,7 @@
 <script>
 import { getToken } from '@/scripts/auth'
 export default {
-  name: 'PdUploadFile',
+  name: 'MbUploadFile',
   model: {
     prop: 'value',
     event: 'change'

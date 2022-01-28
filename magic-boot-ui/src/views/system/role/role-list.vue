@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-form :inline="true">
+      <el-form :inline="true" @keyup.enter.native="reloadTable">
         <el-form-item label="角色名称">
           <el-input v-model="tableOptions.where.name" placeholder="请输入角色名称" style="width: 200px;" class="filter-item" />
         </el-form-item>
@@ -20,9 +20,9 @@
       </el-button>
     </el-row>
 
-    <pd-table ref="table" v-bind="tableOptions" />
+    <mb-table ref="table" v-bind="tableOptions" />
 
-    <pd-dialog ref="roleFormDialog" :title="dialogTitle" width="1000px" @confirm-click="save()">
+    <mb-dialog ref="roleFormDialog" :title="dialogTitle" width="1000px" @confirm-click="save()">
       <template #content>
         <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="120px" style="width: 900px;">
           <el-row :gutter="24">
@@ -52,25 +52,25 @@
           <el-row :gutter="24">
             <el-col :span="12">
               <el-form-item label="菜单权限" prop="menus">
-                <pd-tree ref="tree" :el="{ 'show-checkbox': true }" max-height="320px" url="menu/tree" :search="true" :select-values.sync="temp.menus" />
+                <mb-tree ref="tree" :el="{ 'show-checkbox': true }" max-height="320px" url="menu/tree" :search="true" :select-values.sync="temp.menus" />
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="数据权限" prop="permission">
-                <pd-select v-model="temp.permission" :data="permissionData" />
-                <pd-tree v-if="temp.permission == 1" max-height="320px" :el="{ 'check-strictly': true, 'show-checkbox': true }" ref="office" url="office/tree" :select-values.sync="temp.offices" />
+                <mb-select v-model="temp.permission" :data="permissionData" />
+                <mb-tree v-if="temp.permission == 1" max-height="320px" :el="{ 'check-strictly': true, 'show-checkbox': true }" ref="office" url="office/tree" :select-values.sync="temp.offices" />
               </el-form-item>
             </el-col>
           </el-row>
         </el-form>
       </template>
-    </pd-dialog>
+    </mb-dialog>
 
-    <pd-dialog ref="assignPermissionsDialog" title="分配权限" width="750" @confirm-click="$refs.assignPermissions.save()">
+    <mb-dialog ref="assignPermissionsDialog" title="分配权限" width="750" @confirm-click="$refs.assignPermissions.save()">
       <template #content>
         <role-assign-permissions ref="assignPermissions" :key="Math.random()" :id="temp.id" @close="() => { $refs.assignPermissionsDialog.hide(); temp.id = '' }" />
       </template>
-    </pd-dialog>
+    </mb-dialog>
 
   </div>
 </template>

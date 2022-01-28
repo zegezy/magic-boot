@@ -22,13 +22,13 @@
       <el-button type="primary" icon="el-icon-sort" plain @click="expand">展开/折叠</el-button>
     </el-row>
 
-    <pd-table ref="table" v-bind="tableOptions" v-if="menuData && menuData.length > 0 && refreshTable" />
+    <mb-table ref="table" v-bind="tableOptions" v-if="menuData && menuData.length > 0 && refreshTable" />
 
-    <pd-dialog ref="menuFormDialog" width="1050px" :title="dialogTitle" @confirm-click="$refs.menuForm.save()">
+    <mb-dialog ref="menuFormDialog" width="1050px" :title="dialogTitle" @confirm-click="$refs.menuForm.save()">
       <template #content>
         <menu-form ref="menuForm" :menu-tree="menuTree" @reload-table="reloadTable" />
       </template>
-    </pd-dialog>
+    </mb-dialog>
 
   </div>
 </template>

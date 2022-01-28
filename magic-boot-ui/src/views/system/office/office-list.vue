@@ -28,15 +28,15 @@
       <el-button type="primary" icon="el-icon-sort" plain @click="expand">展开/折叠</el-button>
     </el-row>
 
-    <pd-table ref="table" v-bind="tableOptions" v-if="officeData && officeData.length > 0 && refreshTable" />
+    <mb-table ref="table" v-bind="tableOptions" v-if="officeData && officeData.length > 0 && refreshTable" />
 
-    <pd-dialog ref="officeFormDialog" width="1050px" :title="dialogTitle" @confirm-click="save()">
+    <mb-dialog ref="officeFormDialog" width="1050px" :title="dialogTitle" @confirm-click="save()">
       <template #content>
         <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px" style="width: 900px; margin-left:50px;">
           <el-row :gutter="24">
             <el-col :span="12">
               <el-form-item label="机构类型" prop="type">
-                <pd-select v-model="temp.type" type="office_type" width="100%" />
+                <mb-select v-model="temp.type" type="office_type" width="100%" />
               </el-form-item>
             </el-col>
             <el-col :span="12">
@@ -66,7 +66,7 @@
           </el-row>
         </el-form>
       </template>
-    </pd-dialog>
+    </mb-dialog>
 
   </div>
 </template>

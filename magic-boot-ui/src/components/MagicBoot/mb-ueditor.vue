@@ -1,12 +1,12 @@
 <template>
-  <vue-ueditor-wrap v-model="content" :config="editorConfig" editor-id="pd-ueditor" />
+  <vue-ueditor-wrap v-model="content" :config="editorConfig" editor-id="mb-ueditor" />
 </template>
 
 <script>
 import VueUeditorWrap from 'vue-ueditor-wrap'
 
 export default {
-  name: 'PdUeditor',
+  name: 'MbUeditor',
   components: {
     VueUeditorWrap
   },

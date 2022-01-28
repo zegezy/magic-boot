@@ -51,7 +51,7 @@
         </i>
       </el-upload>
     </vuedraggable>
-    <pd-dialog :visible.sync="cropperDialogVisible" @confirm-click="cropper">
+    <mb-dialog :visible.sync="cropperDialogVisible" @confirm-click="cropper">
       <template #content>
         <div class="cropper-content">
           <div class="cropper" style="text-align:center">
@@ -68,7 +68,7 @@
           </div>
         </div>
       </template>
-    </pd-dialog>
+    </mb-dialog>
   </div>
 </template>
 
@@ -78,7 +78,7 @@ import vuedraggable from 'vuedraggable'
 import { getToken } from '@/scripts/auth'
 
 export default {
-  name: 'PdUploadImage',
+  name: 'MbUploadImage',
   components: { vuedraggable, VueCropper },
   model: {
     prop: 'value',

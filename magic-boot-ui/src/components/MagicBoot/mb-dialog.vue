@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'PdDialog',
+  name: 'MbDialog',
   props: {
     title: {
       type: String,

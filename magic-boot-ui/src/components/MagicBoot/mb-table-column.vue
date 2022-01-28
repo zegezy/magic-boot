@@ -35,18 +35,18 @@
       </span>
       <span v-else-if="col.field">{{ scope.row[col.field] }}</span>
     </template>
-    <pd-table-column v-for="(col2, j) in col.cols" :key="j" :col="col2">
+    <mb-table-column v-for="(col2, j) in col.cols" :key="j" :col="col2">
       <template v-for="(value, key) in $scopedSlots" #[key]="{ row, index }">
         <slot :row="row" :index="index" :name="key" />
       </template>
-    </pd-table-column>
+    </mb-table-column>
   </el-table-column>
 </template>
 
 <script>
 
 export default {
-  name: 'PdTableColumn',
+  name: 'MbTableColumn',
   props: {
     col: {
       type: Object,

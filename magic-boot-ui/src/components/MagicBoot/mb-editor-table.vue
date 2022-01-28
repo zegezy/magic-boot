@@ -3,19 +3,19 @@
     <el-row style="margin-bottom: 6px">
       <el-button type="primary" @click="tableOptions.data.push({})">添加一行</el-button>
     </el-row>
-    <pd-table v-bind="tableOptions">
+    <mb-table v-bind="tableOptions">
       <template v-for="col in cols" #[col.field]="{ index }">
         <el-input v-if="col.type === 'input'" v-bind="col.properties" v-model="tableOptions.data[index][col.field]" @change="dataChange" />
-        <pd-select v-else-if="col.type === 'select'" v-bind="col.properties" v-model="tableOptions.data[index][col.field]" @change="dataChange" />
+        <mb-select v-else-if="col.type === 'select'" v-bind="col.properties" v-model="tableOptions.data[index][col.field]" @change="dataChange" />
       </template>
-    </pd-table>
+    </mb-table>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'PdEditorTable',
+  name: 'MbEditorTable',
   model: {
     prop: 'value',
     event: 'change'

@@ -20,7 +20,7 @@
           <el-checkbox-group v-else-if="col.type === 'checkboxGroup'" v-model="temp[col.name]" size="small">
             <el-checkbox v-for="checkboxIt in temp['_'+col.name]" :key="checkboxIt[col.defaultValue.value]" :label="checkboxIt[col.defaultValue.value]">{{ checkboxIt[col.defaultValue.text] }}</el-checkbox>
           </el-checkbox-group>
-          <pd-select v-else-if="col.type === 'select'" v-model="temp[col.name]" v-bind="col.el" />
+          <mb-select v-else-if="col.type === 'select'" v-model="temp[col.name]" v-bind="col.el" />
           <el-input v-else v-model="temp[col.name]" :type="col.type" :value="col.defaultValue" />
         </el-form-item>
       </el-col>

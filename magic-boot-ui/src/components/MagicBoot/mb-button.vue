@@ -11,7 +11,7 @@
 import { getToken } from '@/scripts/auth'
 
 export default {
-  name: 'PdButton',
+  name: 'MbButton',
   props: {
     el: {
       type: Object,

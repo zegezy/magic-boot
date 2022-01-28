@@ -13,11 +13,11 @@
 <template>
   <div class="app-container">
     <div class="left">
-      <pd-tree url="office/tree" :el="{ 'expand-on-click-node': false,'show-checkbox': true }" :expand="false" :search="true" search-width="100%" :checked="false" @check-change="checkChange" />
+      <mb-tree url="office/tree" :el="{ 'expand-on-click-node': false,'show-checkbox': true }" :expand="false" :search="true" search-width="100%" :checked="false" @check-change="checkChange" />
     </div>
     <div class="right">
       <div class="filter-container">
-        <el-form :inline="true">
+        <el-form :inline="true" @keyup.enter.native="reloadTable">
           <el-form-item label="登录名称">
             <el-input v-model="tableOptions.where.username" placeholder="登录名称" style="width: 200px;" class="filter-item" />
           </el-form-item>
@@ -40,16 +40,16 @@
         <el-button v-permission="'user:save'" class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">
           添加
         </el-button>
-        <pd-button :el="{ plain: true }" :request-url="'user/delete'" :btn-type="'delete'" :request-data="{ id: ids }" :after-handler="reloadTable" />
+        <mb-button :el="{ plain: true }" :request-url="'user/delete'" :btn-type="'delete'" :request-data="{ id: ids }" :after-handler="reloadTable" />
       </el-row>
 
-      <pd-table ref="table" v-bind="tableOptions" @selection-change="selectionChange" />
+      <mb-table ref="table" v-bind="tableOptions" @selection-change="selectionChange" />
 
-      <pd-dialog ref="userFormDialog" :title="dialogTitle" @confirm-click="$refs.userForm.save()" width="770px">
+      <mb-dialog ref="userFormDialog" :title="dialogTitle" @confirm-click="$refs.userForm.save()" width="770px">
         <template #content>
           <user-form ref="userForm" :dialog-status="dialogTitle" @reload-table="reloadTable" />
         </template>
-      </pd-dialog>
+      </mb-dialog>
     </div>
 
     <div class="clear"></div>
@@ -59,11 +59,10 @@
 
 <script>
 import UserForm from './user-form.vue'
-import PdTree from "@/components/Psyduck/pd-tree";
 
 export default {
   name: 'UserList',
-  components: {PdTree, UserForm },
+  components: { UserForm },
   data() {
     return {
       tableOptions: {

@@ -32,7 +32,7 @@
       </el-col>
       <el-col :span="12">
         <el-form-item label="选择角色" prop="roles">
-          <pd-select v-model="temp.roles" url="role/list?size=999999" labelField="name" valueField="id" :el="{ multiple: true }" />
+          <mb-select v-model="temp.roles" url="role/list?size=999999" labelField="name" valueField="id" :el="{ multiple: true }" />
         </el-form-item>
       </el-col>
     </el-row>

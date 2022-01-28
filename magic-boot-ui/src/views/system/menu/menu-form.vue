@@ -66,11 +66,11 @@
         </el-col>
       </el-row>
     </el-form>
-    <pd-dialog ref="iconDialog">
+    <mb-dialog ref="iconDialog">
       <template #content>
         <menu-icons :select-icon="selectIcon" />
       </template>
-    </pd-dialog>
+    </mb-dialog>
   </div>
 </template>
 

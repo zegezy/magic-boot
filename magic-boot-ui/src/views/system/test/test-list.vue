@@ -8,7 +8,7 @@
       </el-form>
     </div>
 
-    <pd-table ref="table" v-bind="tableOptions" />
+    <mb-table ref="table" v-bind="tableOptions" />
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible" :close-on-click-modal="false" width="700px">
       <el-form ref="dataForm" :inline="true" :model="temp" label-position="right" label-width="100px" style="margin-left: 20px">

@@ -6,7 +6,7 @@
           <el-input v-model="tableOptions.where.type" placeholder="请输入类型" style="width: 200px;" class="filter-item" />
         </el-form-item>
         <el-form-item label="字典类型">
-          <pd-select v-model="tableOptions.where.dictType" :all-option="true" type="dict_type" width="185px" />
+          <mb-select v-model="tableOptions.where.dictType" :all-option="true" type="dict_type" width="185px" />
         </el-form-item>
         <el-button class="filter-item" type="primary" icon="el-icon-search" @click="reloadTable">
           搜索
@@ -17,13 +17,13 @@
       </el-form>
     </div>
 
-    <pd-table ref="table" v-bind="tableOptions" />
+    <mb-table ref="table" v-bind="tableOptions" />
 
-    <pd-dialog ref="dictDialog" :title="dialogTitle" width="700px" @confirm-click="save()">
+    <mb-dialog ref="dictDialog" :title="dialogTitle" width="700px" @confirm-click="save()">
       <template #content>
         <el-form ref="dataForm" :inline="true" :rules="rules" :model="temp" label-position="right" label-width="100px" style="margin-left: 20px">
           <el-form-item label="字典类型" prop="dictType">
-            <pd-select v-model="temp.dictType" type="dict_type" width="185px" />
+            <mb-select v-model="temp.dictType" type="dict_type" width="185px" />
           </el-form-item>
           <el-form-item label="类型" prop="type">
             <el-input v-model="temp.type" />
@@ -39,13 +39,13 @@
           </el-form-item>
         </el-form>
       </template>
-    </pd-dialog>
+    </mb-dialog>
 
-    <pd-dialog ref="dictItemsDialog" title="字典项" width="1400px">
+    <mb-dialog ref="dictItemsDialog" title="字典项" width="1400px">
       <template #content>
         <dict-items :dict-id.sync="dictId" />
       </template>
-    </pd-dialog>
+    </mb-dialog>
 
   </div>
 </template>

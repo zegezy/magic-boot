@@ -21,11 +21,11 @@
         </template>
       </el-table-column>
 
-      <pd-table-column v-for="(col, i) in cols" :key="i" :col="col">
+      <mb-table-column v-for="(col, i) in cols" :key="i" :col="col">
         <template v-for="(value, key) in $scopedSlots" #[key]="{ row, index }">
           <slot :row="row" :index="index" :name="key" />
         </template>
-      </pd-table-column>
+      </mb-table-column>
 
       <el-empty :description="emptyText" slot="empty" />
 
@@ -37,11 +37,11 @@
 <script>
 import request from '@/scripts/request'
 import Pagination from '@/components/Pagination'
-import PdTableColumn from './pd-table-column.vue'
+import MbTableColumn from './mb-table-column.vue'
 
 export default {
-  name: 'PdTable',
-  components: { Pagination, PdTableColumn },
+  name: 'MbTable',
+  components: { Pagination, MbTableColumn },
   props: {
     el: {
       type: Object,

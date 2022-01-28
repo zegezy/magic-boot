@@ -17,9 +17,9 @@
       </el-form>
     </div>
 
-    <pd-table ref="table" v-bind="tableOptions" />
+    <mb-table ref="table" v-bind="tableOptions" />
 
-    <pd-dialog ref="formDialog" :title="dialogTitle" width="700px" @confirm-click="save">
+    <mb-dialog ref="formDialog" :title="dialogTitle" width="700px" @confirm-click="save">
       <template #content>
         <el-form ref="dataForm" :inline="true" :rules="rules" :model="temp" label-position="right" label-width="100px" style="margin-left: 20px">
           <el-form-item label="标签名" prop="label">
@@ -36,7 +36,7 @@
           </el-form-item>
         </el-form>
       </template>
-    </pd-dialog>
+    </mb-dialog>
 
   </div>
 </template>

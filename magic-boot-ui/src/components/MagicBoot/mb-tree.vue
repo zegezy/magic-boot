@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: 'PdTree',
+  name: 'MbTree',
   props: {
     url: {
       type: String,
