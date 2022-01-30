@@ -58,7 +58,8 @@ export default {
             type: 'input',
             label: '值',
             value: ''
-          }
+          },
+          dictId: this.dictId
         },
         cols: [
           {
@@ -118,19 +119,12 @@ export default {
       temp: this.getTemp()
     }
   },
-  watch: {
-    dictId(newVal) {
-      this.dictId = newVal
-      this.reloadTable()
-    }
-  },
   mounted() {
     this.selectValue = this.value
     this.reloadTable()
   },
   methods: {
     reloadTable() {
-      this.tableOptions.where.dictId = this.dictId
       this.$refs.table.reloadList()
     },
     getTemp() {

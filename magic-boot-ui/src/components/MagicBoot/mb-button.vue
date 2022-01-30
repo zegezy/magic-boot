@@ -61,6 +61,7 @@ export default {
   data() {
     return {
       el_: this.el || {},
+      requestMethod_: this.requestMethod,
       beforeConfirm_: this.beforeConfirm,
       successTips_: this.successTips,
       failTips_: this.failTips
@@ -69,7 +70,7 @@ export default {
   created() {
     if (this.btnType) {
       if (this.btnType === 'delete') {
-        this.requestMethod = 'post'
+        this.requestMethod_ = 'post'
         this.el_.type = 'danger'
         this.el_.text = '删除'
         this.el_.icon = 'el-icon-delete'
@@ -96,7 +97,7 @@ export default {
     buttonClickRequest() {
       // var requestOptions = {}
       // requestOptions.url = this.requestUrl
-      // requestOptions.method = this.requestMethod
+      // requestOptions.method = this.requestMethod_
       // if (requestOptions.method === 'get') {
       //   requestOptions.params = this.requestData
       // } else {
@@ -108,7 +109,7 @@ export default {
         })
       }
       return new Promise((resolve, reject) => {
-        if (this.requestMethod === 'get') {
+        if (this.requestMethod_ === 'get') {
           this.$get(this.requestUrl, this.requestData).then(res => {
             const { data } = res
             if (data) {

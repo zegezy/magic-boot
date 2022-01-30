@@ -35,7 +35,7 @@
 
     <mb-dialog ref="dictItemsDialog" title="字典项" width="1400px">
       <template #content>
-        <dict-items :dict-id.sync="dictId" />
+        <dict-items :key="Math.random()" :dict-id.sync="dictId" />
       </template>
     </mb-dialog>
 

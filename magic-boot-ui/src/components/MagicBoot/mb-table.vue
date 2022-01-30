@@ -122,6 +122,7 @@ export default {
     this.newWhere = this.$common.renderWhere(this.where)
   },
   mounted() {
+    this.keyup()
     if (this.data) {
       this.handlerData()
     }
@@ -190,6 +191,22 @@ export default {
       }
       if (this.data) {
         this.handlerData()
+      }
+    },
+    keyup(){
+      document.onkeyup = (e) => {
+        if(e.target.nodeName != 'INPUT'){
+          if (e && e.keyCode == 37) {
+            if(this.listCurrent != 1){
+              this.listCurrent -= 1
+            }
+          } else if (e && e.keyCode == 39) {
+            if(this.listCurrent != parseInt((this.total + this.limit - 1) / this.limit)){
+              this.listCurrent += 1
+            }
+          }
+        }
+        this.handlerPagination()
       }
     }
   }
