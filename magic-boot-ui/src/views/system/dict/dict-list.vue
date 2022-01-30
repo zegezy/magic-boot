@@ -1,21 +1,13 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
-      <el-form :inline="true">
-        <el-form-item label="类型">
-          <el-input v-model="tableOptions.where.type" placeholder="请输入类型" style="width: 200px;" class="filter-item" />
-        </el-form-item>
-        <el-form-item label="字典类型">
-          <mb-select v-model="tableOptions.where.dictType" :all-option="true" type="dict_type" width="185px" />
-        </el-form-item>
-        <el-button class="filter-item" type="primary" icon="el-icon-search" @click="reloadTable">
-          搜索
-        </el-button>
-        <el-button v-permission="'dict:save'" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
-          添加
-        </el-button>
-      </el-form>
-    </div>
+
+    <mb-search :where="tableOptions.where" @search="reloadTable" />
+
+    <el-row class="toolbar-container">
+      <el-button v-permission="'dict:save'" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
+        添加
+      </el-button>
+    </el-row>
 
     <mb-table ref="table" v-bind="tableOptions" />
 
@@ -64,8 +56,20 @@ export default {
         url: 'dict/list',
         page: true,
         where: {
-          username: '',
-          name: ''
+          type: {
+            type: 'input',
+            label: '类型',
+            value: ''
+          },
+          dictType: {
+            type: 'select',
+            label: '字典类型',
+            value: '',
+            properties: {
+              'all-option': true,
+              type: 'dict_type'
+            }
+          }
         },
         cols: [
           {

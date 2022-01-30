@@ -60,8 +60,21 @@ const formatJson = (list, filterVal) => {
   }))
 }
 
+common.renderWhere = (where) => {
+  var newWhere = {}
+  for(var key in where) {
+    if(where[key] instanceof Object){
+      newWhere[key] = where[key].value
+    }else{
+      newWhere[key] = where[key]
+    }
+  }
+  return newWhere
+}
+
 common.exportExcel = (options) => {
-  const where = options.where || {}
+  var where = options.where || {}
+  where = common.renderWhere(where)
   where.current = 1
   where.size = 99999999
   const url = options.url

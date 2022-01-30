@@ -102,16 +102,24 @@ export default {
       total: 0,
       list: [],
       listLoading: false,
-      tableKey: 0
+      tableKey: 0,
+      newWhere: {}
     }
   },
   watch: {
     data() {
       this.listCurrent = 1
       this.handlerData()
+    },
+    where: {
+      handler(){
+        this.newWhere = this.$common.renderWhere(this.where)
+      },
+      deep: true
     }
   },
   created() {
+    this.newWhere = this.$common.renderWhere(this.where)
   },
   mounted() {
     if (this.data) {
@@ -125,15 +133,15 @@ export default {
     getList() {
       this.listLoading = true
       if (this.page) {
-        this.where.current = this.listCurrent
-        this.where.size = this.limit
+        this.newWhere.current = this.listCurrent
+        this.newWhere.size = this.limit
       } else {
-        this.where.size = 99999999
+        this.newWhere.size = 99999999
       }
       request({
         url: this.url,
         method: this.method,
-        params: this.where
+        params: this.newWhere
       }).then(res => {
         const { data } = res
         this.total = data.total
@@ -150,7 +158,7 @@ export default {
       } else {
         order = null
       }
-      this.where.orderBy = order
+      this.newWhere.orderBy = order
       this.reloadList()
     },
     selectionChange(columns) {
@@ -158,7 +166,7 @@ export default {
     },
     reloadList() {
       if (this.url) {
-        this.where.current = 1
+        this.newWhere.current = 1
         this.listCurrent = 1
         this.getList()
       }

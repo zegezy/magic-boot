@@ -1,18 +1,7 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
-      <el-form :inline="true" @keyup.enter.native="reloadTable">
-        <el-form-item label="角色名称">
-          <el-input v-model="tableOptions.where.name" placeholder="请输入角色名称" style="width: 200px;" class="filter-item" />
-        </el-form-item>
-        <el-button class="filter-item" type="primary" icon="el-icon-search" @click="reloadTable">
-          搜索
-        </el-button>
-        <el-button class="filter-item" icon="el-icon-delete" @click="tableOptions.where = {}">
-          清空
-        </el-button>
-      </el-form>
-    </div>
+
+    <mb-search :where="tableOptions.where" @search="reloadTable" />
 
     <el-row class="toolbar-container">
       <el-button v-permission="'role:save'" class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">
@@ -99,7 +88,11 @@ export default {
       tableOptions: {
         url: 'role/list',
         where: {
-          name: ''
+          name: {
+            type: 'input',
+            label: '角色名称',
+            value: ''
+          }
         },
         cols: [
           {

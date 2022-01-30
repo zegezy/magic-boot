@@ -1,21 +1,13 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
-      <el-form :inline="true">
-        <el-form-item label="标签">
-          <el-input v-model="tableOptions.where.label" placeholder="标签" style="width: 200px;" class="filter-item" />
-        </el-form-item>
-        <el-form-item label="值">
-          <el-input v-model="tableOptions.where.value" placeholder="值" style="width: 200px;" class="filter-item" />
-        </el-form-item>
-        <el-button class="filter-item" type="primary" icon="el-icon-search" @click="reloadTable">
-          搜索
-        </el-button>
-        <el-button v-permission="'dict:items:save'" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
-          添加
-        </el-button>
-      </el-form>
-    </div>
+
+    <mb-search :where="tableOptions.where" @search="reloadTable" />
+
+    <el-row class="toolbar-container">
+      <el-button v-permission="'dict:items:save'" class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">
+        添加
+      </el-button>
+    </el-row>
 
     <mb-table ref="table" v-bind="tableOptions" />
 
@@ -57,8 +49,16 @@ export default {
         url: 'dict/items/list',
         page: true,
         where: {
-          label: '',
-          value: ''
+          label: {
+            type: 'input',
+            label: '标签',
+            value: ''
+          },
+          value: {
+            type: 'input',
+            label: '值',
+            value: ''
+          }
         },
         cols: [
           {

@@ -16,25 +16,14 @@
       <mb-tree url="office/tree" :el="{ 'expand-on-click-node': false,'show-checkbox': true }" :expand="false" :search="true" search-width="100%" :checked="false" @check-change="checkChange" />
     </div>
     <div class="right">
-      <div class="filter-container">
-        <el-form :inline="true" @keyup.enter.native="reloadTable">
-          <el-form-item label="登录名称">
-            <el-input v-model="tableOptions.where.username" placeholder="登录名称" style="width: 200px;" class="filter-item" />
-          </el-form-item>
-          <el-form-item label="姓名/昵称">
-            <el-input v-model="tableOptions.where.name" placeholder="姓名/昵称" style="width: 200px;" class="filter-item" />
-          </el-form-item>
-          <el-button class="filter-item" type="primary" icon="el-icon-search" @click="reloadTable">
-            搜索
-          </el-button>
-          <el-button :loading="downloadLoading" class="filter-item" icon="el-icon-delete" @click="reset">
-            清空
-          </el-button>
+
+      <mb-search :where="tableOptions.where" @search="reloadTable">
+        <template #btns>
           <el-button :loading="downloadLoading" class="filter-item" icon="el-icon-download" @click="handleDownload">
             导出
           </el-button>
-        </el-form>
-      </div>
+        </template>
+      </mb-search>
 
       <el-row style="margin-bottom: 15px">
         <el-button v-permission="'user:save'" class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">
@@ -70,8 +59,16 @@ export default {
         page: true,
         selection: true,
         where: {
-          username: '',
-          name: ''
+          username: {
+            type: 'input',
+            label: '登录名称',
+            value: ''
+          },
+          name: {
+            type: 'input',
+            label: '姓名/昵称',
+            value: ''
+          }
         },
         cols: [
           {
@@ -146,10 +143,6 @@ export default {
     }
   },
   methods: {
-    reset() {
-      this.tableOptions.where = {}
-      this.$nextTick(() => this.reloadTable())
-    },
     checkChange(values) {
       this.tableOptions.where.officeId = values
       this.reloadTable()
