@@ -199,14 +199,15 @@ export default {
           if (e && e.keyCode == 37) {
             if(this.listCurrent != 1){
               this.listCurrent -= 1
+              this.handlerPagination()
             }
           } else if (e && e.keyCode == 39) {
             if(this.listCurrent != parseInt((this.total + this.limit - 1) / this.limit)){
               this.listCurrent += 1
+              this.handlerPagination()
             }
           }
         }
-        this.handlerPagination()
       }
     }
   }

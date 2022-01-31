@@ -101,7 +101,7 @@ export default {
   },
   methods: {
     async loadData() {
-      if (this.value) {
+      if (this.value || this.value == '') {
         if ((!(this.value instanceof Array) && this.value.toString().indexOf(',') !== -1)) {
           this.selectValue = this.value.split(',')
         } else {
