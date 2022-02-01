@@ -4,8 +4,8 @@
   "script" : null,
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "获取用户信息",
-  "createTime" : 1634724871155,
-  "updateTime" : 1634724871155,
+  "createTime" : null,
+  "updateTime" : 1643710783720,
   "lock" : "0",
   "method" : "GET",
   "path" : "/info",
@@ -14,7 +14,7 @@
   "requestBody" : "{}",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1634093332235,\n    \"executeTime\": null\n}",
+  "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1643710751531,\n    \"executeTime\": null\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -66,7 +66,7 @@
       "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1634093332235",
+      "value" : "1643710751531",
       "description" : "",
       "required" : false,
       "dataType" : "Long",

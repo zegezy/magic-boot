@@ -51,7 +51,7 @@
         </i>
       </el-upload>
     </vuedraggable>
-    <mb-dialog :visible.sync="cropperDialogVisible" @confirm-click="cropper">
+    <mb-dialog ref="cropperDialog" @confirm-click="cropper">
       <template #content>
         <div class="cropper-content">
           <div class="cropper" style="text-align:center">
@@ -128,7 +128,6 @@ export default {
       disabled: false,
       isUploading: false,
       cropperOption: {},
-      cropperDialogVisible: false,
       urls: [],
       fileList: []
     }
@@ -221,7 +220,7 @@ export default {
     beforeCropper(url) {
       this.cropperOption.img = this.$filePrefix + url
       this.cropperOption.relativeImg = url
-      this.cropperDialogVisible = true
+      this.$refs.cropperDialog.show()
     },
     cropper() {
       this.$refs.cropper.getCropBlob((data) => {
@@ -237,7 +236,7 @@ export default {
           this.urls.forEach((it, i) => {
             if (this.cropperOption.img.indexOf(it) !== -1) {
               this.$set(this.urls, i, res.data.url)
-              this.cropperDialogVisible = false
+              this.$refs.cropperDialog.hide()
             }
           })
         })

@@ -5,7 +5,7 @@
   "groupId" : "fd3d225a1cf141bf9998c4ec4bf4a6ab",
   "name" : "删除",
   "createTime" : null,
-  "updateTime" : 1635075573670,
+  "updateTime" : 1643706734133,
   "lock" : "0",
   "method" : "GET",
   "path" : "/delete",
@@ -21,9 +21,10 @@
   "optionMap" : { }
 }
 ================================
-import 'java.net.URLDecoder'
-import 'org.ssssssss.magicboot.model.Global'
-import 'org.ssssssss.magicboot.utils.FileUtils'
+import java.net.URLDecoder
+import org.ssssssss.magicboot.model.Global
+import org.ssssssss.magicboot.utils.FileUtils
+import cn.hutool.core.io.FileUtil;
 
 url = URLDecoder.decode(url, "UTF-8");
 

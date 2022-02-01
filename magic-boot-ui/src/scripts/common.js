@@ -124,11 +124,13 @@ common.uuid = () => {
   return uuidv4().replace(/-/g, '')
 }
 
-common.objAssign = (obj1, obj2) => {
+common.objAssign = (obj1, obj2, exclude) => {
   for (var o1 in obj1) {
     for (var o2 in obj2) {
       if (o1 === o2) {
-        obj1[o1] = obj2[o2]
+        if(exclude.indexOf(o1) == -1){
+          obj1[o1] = obj2[o2]
+        }
       }
     }
   }

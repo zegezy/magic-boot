@@ -4,8 +4,8 @@
   "script" : null,
   "groupId" : "fd3d225a1cf141bf9998c4ec4bf4a6ab",
   "name" : "排序",
-  "createTime" : 1635074732708,
-  "updateTime" : 1635074732708,
+  "createTime" : null,
+  "updateTime" : 1643706726137,
   "lock" : "0",
   "method" : "GET",
   "path" : "/resort",
@@ -21,7 +21,7 @@
   "optionMap" : { }
 }
 ================================
-import 'java.net.URLDecoder'
+import java.net.URLDecoder
 
 for(index,url in urls.split(',')){
     url = URLDecoder.decode(url, "UTF-8")

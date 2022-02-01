@@ -5,16 +5,16 @@
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "登录",
   "createTime" : null,
-  "updateTime" : 1642773955109,
+  "updateTime" : 1643710774934,
   "lock" : "0",
   "method" : "POST",
   "path" : "/login",
   "parameters" : [ ],
   "option" : "[{\"name\":\"require_login\",\"value\":\"false\",\"description\":\"该接口需要登录才允许访问\"}]",
-  "requestBody" : "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"1\"\r\n}",
+  "requestBody" : "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\"\r\n}",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 0,\n    \"message\": \"用户名或密码错误\",\n    \"data\": null,\n    \"timestamp\": 1642321857211,\n    \"executeTime\": 3\n}",
+  "responseBody" : "{\n    \"code\": 0,\n    \"message\": \"用户名或密码错误\",\n    \"data\": null,\n    \"timestamp\": 1643710761990,\n    \"executeTime\": 6\n}",
   "description" : null,
   "requestBodyDefinition" : {
     "name" : "",
@@ -41,7 +41,7 @@
       "children" : [ ]
     }, {
       "name" : "password",
-      "value" : "1",
+      "value" : "123456",
       "description" : "",
       "required" : false,
       "dataType" : "String",
@@ -102,7 +102,7 @@
       "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1642321857211",
+      "value" : "1643710761990",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -114,7 +114,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "3",
+      "value" : "6",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",

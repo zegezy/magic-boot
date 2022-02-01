@@ -25,6 +25,9 @@ const mutations = {
   },
   SET_USERNAME: (state, username) => {
     state.username = username
+  },
+  SET_INFO: (state, info) => {
+    state.info = info
   }
 }
 
@@ -57,6 +60,7 @@ const actions = {
           authorities_.push(data.authorities[i])
         }
         Vue.prototype.$authorities = authorities_
+        commit('SET_INFO', data)
         commit('SET_NAME', data.name)
         commit('SET_USERNAME', data.username)
         resolve()

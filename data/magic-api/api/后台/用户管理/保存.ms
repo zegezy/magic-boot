@@ -5,7 +5,7 @@
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "保存",
   "createTime" : null,
-  "updateTime" : 1642085497821,
+  "updateTime" : 1643710594405,
   "lock" : "0",
   "method" : "POST",
   "path" : "/save",
@@ -21,7 +21,7 @@
   "optionMap" : { }
 }
 ================================
-import 'cn.dev33.satoken.secure.SaSecureUtil';
+import cn.dev33.satoken.secure.SaSecureUtil;
 import org.ssssssss.magicapi.cache.SqlCache
 
 password = password ? SaSecureUtil.sha256(password) : ''

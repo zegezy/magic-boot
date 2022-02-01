@@ -18,6 +18,7 @@ export const constantRoutes = [
       }
     ]
   },
+
   {
     path: '/',
     component: Layout,
@@ -27,6 +28,19 @@ export const constantRoutes = [
       name: '首页',
       component: () => import('@/views/dashboard/index'),
       meta: { title: '首页', icon: 'home', noCache: false, affix: true }
+    }]
+  },
+
+  {
+    path: '/user-center',
+    redirect: '/system/user/user-center',
+    component: Layout,
+    hidden: true,
+    children: [{
+      path: '/system/user/user-center',
+      name: '个人中心',
+      component: () => import('@/views/system/user/user-center'),
+      meta: { title: '个人中心' }
     }]
   },
 
