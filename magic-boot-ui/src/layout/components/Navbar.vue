@@ -16,7 +16,7 @@
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <img src="@/assets/magic-boot.png" style="width: 28px" class="user-avatar">
+          <img :src="$store.getters.userInfo.headPortrait ? $filePrefix + $store.getters.userInfo.headPortrait : require('@/assets/magic-boot.png')" style="width: 28px; height: 28px" class="user-avatar">
           <span style="font-size: 14px">{{ $store.getters.username }}({{ $store.getters.name }})</span>
           <i class="el-icon-caret-bottom" />
         </div>
