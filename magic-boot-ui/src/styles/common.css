@@ -1,3 +1,9 @@
+@font-face {
+  font-family: PoetsenOne;
+  src: url(../assets/fonts/PoetsenOne.woff2) format('woff2');
+  font-weight: 100;
+  font-style: normal;
+}
 body {
   --el-dialog__wrapper-bottom: 15vh;
   --el-dialog__wrapper-top: 15vh;

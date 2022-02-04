@@ -1,7 +1,9 @@
 <template>
   <div :class="{'has-logo':showLogo}">
     <div class="logo-title">
-      <img v-if="!isCollapse" src="@/assets/magic-boot.svg" style="height: 30px; vertical-align: middle;" />
+      <div v-if="!isCollapse" style="color: white">
+        Magic-Boot
+      </div>
       <img v-if="isCollapse" src="@/assets/magic-boot.png" style="vertical-align: middle; width: 28px">
     </div>
     <logo v-if="showLogo" :collapse="isCollapse" />
@@ -29,13 +31,14 @@
   .logo-title {
     color:white;
     height: 60px;
-    font-size: 16px;
+    font-size: 24px;
     line-height: 60px;
     text-align: center;
     font-weight: 300;
     box-shadow: 0px -1px 5px 0px #000;
     z-index: 1;
     position: relative;
+    font-family: PoetsenOne;
   }
 </style>
 

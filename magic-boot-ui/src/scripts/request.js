@@ -30,7 +30,7 @@ service.interceptors.request.use(
   }
 )
 
-var isShowMsg = false
+var currentMessage
 // response interceptor
 service.interceptors.response.use(
   /**
@@ -81,18 +81,17 @@ service.interceptors.response.use(
             }
           })
         }
-        if (isShowMsg === false && res.code !== 402) {
-          Message({
+        if (res.code !== 402) {
+          if(currentMessage){
+            currentMessage.close()
+          }
+          currentMessage = Message({
             message: res.message || 'Error',
             type: 'error',
             duration: duration * 1000,
-            showClose: true,
-            onClose: function() {
-              isShowMsg = false
-            }
+            showClose: true
           })
-          isShowMsg = true
-          // reslove(res)
+          reject(res)
         }
       } else {
         reslove(res)
@@ -101,17 +100,14 @@ service.interceptors.response.use(
   },
   error => {
     // console.log('err' + error) // for debug
-    if (isShowMsg === false) {
-      Message({
-        message: error.message,
-        type: 'error',
-        duration: 5 * 1000,
-        onClose: function() {
-          isShowMsg = false
-        }
-      })
-      isShowMsg = true
+    if(currentMessage){
+      currentMessage.close()
     }
+    currentMessage = Message({
+      message: error.message,
+      type: 'error',
+      duration: 5 * 1000
+    })
     return Promise.reject(error)
   }
 )
