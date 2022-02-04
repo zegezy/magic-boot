@@ -117,9 +117,18 @@ export default {
           {
             title: '操作',
             type: 'btns',
-            width: 200,
+            width: 270,
             fixed: 'right',
             btns: [
+              {
+                permission: 'role:user:list',
+                title: '用户列表',
+                type: 'text',
+                icon: 'el-icon-user-solid',
+                click: (row) => {
+                  this.$router.push({ path: `/system/user/user-list?roleId=${row.id}` })
+                }
+              },
               {
                 permission: 'role:save',
                 title: '修改',

@@ -157,6 +157,9 @@ export default {
       ids: []
     }
   },
+  created() {
+    this.tableOptions.where.roleId.value = this.$route.query.roleId
+  },
   methods: {
     checkChange(values) {
       this.tableOptions.where.officeId = values
