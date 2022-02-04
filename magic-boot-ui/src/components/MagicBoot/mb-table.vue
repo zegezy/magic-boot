@@ -113,13 +113,13 @@ export default {
     },
     where: {
       handler(){
-        this.newWhere = this.$common.renderWhere(this.where)
+        this.renderWhere()
       },
       deep: true
     }
   },
   created() {
-    this.newWhere = this.$common.renderWhere(this.where)
+    this.renderWhere()
   },
   mounted() {
     this.keyup()
@@ -131,7 +131,11 @@ export default {
     }
   },
   methods: {
+    renderWhere(){
+      this.newWhere = this.$common.renderWhere(this.where)
+    },
     getList() {
+      this.renderWhere()
       this.listLoading = true
       if (this.page) {
         this.newWhere.current = this.listCurrent

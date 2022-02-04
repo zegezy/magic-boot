@@ -121,15 +121,6 @@ export default {
             fixed: 'right',
             btns: [
               {
-                permission: 'role:user:list',
-                title: '用户列表',
-                type: 'text',
-                icon: 'el-icon-user-solid',
-                click: (row) => {
-                  this.$router.push({ path: `/system/user/user-list?roleId=${row.id}` })
-                }
-              },
-              {
                 permission: 'role:save',
                 title: '修改',
                 type: 'text',
@@ -159,6 +150,15 @@ export default {
                 click: (row) => {
                   this.temp.id = row.id
                   this.$refs.assignPermissionsDialog.show()
+                }
+              },
+              {
+                permission: 'role:user:list',
+                title: '用户列表',
+                type: 'text',
+                icon: 'el-icon-user-solid',
+                click: (row) => {
+                  this.$router.push({ path: `/system/user/user-list?roleId=${row.id}` })
                 }
               }
             ]

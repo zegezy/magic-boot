@@ -14,6 +14,7 @@
       v-bind="el"
       node-key="id"
       :default-expand-all="defaultExpandAll"
+      :default-checked-keys="checkedIds"
       @check-change="checkChange"
       @node-click="nodeClick"
       :props="defaultProps"
@@ -62,6 +63,10 @@ export default {
     searchWidth: {
       type: String,
       default: '230px'
+    },
+    checkedIds: {
+      type: Array,
+      default: () => []
     }
   },
   watch: {

@@ -148,7 +148,7 @@ export default {
           {
             title: '操作',
             type: 'btns',
-            width: 260,
+            width: 310,
             fixed: 'right',
             align: 'left',
             btns: [
@@ -178,6 +178,15 @@ export default {
                     id: row.id,
                     done: () => this.reloadTable()
                   })
+                }
+              },
+              {
+                permission: 'office:user:list',
+                title: '用户列表',
+                type: 'text',
+                icon: 'el-icon-user-solid',
+                click: (row) => {
+                  this.$router.push({ path: `/system/user/user-list?officeId=${row.id}` })
                 }
               }
             ]

@@ -13,7 +13,7 @@
 <template>
   <div class="app-container">
     <div class="left">
-      <mb-tree url="office/tree" :el="{ 'expand-on-click-node': false,'show-checkbox': true }" :expand="false" :search="true" search-width="100%" :checked="false" @check-change="checkChange" />
+      <mb-tree url="office/tree" :el="{ 'expand-on-click-node': false,'show-checkbox': true }" :checked-ids="[tableOptions.where.officeId]" :expand="false" :search="true" search-width="100%" :checked="false" @check-change="checkChange" />
     </div>
     <div class="right">
 
@@ -158,12 +158,18 @@ export default {
     }
   },
   created() {
-    this.tableOptions.where.roleId.value = this.$route.query.roleId
+    if(this.$route.query.roleId){
+      this.tableOptions.where.roleId.value = this.$route.query.roleId
+    }
+    if(this.$route.query.officeId){
+      this.tableOptions.where.officeId = this.$route.query.officeId
+    }
   },
   methods: {
     checkChange(values) {
+      console.log(values)
       this.tableOptions.where.officeId = values
-      this.reloadTable()
+      this.$nextTick(() => this.reloadTable())
     },
     selectionChange(columns) {
       this.ids = columns.map(it => it['id']).join(',')
