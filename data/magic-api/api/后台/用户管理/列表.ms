@@ -5,7 +5,7 @@
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "列表",
   "createTime" : null,
-  "updateTime" : 1642173275899,
+  "updateTime" : 1643965494984,
   "lock" : "0",
   "method" : "GET",
   "path" : "/list",
@@ -14,15 +14,88 @@
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : null,
+  "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1643964929030,\n    \"executeTime\": null\n}",
   "description" : null,
   "requestBodyDefinition" : null,
-  "responseBodyDefinition" : null,
+  "responseBodyDefinition" : {
+    "name" : "",
+    "value" : "",
+    "description" : "",
+    "required" : false,
+    "dataType" : "Object",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : "",
+    "error" : "",
+    "expression" : "",
+    "children" : [ {
+      "name" : "code",
+      "value" : "402",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Integer",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "message",
+      "value" : "凭证已过期",
+      "description" : "",
+      "required" : false,
+      "dataType" : "String",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "data",
+      "value" : "null",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Object",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "timestamp",
+      "value" : "1643964929030",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Long",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "executeTime",
+      "value" : "null",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Object",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    } ]
+  },
   "optionMap" : { }
 }
 ================================
 return db.page("""
     select
+        distinct
         su.id,
         su.username,
         su.name,
@@ -30,10 +103,13 @@ return db.page("""
         su.phone,
         su.create_date,
         su.office_id,
-        so.name office_name
+        so.name office_name,
+        (select group_concat(sr.name) from sys_role sr left join sys_user_role sur on sr.id = sur.role_id where sr.is_del = 0 and sur.user_id = su.id) roles
     from sys_user su
     left join sys_office so on su.office_id = so.id
+    left join sys_user_role sur on su.id = sur.user_id
     where su.is_del = 0
+    ?{roleId, and sur.role_id in(#{roleId.split(',')})}
     ?{officeId, and su.office_id in(#{officeId.split(',')})}
     ?{username, and su.username like concat('%',#{username},'%')}
     ?{name, and su.name like concat('%',#{name},'%')}

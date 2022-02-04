@@ -68,6 +68,17 @@ export default {
             type: 'input',
             label: '姓名/昵称',
             value: ''
+          },
+          roleId: {
+            type: 'select',
+            label: '角色',
+            value: null,
+            properties: {
+              url: 'role/list?size=999999',
+              labelField: 'name',
+              valueField: 'id',
+              el: { multiple: true }
+            }
           }
         },
         cols: [
@@ -84,6 +95,10 @@ export default {
           {
             field: 'officeName',
             title: '所属机构'
+          },
+          {
+            field: 'roles',
+            title: '角色'
           },
           {
             field: 'phone',

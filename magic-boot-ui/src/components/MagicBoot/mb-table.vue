@@ -15,7 +15,7 @@
 
       <el-table-column v-if="selection" align="center" type="selection" width="50" />
 
-      <el-table-column v-if="showNo" label="序号" prop="num" align="center" width="100">
+      <el-table-column v-if="showNo" label="序号" prop="num" align="center" width="65">
         <template slot-scope="row">
           <span>{{ row.$index+1 }}</span>
         </template>

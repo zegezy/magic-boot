@@ -74,16 +74,16 @@ export default {
     return {
       permissionData: [{
         label: '全部',
-        value: 0
+        value: '0'
       }, {
         label: '自定义',
-        value: 1
+        value: '1'
       }, {
         label: '本级及子级',
-        value: 2
+        value: '2'
       }, {
         label: '本级',
-        value: 3
+        value: '3'
       }],
       tableOptions: {
         url: 'role/list',
@@ -182,7 +182,7 @@ export default {
         name: '',
         menus: '',
         offices: '',
-        permission: 0,
+        permission: '0',
         code: '',
         descRibe: ''
       }
@@ -201,7 +201,7 @@ export default {
     save() {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          this.$post('role/save', this.temp).then((response) => {
+          this.$post('role/save', this.temp).then(() => {
             this.reloadTable()
             this.$refs.roleFormDialog.hide()
             this.$notify({

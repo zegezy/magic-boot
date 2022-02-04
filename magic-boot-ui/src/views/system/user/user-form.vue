@@ -32,7 +32,7 @@
       </el-col>
       <el-col :span="12">
         <el-form-item label="选择角色" prop="roles">
-          <mb-select v-model="temp.roles" url="role/list?size=999999" labelField="name" valueField="id" :el="{ multiple: true }" />
+          <mb-select v-model="temp.roles" url="role/list?size=999999" placeholder="请选择角色" labelField="name" valueField="id" :el="{ multiple: true }" />
         </el-form-item>
       </el-col>
     </el-row>
@@ -84,7 +84,7 @@ export default {
         password: '',
         phone: '',
         isLogin: 0,
-        roles: '',
+        roles: null,
         officeId: null
       }
     },

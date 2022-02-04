@@ -70,9 +70,9 @@ export default {
     reset() {
       for(var key in this.where){
         if(this.where[key] instanceof Object){
-          this.where[key].value = ''
+          this.where[key].value = null
         }else{
-          this.where[key] = ''
+          this.where[key] = null
         }
       }
       this.$nextTick(() => this.$emit('search'))

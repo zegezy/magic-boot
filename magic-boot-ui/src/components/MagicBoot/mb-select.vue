@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-select v-if="mbType === 'select'" v-model="selectValue" v-bind="el" :style="{ width }" placeholder="请选择" filterable clearable>
+    <el-select v-if="mbType === 'select'" v-model="selectValue" v-bind="el" :style="{ width }" :placeholder="placeholder || '请选择'" filterable clearable>
       <el-option
         v-for="item in selectList"
         :key="item.value"
@@ -68,6 +68,10 @@ export default {
     el: {
       type: Object,
       default: () => {}
+    },
+    placeholder: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -89,7 +93,7 @@ export default {
       this.loadData()
     },
     selectValue(value) {
-      if (this.el && this.el.multiple && !(this.value instanceof Array)) {
+      if (this.el && this.el.multiple && value.length > 0) {
         value = value.join(',')
       }
       this.$emit('update:value', value)
