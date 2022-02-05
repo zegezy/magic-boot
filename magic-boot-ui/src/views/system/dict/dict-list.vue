@@ -11,7 +11,7 @@
 
     <mb-table ref="table" v-bind="tableOptions" />
 
-    <mb-dialog ref="dictDialog" :title="dialogTitle" width="700px" @confirm-click="save()">
+    <mb-dialog ref="dictDialog" :title="dialogTitle" width="700px" @confirm-click="save($event)">
       <template #content>
         <el-form ref="dataForm" :inline="true" :rules="rules" :model="temp" label-position="right" label-width="100px" style="margin-left: 20px">
           <el-form-item label="字典类型" prop="dictType">
@@ -177,10 +177,12 @@ export default {
         this.$refs['dataForm'].clearValidate()
       })
     },
-    save() {
+    save(d) {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
+          d.loading()
           this.$post('dict/save', this.temp).then((response) => {
+            d.hideLoading()
             this.temp.id = response.data
             this.$refs.dictDialog.hide()
             this.$notify({
@@ -191,7 +193,7 @@ export default {
             })
             this.reloadTable()
             this.$common.getDictData()
-          })
+          }).catch(() => d.hideLoading())
         }
       })
     },

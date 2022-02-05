@@ -30,7 +30,7 @@
 
     <mb-table ref="table" v-bind="tableOptions" v-if="officeData && officeData.length > 0 && refreshTable" />
 
-    <mb-dialog ref="officeFormDialog" width="1050px" :title="dialogTitle" @confirm-click="save()">
+    <mb-dialog ref="officeFormDialog" width="1050px" :title="dialogTitle" @confirm-click="save($event)">
       <template #content>
         <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px" style="width: 900px; margin-left:50px;">
           <el-row :gutter="24">
@@ -264,9 +264,10 @@ export default {
         this.$refs['dataForm'].clearValidate()
       })
     },
-    save() {
+    save(d) {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
+          d.loading()
           if(this.temp.pid == this.temp.id){
             this.$notify({
               title: '失败',
@@ -286,6 +287,7 @@ export default {
             return
           }
           this.$post('office/save', this.temp).then(() => {
+            d.hideLoading()
             this.reloadTable()
             this.$refs.officeFormDialog.hide()
             this.$notify({
@@ -294,7 +296,7 @@ export default {
               type: 'success',
               duration: 2000
             })
-          })
+          }).catch(() => d.hideLoading())
         }
       })
     },

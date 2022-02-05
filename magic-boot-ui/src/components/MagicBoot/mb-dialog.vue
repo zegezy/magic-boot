@@ -6,7 +6,7 @@
         <el-button @click="dialogVisible = false">
           关闭
         </el-button>
-        <el-button type="primary" @click="confirmClick">
+        <el-button type="primary" :loading="confirmLoading" @click="confirmClick">
           确认
         </el-button>
       </slot>
@@ -37,7 +37,8 @@ export default {
   },
   data() {
     return {
-      dialogVisible: false
+      dialogVisible: false,
+      confirmLoading: false
     }
   },
   created() {
@@ -53,7 +54,13 @@ export default {
   },
   methods: {
     confirmClick() {
-      this.$emit('confirm-click')
+      this.$emit('confirm-click', this)
+    },
+    loading(){
+      this.confirmLoading = true
+    },
+    hideLoading(){
+      this.confirmLoading = false
     },
     show() {
       this.dialogVisible = true

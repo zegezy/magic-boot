@@ -23,11 +23,13 @@ export default {
     })
   },
   methods: {
-    save() {
+    save(d) {
+      d.loading()
       this.$post('role/save', {
         id: this.id,
         menus: this.menus
       }).then((response) => {
+        d.hideLoading()
         this.$notify({
           title: '成功',
           message: '分配成功',
@@ -35,7 +37,7 @@ export default {
           duration: 2000
         })
         this.$emit('close')
-      })
+      }).catch(() => d.hideLoading())
     }
   }
 }

@@ -135,9 +135,10 @@ export default {
     }
   },
   methods: {
-    save() {
+    save(d) {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
+          d.loading()
           if(this.temp.pid == this.temp.id){
             this.$notify({
               title: '失败',
@@ -165,6 +166,7 @@ export default {
             this.temp.url = ''
           }
           this.$post('menu/save', this.temp).then(() => {
+            d.hideLoading()
             this.$notify({
               title: '成功',
               message: (this.dialogStatus === 'create' ? '创建' : '修改') + '成功',
@@ -172,7 +174,7 @@ export default {
               duration: 2000
             })
             this.$emit('reload-table')
-          })
+          }).catch(() => d.hideLoading())
         }
       })
     },

@@ -94,15 +94,16 @@ export default {
         this.$refs['dataForm'].clearValidate()
       })
     },
-    save() {
+    save(d) {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
+          d.loading()
           this.$request({
             url: 'user/save',
             method: 'post',
             params: this.temp
-          }).then((response) => {
-            this.dialogVisible = false
+          }).then(() => {
+            d.hideLoading()
             this.$notify({
               title: '成功',
               message: this.dialogTitle + '成功',
@@ -110,7 +111,7 @@ export default {
               duration: 2000
             })
             this.$emit('reload-table')
-          })
+          }).catch(() => d.hideLoading())
         }
       })
     },

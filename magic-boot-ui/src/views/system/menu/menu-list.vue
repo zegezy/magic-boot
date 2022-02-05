@@ -24,7 +24,7 @@
 
     <mb-table ref="table" v-bind="tableOptions" v-if="menuData && menuData.length > 0 && refreshTable" />
 
-    <mb-dialog ref="menuFormDialog" width="1050px" :title="dialogTitle" @confirm-click="$refs.menuForm.save()">
+    <mb-dialog ref="menuFormDialog" width="1050px" :title="dialogTitle" @confirm-click="$refs.menuForm.save($event)">
       <template #content>
         <menu-form ref="menuForm" :menu-tree="menuTree" @reload-table="reloadTable" />
       </template>

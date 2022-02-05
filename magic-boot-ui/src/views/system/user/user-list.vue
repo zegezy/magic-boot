@@ -34,7 +34,7 @@
 
       <mb-table ref="table" v-bind="tableOptions" @selection-change="selectionChange" />
 
-      <mb-dialog ref="userFormDialog" :title="dialogTitle" @confirm-click="$refs.userForm.save()" width="770px">
+      <mb-dialog ref="userFormDialog" :title="dialogTitle" @confirm-click="$refs.userForm.save($event)" width="770px">
         <template #content>
           <user-form ref="userForm" :dialog-status="dialogTitle" @reload-table="reloadTable" />
         </template>

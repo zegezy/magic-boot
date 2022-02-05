@@ -11,7 +11,7 @@
 
     <mb-table ref="table" v-bind="tableOptions" />
 
-    <mb-dialog ref="roleFormDialog" :title="dialogTitle" width="1000px" @confirm-click="save()">
+    <mb-dialog ref="roleFormDialog" :title="dialogTitle" width="1000px" @confirm-click="save($event)">
       <template #content>
         <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="120px" style="width: 900px;">
           <el-row :gutter="24">
@@ -55,7 +55,7 @@
       </template>
     </mb-dialog>
 
-    <mb-dialog ref="assignPermissionsDialog" title="分配权限" width="750" @confirm-click="$refs.assignPermissions.save()">
+    <mb-dialog ref="assignPermissionsDialog" title="分配权限" width="750" @confirm-click="$refs.assignPermissions.save($event)">
       <template #content>
         <role-assign-permissions ref="assignPermissions" :key="Math.random()" :id="temp.id" @close="() => { $refs.assignPermissionsDialog.hide(); temp.id = '' }" />
       </template>
@@ -207,10 +207,12 @@ export default {
         this.$refs['dataForm'].clearValidate()
       })
     },
-    save() {
+    save(d) {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
+          d.loading()
           this.$post('role/save', this.temp).then(() => {
+            d.hideLoading()
             this.reloadTable()
             this.$refs.roleFormDialog.hide()
             this.$notify({
@@ -219,7 +221,7 @@ export default {
               type: 'success',
               duration: 2000
             })
-          })
+          }).catch(() => d.hideLoading())
         }
       })
     },
