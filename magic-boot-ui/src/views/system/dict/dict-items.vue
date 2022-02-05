@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
 
-    <mb-search :where="tableOptions.where" @search="reloadTable" />
+    <mb-search :where="tableOptions.where" @search="reloadTable" not-reset="dictId" />
 
     <el-row class="toolbar-container">
       <el-button v-permission="'dict:items:save'" class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">
@@ -11,21 +11,33 @@
 
     <mb-table ref="table" v-bind="tableOptions" />
 
-    <mb-dialog ref="formDialog" :title="dialogTitle" width="700px" @confirm-click="save($event)">
+    <mb-dialog ref="formDialog" :title="dialogTitle" width="640px" @confirm-click="save($event)">
       <template #content>
-        <el-form ref="dataForm" :inline="true" :rules="rules" :model="temp" label-position="right" label-width="100px" style="margin-left: 20px">
-          <el-form-item label="标签名" prop="label">
-            <el-input v-model="temp.label" />
-          </el-form-item>
-          <el-form-item label="值" prop="value">
-            <el-input v-model="temp.value" />
-          </el-form-item>
-          <el-form-item label="排序" prop="sort">
-            <el-input v-model="temp.sort" />
-          </el-form-item>
-          <el-form-item label="备注" prop="remarks">
-            <el-input v-model="temp.remarks" />
-          </el-form-item>
+        <el-form ref="dataForm" :inline="true" :rules="rules" :model="temp" label-position="right" label-width="80px">
+          <el-row :gutter="24">
+            <el-col :span="12">
+              <el-form-item label="标签名" prop="label">
+                <el-input v-model="temp.label" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="值" prop="value">
+                <el-input v-model="temp.value" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="24">
+            <el-col :span="12">
+              <el-form-item label="排序" prop="sort">
+                <el-input v-model="temp.sort" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="备注" prop="remarks">
+                <el-input v-model="temp.remarks" />
+              </el-form-item>
+            </el-col>
+          </el-row>
         </el-form>
       </template>
     </mb-dialog>
@@ -81,12 +93,14 @@ export default {
           {
             title: '操作',
             type: 'btns',
+            width: 160,
             fixed: 'right',
             btns: [
               {
                 permission: 'dict:items:save',
                 title: '修改',
-                type: 'primary',
+                type: 'text',
+                icon: 'el-icon-edit',
                 click: (row) => {
                   this.handleUpdate(row)
                 }
@@ -94,7 +108,8 @@ export default {
               {
                 permission: 'dict:items:delete',
                 title: '删除',
-                type: 'danger',
+                type: 'text',
+                icon: 'el-icon-delete',
                 click: (row) => {
                   this.$common.handleDelete({
                     url: 'dict/items/delete',

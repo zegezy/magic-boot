@@ -5,7 +5,7 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "保存",
   "createTime" : null,
-  "updateTime" : 1641219427227,
+  "updateTime" : 1644031443910,
   "lock" : "0",
   "method" : "POST",
   "path" : "/save",
@@ -25,6 +25,19 @@
 ================================
 import org.ssssssss.magicapi.cache.SqlCache;
 import '@get:/menu/cache/delete' as cacheDelete;
+
+if(data.url){
+    var urlCount = db.selectInt("select count(1) from sys_menu where is_del = 0 and url = #{data.url} ?{data.id, and id != #{data.id}}")
+    if(urlCount > 0){
+        exit 0,'菜单链接已存在'
+    }
+}
+if(data.permission){
+    var permissionCount = db.selectInt("select count(1) from sys_menu where is_del = 0 and permission = #{data.permission} ?{data.id, and id != #{data.id}}")
+    if(permissionCount > 0){
+        exit 0,'权限标识已存在'
+    }
+}
 
 SqlCache.delete('permissions:1')
 if(data.id){

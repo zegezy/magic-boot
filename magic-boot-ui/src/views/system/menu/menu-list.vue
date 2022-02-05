@@ -24,7 +24,7 @@
 
     <mb-table ref="table" v-bind="tableOptions" v-if="menuData && menuData.length > 0 && refreshTable" />
 
-    <mb-dialog ref="menuFormDialog" width="1050px" :title="dialogTitle" @confirm-click="$refs.menuForm.save($event)">
+    <mb-dialog ref="menuFormDialog" width="950px" :title="dialogTitle" @confirm-click="$refs.menuForm.save($event)">
       <template #content>
         <menu-form ref="menuForm" :menu-tree="menuTree" @reload-table="reloadTable" />
       </template>
@@ -162,7 +162,7 @@ export default {
                 }
               },
               {
-                title: '编辑',
+                title: '修改',
                 type: 'text',
                 icon: 'el-icon-edit',
                 click: (row) => {

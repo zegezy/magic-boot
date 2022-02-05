@@ -125,6 +125,7 @@ common.uuid = () => {
 }
 
 common.objAssign = (obj1, obj2, exclude) => {
+  exclude = exclude || ''
   for (var o1 in obj1) {
     for (var o2 in obj2) {
       if (o1 === o2) {

@@ -34,9 +34,9 @@
 
       <mb-table ref="table" v-bind="tableOptions" @selection-change="selectionChange" />
 
-      <mb-dialog ref="userFormDialog" :title="dialogTitle" @confirm-click="$refs.userForm.save($event)" width="770px">
+      <mb-dialog ref="userFormDialog" :title="dialogTitle" @confirm-click="$refs.userForm.save($event)" width="670px">
         <template #content>
-          <user-form ref="userForm" :dialog-status="dialogTitle" @reload-table="reloadTable" />
+          <user-form ref="userForm" @reload-table="reloadTable" />
         </template>
       </mb-dialog>
     </div>
@@ -125,13 +125,14 @@ export default {
           {
             title: '操作',
             type: 'btns',
-            width: 200,
+            width: 140,
             fixed: 'right',
             btns: [
               {
                 permission: 'user:save',
                 title: '修改',
-                type: 'primary',
+                type: 'text',
+                icon: 'el-icon-edit',
                 click: (row) => {
                   this.handleUpdate(row)
                 }
@@ -139,7 +140,8 @@ export default {
               {
                 permission: 'user:delete',
                 title: '删除',
-                type: 'danger',
+                type: 'text',
+                icon: 'el-icon-delete',
                 click: (row) => {
                   this.$common.handleDelete({
                     url: 'user/delete',
@@ -167,7 +169,6 @@ export default {
   },
   methods: {
     checkChange(values) {
-      console.log(values)
       this.tableOptions.where.officeId = values
       this.$nextTick(() => this.reloadTable())
     },

@@ -5,7 +5,7 @@
   "groupId" : "89130d496f6f467c88b22ae4a7f688eb",
   "name" : "保存",
   "createTime" : null,
-  "updateTime" : 1642326331841,
+  "updateTime" : 1644046445441,
   "lock" : "0",
   "method" : "POST",
   "path" : "/save",
@@ -24,6 +24,11 @@
 }
 ================================
 import '@get:/role/cache/delete' as cacheDelete
+
+var codeCount = db.selectInt("select count(1) from sys_role where is_del = 0 and code = #{code} ?{id, and id != #{id}}")
+if(codeCount > 0){
+    exit 0,'角色编码已存在'
+}
 
 var role = {
     code,

@@ -5,7 +5,7 @@
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "保存",
   "createTime" : null,
-  "updateTime" : 1643710594405,
+  "updateTime" : 1644046192172,
   "lock" : "0",
   "method" : "POST",
   "path" : "/save",
@@ -23,6 +23,11 @@
 ================================
 import cn.dev33.satoken.secure.SaSecureUtil;
 import org.ssssssss.magicapi.cache.SqlCache
+
+var usernameCount = db.selectInt("select count(1) from sys_user where is_del = 0 and username = #{username} ?{id, and id != #{id}}")
+if(usernameCount > 0){
+    exit 0,'登录名称已存在'
+}
 
 password = password ? SaSecureUtil.sha256(password) : ''
 var user = {

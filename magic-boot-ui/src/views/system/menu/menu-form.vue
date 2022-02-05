@@ -6,7 +6,7 @@
 
 <template>
   <div>
-    <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px" style="width: 900px; margin-left:50px;">
+    <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px">
       <el-row :gutter="24">
         <el-col :span="12">
           <el-form-item label="菜单类型" prop="type">
@@ -169,7 +169,7 @@ export default {
             d.hideLoading()
             this.$notify({
               title: '成功',
-              message: (this.dialogStatus === 'create' ? '创建' : '修改') + '成功',
+              message: d.title + '成功',
               type: 'success',
               duration: 2000
             })

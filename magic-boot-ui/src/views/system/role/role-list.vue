@@ -11,9 +11,9 @@
 
     <mb-table ref="table" v-bind="tableOptions" />
 
-    <mb-dialog ref="roleFormDialog" :title="dialogTitle" width="1000px" @confirm-click="save($event)">
+    <mb-dialog ref="roleFormDialog" :title="dialogTitle" width="900px" @confirm-click="save($event)">
       <template #content>
-        <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="120px" style="width: 900px;">
+        <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px">
           <el-row :gutter="24">
             <el-col :span="12">
               <el-form-item label="角色名称" prop="name">
@@ -41,13 +41,13 @@
           <el-row :gutter="24">
             <el-col :span="12">
               <el-form-item label="菜单权限" prop="menus">
-                <mb-tree ref="tree" :el="{ 'show-checkbox': true }" max-height="320px" url="menu/tree" :search="true" :select-values.sync="temp.menus" />
+                <mb-tree ref="tree" :el="{ 'show-checkbox': true }" max-height="270px" url="menu/tree" :search="true" :select-values.sync="temp.menus" />
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="数据权限" prop="permission">
                 <mb-select v-model="temp.permission" :data="permissionData" />
-                <mb-tree v-if="temp.permission == 1" max-height="320px" :el="{ 'check-strictly': true, 'show-checkbox': true }" ref="office" url="office/tree" :select-values.sync="temp.offices" />
+                <mb-tree v-if="temp.permission == 1" max-height="270px" :el="{ 'check-strictly': true, 'show-checkbox': true }" ref="office" url="office/tree" :select-values.sync="temp.offices" />
               </el-form-item>
             </el-col>
           </el-row>

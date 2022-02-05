@@ -36,6 +36,10 @@ export default {
     where: {
       type: Object,
       default: () => {}
+    },
+    notReset: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -69,10 +73,12 @@ export default {
     },
     reset() {
       for(var key in this.where){
-        if(this.where[key] instanceof Object){
-          this.where[key].value = null
-        }else{
-          this.where[key] = null
+        if(this.notReset.indexOf(key) == -1){
+          if(this.where[key] instanceof Object){
+            this.where[key].value = null
+          }else{
+            this.where[key] = null
+          }
         }
       }
       this.$nextTick(() => this.$emit('search'))

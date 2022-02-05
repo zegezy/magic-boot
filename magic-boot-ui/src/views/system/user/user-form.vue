@@ -1,5 +1,5 @@
 <template>
-  <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px">
+  <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px" v-if="isForm">
     <el-row :gutter="24">
       <el-col :span="12">
         <el-form-item label="登录名称" prop="username">
@@ -7,15 +7,15 @@
         </el-form-item>
       </el-col>
       <el-col :span="12">
-        <el-form-item label="姓名/昵称" prop="name">
-          <el-input v-model="temp.name" autocomplete="new-password" />
+        <el-form-item label="密码" prop="password">
+          <el-input v-model="temp.password" type="password" autocomplete="new-password" />
         </el-form-item>
       </el-col>
     </el-row>
     <el-row :gutter="24">
       <el-col :span="12">
-        <el-form-item label="密码" prop="password">
-          <el-input v-model="temp.password" type="password" autocomplete="new-password" />
+        <el-form-item label="姓名/昵称" prop="name">
+          <el-input v-model="temp.name" autocomplete="new-password" />
         </el-form-item>
       </el-col>
       <el-col :span="12">
@@ -52,12 +52,6 @@ import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 export default {
   name: 'UserForm',
   components: { Treeselect },
-  props: {
-    dialogTitle: {
-      type: String,
-      default: ''
-    }
-  },
   data() {
     return {
       rules: {
@@ -66,7 +60,8 @@ export default {
         officeId: [{ required: true, message: '请选择组织机构', trigger: 'change' }]
       },
       temp: this.getTemp(),
-      officeTree: []
+      officeTree: [],
+      isForm: true
     }
   },
   created() {
@@ -89,9 +84,14 @@ export default {
       }
     },
     resetTemp() {
+      this.isForm = false
+      this.rules.password = [{ required: true, message: '请输入密码', trigger: 'change' }]
       this.temp = this.getTemp()
       this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
+        this.isForm = true
+        this.$nextTick(() => {
+          this.$refs['dataForm'].clearValidate()
+        })
       })
     },
     save(d) {
@@ -106,7 +106,7 @@ export default {
             d.hideLoading()
             this.$notify({
               title: '成功',
-              message: this.dialogTitle + '成功',
+              message: d.title + '成功',
               type: 'success',
               duration: 2000
             })
@@ -116,6 +116,11 @@ export default {
       })
     },
     getInfo(row) {
+      this.isForm = false
+      delete this.rules.password
+      this.$nextTick(() => {
+        this.isForm = true
+      })
       for (var t in this.temp) {
         if (t !== 'roles') {
           this.temp[t] = row[t]

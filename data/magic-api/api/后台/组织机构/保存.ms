@@ -5,7 +5,7 @@
   "groupId" : "8295fc13678d4144bf7363c465247a50",
   "name" : "保存",
   "createTime" : null,
-  "updateTime" : 1641732020139,
+  "updateTime" : 1644046432007,
   "lock" : "0",
   "method" : "POST",
   "path" : "/save",
@@ -23,4 +23,8 @@
   }
 }
 ================================
+var codeCount = db.selectInt("select count(1) from sys_office where is_del = 0 and code = #{code} ?{id, and id != #{id}}")
+if(codeCount > 0){
+    exit 0,'机构编码已存在'
+}
 return db.table("sys_office").primary("id").saveOrUpdate(data);

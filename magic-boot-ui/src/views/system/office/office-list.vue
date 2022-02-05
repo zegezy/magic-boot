@@ -21,8 +21,8 @@
       </el-form>
     </div>
 
-    <el-row style="margin-bottom: 5px">
-      <el-button class="filter-item" style="margin-bottom:10px;" type="primary" icon="el-icon-edit" @click="addSubOffice('0')">
+    <el-row class="toolbar-container">
+      <el-button class="filter-item" type="primary" icon="el-icon-edit" @click="addSubOffice('0')">
         添加机构
       </el-button>
       <el-button type="primary" icon="el-icon-sort" plain @click="expand">展开/折叠</el-button>
@@ -30,9 +30,9 @@
 
     <mb-table ref="table" v-bind="tableOptions" v-if="officeData && officeData.length > 0 && refreshTable" />
 
-    <mb-dialog ref="officeFormDialog" width="1050px" :title="dialogTitle" @confirm-click="save($event)">
+    <mb-dialog ref="officeFormDialog" width="700px" :title="dialogTitle" @confirm-click="save($event)">
       <template #content>
-        <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px" style="width: 900px; margin-left:50px;">
+        <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px">
           <el-row :gutter="24">
             <el-col :span="12">
               <el-form-item label="机构类型" prop="type">
@@ -161,7 +161,7 @@ export default {
                 }
               },
               {
-                title: '编辑',
+                title: '修改',
                 type: 'text',
                 icon: 'el-icon-edit',
                 click: (row) => {
@@ -288,14 +288,14 @@ export default {
           }
           this.$post('office/save', this.temp).then(() => {
             d.hideLoading()
-            this.reloadTable()
-            this.$refs.officeFormDialog.hide()
             this.$notify({
               title: '成功',
-              message: dialogTitle + '成功',
+              message: this.dialogTitle + '成功',
               type: 'success',
               duration: 2000
             })
+            this.reloadTable()
+            this.$refs.officeFormDialog.hide()
           }).catch(() => d.hideLoading())
         }
       })

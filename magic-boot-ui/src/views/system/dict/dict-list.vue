@@ -4,31 +4,47 @@
     <mb-search :where="tableOptions.where" @search="reloadTable" />
 
     <el-row class="toolbar-container">
-      <el-button v-permission="'dict:save'" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
+      <el-button v-permission="'dict:save'" class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">
         添加
       </el-button>
     </el-row>
 
     <mb-table ref="table" v-bind="tableOptions" />
 
-    <mb-dialog ref="dictDialog" :title="dialogTitle" width="700px" @confirm-click="save($event)">
+    <mb-dialog ref="dictDialog" :title="dialogTitle" width="640px" @confirm-click="save($event)">
       <template #content>
-        <el-form ref="dataForm" :inline="true" :rules="rules" :model="temp" label-position="right" label-width="100px" style="margin-left: 20px">
-          <el-form-item label="字典类型" prop="dictType">
-            <mb-select v-model="temp.dictType" type="dict_type" width="185px" />
-          </el-form-item>
-          <el-form-item label="类型" prop="type">
-            <el-input v-model="temp.type" />
-          </el-form-item>
-          <el-form-item label="排序" prop="sort">
-            <el-input v-model="temp.sort" />
-          </el-form-item>
-          <el-form-item label="描述" prop="descRibe">
-            <el-input v-model="temp.descRibe" />
-          </el-form-item>
-          <el-form-item label="备注" prop="remarks">
-            <el-input v-model="temp.remarks" />
-          </el-form-item>
+        <el-form ref="dataForm" :inline="true" :rules="rules" :model="temp" label-position="right" label-width="80px">
+          <el-row :gutter="24">
+            <el-col :span="12">
+              <el-form-item label="字典类型" prop="dictType">
+                <mb-select v-model="temp.dictType" type="dict_type" width="185px" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="类型" prop="type">
+                <el-input v-model="temp.type" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="24">
+            <el-col :span="12">
+              <el-form-item label="排序" prop="sort">
+                <el-input v-model="temp.sort" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="描述" prop="descRibe">
+                <el-input v-model="temp.descRibe" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row :gutter="24">
+            <el-col :span="12">
+              <el-form-item label="备注" prop="remarks">
+                <el-input v-model="temp.remarks" />
+              </el-form-item>
+            </el-col>
+          </el-row>
         </el-form>
       </template>
     </mb-dialog>
@@ -99,13 +115,14 @@ export default {
           {
             title: '操作',
             type: 'btns',
-            width: 300,
+            width: 220,
             fixed: 'right',
             btns: [
               {
                 permission: 'dict:save',
                 title: '修改',
-                type: 'primary',
+                type: 'text',
+                icon: 'el-icon-edit',
                 click: (row) => {
                   this.handleUpdate(row)
                 }
@@ -113,7 +130,8 @@ export default {
               {
                 permission: 'dict:delete',
                 title: '删除',
-                type: 'danger',
+                type: 'text',
+                icon: 'el-icon-delete',
                 click: (row) => {
                   this.$common.handleDelete({
                     url: 'dict/delete',
@@ -128,7 +146,8 @@ export default {
               {
                 permission: 'dict:items',
                 title: '字典项',
-                type: 'primary',
+                type: 'text',
+                icon: 'el-icon-menu',
                 click: (row) => {
                   this.$refs.dictItemsDialog.show()
                   this.dictId = row.id
