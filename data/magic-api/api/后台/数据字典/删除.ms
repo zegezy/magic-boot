@@ -5,20 +5,22 @@
   "groupId" : "c7ce65f5b3cf4aaa913f6fec7d35d176",
   "name" : "删除",
   "createTime" : null,
-  "updateTime" : 1634734751223,
+  "updateTime" : 1644121690359,
   "lock" : "0",
   "method" : "POST",
   "path" : "/delete",
   "parameters" : [ ],
-  "option" : "[]",
-  "requestBody" : "",
+  "option" : "[{\"name\":\"permission\",\"value\":\"dict:delete\",\"description\":\"允许拥有该权限的访问\"}]",
+  "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : null,
-  "optionMap" : { }
+  "optionMap" : {
+    "permission" : "dict:delete"
+  }
 }
 ================================
 db.table("sys_dict_items").logic().where().eq("dictId",id).delete()

@@ -29,7 +29,7 @@
         <el-button v-permission="'user:save'" class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">
           添加
         </el-button>
-        <mb-button :el="{ plain: true }" :request-url="'user/delete'" :btn-type="'delete'" :request-data="{ id: ids }" :after-handler="reloadTable" />
+        <mb-button v-permission="'user:delete'" :el="{ plain: true }" :request-url="'user/delete'" :btn-type="'delete'" :request-data="{ id: ids }" :after-handler="reloadTable" />
       </el-row>
 
       <mb-table ref="table" v-bind="tableOptions" @selection-change="selectionChange" />

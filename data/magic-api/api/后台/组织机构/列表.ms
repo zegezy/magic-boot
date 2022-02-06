@@ -5,13 +5,13 @@
   "groupId" : "8295fc13678d4144bf7363c465247a50",
   "name" : "列表",
   "createTime" : null,
-  "updateTime" : 1642134990129,
+  "updateTime" : 1644121676212,
   "lock" : "0",
   "method" : "GET",
   "path" : "/tree",
   "parameters" : [ ],
-  "option" : "[]",
-  "requestBody" : "",
+  "option" : "[{\"name\":\"permission\",\"value\":\"office:view\",\"description\":\"允许拥有该权限的访问\"}]",
+  "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"list\": [{\n            \"id\": \"4c37a80226134bce8bc91c8fc04a7d2f\",\n            \"name\": \"<font color=\\\"yellow\\\">马小东公司</font>\",\n            \"pid\": \"0\",\n            \"type\": \"2\",\n            \"sort\": 10,\n            \"code\": \"mxd\",\n            \"children\": [{\n                \"id\": \"81b5493cdb31477f9ceea85b2cd08f15\",\n                \"name\": \"<font color=\\\"yellow\\\">马小东子公司</font>\",\n                \"pid\": \"4c37a80226134bce8bc91c8fc04a7d2f\",\n                \"type\": null,\n                \"sort\": 10,\n                \"code\": \"mxdz\",\n                \"children\": []\n            }, {\n                \"id\": \"31b365008f994e93850186126fce87cb\",\n                \"name\": \"<font color=\\\"yellow\\\">马小东子公司2</font>\",\n                \"pid\": \"4c37a80226134bce8bc91c8fc04a7d2f\",\n                \"type\": null,\n                \"sort\": 20,\n                \"code\": \"mxdzz\",\n                \"children\": []\n            }]\n        }, {\n            \"id\": \"935126327e2a4f90b3f485f818f61ea5\",\n            \"name\": \"<font color=\\\"yellow\\\">吕金泽公司</font>\",\n            \"pid\": \"0\",\n            \"type\": null,\n            \"sort\": 20,\n            \"code\": \"ljz\",\n            \"children\": [{\n                \"id\": \"1ae0299fc79b43c6b0ae2e14756ec41a\",\n                \"name\": \"<font color=\\\"yellow\\\">吕金泽子公司</font>\",\n                \"pid\": \"935126327e2a4f90b3f485f818f61ea5\",\n                \"type\": null,\n                \"sort\": 10,\n                \"code\": \"ljzz\",\n                \"children\": []\n            }]\n        }],\n        \"total\": 2\n    },\n    \"timestamp\": 1642134812650,\n    \"executeTime\": 9\n}",
@@ -306,7 +306,9 @@
       "children" : [ ]
     } ]
   },
-  "optionMap" : { }
+  "optionMap" : {
+    "permission" : "office:view"
+  }
 }
 ================================
 var toTree = (list,pid) => select t.*,toTree(list,t.id) children from list t where t.pid = pid

@@ -5,7 +5,7 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "删除",
   "createTime" : null,
-  "updateTime" : 1641276678116,
+  "updateTime" : 1644121673352,
   "lock" : "0",
   "method" : "POST",
   "path" : "/delete",
@@ -22,8 +22,8 @@
     "expression" : null,
     "children" : null
   } ],
-  "option" : "[]",
-  "requestBody" : "{\r\n\t\r\n}",
+  "option" : "[{\"name\":\"permission\",\"value\":\"menu:delete\",\"description\":\"允许拥有该权限的访问\"}]",
+  "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": null,\n    \"timestamp\": 1641201245421,\n    \"executeTime\": 7\n}",
@@ -102,7 +102,9 @@
       "children" : [ ]
     } ]
   },
-  "optionMap" : { }
+  "optionMap" : {
+    "permission" : "menu:delete"
+  }
 }
 ================================
 import '@get:/menu/cache/delete' as cacheDelete;

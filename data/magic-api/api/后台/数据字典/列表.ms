@@ -5,13 +5,13 @@
   "groupId" : "c7ce65f5b3cf4aaa913f6fec7d35d176",
   "name" : "列表",
   "createTime" : null,
-  "updateTime" : 1634736176170,
+  "updateTime" : 1644121689680,
   "lock" : "0",
   "method" : "GET",
   "path" : "/list",
   "parameters" : [ ],
-  "option" : "[]",
-  "requestBody" : "",
+  "option" : "[{\"name\":\"permission\",\"value\":\"dict:view\",\"description\":\"允许拥有该权限的访问\"}]",
+  "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1634734488837,\n    \"executeTime\": null\n}",
@@ -90,7 +90,9 @@
       "children" : [ ]
     } ]
   },
-  "optionMap" : { }
+  "optionMap" : {
+    "permission" : "dict:view"
+  }
 }
 ================================
 return db.page("""

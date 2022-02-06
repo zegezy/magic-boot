@@ -5,13 +5,13 @@
   "groupId" : "8295fc13678d4144bf7363c465247a50",
   "name" : "删除",
   "createTime" : null,
-  "updateTime" : 1641732068899,
+  "updateTime" : 1644121676877,
   "lock" : "0",
   "method" : "POST",
   "path" : "/delete",
   "parameters" : [ ],
-  "option" : "[]",
-  "requestBody" : "{\r\n\t\r\n}",
+  "option" : "[{\"name\":\"permission\",\"value\":\"office:delete\",\"description\":\"允许拥有该权限的访问\"}]",
+  "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": null,\n    \"timestamp\": 1641201245421,\n    \"executeTime\": 7\n}",
@@ -90,7 +90,9 @@
       "children" : [ ]
     } ]
   },
-  "optionMap" : { }
+  "optionMap" : {
+    "permission" : "office:delete"
+  }
 }
 ================================
 // db.table('sys_user_office').where().eq("office_id",id).delete();

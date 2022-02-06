@@ -5,20 +5,22 @@
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "删除",
   "createTime" : null,
-  "updateTime" : 1641218486141,
+  "updateTime" : 1644121688496,
   "lock" : "0",
   "method" : "POST",
   "path" : "/delete",
   "parameters" : [ ],
-  "option" : "[]",
-  "requestBody" : "",
+  "option" : "[{\"name\":\"permission\",\"value\":\"user:delete\",\"description\":\"允许拥有该权限的访问\"}]",
+  "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : null,
-  "optionMap" : { }
+  "optionMap" : {
+    "permission" : "user:delete"
+  }
 }
 ================================
 import org.ssssssss.magicapi.cache.SqlCache

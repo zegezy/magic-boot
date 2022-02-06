@@ -6,8 +6,9 @@
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve --open",
+    "serve:preview": "vue-cli-service serve --mode preview --open",
     "build": "vue-cli-service build",
-    "preview": "node build/index.js --preview",
+    "preview": "vue-cli-service build --mode preview",
     "lint": "eslint --ext .js,.vue src",
     "test:unit": "jest --clearCache && vue-cli-service test:unit",
     "test:ci": "npm run lint && npm run test:unit",

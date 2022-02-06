@@ -144,7 +144,7 @@ export default {
                 }
               },
               {
-                permission: 'dict:items',
+                permission: 'dict:items:view',
                 title: '字典项',
                 type: 'text',
                 icon: 'el-icon-menu',

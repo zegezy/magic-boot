@@ -5,20 +5,22 @@
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "保存",
   "createTime" : null,
-  "updateTime" : 1644046192172,
+  "updateTime" : 1644121682487,
   "lock" : "0",
   "method" : "POST",
   "path" : "/save",
   "parameters" : [ ],
-  "option" : "[]",
-  "requestBody" : "",
+  "option" : "[{\"name\":\"permission\",\"value\":\"user:save\",\"description\":\"允许拥有该权限的访问\"}]",
+  "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : null,
-  "optionMap" : { }
+  "optionMap" : {
+    "permission" : "user:save"
+  }
 }
 ================================
 import cn.dev33.satoken.secure.SaSecureUtil;

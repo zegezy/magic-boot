@@ -5,13 +5,13 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "获取菜单tree",
   "createTime" : null,
-  "updateTime" : 1641483087321,
+  "updateTime" : 1644121674088,
   "lock" : "0",
   "method" : "GET",
   "path" : "/tree",
   "parameters" : [ ],
-  "option" : "[]",
-  "requestBody" : "{\r\n\t\r\n}",
+  "option" : "[{\"name\":\"permission\",\"value\":\"menu:view\",\"description\":\"允许拥有该权限的访问\"}]",
+  "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1634309660370,\n    \"executeTime\": null\n}",
@@ -90,7 +90,9 @@
       "children" : [ ]
     } ]
   },
-  "optionMap" : { }
+  "optionMap" : {
+    "permission" : "menu:view"
+  }
 }
 ================================
 var toTree = (list,pid) => select t.*,toTree(list,t.id) children from list t where t.pid = pid

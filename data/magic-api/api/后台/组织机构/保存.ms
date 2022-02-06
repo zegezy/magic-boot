@@ -5,12 +5,12 @@
   "groupId" : "8295fc13678d4144bf7363c465247a50",
   "name" : "保存",
   "createTime" : null,
-  "updateTime" : 1644046432007,
+  "updateTime" : 1644121675551,
   "lock" : "0",
   "method" : "POST",
   "path" : "/save",
   "parameters" : [ ],
-  "option" : "[{\"name\":\"wrap_request_parameter\",\"value\":\"data\",\"description\":\"包装请求参数到一个变量中\"}]",
+  "option" : "[{\"name\":\"wrap_request_parameter\",\"value\":\"data\",\"description\":\"包装请求参数到一个变量中\"},{\"name\":\"permission\",\"value\":\"office:save\",\"description\":\"允许拥有该权限的访问\"}]",
   "requestBody" : "{}",
   "headers" : [ ],
   "paths" : [ ],
@@ -19,7 +19,8 @@
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : null,
   "optionMap" : {
-    "wrap_request_parameter" : "data"
+    "wrap_request_parameter" : "data",
+    "permission" : "office:save"
   }
 }
 ================================

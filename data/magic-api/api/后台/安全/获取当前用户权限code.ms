@@ -5,13 +5,13 @@
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "获取当前用户权限code",
   "createTime" : null,
-  "updateTime" : 1641276424757,
+  "updateTime" : 1644121674755,
   "lock" : "0",
   "method" : "POST",
   "path" : "/permissions",
   "parameters" : [ ],
   "option" : "[{\"name\":\"\",\"value\":\"\",\"description\":\"\"}]",
-  "requestBody" : "{\r\n\t\r\n}",
+  "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [\"sys:test:aaa\", \"menu:save\", \"menu:delete\", \"office:office:list\", \"office:office:save\", \"office:office:delete\", \"role:view\", \"role:save\", \"role:delete\", \"user:save\", \"user:delete\", \"dict:view\", \"dict:save\", \"dict:delete\", \"dict:items\", \"dict:items:save\", \"dict:items:delete\"],\n    \"timestamp\": 1641199273283,\n    \"executeTime\": 1\n}",
@@ -115,9 +115,9 @@ return db.cache(`permissions:${userId}`).select("""
         sm.permission
     FROM
         sys_menu sm
-        left JOIN sys_role_menu srm ON sm.id = srm.menu_id
-        left JOIN sys_user_role sur ON sur.role_id = srm.role_id
-        left JOIN sys_user su ON su.id = sur.user_id
+        right JOIN sys_role_menu srm ON sm.id = srm.menu_id
+        right JOIN sys_user_role sur ON sur.role_id = srm.role_id
+        right JOIN sys_user su ON su.id = sur.user_id
         ?{userId != '1', AND su.id = #{userId}}
         AND su.is_del = 0
     WHERE

@@ -5,20 +5,22 @@
   "groupId" : "89130d496f6f467c88b22ae4a7f688eb",
   "name" : "删除",
   "createTime" : null,
-  "updateTime" : 1641276685001,
+  "updateTime" : 1644121681716,
   "lock" : "0",
   "method" : "POST",
   "path" : "/delete",
   "parameters" : [ ],
-  "option" : "[]",
-  "requestBody" : "{\r\n\t\r\n}",
+  "option" : "[{\"name\":\"permission\",\"value\":\"role:delete\",\"description\":\"允许拥有该权限的访问\"}]",
+  "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : null,
-  "optionMap" : { }
+  "optionMap" : {
+    "permission" : "role:delete"
+  }
 }
 ================================
 import '@get:/role/cache/delete' as cacheDelete

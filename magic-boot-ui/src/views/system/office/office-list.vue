@@ -22,7 +22,7 @@
     </div>
 
     <el-row class="toolbar-container">
-      <el-button class="filter-item" type="primary" icon="el-icon-edit" @click="addSubOffice('0')">
+      <el-button class="filter-item" type="primary" icon="el-icon-edit" @click="addSubOffice('0')" v-permission="'office:save'">
         添加机构
       </el-button>
       <el-button type="primary" icon="el-icon-sort" plain @click="expand">展开/折叠</el-button>
@@ -155,6 +155,7 @@ export default {
               {
                 title: '添加下级机构',
                 type: 'text',
+                permission: 'office:save',
                 icon: 'el-icon-plus',
                 click: (row) => {
                   this.addSubOffice(row.id)
@@ -163,6 +164,7 @@ export default {
               {
                 title: '修改',
                 type: 'text',
+                permission: 'office:save',
                 icon: 'el-icon-edit',
                 click: (row) => {
                   this.handleUpdate(row)
@@ -171,6 +173,7 @@ export default {
               {
                 title: '删除',
                 type: 'text',
+                permission: 'office:delete',
                 icon: 'el-icon-delete',
                 click: (row) => {
                   this.$common.handleDelete({

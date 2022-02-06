@@ -62,6 +62,7 @@ treeTable.deleteEmptyChildren = (children) => {
 }
 
 treeTable.recursionSearch = (fields, data, text, html) => {
+  html = html != undefined ? html : true
   var searchData = []
   for(var i in data){
     var treeNode = data[i]

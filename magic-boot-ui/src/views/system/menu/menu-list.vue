@@ -16,7 +16,7 @@
     </div>
 
     <el-row class="toolbar-container">
-      <el-button class="filter-item" type="primary" icon="el-icon-edit" @click="addSubMenu('0')">
+      <el-button class="filter-item" type="primary" icon="el-icon-edit" @click="addSubMenu('0')" v-permission="'menu:save'">
         添加菜单
       </el-button>
       <el-button type="primary" icon="el-icon-sort" plain @click="expand">展开/折叠</el-button>
@@ -156,6 +156,7 @@ export default {
               {
                 title: '添加下级菜单',
                 type: 'text',
+                permission: 'menu:save',
                 icon: 'el-icon-plus',
                 click: (row) => {
                   this.addSubMenu(row.id)
@@ -164,6 +165,7 @@ export default {
               {
                 title: '修改',
                 type: 'text',
+                permission: 'menu:save',
                 icon: 'el-icon-edit',
                 click: (row) => {
                   this.handleUpdate(row)
@@ -172,6 +174,7 @@ export default {
               {
                 title: '删除',
                 type: 'text',
+                permission: 'menu:delete',
                 icon: 'el-icon-delete',
                 click: (row) => {
                   this.$common.handleDelete({

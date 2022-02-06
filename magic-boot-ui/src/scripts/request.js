@@ -85,6 +85,9 @@ service.interceptors.response.use(
           if(currentMessage){
             currentMessage.close()
           }
+          if(res.code == 403 && process.env.NODE_ENV == 'preview'){
+            res.message = '演示模式，不允许操作！'
+          }
           currentMessage = Message({
             message: res.message || 'Error',
             type: 'error',
