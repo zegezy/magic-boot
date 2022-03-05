@@ -4,8 +4,8 @@
   "script" : null,
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "保存",
-  "createTime" : 1646490239506,
-  "updateTime" : 1644121672548,
+  "createTime" : null,
+  "updateTime" : 1646493564406,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -42,11 +42,23 @@
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
-  "requestBodyDefinition" : null,
+  "requestBodyDefinition" : {
+    "name" : "",
+    "value" : "",
+    "description" : "",
+    "required" : false,
+    "dataType" : "Object",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : "",
+    "error" : "",
+    "expression" : "",
+    "children" : [ ]
+  },
   "responseBodyDefinition" : null
 }
 ================================
-import org.ssssssss.magicapi.cache.SqlCache;
+import org.ssssssss.magicapi.modules.db.cache.SqlCache;
 import '@get:/menu/cache/delete' as cacheDelete;
 
 if(data.url){

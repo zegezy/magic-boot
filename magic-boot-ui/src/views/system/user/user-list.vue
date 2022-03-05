@@ -161,7 +161,7 @@ const table = ref()
 const userForm = ref()
 
 onMounted(() => {
-  setTimeout(function(){
+  // setTimeout(function(){
     console.log(proxy.$route.query.roleId)
     if(proxy.$route.query.roleId){
       tableOptions.where.roleId.value = proxy.$route.query.roleId
@@ -169,7 +169,7 @@ onMounted(() => {
     if(proxy.$route.query.officeId){
       tableOptions.where.officeId = proxy.$route.query.officeId
     }
-  },1000)
+  // },1000)
 })
 
 function checkChange(values) {

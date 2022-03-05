@@ -121,7 +121,7 @@ async function loadData() {
     listConcat(handlerData(props.data))
   } else if (props.url) {
     proxy.$get(props.url, props.params).then(res => {
-      listConcat(handlerData(res.data))
+      listConcat(handlerData(res.data.list || res.data))
     })
   } else {
     listConcat(proxy.$common.getDictType(props.type))

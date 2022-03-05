@@ -4,8 +4,8 @@
   "script" : null,
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "保存",
-  "createTime" : 1646490239467,
-  "updateTime" : 1644121682487,
+  "createTime" : null,
+  "updateTime" : 1646493559668,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -30,12 +30,24 @@
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
-  "requestBodyDefinition" : null,
+  "requestBodyDefinition" : {
+    "name" : "",
+    "value" : "",
+    "description" : "",
+    "required" : false,
+    "dataType" : "Object",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : "",
+    "error" : "",
+    "expression" : "",
+    "children" : [ ]
+  },
   "responseBodyDefinition" : null
 }
 ================================
 import cn.dev33.satoken.secure.SaSecureUtil;
-import org.ssssssss.magicapi.cache.SqlCache
+import org.ssssssss.magicapi.modules.db.cache.SqlCache
 
 var usernameCount = db.selectInt("select count(1) from sys_user where is_del = 0 and username = #{username} ?{id, and id != #{id}}")
 if(usernameCount > 0){

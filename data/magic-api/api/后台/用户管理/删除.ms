@@ -4,8 +4,8 @@
   "script" : null,
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "删除",
-  "createTime" : 1646490239473,
-  "updateTime" : 1644121688496,
+  "createTime" : null,
+  "updateTime" : 1646493558181,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -30,11 +30,23 @@
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
-  "requestBodyDefinition" : null,
+  "requestBodyDefinition" : {
+    "name" : "",
+    "value" : "",
+    "description" : "",
+    "required" : false,
+    "dataType" : "Object",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : "",
+    "error" : "",
+    "expression" : "",
+    "children" : [ ]
+  },
   "responseBodyDefinition" : null
 }
 ================================
-import org.ssssssss.magicapi.cache.SqlCache
+import org.ssssssss.magicapi.modules.db.cache.SqlCache
 
 for(userId in id.split(',')){
     SqlCache.delete(`permissions:${userId}`)

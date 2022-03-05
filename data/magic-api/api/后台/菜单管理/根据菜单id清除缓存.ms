@@ -4,8 +4,8 @@
   "script" : null,
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "根据菜单id清除缓存",
-  "createTime" : 1646490239517,
-  "updateTime" : 1641218495832,
+  "createTime" : null,
+  "updateTime" : 1646493562232,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -22,7 +22,7 @@
   "responseBodyDefinition" : null
 }
 ================================
-import org.ssssssss.magicapi.cache.SqlCache
+import org.ssssssss.magicapi.modules.db.cache.SqlCache
 var userIds = db.select("""
     select user_id from sys_user_role where role_id in (
         select role_id from sys_role_menu where menu_id = #{menuId}

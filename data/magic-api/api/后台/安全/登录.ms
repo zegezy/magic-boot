@@ -4,8 +4,8 @@
   "script" : null,
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "登录",
-  "createTime" : 1646490239399,
-  "updateTime" : 1646482165171,
+  "createTime" : null,
+  "updateTime" : 1646493566796,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -28,10 +28,10 @@
   "requestBody" : "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\"\r\n}",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 0,\n    \"message\": \"用户名或密码错误\",\n    \"data\": null,\n    \"timestamp\": 1643710761990,\n    \"executeTime\": 6\n}",
+  "responseBody" : "{\"code\":200,\"message\":\"success\",\"data\":\"60f0ddf8-c42c-4b3e-802f-7482f6bd1075\",\"timestamp\":1646493023758,\"executeTime\":316}",
   "description" : null,
   "requestBodyDefinition" : {
-    "name" : "root",
+    "name" : "",
     "value" : "",
     "description" : "",
     "required" : false,
@@ -80,7 +80,7 @@
     "expression" : "",
     "children" : [ {
       "name" : "code",
-      "value" : "0",
+      "value" : "200",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -92,7 +92,7 @@
       "children" : [ ]
     }, {
       "name" : "message",
-      "value" : "用户名或密码错误",
+      "value" : "success",
       "description" : "",
       "required" : false,
       "dataType" : "String",
@@ -104,10 +104,10 @@
       "children" : [ ]
     }, {
       "name" : "data",
-      "value" : "null",
+      "value" : "60f0ddf8-c42c-4b3e-802f-7482f6bd1075",
       "description" : "",
       "required" : false,
-      "dataType" : "Object",
+      "dataType" : "String",
       "type" : null,
       "defaultValue" : null,
       "validateType" : "",
@@ -116,7 +116,7 @@
       "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1643710761990",
+      "value" : "1646493023758",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -128,7 +128,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "6",
+      "value" : "316",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
