@@ -5,7 +5,7 @@
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "登录",
   "createTime" : null,
-  "updateTime" : 1643710774934,
+  "updateTime" : 1646400972875,
   "lock" : "0",
   "method" : "POST",
   "path" : "/login",
@@ -17,7 +17,7 @@
   "responseBody" : "{\n    \"code\": 0,\n    \"message\": \"用户名或密码错误\",\n    \"data\": null,\n    \"timestamp\": 1643710761990,\n    \"executeTime\": 6\n}",
   "description" : null,
   "requestBodyDefinition" : {
-    "name" : "",
+    "name" : "root",
     "value" : "",
     "description" : "",
     "required" : false,

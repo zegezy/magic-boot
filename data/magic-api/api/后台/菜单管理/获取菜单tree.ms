@@ -5,7 +5,7 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "获取菜单tree",
   "createTime" : null,
-  "updateTime" : 1644121674088,
+  "updateTime" : 1646402874965,
   "lock" : "0",
   "method" : "GET",
   "path" : "/tree",
@@ -96,7 +96,7 @@
 }
 ================================
 var toTree = (list,pid) => select t.*,toTree(list,t.id) children from list t where t.pid = pid
-var list = toTree(db.select('select id,name,pid,is_show,url,sort,permission,desc_ribe,icon,keep_alive from sys_menu where is_del = 0 order by sort'),'0')
+var list = toTree(db.select('select id,name,pid,is_show,url,sort,permission,desc_ribe,icon,keep_alive,component_id from sys_menu where is_del = 0 order by sort'),'0')
 
 return {
     list: list,

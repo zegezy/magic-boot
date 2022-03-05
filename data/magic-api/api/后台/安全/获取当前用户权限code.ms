@@ -5,7 +5,7 @@
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "获取当前用户权限code",
   "createTime" : null,
-  "updateTime" : 1644121674755,
+  "updateTime" : 1645715502500,
   "lock" : "0",
   "method" : "POST",
   "path" : "/permissions",
@@ -14,7 +14,7 @@
   "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [\"sys:test:aaa\", \"menu:save\", \"menu:delete\", \"office:office:list\", \"office:office:save\", \"office:office:delete\", \"role:view\", \"role:save\", \"role:delete\", \"user:save\", \"user:delete\", \"dict:view\", \"dict:save\", \"dict:delete\", \"dict:items\", \"dict:items:save\", \"dict:items:delete\"],\n    \"timestamp\": 1641199273283,\n    \"executeTime\": 1\n}",
+  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [\"menu:view\", \"menu:save\", \"menu:delete\", \"office:save\", \"office:delete\", \"role:save\", \"role:delete\", \"role:permission\", \"user:save\", \"user:delete\", \"dict:save\", \"dict:delete\", \"dict:items:save\", \"dict:items:delete\", \"office:view\", \"role:view\", \"user:view\", \"dict:view\", \"dict:items:view\"],\n    \"timestamp\": 1645715342825,\n    \"executeTime\": 2\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -65,7 +65,7 @@
       "expression" : "",
       "children" : [ {
         "name" : "",
-        "value" : "sys:test:aaa",
+        "value" : "menu:view",
         "description" : "",
         "required" : false,
         "dataType" : "String",
@@ -78,7 +78,7 @@
       } ]
     }, {
       "name" : "timestamp",
-      "value" : "1641199273283",
+      "value" : "1645715342825",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -90,7 +90,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "1",
+      "value" : "2",
       "description" : "",
       "required" : false,
       "dataType" : "Object",
@@ -115,11 +115,12 @@ return db.cache(`permissions:${userId}`).select("""
         sm.permission
     FROM
         sys_menu sm
-        right JOIN sys_role_menu srm ON sm.id = srm.menu_id
-        right JOIN sys_user_role sur ON sur.role_id = srm.role_id
-        right JOIN sys_user su ON su.id = sur.user_id
-        ?{userId != '1', AND su.id = #{userId}}
-        AND su.is_del = 0
+        ?{userId != '1', 
+            right JOIN sys_role_menu srm ON sm.id = srm.menu_id
+            right JOIN sys_user_role sur ON sur.role_id = srm.role_id
+            right JOIN sys_user su ON su.id = sur.user_id
+            AND su.id = #{userId} AND su.is_del = 0
+        }
     WHERE
         sm.is_del = 0
         AND sm.permission != ''

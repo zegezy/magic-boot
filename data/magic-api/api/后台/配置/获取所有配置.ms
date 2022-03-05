@@ -5,7 +5,7 @@
   "groupId" : "5c36bdc1de454d6e9d1a464d87c96091",
   "name" : "获取所有配置",
   "createTime" : null,
-  "updateTime" : 1635576982955,
+  "updateTime" : 1646391487051,
   "lock" : "0",
   "method" : "GET",
   "path" : "/list",
@@ -14,7 +14,7 @@
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1635043795053,\n    \"executeTime\": null\n}",
+  "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1646391479074,\n    \"executeTime\": null\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -66,7 +66,7 @@
       "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1635043795053",
+      "value" : "1646391479074",
       "description" : "",
       "required" : false,
       "dataType" : "Long",

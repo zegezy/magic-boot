@@ -5,7 +5,7 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "当前用户菜单",
   "createTime" : null,
-  "updateTime" : 1641482674575,
+  "updateTime" : 1646400991044,
   "lock" : "0",
   "method" : "POST",
   "path" : "/current/menus",
@@ -14,7 +14,7 @@
   "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [{\n        \"id\": \"b1851d1b13594e71840103c11a37a669\",\n        \"name\": \"系统设置\",\n        \"pid\": \"0\",\n        \"isShow\": 1,\n        \"url\": \"/system\",\n        \"sort\": 10,\n        \"icon\": \"settings\",\n        \"component\": \"Layout\",\n        \"path\": \"/system\",\n        \"meta\": {\n            \"title\": \"系统设置\",\n            \"icon\": \"settings\"\n        },\n        \"redirect\": \"noRedirect\",\n        \"alwaysShow\": true,\n        \"children\": [{\n            \"id\": \"39be13ef6f0745568c80bf35202ddb2b\",\n            \"name\": \"菜单管理\",\n            \"pid\": \"b1851d1b13594e71840103c11a37a669\",\n            \"isShow\": 1,\n            \"url\": \"/system/menu/menu-list\",\n            \"sort\": 10,\n            \"icon\": \"menu\",\n            \"component\": \"/system/menu/menu-list\",\n            \"path\": \"/system/menu/menu-list\",\n            \"meta\": {\n                \"title\": \"菜单管理\",\n                \"icon\": \"menu\"\n            }\n        }, {\n            \"id\": \"8e9455740091486c914495cfb0c7faa5\",\n            \"name\": \"角色管理\",\n            \"pid\": \"b1851d1b13594e71840103c11a37a669\",\n            \"isShow\": 1,\n            \"url\": \"/system/role/role-list\",\n            \"sort\": 40,\n            \"icon\": \"role\",\n            \"component\": \"/system/role/role-list\",\n            \"path\": \"/system/role/role-list\",\n            \"meta\": {\n                \"title\": \"角色管理\",\n                \"icon\": \"role\"\n            }\n        }, {\n            \"id\": \"06b8a427e4cd4c1ba11752070f565f20\",\n            \"name\": \"用户管理\",\n            \"pid\": \"b1851d1b13594e71840103c11a37a669\",\n            \"isShow\": 1,\n            \"url\": \"/system/user/user-list\",\n            \"sort\": 50,\n            \"icon\": \"user\",\n            \"component\": \"/system/user/user-list\",\n            \"path\": \"/system/user/user-list\",\n            \"meta\": {\n                \"title\": \"用户管理\",\n                \"icon\": \"user\"\n            }\n        }, {\n            \"id\": \"c5f407478c4e4c9cbcdbee6389d2c909\",\n            \"name\": \"数据字典\",\n            \"pid\": \"b1851d1b13594e71840103c11a37a669\",\n            \"isShow\": 1,\n            \"url\": \"/system/dict/dict-list\",\n            \"sort\": 60,\n            \"icon\": \"dict\",\n            \"component\": \"/system/dict/dict-list\",\n            \"path\": \"/system/dict/dict-list\",\n            \"meta\": {\n                \"title\": \"数据字典\",\n                \"icon\": \"dict\"\n            }\n        }]\n    }, {\n        \"id\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n        \"name\": \"一些例子\",\n        \"pid\": \"0\",\n        \"isShow\": 1,\n        \"url\": \"/examples\",\n        \"sort\": 20,\n        \"icon\": \"examples\",\n        \"component\": \"Layout\",\n        \"path\": \"/examples\",\n        \"meta\": {\n            \"title\": \"一些例子\",\n            \"icon\": \"examples\"\n        },\n        \"redirect\": \"noRedirect\",\n        \"alwaysShow\": true,\n        \"children\": [{\n            \"id\": \"dc332875-831e-4937-86ff-0c7420915ce9\",\n            \"name\": \"三级联动\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/three-linkage\",\n            \"sort\": 10,\n            \"icon\": \"\",\n            \"component\": \"/examples/three-linkage\",\n            \"path\": \"/examples/three-linkage\",\n            \"meta\": {\n                \"title\": \"三级联动\",\n                \"icon\": \"\"\n            }\n        }, {\n            \"id\": \"f09410d5-5043-4164-9f68-8d135de71b29\",\n            \"name\": \"上传文件\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/upload-file\",\n            \"sort\": 20,\n            \"icon\": \"\",\n            \"component\": \"/examples/upload-file\",\n            \"path\": \"/examples/upload-file\",\n            \"meta\": {\n                \"title\": \"上传文件\",\n                \"icon\": \"\"\n            }\n        }, {\n            \"id\": \"74c852ea-be4b-4533-b146-cfbd776045d5\",\n            \"name\": \"富文本\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/ueditor-example\",\n            \"sort\": 30,\n            \"icon\": \"\",\n            \"component\": \"/examples/ueditor-example\",\n            \"path\": \"/examples/ueditor-example\",\n            \"meta\": {\n                \"title\": \"富文本\",\n                \"icon\": \"\"\n            }\n        }, {\n            \"id\": \"91bdb7d742a64a8c8a8fdc6d3bb61581\",\n            \"name\": \"可编辑表格\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/editor-table\",\n            \"sort\": 40,\n            \"icon\": \"\",\n            \"component\": \"/examples/editor-table\",\n            \"path\": \"/examples/editor-table\",\n            \"meta\": {\n                \"title\": \"可编辑表格\",\n                \"icon\": \"\"\n            }\n        }, {\n            \"id\": \"0ca23f378d794b23b935d6045bb54915\",\n            \"name\": \"页面设计\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/page-design\",\n            \"sort\": 50,\n            \"icon\": \"\",\n            \"component\": \"/examples/page-design\",\n            \"path\": \"/examples/page-design\",\n            \"meta\": {\n                \"title\": \"页面设计\",\n                \"icon\": \"\"\n            }\n        }, {\n            \"id\": \"2664b76cb2904227bce5b0f7d1dd6e7b\",\n            \"name\": \"下拉框\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/select-example\",\n            \"sort\": 60,\n            \"icon\": \"\",\n            \"component\": \"/examples/select-example\",\n            \"path\": \"/examples/select-example\",\n            \"meta\": {\n                \"title\": \"下拉框\",\n                \"icon\": \"\"\n            }\n        }]\n    }, {\n        \"id\": \"f481f745ef8f40deae861b57390f9130\",\n        \"name\": \"测试\",\n        \"pid\": \"0\",\n        \"isShow\": 1,\n        \"url\": null,\n        \"sort\": 30,\n        \"icon\": null,\n        \"component\": \"Layout\",\n        \"path\": \"/\",\n        \"meta\": {\n            \"title\": \"测试\",\n            \"icon\": null\n        },\n        \"redirect\": \"noRedirect\",\n        \"alwaysShow\": true,\n        \"children\": [{\n            \"id\": \"2c0dfae696b84994981461231dd82599\",\n            \"name\": \"1\",\n            \"pid\": \"f481f745ef8f40deae861b57390f9130\",\n            \"isShow\": 1,\n            \"url\": null,\n            \"sort\": 40,\n            \"icon\": null,\n            \"component\": \"Layout\",\n            \"path\": \"/\",\n            \"meta\": {\n                \"title\": \"1\",\n                \"icon\": null\n            },\n            \"redirect\": \"noRedirect\",\n            \"alwaysShow\": true,\n            \"children\": [{\n                \"id\": \"def5a6402307471498447e17e48daf32\",\n                \"name\": \"1-1\",\n                \"pid\": \"2c0dfae696b84994981461231dd82599\",\n                \"isShow\": 1,\n                \"url\": null,\n                \"sort\": 10,\n                \"icon\": null,\n                \"component\": \"Layout\",\n                \"path\": \"/\",\n                \"meta\": {\n                    \"title\": \"1-1\",\n                    \"icon\": null\n                },\n                \"redirect\": \"noRedirect\",\n                \"alwaysShow\": true,\n                \"children\": [{\n                    \"id\": \"dc2fc72b7b584cb4a1027a9abcce4269\",\n                    \"name\": \"1-1-1\",\n                    \"pid\": \"def5a6402307471498447e17e48daf32\",\n                    \"isShow\": 1,\n                    \"url\": null,\n                    \"sort\": 10,\n                    \"icon\": null,\n                    \"component\": \"Layout\",\n                    \"path\": \"/\",\n                    \"meta\": {\n                        \"title\": \"1-1-1\",\n                        \"icon\": null\n                    },\n                    \"redirect\": \"noRedirect\",\n                    \"alwaysShow\": true,\n                    \"children\": [{\n                        \"id\": \"740eb175bb004427a91deecfe6551c78\",\n                        \"name\": \"1-1-1-1\",\n                        \"pid\": \"dc2fc72b7b584cb4a1027a9abcce4269\",\n                        \"isShow\": 1,\n                        \"url\": null,\n                        \"sort\": 10,\n                        \"icon\": null,\n                        \"component\": \"Layout\",\n                        \"path\": \"/\",\n                        \"meta\": {\n                            \"title\": \"1-1-1-1\",\n                            \"icon\": null\n                        }\n                    }]\n                }, {\n                    \"id\": \"4bf506637f094a38903345c906ca13f9\",\n                    \"name\": \"1-1-2\",\n                    \"pid\": \"def5a6402307471498447e17e48daf32\",\n                    \"isShow\": 1,\n                    \"url\": null,\n                    \"sort\": 20,\n                    \"icon\": null,\n                    \"component\": \"Layout\",\n                    \"path\": \"/\",\n                    \"meta\": {\n                        \"title\": \"1-1-2\",\n                        \"icon\": null\n                    }\n                }]\n            }, {\n                \"id\": \"3922bbc556b64e08b2caf77ee5690f1a\",\n                \"name\": \"1-2\",\n                \"pid\": \"2c0dfae696b84994981461231dd82599\",\n                \"isShow\": 1,\n                \"url\": null,\n                \"sort\": 30,\n                \"icon\": null,\n                \"component\": \"Layout\",\n                \"path\": \"/\",\n                \"meta\": {\n                    \"title\": \"1-2\",\n                    \"icon\": null\n                }\n            }]\n        }, {\n            \"id\": \"eb2f8b86ad994986862a705168da875b\",\n            \"name\": \"测试2\",\n            \"pid\": \"f481f745ef8f40deae861b57390f9130\",\n            \"isShow\": 1,\n            \"url\": null,\n            \"sort\": 40,\n            \"icon\": null,\n            \"component\": \"Layout\",\n            \"path\": \"/\",\n            \"meta\": {\n                \"title\": \"测试2\",\n                \"icon\": null\n            }\n        }]\n    }],\n    \"timestamp\": 1641276761756,\n    \"executeTime\": 7\n}",
+  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [{\n        \"id\": \"b1851d1b13594e71840103c11a37a669\",\n        \"name\": \"系统设置\",\n        \"pid\": \"0\",\n        \"isShow\": 1,\n        \"url\": \"/system\",\n        \"sort\": 10,\n        \"icon\": \"settings\",\n        \"keepAlive\": 0,\n        \"code\": null,\n        \"componentname\": null,\n        \"component\": \"Layout\",\n        \"path\": \"/system\",\n        \"meta\": {\n            \"title\": \"系统设置\",\n            \"icon\": \"settings\",\n            \"keepAlive\": false\n        },\n        \"redirect\": \"noRedirect\",\n        \"alwaysShow\": true,\n        \"children\": [{\n            \"id\": \"39be13ef6f0745568c80bf35202ddb2b\",\n            \"name\": \"菜单管理\",\n            \"pid\": \"b1851d1b13594e71840103c11a37a669\",\n            \"isShow\": 1,\n            \"url\": \"/system/menu/menu-list\",\n            \"sort\": 10,\n            \"icon\": \"menu\",\n            \"keepAlive\": 1,\n            \"code\": null,\n            \"componentname\": null,\n            \"component\": \"/system/menu/menu-list\",\n            \"path\": \"/system/menu/menu-list\",\n            \"meta\": {\n                \"title\": \"菜单管理\",\n                \"icon\": \"menu\",\n                \"keepAlive\": true\n            }\n        }, {\n            \"id\": \"6f3594d0-5445-41e1-a13c-890a57485036\",\n            \"name\": \"组织机构\",\n            \"pid\": \"b1851d1b13594e71840103c11a37a669\",\n            \"isShow\": 1,\n            \"url\": \"/system/office/office-list\",\n            \"sort\": 20,\n            \"icon\": \"office\",\n            \"keepAlive\": 0,\n            \"code\": null,\n            \"componentname\": null,\n            \"component\": \"/system/office/office-list\",\n            \"path\": \"/system/office/office-list\",\n            \"meta\": {\n                \"title\": \"组织机构\",\n                \"icon\": \"office\",\n                \"keepAlive\": false\n            }\n        }, {\n            \"id\": \"8e9455740091486c914495cfb0c7faa5\",\n            \"name\": \"角色管理\",\n            \"pid\": \"b1851d1b13594e71840103c11a37a669\",\n            \"isShow\": 1,\n            \"url\": \"/system/role/role-list\",\n            \"sort\": 40,\n            \"icon\": \"role\",\n            \"keepAlive\": 0,\n            \"code\": null,\n            \"componentname\": null,\n            \"component\": \"/system/role/role-list\",\n            \"path\": \"/system/role/role-list\",\n            \"meta\": {\n                \"title\": \"角色管理\",\n                \"icon\": \"role\",\n                \"keepAlive\": false\n            }\n        }, {\n            \"id\": \"06b8a427e4cd4c1ba11752070f565f20\",\n            \"name\": \"用户管理\",\n            \"pid\": \"b1851d1b13594e71840103c11a37a669\",\n            \"isShow\": 1,\n            \"url\": \"/system/user/user-list\",\n            \"sort\": 50,\n            \"icon\": \"user\",\n            \"keepAlive\": 0,\n            \"code\": null,\n            \"componentname\": null,\n            \"component\": \"/system/user/user-list\",\n            \"path\": \"/system/user/user-list\",\n            \"meta\": {\n                \"title\": \"用户管理\",\n                \"icon\": \"user\",\n                \"keepAlive\": false\n            }\n        }, {\n            \"id\": \"c5f407478c4e4c9cbcdbee6389d2c909\",\n            \"name\": \"数据字典\",\n            \"pid\": \"b1851d1b13594e71840103c11a37a669\",\n            \"isShow\": 1,\n            \"url\": \"/system/dict/dict-list\",\n            \"sort\": 60,\n            \"icon\": \"dict\",\n            \"keepAlive\": 0,\n            \"code\": null,\n            \"componentname\": null,\n            \"component\": \"/system/dict/dict-list\",\n            \"path\": \"/system/dict/dict-list\",\n            \"meta\": {\n                \"title\": \"数据字典\",\n                \"icon\": \"dict\",\n                \"keepAlive\": false\n            }\n        }, {\n            \"id\": \"10fc3bdde0c642aea2af34d281a49cf9\",\n            \"name\": \"测试数据\",\n            \"pid\": \"b1851d1b13594e71840103c11a37a669\",\n            \"isShow\": 1,\n            \"url\": \"/system/test/test-list\",\n            \"sort\": 100,\n            \"icon\": \"home\",\n            \"keepAlive\": 1,\n            \"code\": null,\n            \"componentname\": null,\n            \"component\": \"/system/test/test-list\",\n            \"path\": \"/system/test/test-list\",\n            \"meta\": {\n                \"title\": \"测试数据\",\n                \"icon\": \"home\",\n                \"keepAlive\": true\n            }\n        }]\n    }, {\n        \"id\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n        \"name\": \"一些例子\",\n        \"pid\": \"0\",\n        \"isShow\": 1,\n        \"url\": \"/examples\",\n        \"sort\": 20,\n        \"icon\": \"examples\",\n        \"keepAlive\": 0,\n        \"code\": null,\n        \"componentname\": null,\n        \"component\": \"Layout\",\n        \"path\": \"/examples\",\n        \"meta\": {\n            \"title\": \"一些例子\",\n            \"icon\": \"examples\",\n            \"keepAlive\": false\n        },\n        \"redirect\": \"noRedirect\",\n        \"alwaysShow\": true,\n        \"children\": [{\n            \"id\": \"dc332875-831e-4937-86ff-0c7420915ce9\",\n            \"name\": \"三级联动\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/three-linkage\",\n            \"sort\": 10,\n            \"icon\": \"\",\n            \"keepAlive\": 0,\n            \"code\": null,\n            \"componentname\": null,\n            \"component\": \"/examples/three-linkage\",\n            \"path\": \"/examples/three-linkage\",\n            \"meta\": {\n                \"title\": \"三级联动\",\n                \"icon\": \"\",\n                \"keepAlive\": false\n            }\n        }, {\n            \"id\": \"f09410d5-5043-4164-9f68-8d135de71b29\",\n            \"name\": \"上传文件\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/upload-file\",\n            \"sort\": 20,\n            \"icon\": \"\",\n            \"keepAlive\": 0,\n            \"code\": null,\n            \"componentname\": null,\n            \"component\": \"/examples/upload-file\",\n            \"path\": \"/examples/upload-file\",\n            \"meta\": {\n                \"title\": \"上传文件\",\n                \"icon\": \"\",\n                \"keepAlive\": false\n            }\n        }, {\n            \"id\": \"74c852ea-be4b-4533-b146-cfbd776045d5\",\n            \"name\": \"富文本\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/ueditor-example\",\n            \"sort\": 30,\n            \"icon\": \"\",\n            \"keepAlive\": 0,\n            \"code\": null,\n            \"componentname\": null,\n            \"component\": \"/examples/ueditor-example\",\n            \"path\": \"/examples/ueditor-example\",\n            \"meta\": {\n                \"title\": \"富文本\",\n                \"icon\": \"\",\n                \"keepAlive\": false\n            }\n        }, {\n            \"id\": \"91bdb7d742a64a8c8a8fdc6d3bb61581\",\n            \"name\": \"可编辑表格\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/editor-table\",\n            \"sort\": 40,\n            \"icon\": \"\",\n            \"keepAlive\": 0,\n            \"code\": null,\n            \"componentname\": null,\n            \"component\": \"/examples/editor-table\",\n            \"path\": \"/examples/editor-table\",\n            \"meta\": {\n                \"title\": \"可编辑表格\",\n                \"icon\": \"\",\n                \"keepAlive\": false\n            }\n        }, {\n            \"id\": \"0ca23f378d794b23b935d6045bb54915\",\n            \"name\": \"页面设计\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/page-design\",\n            \"sort\": 50,\n            \"icon\": \"\",\n            \"keepAlive\": 0,\n            \"code\": null,\n            \"componentname\": null,\n            \"component\": \"/examples/page-design\",\n            \"path\": \"/examples/page-design\",\n            \"meta\": {\n                \"title\": \"页面设计\",\n                \"icon\": \"\",\n                \"keepAlive\": false\n            }\n        }, {\n            \"id\": \"2664b76cb2904227bce5b0f7d1dd6e7b\",\n            \"name\": \"下拉框\",\n            \"pid\": \"641253af-8ea1-4b5d-8bc3-a7165ef60ff2\",\n            \"isShow\": 1,\n            \"url\": \"/examples/select-example\",\n            \"sort\": 60,\n            \"icon\": \"\",\n            \"keepAlive\": 0,\n            \"code\": null,\n            \"componentname\": null,\n            \"component\": \"/examples/select-example\",\n            \"path\": \"/examples/select-example\",\n            \"meta\": {\n                \"title\": \"下拉框\",\n                \"icon\": \"\",\n                \"keepAlive\": false\n            }\n        }]\n    }, {\n        \"id\": \"d7f8d052d4864bd285c575c3cf2dce69\",\n        \"name\": \"低代码\",\n        \"pid\": \"0\",\n        \"isShow\": 1,\n        \"url\": \"/lowcode\",\n        \"sort\": 30,\n        \"icon\": null,\n        \"keepAlive\": 1,\n        \"code\": null,\n        \"componentname\": null,\n        \"component\": \"Layout\",\n        \"path\": \"/lowcode\",\n        \"meta\": {\n            \"title\": \"低代码\",\n            \"icon\": null,\n            \"keepAlive\": true\n        },\n        \"redirect\": \"noRedirect\",\n        \"alwaysShow\": true,\n        \"children\": [{\n            \"id\": \"9de78e0a6042469c891af82fbc21ba90\",\n            \"name\": \"组件管理\",\n            \"pid\": \"d7f8d052d4864bd285c575c3cf2dce69\",\n            \"isShow\": 1,\n            \"url\": \"/lowcode/component-list\",\n            \"sort\": 10,\n            \"icon\": null,\n            \"keepAlive\": 1,\n            \"code\": null,\n            \"componentname\": null,\n            \"component\": \"/lowcode/component-list\",\n            \"path\": \"/lowcode/component-list\",\n            \"meta\": {\n                \"title\": \"组件管理\",\n                \"icon\": null,\n                \"keepAlive\": true\n            }\n        }, {\n            \"id\": \"c7445e2ac6144a15a76d723607fbfb9d\",\n            \"name\": \"接口管理\",\n            \"pid\": \"d7f8d052d4864bd285c575c3cf2dce69\",\n            \"isShow\": 1,\n            \"url\": \"/lowcode/magic-editor\",\n            \"sort\": 20,\n            \"icon\": null,\n            \"keepAlive\": 1,\n            \"code\": null,\n            \"componentname\": null,\n            \"component\": \"/lowcode/magic-editor\",\n            \"path\": \"/lowcode/magic-editor\",\n            \"meta\": {\n                \"title\": \"接口管理\",\n                \"icon\": null,\n                \"keepAlive\": true\n            }\n        }]\n    }],\n    \"timestamp\": 1646400974566,\n    \"executeTime\": 41\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -159,6 +159,42 @@
           "expression" : "",
           "children" : [ ]
         }, {
+          "name" : "keepAlive",
+          "value" : "0",
+          "description" : "",
+          "required" : false,
+          "dataType" : "Integer",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        }, {
+          "name" : "code",
+          "value" : "null",
+          "description" : "",
+          "required" : false,
+          "dataType" : "Object",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        }, {
+          "name" : "componentname",
+          "value" : "null",
+          "description" : "",
+          "required" : false,
+          "dataType" : "Object",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        }, {
           "name" : "component",
           "value" : "Layout",
           "description" : "",
@@ -211,6 +247,18 @@
             "description" : "",
             "required" : false,
             "dataType" : "String",
+            "type" : null,
+            "defaultValue" : null,
+            "validateType" : "",
+            "error" : "",
+            "expression" : "",
+            "children" : [ ]
+          }, {
+            "name" : "keepAlive",
+            "value" : "false",
+            "description" : "",
+            "required" : false,
+            "dataType" : "Boolean",
             "type" : null,
             "defaultValue" : null,
             "validateType" : "",
@@ -349,6 +397,42 @@
               "expression" : "",
               "children" : [ ]
             }, {
+              "name" : "keepAlive",
+              "value" : "1",
+              "description" : "",
+              "required" : false,
+              "dataType" : "Integer",
+              "type" : null,
+              "defaultValue" : null,
+              "validateType" : "",
+              "error" : "",
+              "expression" : "",
+              "children" : [ ]
+            }, {
+              "name" : "code",
+              "value" : "null",
+              "description" : "",
+              "required" : false,
+              "dataType" : "Object",
+              "type" : null,
+              "defaultValue" : null,
+              "validateType" : "",
+              "error" : "",
+              "expression" : "",
+              "children" : [ ]
+            }, {
+              "name" : "componentname",
+              "value" : "null",
+              "description" : "",
+              "required" : false,
+              "dataType" : "Object",
+              "type" : null,
+              "defaultValue" : null,
+              "validateType" : "",
+              "error" : "",
+              "expression" : "",
+              "children" : [ ]
+            }, {
               "name" : "component",
               "value" : "/system/menu/menu-list",
               "description" : "",
@@ -407,6 +491,18 @@
                 "error" : "",
                 "expression" : "",
                 "children" : [ ]
+              }, {
+                "name" : "keepAlive",
+                "value" : "true",
+                "description" : "",
+                "required" : false,
+                "dataType" : "Boolean",
+                "type" : null,
+                "defaultValue" : null,
+                "validateType" : "",
+                "error" : "",
+                "expression" : "",
+                "children" : [ ]
               } ]
             } ]
           } ]
@@ -414,7 +510,7 @@
       } ]
     }, {
       "name" : "timestamp",
-      "value" : "1641276761756",
+      "value" : "1646400974566",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -426,7 +522,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "7",
+      "value" : "41",
       "description" : "",
       "required" : false,
       "dataType" : "Object",
@@ -454,8 +550,11 @@ var menus = db.select("""
         sm.url,
         sm.sort,
         sm.icon,
-        sm.keep_alive
-    from sys_menu sm where 1=1
+        sm.keep_alive,
+        sc.code,
+        sc.name component_name
+    from sys_menu sm
+    left join sys_component sc on sm.component_id = sc.id where 1=1
     ?{userId != '1',
         and sm.id in (
             select menu_id from sys_role_menu where role_id in (
