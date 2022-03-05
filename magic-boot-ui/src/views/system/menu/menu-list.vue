@@ -1,0 +1,251 @@
+<template>
+  <div class="app-container">
+
+    <div class="filter-container">
+      <el-form :inline="true">
+        <el-form-item label="菜单搜索">
+          <el-input v-model="searchValue" @input="searchMenu" placeholder="菜单名称、链接、权限标识" style="width: 200px"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button class="filter-item" type="primary" icon="ElSearch" @click="searchMenu">
+            搜索
+          </el-button>
+          <el-button class="filter-item" icon="ElDelete" @click="() => { searchValue = ''; searchMenu() }">
+            清空
+          </el-button>
+        </el-form-item>
+      </el-form>
+    </div>
+
+    <el-row class="toolbar-container">
+      <el-button class="filter-item" type="primary" icon="ElPlus" @click="addSubMenu('0')" v-permission="'menu:save'">
+        添加菜单
+      </el-button>
+      <el-button type="primary" icon="ElSort" plain @click="expand">展开/折叠</el-button>
+    </el-row>
+
+    <mb-table ref="table" v-bind="tableOptions" v-if="menuData && menuData.length > 0 && refreshTable" />
+    
+    <mb-dialog ref="menuFormDialog" width="970px" :title="dialogTitle" @confirm-click="menuFormRef.save($event)">
+      <template #content>
+        <menu-form ref="menuFormRef" :title="dialogTitle" :menu-tree="menuTree" :menu-data="menuData" @reload-table="reloadTable" />
+      </template>
+    </mb-dialog>
+
+  </div>
+</template>
+
+<script setup>
+
+import { ref,reactive, onMounted, getCurrentInstance, nextTick, watch } from 'vue'
+import MenuForm from './menu-form'
+
+const { proxy } = getCurrentInstance()
+
+const refreshTable = ref(true)
+let menuTree = ref([])
+const menuData = ref([])
+let searchValue = ref('')
+const tableOptions = reactive({
+        el: {
+          'default-expand-all': true,
+          'tree-props': { children: 'children', hasChildren: 'hasChildren' },
+          'row-key': 'id'
+        },
+        showNo: false,
+        page: false,
+        cols: [
+          {
+            field: 'name',
+            title: '菜单名称',
+            align: 'left',
+            type: 'html'
+          },
+          {
+            field: 'url',
+            title: '路径',
+            align: 'left',
+            type: 'html'
+          },
+          {
+            field: 'permission',
+            title: '权限标识',
+            width: 150,
+            align: 'left',
+            type: 'html'
+          },
+          {
+            field: 'icon',
+            title: '图标',
+            width: 55,
+            align: 'center',
+            templet: (row) => {
+              return generateIconCode(row.icon)
+            }
+          },
+          {
+            field: 'sort',
+            title: '序号',
+            width: 60
+          },
+          {
+            title: '排序',
+            type: 'btns',
+            width: 150,
+            btns: [
+              {
+                title: '上移',
+                type: 'text',
+                icon: 'ElSortUp',
+                click: (row) => {
+                  proxy.$get('menu/sort/up',{
+                    id: row.id,
+                    pid: row.pid,
+                    sort: row.sort
+                  }).then(() => {
+                    reloadTable()
+                  })
+                }
+              },
+              {
+                title: '下移',
+                type: 'text',
+                icon: 'ElSortDown',
+                click: (row) => {
+                  proxy.$get('menu/sort/down',{
+                    id: row.id,
+                    pid: row.pid,
+                    sort: row.sort
+                  }).then(() => {
+                    reloadTable()
+                  })
+                }
+              }
+            ]
+          },
+          {
+            field: 'isShow',
+            title: '是否显示',
+            type: 'switch',
+            width: 100,
+            change: (row) => {
+              proxy.$get('menu/change', {
+                id: row.id,
+                isShow: row.isShow
+              })
+            }
+          },
+          {
+            field: 'keepAlive',
+            title: '是否缓存',
+            type: 'switch',
+            width: 100,
+            change: (row) => {
+              proxy.$get('menu/change', {
+                id: row.id,
+                keepAlive: row.keepAlive
+              })
+            }
+          },
+          {
+            title: '操作',
+            type: 'btns',
+            width: 260,
+            fixed: 'right',
+            align: 'left',
+            btns: [
+              {
+                title: '添加下级菜单',
+                type: 'text',
+                permission: 'menu:save',
+                icon: 'ElPlus',
+                click: (row) => {
+                  addSubMenu(row.id)
+                }
+              },
+              {
+                title: '修改',
+                type: 'text',
+                permission: 'menu:save',
+                icon: 'ElEdit',
+                click: (row) => {
+                  handleUpdate(row)
+                }
+              },
+              {
+                title: '删除',
+                type: 'text',
+                permission: 'menu:delete',
+                icon: 'ElDelete',
+                click: (row) => {
+                  proxy.$common.handleDelete({
+                    url: 'menu/delete',
+                    id: row.id,
+                    done: () => reloadTable()
+                  })
+                }
+              }
+            ]
+          }
+        ]
+      })
+let dialogTitle = ref('')
+let searchTimeout = reactive()
+const menuFormDialog = ref()
+const menuFormRef = ref()
+
+function reloadTable(){
+  proxy.$get('menu/tree').then(res => {
+    menuData.value = res.data.list
+    tableOptions.data = menuData.value
+  })
+}
+
+function expand(){
+  refreshTable.value = false
+  tableOptions.el["default-expand-all"] = !tableOptions.el["default-expand-all"]
+  nextTick(() => refreshTable.value = true)
+}
+
+function searchMenu() {
+  clearTimeout(searchTimeout)
+  searchTimeout = setTimeout(() => {
+    if(searchValue.value){
+      tableOptions.data = proxy.$treeTable.recursionSearch(['name', 'url', 'permission'], proxy.$common.copyNew(menuData.value), searchValue.value)
+    }else{
+      tableOptions.data = menuData.value
+    }
+  },500)
+}
+
+function addSubMenu(id) {
+  dialogTitle.value = '添加'
+  menuFormDialog.value.show()
+  nextTick(() => {
+    menuFormRef.value.addSubMenu(id)
+  })
+}
+
+function handleUpdate(row) {
+  dialogTitle.value = '修改'
+  menuFormDialog.value.show()
+  nextTick(() => {
+    menuFormRef.value.getInfo(row);
+  })
+}
+
+function generateIconCode(symbol) {
+  return `<svg style="width: 20px;height: 20px;fill: #999" aria-hidden="true" class="svg-icon disabled"><use href="#icon-${symbol}"></use></svg>`
+}
+
+onMounted(() => reloadTable())
+
+watch(menuData, () => {
+  menuTree.value = [{
+    label: '根节点',
+    id: '0',
+    children: proxy.$treeTable.genTree(menuData.value)
+  }]
+})
+
+</script>
