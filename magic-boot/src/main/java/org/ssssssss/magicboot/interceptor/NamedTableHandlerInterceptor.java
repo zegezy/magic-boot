@@ -3,12 +3,13 @@ package org.ssssssss.magicboot.interceptor;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.IdUtil;
 import org.springframework.stereotype.Component;
-import org.ssssssss.magicapi.interceptor.NamedTableInterceptor;
-import org.ssssssss.magicapi.model.SqlMode;
-import org.ssssssss.magicapi.modules.table.NamedTable;
-import static org.ssssssss.magicboot.model.MagicBootConstants.*;
+import org.ssssssss.magicapi.modules.db.inteceptor.NamedTableInterceptor;
+import org.ssssssss.magicapi.modules.db.model.SqlMode;
+import org.ssssssss.magicapi.modules.db.table.NamedTable;
 
 import java.util.Date;
+
+import static org.ssssssss.magicboot.model.MagicBootConstants.*;
 
 @Component
 public class NamedTableHandlerInterceptor implements NamedTableInterceptor {

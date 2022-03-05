@@ -4,21 +4,22 @@
   "script" : null,
   "groupId" : "376f26eb43a44a3daeafd27020a96f48",
   "name" : "获取排序号",
-  "createTime" : 1634735599490,
+  "createTime" : 1646490239449,
   "updateTime" : 1634735599490,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/sort",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
-  "responseBodyDefinition" : null,
-  "optionMap" : { }
+  "responseBodyDefinition" : null
 }
 ================================
 return db.selectInt("""select max(sort) + 10 from sys_dict_items where dict_id = #{dictId} and is_del = '0'""") || 10;

@@ -1,7 +1,7 @@
 package org.ssssssss.magicboot.extension;
 
 import org.springframework.stereotype.Component;
-import org.ssssssss.magicapi.modules.table.NamedTable;
+import org.ssssssss.magicapi.modules.db.table.NamedTable;
 import org.ssssssss.magicboot.model.MagicBootConstants;
 import org.ssssssss.script.annotation.Comment;
 import org.ssssssss.script.functions.ExtensionMethod;

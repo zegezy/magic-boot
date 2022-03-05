@@ -4,13 +4,15 @@
   "script" : null,
   "groupId" : "41922e26ef57421f8819fe6c59f14d63",
   "name" : "组织机构",
-  "createTime" : null,
+  "createTime" : 1646490239535,
   "updateTime" : 1642327198030,
   "lock" : "0",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/office",
   "description" : null,
   "returnType" : null,
-  "mappingPath" : null,
+  "mappingPath" : "/permission/office",
   "parameters" : [ ]
 }
 ================================

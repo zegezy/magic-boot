@@ -4,13 +4,15 @@
   "script" : null,
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "所有机构",
-  "createTime" : null,
+  "createTime" : 1646490239474,
   "updateTime" : 1642134606249,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/offices",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
@@ -233,8 +235,7 @@
       "expression" : "",
       "children" : [ ]
     } ]
-  },
-  "optionMap" : { }
+  }
 }
 ================================
 var toTree = (list,pid) => select t.*,toTree(list,t.id) children from list t where t.pid = pid

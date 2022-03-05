@@ -2,7 +2,7 @@
   "properties" : { },
   "id" : "5c36bdc1de454d6e9d1a464d87c96091",
   "name" : "配置",
-  "type" : "1",
+  "type" : "api",
   "parentId" : "02df51e4d7184780a98b632f43dc5848",
   "path" : "/config",
   "paths" : [ ],

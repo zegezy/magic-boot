@@ -4,23 +4,34 @@
   "script" : null,
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "保存",
-  "createTime" : null,
+  "createTime" : 1646490239467,
   "updateTime" : 1644121682487,
   "lock" : "0",
-  "method" : "POST",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/save",
+  "method" : "POST",
   "parameters" : [ ],
-  "option" : "[{\"name\":\"permission\",\"value\":\"user:save\",\"description\":\"允许拥有该权限的访问\"}]",
+  "options" : [ {
+    "name" : "permission",
+    "value" : "user:save",
+    "description" : "允许拥有该权限的访问",
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  } ],
   "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
-  "responseBodyDefinition" : null,
-  "optionMap" : {
-    "permission" : "user:save"
-  }
+  "responseBodyDefinition" : null
 }
 ================================
 import cn.dev33.satoken.secure.SaSecureUtil;

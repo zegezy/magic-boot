@@ -4,13 +4,27 @@
   "script" : null,
   "groupId" : "8295fc13678d4144bf7363c465247a50",
   "name" : "删除",
-  "createTime" : null,
+  "createTime" : 1646490239496,
   "updateTime" : 1644121676877,
   "lock" : "0",
-  "method" : "POST",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/delete",
+  "method" : "POST",
   "parameters" : [ ],
-  "option" : "[{\"name\":\"permission\",\"value\":\"office:delete\",\"description\":\"允许拥有该权限的访问\"}]",
+  "options" : [ {
+    "name" : "permission",
+    "value" : "office:delete",
+    "description" : "允许拥有该权限的访问",
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  } ],
   "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
@@ -89,9 +103,6 @@
       "expression" : "",
       "children" : [ ]
     } ]
-  },
-  "optionMap" : {
-    "permission" : "office:delete"
   }
 }
 ================================

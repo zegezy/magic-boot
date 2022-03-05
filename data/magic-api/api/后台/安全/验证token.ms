@@ -4,13 +4,27 @@
   "script" : null,
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "验证token",
-  "createTime" : 1634724871160,
+  "createTime" : 1646490239415,
   "updateTime" : 1634724871160,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/validateToken",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[{\"name\":\"require_login\",\"value\":\"false\",\"description\":\"该接口需要登录才允许访问\"}]",
+  "options" : [ {
+    "name" : "require_login",
+    "value" : "false",
+    "description" : "该接口需要登录才允许访问",
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  } ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
@@ -89,9 +103,6 @@
       "expression" : "",
       "children" : [ ]
     } ]
-  },
-  "optionMap" : {
-    "require_login" : "false"
   }
 }
 ================================

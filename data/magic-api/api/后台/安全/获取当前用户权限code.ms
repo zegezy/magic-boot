@@ -4,13 +4,27 @@
   "script" : null,
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "获取当前用户权限code",
-  "createTime" : null,
+  "createTime" : 1646490239409,
   "updateTime" : 1645715502500,
   "lock" : "0",
-  "method" : "POST",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/permissions",
+  "method" : "POST",
   "parameters" : [ ],
-  "option" : "[{\"name\":\"\",\"value\":\"\",\"description\":\"\"}]",
+  "options" : [ {
+    "name" : "",
+    "value" : "",
+    "description" : "",
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  } ],
   "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
@@ -101,9 +115,6 @@
       "expression" : "",
       "children" : [ ]
     } ]
-  },
-  "optionMap" : {
-    "" : ""
   }
 }
 ================================

@@ -4,13 +4,15 @@
   "script" : null,
   "groupId" : "6f106ebdee21489db34b956f7770ff03",
   "name" : "选择组件",
-  "createTime" : null,
+  "createTime" : 1646490239487,
   "updateTime" : 1646402724502,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/select",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
@@ -89,8 +91,7 @@
       "expression" : "",
       "children" : [ ]
     } ]
-  },
-  "optionMap" : { }
+  }
 }
 ================================
 return db.select("""

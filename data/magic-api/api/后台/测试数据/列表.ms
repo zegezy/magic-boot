@@ -4,21 +4,22 @@
   "script" : null,
   "groupId" : "42d241c0bb18476f8dabf92c2e4e2324",
   "name" : "列表",
-  "createTime" : null,
+  "createTime" : 1646490239464,
   "updateTime" : 1642327645651,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/list",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
-  "responseBodyDefinition" : null,
-  "optionMap" : { }
+  "responseBodyDefinition" : null
 }
 ================================
 /**

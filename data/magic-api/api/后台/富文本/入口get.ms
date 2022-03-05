@@ -4,13 +4,15 @@
   "script" : null,
   "groupId" : "7eeba36706c24c1484ee4e84ad829f9b",
   "name" : "入口get",
-  "createTime" : null,
+  "createTime" : 1646490239422,
   "updateTime" : 1635927863001,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/main",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "{}",
   "headers" : [ ],
   "paths" : [ ],
@@ -101,9 +103,6 @@
       "expression" : "",
       "children" : [ ]
     } ]
-  },
-  "optionMap" : {
-    "require_login" : "false"
   }
 }
 ================================

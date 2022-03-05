@@ -4,13 +4,27 @@
   "script" : null,
   "groupId" : "7eeba36706c24c1484ee4e84ad829f9b",
   "name" : "配置",
-  "createTime" : null,
+  "createTime" : 1646490239427,
   "updateTime" : 1635927563365,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/config",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[{\"name\":\"\",\"value\":\"\",\"description\":\"\"}]",
+  "options" : [ {
+    "name" : "",
+    "value" : "",
+    "description" : "",
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  } ],
   "requestBody" : "{}",
   "headers" : [ ],
   "paths" : [ ],
@@ -485,10 +499,6 @@
         "children" : [ ]
       } ]
     } ]
-  },
-  "optionMap" : {
-    "" : "",
-    "require_login" : "false"
   }
 }
 ================================

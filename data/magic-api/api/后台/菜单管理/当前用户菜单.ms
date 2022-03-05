@@ -4,13 +4,15 @@
   "script" : null,
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "当前用户菜单",
-  "createTime" : null,
+  "createTime" : 1646490239513,
   "updateTime" : 1646450734459,
   "lock" : "0",
-  "method" : "POST",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/current/menus",
+  "method" : "POST",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
@@ -533,8 +535,7 @@
       "expression" : "",
       "children" : [ ]
     } ]
-  },
-  "optionMap" : { }
+  }
 }
 ================================
 import 'cn.dev33.satoken.stp.StpUtil';

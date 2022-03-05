@@ -4,13 +4,27 @@
   "script" : null,
   "groupId" : "89130d496f6f467c88b22ae4a7f688eb",
   "name" : "列表",
-  "createTime" : null,
+  "createTime" : 1646490239527,
   "updateTime" : 1644121680976,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/list",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[{\"name\":\"permission\",\"value\":\"role:view\",\"description\":\"允许拥有该权限的访问\"}]",
+  "options" : [ {
+    "name" : "permission",
+    "value" : "role:view",
+    "description" : "允许拥有该权限的访问",
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  } ],
   "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
@@ -149,9 +163,6 @@
       "expression" : "",
       "children" : [ ]
     } ]
-  },
-  "optionMap" : {
-    "permission" : "role:view"
   }
 }
 ================================

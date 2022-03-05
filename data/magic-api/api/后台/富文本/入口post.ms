@@ -5,22 +5,21 @@
   "groupId" : "7eeba36706c24c1484ee4e84ad829f9b",
   "name" : "入口post",
   "createTime" : null,
-  "updateTime" : 1635927291775,
+  "updateTime" : 1646490257556,
   "lock" : "0",
-  "method" : "POST",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/main",
+  "method" : "POST",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
-  "responseBodyDefinition" : null,
-  "optionMap" : {
-    "require_login" : "false"
-  }
+  "responseBodyDefinition" : null
 }
 ================================
 import response;

@@ -1,6 +1,6 @@
 package org.ssssssss.magicboot.model;
 
-import org.ssssssss.magicapi.model.JsonBean;
+import org.ssssssss.magicapi.core.model.JsonBean;
 
 public enum StatusCode {
 

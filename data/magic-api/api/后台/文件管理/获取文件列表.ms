@@ -4,13 +4,15 @@
   "script" : null,
   "groupId" : "fd3d225a1cf141bf9998c4ec4bf4a6ab",
   "name" : "获取文件列表",
-  "createTime" : null,
+  "createTime" : 1646490239456,
   "updateTime" : 1635075004674,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/files",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
@@ -101,8 +103,7 @@
       "expression" : "",
       "children" : [ ]
     } ]
-  },
-  "optionMap" : { }
+  }
 }
 ================================
 return db.select("select url from sys_file where external_id = #{externalId} and external_type = #{externalType} order by sort").map(it => {return it.url})

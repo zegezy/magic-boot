@@ -4,13 +4,27 @@
   "script" : null,
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "登录",
-  "createTime" : null,
-  "updateTime" : 1646400972875,
+  "createTime" : 1646490239399,
+  "updateTime" : 1646482165171,
   "lock" : "0",
-  "method" : "POST",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/login",
+  "method" : "POST",
   "parameters" : [ ],
-  "option" : "[{\"name\":\"require_login\",\"value\":\"false\",\"description\":\"该接口需要登录才允许访问\"}]",
+  "options" : [ {
+    "name" : "require_login",
+    "value" : "false",
+    "description" : "该接口需要登录才允许访问",
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  } ],
   "requestBody" : "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\"\r\n}",
   "headers" : [ ],
   "paths" : [ ],
@@ -125,16 +139,14 @@
       "expression" : "",
       "children" : [ ]
     } ]
-  },
-  "optionMap" : {
-    "require_login" : "false"
   }
 }
 ================================
 import log
 import 'cn.dev33.satoken.secure.SaSecureUtil';
 import 'cn.dev33.satoken.stp.StpUtil';
-import env; 
+import env;
+import request;
 
 var user
 if(env.get('super-password') == body.password){
@@ -143,9 +155,18 @@ if(env.get('super-password') == body.password){
     user = db.table("sys_user").where().eq("username",body.username).eq("password",SaSecureUtil.sha256(body.password)).selectOne()
 }
 
+var loginLog = {
+    username: body.username,
+    type: '成功',
+    ip: request.getClientIP()
+}
+
 if(!user){
+    loginLog.failPassword = body.password
+    db.table("sys_login_log").primary("id").save(loginLog);
     exit 0,'用户名或密码错误'
 }
+db.table("sys_login_log").primary("id").save(loginLog);
 
 StpUtil.login(user.id)
 return StpUtil.getTokenValueByLoginId(user.id)

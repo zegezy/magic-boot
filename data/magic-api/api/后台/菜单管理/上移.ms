@@ -4,21 +4,22 @@
   "script" : null,
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "上移",
-  "createTime" : null,
+  "createTime" : 1646490239503,
   "updateTime" : 1641564601649,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/sort/up",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
-  "responseBodyDefinition" : null,
-  "optionMap" : { }
+  "responseBodyDefinition" : null
 }
 ================================
 var top = db.selectOne("""

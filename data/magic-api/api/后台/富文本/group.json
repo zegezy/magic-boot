@@ -2,7 +2,7 @@
   "properties" : { },
   "id" : "7eeba36706c24c1484ee4e84ad829f9b",
   "name" : "富文本",
-  "type" : "1",
+  "type" : "api",
   "parentId" : "02df51e4d7184780a98b632f43dc5848",
   "path" : "/ueditor",
   "paths" : [ ],

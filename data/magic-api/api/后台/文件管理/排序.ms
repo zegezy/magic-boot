@@ -4,21 +4,22 @@
   "script" : null,
   "groupId" : "fd3d225a1cf141bf9998c4ec4bf4a6ab",
   "name" : "排序",
-  "createTime" : null,
+  "createTime" : 1646490239454,
   "updateTime" : 1643706726137,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/resort",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
-  "responseBodyDefinition" : null,
-  "optionMap" : { }
+  "responseBodyDefinition" : null
 }
 ================================
 import java.net.URLDecoder

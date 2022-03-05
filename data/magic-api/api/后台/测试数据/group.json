@@ -2,7 +2,7 @@
   "properties" : { },
   "id" : "42d241c0bb18476f8dabf92c2e4e2324",
   "name" : "测试数据",
-  "type" : "1",
+  "type" : "api",
   "parentId" : "02df51e4d7184780a98b632f43dc5848",
   "path" : "/test",
   "paths" : [ ],

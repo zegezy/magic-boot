@@ -4,11 +4,13 @@
   "script" : null,
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "根据角色获取菜单",
-  "createTime" : null,
+  "createTime" : 1646490239520,
   "updateTime" : 1642080927004,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/by/role",
+  "method" : "GET",
   "parameters" : [ {
     "name" : "roleId",
     "value" : "4d80f40315f747768d5b14095a0a7336",
@@ -22,7 +24,7 @@
     "expression" : null,
     "children" : null
   } ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
@@ -113,8 +115,7 @@
       "expression" : "",
       "children" : [ ]
     } ]
-  },
-  "optionMap" : { }
+  }
 }
 ================================
 return db.select("""

@@ -4,13 +4,15 @@
   "script" : null,
   "groupId" : "5c36bdc1de454d6e9d1a464d87c96091",
   "name" : "获取所有配置",
-  "createTime" : null,
+  "createTime" : 1646490239534,
   "updateTime" : 1646391487051,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/list",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
@@ -89,8 +91,7 @@
       "expression" : "",
       "children" : [ ]
     } ]
-  },
-  "optionMap" : { }
+  }
 }
 ================================
 import 'org.ssssssss.magicboot.utils.WebUtils'

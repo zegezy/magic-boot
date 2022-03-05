@@ -4,13 +4,15 @@
   "script" : null,
   "groupId" : "7eeba36706c24c1484ee4e84ad829f9b",
   "name" : "上传图片",
-  "createTime" : null,
+  "createTime" : 1646490239417,
   "updateTime" : 1635926424491,
   "lock" : "0",
-  "method" : "POST",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/uploadImage",
+  "method" : "POST",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "{}",
   "headers" : [ ],
   "paths" : [ ],
@@ -89,8 +91,7 @@
       "expression" : "",
       "children" : [ ]
     } ]
-  },
-  "optionMap" : { }
+  }
 }
 ================================
 import 'org.ssssssss.magicboot.utils.FileUtils'

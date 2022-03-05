@@ -4,11 +4,13 @@
   "script" : null,
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "获取排序号",
-  "createTime" : null,
+  "createTime" : 1646490239522,
   "updateTime" : 1641732167291,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/sort",
+  "method" : "GET",
   "parameters" : [ {
     "name" : "pid",
     "value" : "",
@@ -22,15 +24,14 @@
     "expression" : null,
     "children" : null
   } ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
-  "responseBodyDefinition" : null,
-  "optionMap" : { }
+  "responseBodyDefinition" : null
 }
 ================================
 return db.selectInt("""

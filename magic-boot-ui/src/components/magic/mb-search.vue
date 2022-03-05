@@ -8,12 +8,12 @@
           v-else-if="it.type == 'date' || it.type == 'datetime' || it.type == 'daterange' || it.type == 'datetimerange'"
           v-model="it.value"
           align="right"
-          :format="it.type.startsWith('datetime') ? 'yyyy-MM-dd HH:mm:ss' : 'yyyy-MM-dd'"
-          :value-format="it.type.startsWith('datetime') ? 'yyyy-MM-dd HH:mm:ss' : 'yyyy-MM-dd'"
+          :format="it.type.startsWith('datetime') ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD'"
+          :value-format="it.type.startsWith('datetime') ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD'"
           :type="it.type"
-          :start-placeholder="it.type.startsWith('datetime') ? 'yyyy-MM-dd HH:mm:ss' : 'yyyy-MM-dd'"
-          :end-placeholder="it.type.startsWith('datetime') ? 'yyyy-MM-dd HH:mm:ss' : 'yyyy-MM-dd'"
-          :placeholder="it.type.startsWith('datetime') ? 'yyyy-MM-dd HH:mm:ss' : 'yyyy-MM-dd'"
+          start-placeholder="开始时间"
+          end-placeholder="结束时间"
+          :placeholder="it.type.startsWith('datetime') ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD'"
         >
         </el-date-picker>
         <component v-else :is="it.type" v-model="it.value" v-bind="it.properties" />

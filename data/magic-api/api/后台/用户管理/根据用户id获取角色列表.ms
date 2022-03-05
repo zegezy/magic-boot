@@ -4,11 +4,13 @@
   "script" : null,
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "根据用户id获取角色列表",
-  "createTime" : null,
+  "createTime" : 1646490239476,
   "updateTime" : 1642773983120,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/roles",
+  "method" : "GET",
   "parameters" : [ {
     "name" : "userId",
     "value" : "674a3aa6b1ea4d91a1f72e7879d415c3",
@@ -22,7 +24,7 @@
     "expression" : null,
     "children" : null
   } ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
@@ -101,8 +103,7 @@
       "expression" : "",
       "children" : [ ]
     } ]
-  },
-  "optionMap" : { }
+  }
 }
 ================================
 return db.select("""

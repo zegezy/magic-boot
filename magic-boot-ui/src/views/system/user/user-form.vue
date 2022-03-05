@@ -27,7 +27,7 @@
     <el-row :gutter="24">
       <el-col :span="12">
         <el-form-item label="组织机构" prop="officeId">
-          <treeselect v-model="temp.officeId" :options="officeTree" :show-count="true" placeholder="请选择组织机构" />
+          <treeselect v-model="temp.officeId" :options="officeTree" :key="temp.officeId" :show-count="true" placeholder="请选择组织机构" />
         </el-form-item>
       </el-col>
       <el-col :span="12">

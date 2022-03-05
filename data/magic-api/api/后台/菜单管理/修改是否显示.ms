@@ -4,23 +4,34 @@
   "script" : null,
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "修改是否显示",
-  "createTime" : null,
+  "createTime" : 1646490239508,
   "updateTime" : 1641482987357,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/change",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[{\"name\":\"wrap_request_parameter\",\"value\":\"data\",\"description\":\"包装请求参数到一个变量中\"}]",
+  "options" : [ {
+    "name" : "wrap_request_parameter",
+    "value" : "data",
+    "description" : "包装请求参数到一个变量中",
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  } ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
-  "responseBodyDefinition" : null,
-  "optionMap" : {
-    "wrap_request_parameter" : "data"
-  }
+  "responseBodyDefinition" : null
 }
 ================================
 return db.table("sys_menu").primary("id").update(data)

@@ -2,7 +2,7 @@
   "properties" : { },
   "id" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "用户管理",
-  "type" : "1",
+  "type" : "api",
   "parentId" : "02df51e4d7184780a98b632f43dc5848",
   "path" : "/user",
   "paths" : [ ],

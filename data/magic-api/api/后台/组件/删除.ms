@@ -4,21 +4,22 @@
   "script" : null,
   "groupId" : "6f106ebdee21489db34b956f7770ff03",
   "name" : "删除",
-  "createTime" : null,
+  "createTime" : 1646490239484,
   "updateTime" : 1646401575406,
   "lock" : "0",
-  "method" : "POST",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/delete",
+  "method" : "POST",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
-  "responseBodyDefinition" : null,
-  "optionMap" : { }
+  "responseBodyDefinition" : null
 }
 ================================
 return db.table("sys_component").logic().where().eq("id",id).delete()

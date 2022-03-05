@@ -4,24 +4,46 @@
   "script" : null,
   "groupId" : "8295fc13678d4144bf7363c465247a50",
   "name" : "保存",
-  "createTime" : null,
+  "createTime" : 1646490239492,
   "updateTime" : 1644121675551,
   "lock" : "0",
-  "method" : "POST",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/save",
+  "method" : "POST",
   "parameters" : [ ],
-  "option" : "[{\"name\":\"wrap_request_parameter\",\"value\":\"data\",\"description\":\"包装请求参数到一个变量中\"},{\"name\":\"permission\",\"value\":\"office:save\",\"description\":\"允许拥有该权限的访问\"}]",
+  "options" : [ {
+    "name" : "wrap_request_parameter",
+    "value" : "data",
+    "description" : "包装请求参数到一个变量中",
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  }, {
+    "name" : "permission",
+    "value" : "office:save",
+    "description" : "允许拥有该权限的访问",
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  } ],
   "requestBody" : "{}",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
-  "responseBodyDefinition" : null,
-  "optionMap" : {
-    "wrap_request_parameter" : "data",
-    "permission" : "office:save"
-  }
+  "responseBodyDefinition" : null
 }
 ================================
 var codeCount = db.selectInt("select count(1) from sys_office where is_del = 0 and code = #{code} ?{id, and id != #{id}}")

@@ -4,21 +4,22 @@
   "script" : null,
   "groupId" : "6f106ebdee21489db34b956f7770ff03",
   "name" : "列表",
-  "createTime" : null,
+  "createTime" : 1646490239482,
   "updateTime" : 1646401619732,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/list",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
-  "responseBodyDefinition" : null,
-  "optionMap" : { }
+  "responseBodyDefinition" : null
 }
 ================================
 return db.page("""

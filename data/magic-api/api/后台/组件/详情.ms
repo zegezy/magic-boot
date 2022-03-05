@@ -4,13 +4,15 @@
   "script" : null,
   "groupId" : "6f106ebdee21489db34b956f7770ff03",
   "name" : "详情",
-  "createTime" : null,
+  "createTime" : 1646490239485,
   "updateTime" : 1646401567689,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/get",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
@@ -185,8 +187,7 @@
       "expression" : "",
       "children" : [ ]
     } ]
-  },
-  "optionMap" : { }
+  }
 }
 ================================
 return db.table("sys_component").where().eq("id",id).selectOne()

@@ -54,29 +54,31 @@ service.interceptors.response.use(
         var duration = 5
         if (res.code === 402) {
           duration = 1
-          ElMessageBox.prompt(`当前账号：${global.user.info.username}凭证已过期，请输入密码重新登录`, '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '退出',
-            inputType: 'password',
-            closeOnClickModal: false,
-            beforeClose: (action, instance, done) => {
-              if (action === 'confirm') {
-                login({
-                  username: global.user.info.username,
-                  password: instance.inputValue
-                }).then((res) => {
-                  if (res) {
-                    done()
-                    service(response.config).then(ret => reslove(ret))
-                  }
-                })
-              } else if (action === 'cancel') {
-                logout()
-              } else {
-                done()
+          if(global.user.info.username){
+            ElMessageBox.prompt(`当前账号：${global.user.info.username}凭证已过期，请输入密码重新登录`, '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '退出',
+              inputType: 'password',
+              closeOnClickModal: false,
+              beforeClose: (action, instance, done) => {
+                if (action === 'confirm') {
+                  login({
+                    username: global.user.info.username,
+                    password: instance.inputValue
+                  }).then((res) => {
+                    if (res) {
+                      done()
+                      service(response.config).then(ret => reslove(ret))
+                    }
+                  })
+                } else if (action === 'cancel') {
+                  logout()
+                } else {
+                  done()
+                }
               }
-            }
-          })
+            })
+          }
         }
         if (res.code !== 402) {
           if(currentMessage){

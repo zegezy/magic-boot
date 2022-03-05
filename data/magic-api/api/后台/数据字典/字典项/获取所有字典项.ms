@@ -4,13 +4,15 @@
   "script" : null,
   "groupId" : "376f26eb43a44a3daeafd27020a96f48",
   "name" : "获取所有字典项",
-  "createTime" : null,
+  "createTime" : 1646490239446,
   "updateTime" : 1634735167647,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/all",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "{\r\n\t\r\n}",
   "headers" : [ ],
   "paths" : [ ],
@@ -89,8 +91,7 @@
       "expression" : "",
       "children" : [ ]
     } ]
-  },
-  "optionMap" : { }
+  }
 }
 ================================
 return db.select("""

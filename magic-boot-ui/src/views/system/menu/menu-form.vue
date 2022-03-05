@@ -17,7 +17,7 @@
       </el-col>
       <el-col :span="12">
         <el-form-item label="上级菜单" prop="pid">
-          <treeselect v-model="temp.pid" :options="menuTree" />
+          <treeselect v-model="temp.pid" :options="menuTree" :key="temp.pid" />
         </el-form-item>
       </el-col>
     </el-row>
@@ -44,7 +44,7 @@
           <a @click="openIcons">
             <el-input v-model="temp.icon" class="input-with-select">
               <template #append>
-                <el-button style="height:40px;">
+                <el-button style="height:32px;">
                   <mb-icon :icon="temp.icon" />
                 </el-button>
               </template>

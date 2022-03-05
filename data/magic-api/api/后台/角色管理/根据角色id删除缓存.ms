@@ -4,21 +4,22 @@
   "script" : null,
   "groupId" : "89130d496f6f467c88b22ae4a7f688eb",
   "name" : "根据角色id删除缓存",
-  "createTime" : null,
+  "createTime" : 1646490239532,
   "updateTime" : 1641218346505,
   "lock" : "0",
-  "method" : "GET",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/cache/delete",
+  "method" : "GET",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
-  "responseBodyDefinition" : null,
-  "optionMap" : { }
+  "responseBodyDefinition" : null
 }
 ================================
 import org.ssssssss.magicapi.cache.SqlCache

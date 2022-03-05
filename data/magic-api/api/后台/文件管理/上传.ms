@@ -4,21 +4,22 @@
   "script" : null,
   "groupId" : "fd3d225a1cf141bf9998c4ec4bf4a6ab",
   "name" : "上传",
-  "createTime" : null,
+  "createTime" : 1646490239451,
   "updateTime" : 1643706737853,
   "lock" : "0",
-  "method" : "POST",
+  "createBy" : null,
+  "updateBy" : null,
   "path" : "/upload",
+  "method" : "POST",
   "parameters" : [ ],
-  "option" : "[]",
+  "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
   "requestBodyDefinition" : null,
-  "responseBodyDefinition" : null,
-  "optionMap" : { }
+  "responseBodyDefinition" : null
 }
 ================================
 import org.ssssssss.magicboot.utils.FileUtils

@@ -37,19 +37,19 @@ magic-api:
   web: /magic/web
   show-sql: true #配置打印SQL
   sql-column-case: camel
-  page-config:
-    page: current
-    size: size
-  cache-config:
-    enable: true  #开启缓存，默认是不开启的
-    ttl: 3600000 #有效期1小时，默认-1 即永不过期
   resource:
     location: data/magic-api
-  response-code-config:
+  page:
+    page: current
+    size: size
+  cache:
+    enable: true  #开启缓存，默认是不开启的
+    ttl: 3600000 #有效期1小时，默认-1 即永不过期
+  response-code:
     success: 200 #执行成功的code值
     invalid: 400 #参数验证未通过的code值
     exception: 500 #执行出现异常的code值
-  crud-config: # CRUD相关配置
+  crud: # CRUD相关配置
     logic-delete-column: is_del #逻辑删除列
     logic-delete-value: 1 #逻辑删除值
 #  security-config:
