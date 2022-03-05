@@ -15,6 +15,7 @@ import App from './App.vue'
 import router from './scripts/router'
 import components from '@/components/index'
 import globalProperties from './scripts/globalProperties'
+import dynamicComponent from './scripts/dynamicComponent'
 import hasPermission from './scripts/hasPermission'
 
 import '@/permission'
@@ -28,6 +29,7 @@ router.beforeEach((to, from) => {
   return true
 })
 app.use(globalProperties)
+app.use(dynamicComponent)
 app.use(hasPermission)
 app.use(components)
 app.use(ElementPlus, {

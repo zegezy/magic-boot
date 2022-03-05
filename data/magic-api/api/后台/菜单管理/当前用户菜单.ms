@@ -5,7 +5,7 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "当前用户菜单",
   "createTime" : null,
-  "updateTime" : 1646400991044,
+  "updateTime" : 1646450734459,
   "lock" : "0",
   "method" : "POST",
   "path" : "/current/menus",
@@ -551,7 +551,6 @@ var menus = db.select("""
         sm.sort,
         sm.icon,
         sm.keep_alive,
-        sc.code,
         sc.name component_name
     from sys_menu sm
     left join sys_component sc on sm.component_id = sc.id where 1=1

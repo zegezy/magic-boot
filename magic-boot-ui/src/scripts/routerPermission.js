@@ -7,11 +7,8 @@ export const filterAsyncRouter = (routers, level) => {
   const accessedRouters = routers.filter(router => {
     if (router.isShow === 1) {
       if (router.componentName) {
-        router.component = loadView(`/common/parse-component`)
-        router.props = {
-          name: router.componentName,
-          code: router.code
-        }
+        router.component = loadView(`/common/show-component`)
+        router.props = { name: router.componentName }
       } else if (router.component) {
         const component = router.component
         if (component === 'Layout') {
