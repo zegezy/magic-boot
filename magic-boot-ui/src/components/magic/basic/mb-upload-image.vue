@@ -179,7 +179,7 @@ export default {
           this.fileList.splice(i, 1)
         }
       })
-      this.$get('file/delete', { url: encodeURI(url) })
+      this.$delete('file/delete', { url: encodeURI(url) })
       if (this.multiple) {
         this.$emit('update:modelValue', this.urls)
         this.$emit('change', this.urls)

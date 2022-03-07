@@ -4,8 +4,8 @@
   "script" : null,
   "groupId" : "6f106ebdee21489db34b956f7770ff03",
   "name" : "详情",
-  "createTime" : 1646490239485,
-  "updateTime" : 1646401567689,
+  "createTime" : null,
+  "updateTime" : 1646552459844,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -16,7 +16,7 @@
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"id\": \"1\",\n        \"name\": \"TestCode\",\n        \"code\": \"\\r\\n  <template>\\r\\n    <div class=\\\"aaa\\\">\\r\\n      {{ msg }}\\r\\n      <el-button type=\\\"primary\\\" @click=\\\"$emit('xxClick')\\\">阿斯顿发</el-button>\\r\\n      {{ props.aaaaaa }}\\r\\n    </div>\\r\\n  </template>\\r\\n\\r\\n  <script setup>\\r\\n    const msg = '11111'\\r\\n    const props = defineProps({\\r\\n      aaaaaa: String\\r\\n    })\\r\\n  </script>\\r\\n\\r\\n  <style scoped>\\r\\n    .aaa{\\r\\n      font-size: 30px;\\r\\n      color: red;\\r\\n    }\\r\\n  </style>\\r\\n\",\n        \"isDel\": 0,\n        \"createBy\": null,\n        \"createDate\": null,\n        \"updateBy\": null,\n        \"updateDate\": null\n    },\n    \"timestamp\": 1646401557066,\n    \"executeTime\": 45\n}",
+  "responseBody" : "{\"code\":402,\"message\":\"凭证已过期\",\"data\":null,\"timestamp\":1646545664781,\"executeTime\":null}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -32,7 +32,7 @@
     "expression" : "",
     "children" : [ {
       "name" : "code",
-      "value" : "200",
+      "value" : "402",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -44,7 +44,7 @@
       "children" : [ ]
     }, {
       "name" : "message",
-      "value" : "success",
+      "value" : "凭证已过期",
       "description" : "",
       "required" : false,
       "dataType" : "String",
@@ -56,7 +56,7 @@
       "children" : [ ]
     }, {
       "name" : "data",
-      "value" : "",
+      "value" : "null",
       "description" : "",
       "required" : false,
       "dataType" : "Object",
@@ -65,106 +65,10 @@
       "validateType" : "",
       "error" : "",
       "expression" : "",
-      "children" : [ {
-        "name" : "id",
-        "value" : "1",
-        "description" : "",
-        "required" : false,
-        "dataType" : "String",
-        "type" : null,
-        "defaultValue" : null,
-        "validateType" : "",
-        "error" : "",
-        "expression" : "",
-        "children" : [ ]
-      }, {
-        "name" : "name",
-        "value" : "TestCode",
-        "description" : "",
-        "required" : false,
-        "dataType" : "String",
-        "type" : null,
-        "defaultValue" : null,
-        "validateType" : "",
-        "error" : "",
-        "expression" : "",
-        "children" : [ ]
-      }, {
-        "name" : "code",
-        "value" : "\\r\\n  <template>\\r\\n    <div class=\\\"aaa\\\">\\r\\n      {{ msg }}\\r\\n      <el-button type=\\\"primary\\\" @click=\\\"$emit('xxClick')\\\">阿斯顿发</el-button>\\r\\n      {{ props.aaaaaa }}\\r\\n    </div>\\r\\n  </template>\\r\\n\\r\\n  <script setup>\\r\\n    const msg = '11111'\\r\\n    const props = defineProps({\\r\\n      aaaaaa: String\\r\\n    })\\r\\n  </script>\\r\\n\\r\\n  <style scoped>\\r\\n    .aaa{\\r\\n      font-size: 30px;\\r\\n      color: red;\\r\\n    }\\r\\n  </style>\\r\\n",
-        "description" : "",
-        "required" : false,
-        "dataType" : "String",
-        "type" : null,
-        "defaultValue" : null,
-        "validateType" : "",
-        "error" : "",
-        "expression" : "",
-        "children" : [ ]
-      }, {
-        "name" : "isDel",
-        "value" : "0",
-        "description" : "",
-        "required" : false,
-        "dataType" : "Integer",
-        "type" : null,
-        "defaultValue" : null,
-        "validateType" : "",
-        "error" : "",
-        "expression" : "",
-        "children" : [ ]
-      }, {
-        "name" : "createBy",
-        "value" : "null",
-        "description" : "",
-        "required" : false,
-        "dataType" : "Object",
-        "type" : null,
-        "defaultValue" : null,
-        "validateType" : "",
-        "error" : "",
-        "expression" : "",
-        "children" : [ ]
-      }, {
-        "name" : "createDate",
-        "value" : "null",
-        "description" : "",
-        "required" : false,
-        "dataType" : "Object",
-        "type" : null,
-        "defaultValue" : null,
-        "validateType" : "",
-        "error" : "",
-        "expression" : "",
-        "children" : [ ]
-      }, {
-        "name" : "updateBy",
-        "value" : "null",
-        "description" : "",
-        "required" : false,
-        "dataType" : "Object",
-        "type" : null,
-        "defaultValue" : null,
-        "validateType" : "",
-        "error" : "",
-        "expression" : "",
-        "children" : [ ]
-      }, {
-        "name" : "updateDate",
-        "value" : "null",
-        "description" : "",
-        "required" : false,
-        "dataType" : "Object",
-        "type" : null,
-        "defaultValue" : null,
-        "validateType" : "",
-        "error" : "",
-        "expression" : "",
-        "children" : [ ]
-      } ]
+      "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1646401557066",
+      "value" : "1646545664781",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -176,10 +80,10 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "45",
+      "value" : "null",
       "description" : "",
       "required" : false,
-      "dataType" : "Integer",
+      "dataType" : "Object",
       "type" : null,
       "defaultValue" : null,
       "validateType" : "",

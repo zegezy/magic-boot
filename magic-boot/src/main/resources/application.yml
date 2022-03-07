@@ -80,6 +80,10 @@ magic-api:
   sql-column-case: camel
   resource:
     location: data/magic-api
+  backup: #备份相关配置
+    enable: true #是否启用
+    max-history: -1 #备份保留天数，-1为永久保留
+    table-name: magic_backup_record_v2 #使用数据库存储备份时的表名
   page:
     page: current
     size: size

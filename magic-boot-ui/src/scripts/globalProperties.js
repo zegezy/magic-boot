@@ -1,5 +1,7 @@
 import * as PlusIcons from '@element-plus/icons-vue'
 import VueUeditorWrap from 'vue-ueditor-wrap'
+import Treeselect from 'vue3-treeselect'
+import 'vue3-treeselect/dist/vue3-treeselect.css'
 import request from './request'
 import global from './global'
 import common from './common'
@@ -19,6 +21,7 @@ const install = (app) => {
     }
   })
   app.config.globalProperties.$get = (url, data) => request({ url, params: data })
+  app.config.globalProperties.$delete = (url, data) => request({ url, method: 'delete', params: data })
   app.config.globalProperties.$global = global
   app.config.globalProperties.$common = common
   app.config.globalProperties.$treeTable = treeTable
@@ -26,5 +29,6 @@ const install = (app) => {
     app.component(`El${key}`, PlusIcons[key])
   }
   app.use(VueUeditorWrap)
+  app.component('treeselect', Treeselect)
 }
 export default install

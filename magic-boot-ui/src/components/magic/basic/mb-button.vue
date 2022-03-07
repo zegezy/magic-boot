@@ -9,6 +9,7 @@
 
 <script>
 import { getToken } from '@/scripts/auth'
+import {ElNotification} from "element-plus";
 
 export default {
   name: 'MbButton',
@@ -70,11 +71,11 @@ export default {
   created() {
     if (this.btnType) {
       if (this.btnType === 'delete') {
-        this.requestMethod_ = 'post'
+        this.requestMethod_ = 'delete'
         this.el_.type = 'danger'
         this.el_.text = '删除'
         this.el_.icon = 'ElDelete'
-        this.beforeConfirm_ = '确定删除吗？'
+        this.beforeConfirm_ = '此操作将永久删除该数据, 是否继续?'
         this.successTips_ = '删除成功！'
         this.failTips_ = '删除失败！'
       }
@@ -109,33 +110,25 @@ export default {
         })
       }
       return new Promise((resolve, reject) => {
-        if (this.requestMethod_ === 'get') {
-          this.$get(this.requestUrl, this.requestData).then(res => {
-            const { data } = res
-            if (data) {
-              this.$message({
-                type: 'success',
-                message: this.successTips_
-              })
-            } else {
-              this.$message.error(this.failTips_)
-            }
-            resolve()
-          })
-        } else {
-          this.$post(this.requestUrl, this.requestData).then(res => {
-            const { data } = res
-            if (data) {
-              this.$message({
-                type: 'success',
-                message: this.successTips_
-              })
-            } else {
-              this.$message.error(this.failTips_)
-            }
-            resolve()
-          })
-        }
+        this.$request({
+          url: this.requestUrl,
+          method: this.requestMethod_,
+          params: this.requestData,
+          data: this.requestData
+        }).then(res => {
+          const { data } = res
+          if (data) {
+            ElNotification({
+              title: '成功',
+              message: this.successTips_,
+              type: 'success',
+              duration: 2000
+            })
+          } else {
+            this.$message.error(this.failTips_)
+          }
+          resolve()
+        })
       })
     }
   }

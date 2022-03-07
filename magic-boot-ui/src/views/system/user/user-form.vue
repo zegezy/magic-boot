@@ -32,12 +32,12 @@
       </el-col>
       <el-col :span="12">
         <el-form-item label="选择角色" prop="roles">
-          <mb-select v-model="temp.roles" url="role/list?size=999999" placeholder="请选择角色" labelField="name" valueField="id" :el="{ multiple: true }" />
+          <mb-select v-model="temp.roles" url="role/all" placeholder="请选择角色" :el="{ multiple: true }" />
         </el-form-item>
       </el-col>
     </el-row>
     <el-form-item label="登录状态" prop="isLogin">
-      <el-radio-group v-model="temp.isLogin" size="small">
+      <el-radio-group v-model="temp.isLogin">
         <el-radio-button label="0">有效</el-radio-button>
         <el-radio-button label="1">锁定</el-radio-button>
       </el-radio-group>
@@ -46,8 +46,6 @@
 </template>
 
 <script setup>
-import Treeselect from 'vue3-treeselect'
-import 'vue3-treeselect/dist/vue3-treeselect.css'
 
 import { ref, reactive, onBeforeMount, getCurrentInstance, nextTick, defineExpose } from 'vue'
 
@@ -130,6 +128,6 @@ function getInfo(row) {
   })
 }
 
-defineExpose({ getInfo, resetTemp })
+defineExpose({ save, getInfo, resetTemp })
 
 </script>

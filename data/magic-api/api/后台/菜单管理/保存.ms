@@ -5,7 +5,7 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "保存",
   "createTime" : null,
-  "updateTime" : 1646493564406,
+  "updateTime" : 1646576146705,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -79,4 +79,4 @@ if(data.id){
     var menuId = data.id
     cacheDelete();
 }
-return db.table("sys_menu").primary("id").saveOrUpdate(data);
+return db.table("sys_menu").primary("id").withBlank().saveOrUpdate(data);

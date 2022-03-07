@@ -137,7 +137,7 @@ export default {
         this.$emit('update:modelValue', '')
         this.$emit('change', '')
       }
-      this.$get('file/delete', { url: encodeURI(url) })
+      this.$delete('file/delete', { url: encodeURI(url) })
     },
     handlePreview(file) {
       window.open(this.$global.filePrefix + file.response.data.url)

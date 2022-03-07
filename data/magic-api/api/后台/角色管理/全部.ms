@@ -1,16 +1,16 @@
 {
   "properties" : { },
-  "id" : "529cbe774ebe4565b091a30e806a5085",
+  "id" : "9fe8956f3e79479c825e50dc314bb9bd",
   "script" : null,
-  "groupId" : "6f106ebdee21489db34b956f7770ff03",
-  "name" : "删除",
+  "groupId" : "89130d496f6f467c88b22ae4a7f688eb",
+  "name" : "全部",
   "createTime" : null,
-  "updateTime" : 1646553123792,
-  "lock" : "0",
+  "updateTime" : 1646555166829,
+  "lock" : null,
   "createBy" : null,
   "updateBy" : null,
-  "path" : "/delete",
-  "method" : "DELETE",
+  "path" : "/all",
+  "method" : "GET",
   "parameters" : [ ],
   "options" : [ ],
   "requestBody" : "",
@@ -22,4 +22,6 @@
   "responseBodyDefinition" : null
 }
 ================================
-return db.table("sys_component").logic().where().eq("id",id).delete()
+return db.select("""
+    select name label, id value from sys_role where is_del = 0
+""")

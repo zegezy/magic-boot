@@ -4,7 +4,7 @@
     <mb-search :where="tableOptions.where" @search="reloadTable" />
 
     <el-row class="toolbar-container">
-      <el-button v-permission="'role:save'" class="filter-item" type="primary" icon="ElPlus" @click="handleCreate">
+      <el-button v-permission="'component:save'" class="filter-item" type="primary" icon="ElPlus" @click="handleCreate">
         添加
       </el-button>
     </el-row>
@@ -16,6 +16,9 @@
         <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px">
           <el-form-item label="组件名称" prop="name">
             <el-input v-model="temp.name" />
+          </el-form-item>
+          <el-form-item label="组件描述" prop="descRibe">
+            <el-input v-model="temp.descRibe" />
           </el-form-item>
           <el-form-item label="组件代码" prop="code">
             <el-input v-model="temp.code" :rows="30" type="textarea" />
@@ -42,12 +45,21 @@ const tableOptions = reactive({
             type: 'input',
             label: '组件名称',
             value: ''
+          },
+          descRibe: {
+            type: 'input',
+            label: '组件描述',
+            value: ''
           }
         },
         cols: [
           {
             field: 'name',
             title: '组件名称'
+          },
+          {
+            field: 'descRibe',
+            title: '组件描述'
           },
           {
             title: '操作',
@@ -85,6 +97,7 @@ const dialogTitle = ref('')
 const temp = ref(getTemp())
 const rules = reactive({
   name: [{ required: true, message: '请输入组件名称', trigger: 'change' }],
+  descRibe: [{ required: true, message: '请输入组件描述', trigger: 'change' }],
   code: [{ required: true, message: '请输入组件代码', trigger: 'change' }]
 })
 const downloadLoading = ref(false)
@@ -98,6 +111,7 @@ function getTemp(){
     id: '',
     name: '',
     code: '',
+    descRibe: ''
   }
 }
 
@@ -118,7 +132,7 @@ function save(d) {
   dataForm.value.validate((valid) => {
     if (valid) {
       d.loading()
-      proxy.$post('role/save', temp.value).then(() => {
+      proxy.$post('component/save', temp.value).then(() => {
         d.hideLoading()
         reloadTable()
         formDialog.value.hide()

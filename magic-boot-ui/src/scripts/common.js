@@ -38,7 +38,7 @@ common.handleDelete = (options) => {
   }).then(() => {
     request({
       url: url,
-      method: 'post',
+      method: 'delete',
       params: {
         id: id
       }
@@ -165,6 +165,10 @@ common.loadConfig = async() => {
     const { data } = res
     global.filePrefix = data.filePrefix
   })
+}
+
+common.setDefaultValue = (obj, attr, value) => {
+  obj[attr] = obj[attr] === undefined ? value : obj[attr]
 }
 
 export default common

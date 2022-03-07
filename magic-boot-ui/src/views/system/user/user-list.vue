@@ -71,14 +71,13 @@ const tableOptions = reactive({
     roleId: {
       type: 'select',
       label: '角色',
-      value: '',
+      value: proxy.$route.query.roleId,
       properties: {
-        url: 'role/list?size=999999',
-        labelField: 'name',
-        valueField: 'id',
+        url: 'role/all',
         el: { multiple: true }
       }
-    }
+    },
+    officeId: proxy.$route.query.officeId
   },
   cols: [
     {
@@ -160,17 +159,20 @@ const userFormDialog = ref()
 const table = ref()
 const userForm = ref()
 
-onMounted(() => {
+// onMounted(() => {
   // setTimeout(function(){
-    console.log(proxy.$route.query.roleId)
-    if(proxy.$route.query.roleId){
-      tableOptions.where.roleId.value = proxy.$route.query.roleId
-    }
-    if(proxy.$route.query.officeId){
-      tableOptions.where.officeId = proxy.$route.query.officeId
-    }
+  // nextTick(() => {
+  //   console.log(proxy.$route.query.roleId)
+  //   if(proxy.$route.query.roleId){
+  //     tableOptions.where.roleId.value = proxy.$route.query.roleId
+  //   }
+  //   if(proxy.$route.query.officeId){
+  //     tableOptions.where.officeId = proxy.$route.query.officeId
+  //   }
+  // })
+
   // },1000)
-})
+// })
 
 function checkChange(values) {
   tableOptions.where.officeId = values

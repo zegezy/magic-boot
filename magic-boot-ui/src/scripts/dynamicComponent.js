@@ -27,7 +27,7 @@ function appComponent(app, item){
 }
 
 const install = (app) => {
-    app.config.globalProperties.$get('/component/list', { size: 999999 }).then((res) => {
+    app.config.globalProperties.$post('/component/list', { size: 999999 }).then((res) => {
         res.data.list.forEach(it => {
             appComponent(app, it)
         })

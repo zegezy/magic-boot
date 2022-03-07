@@ -49,6 +49,12 @@ body{
 .toolbar-container{
   margin-bottom: 10px
 }
+.toolbar-container > div{
+  margin-left: 10px;
+}
+.toolbar-container > div:nth-child(1){
+  margin-left: 0px;
+}
 .clear{
   clear: both;
 }

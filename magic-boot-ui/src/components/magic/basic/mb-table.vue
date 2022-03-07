@@ -83,7 +83,7 @@ const props = defineProps({
   },
   method: {
     type: String,
-    default: 'get'
+    default: 'post'
   },
   cols: {
     type: Array,
@@ -121,7 +121,8 @@ function getList() {
   request({
     url: props.url,
     method: props.method,
-    params: newWhere
+    params: newWhere,
+    data: newWhere
   }).then(res => {
     const { data } = res
     total.value = data.total

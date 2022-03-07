@@ -4,13 +4,13 @@
   "script" : null,
   "groupId" : "376f26eb43a44a3daeafd27020a96f48",
   "name" : "删除",
-  "createTime" : 1646490239443,
-  "updateTime" : 1644121693440,
+  "createTime" : null,
+  "updateTime" : 1646553109828,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
   "path" : "/delete",
-  "method" : "POST",
+  "method" : "DELETE",
   "parameters" : [ ],
   "options" : [ {
     "name" : "permission",
@@ -30,7 +30,19 @@
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
-  "requestBodyDefinition" : null,
+  "requestBodyDefinition" : {
+    "name" : "",
+    "value" : "",
+    "description" : "",
+    "required" : false,
+    "dataType" : "Object",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : "",
+    "error" : "",
+    "expression" : "",
+    "children" : [ ]
+  },
   "responseBodyDefinition" : null
 }
 ================================
