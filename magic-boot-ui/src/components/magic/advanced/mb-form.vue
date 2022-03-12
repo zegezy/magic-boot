@@ -36,7 +36,7 @@
       default: () => {}
     }
   })
-  const emit = defineEmits(['reload-table'])
+  const emit = defineEmits(['reload'])
 
   props.form.props = props.form.props || {}
   proxy.$common.setDefaultValue(props.form.props, 'labelPosition', 'right')
@@ -91,7 +91,7 @@
             props.detail.formData = {}
           }
           d.hide()
-          emit('reload-table')
+          emit('reload')
         }).catch(() => d.hideLoading())
       }
     })

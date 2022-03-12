@@ -1,5 +1,5 @@
 <template>
-  <el-input v-model="modelValue" :type="type" :value="value" :placeholder="placeholder || (label && '请输入' + label)" v-bind="props.props" />
+  <el-input v-model="modelValue" :type="type" :placeholder="placeholder || (label && '请输入' + label)" v-bind="props.props" />
 </template>
 
 <script setup>
@@ -9,7 +9,6 @@
     modelValue: String,
     label: String,
     placeholder: String,
-    value: String,
     type: String,
     props: Object
   })

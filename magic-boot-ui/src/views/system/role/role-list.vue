@@ -99,32 +99,32 @@ const tableOptions = reactive({
         cols: [
           {
             field: 'name',
-            title: '角色名称'
+            label: '角色名称'
           },
           {
             field: 'code',
-            title: '角色编码'
+            label: '角色编码'
           },
           {
             field: 'descRibe',
-            title: '角色描述'
+            label: '角色描述'
           },
           {
             field: 'permission',
-            title: '数据权限',
+            label: '数据权限',
             templet: (row) => {
               return permissionData[row.permission].label
             }
           },
           {
-            title: '操作',
+            label: '操作',
             type: 'btns',
             width: 270,
             fixed: 'right',
             btns: [
               {
                 permission: 'role:save',
-                title: '修改',
+                label: '修改',
                 type: 'text',
                 icon: 'ElEdit',
                 click: (row) => {
@@ -133,7 +133,7 @@ const tableOptions = reactive({
               },
               {
                 permission: 'role:delete',
-                title: '删除',
+                label: '删除',
                 type: 'text',
                 icon: 'ElDelete',
                 click: (row) => {
@@ -146,7 +146,7 @@ const tableOptions = reactive({
               },
               {
                 permission: 'role:permission',
-                title: '权限',
+                label: '权限',
                 type: 'text',
                 icon: 'ElPlus',
                 click: (row) => {
@@ -156,7 +156,7 @@ const tableOptions = reactive({
               },
               {
                 permission: 'role:user:list',
-                title: '用户列表',
+                label: '用户列表',
                 type: 'text',
                 icon: 'ElUserFilled',
                 click: (row) => {

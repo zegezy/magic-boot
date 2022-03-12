@@ -77,29 +77,29 @@ const tableOptions = reactive({
   cols: [
     {
       field: 'label',
-      title: '类型'
+      label: '类型'
     },
     {
       field: 'value',
-      title: '值'
+      label: '值'
     },
     {
       field: 'sort',
-      title: '排序'
+      label: '排序'
     },
     {
       field: 'remarks',
-      title: '备注'
+      label: '备注'
     },
     {
-      title: '操作',
+      label: '操作',
       type: 'btns',
       width: 160,
       fixed: 'right',
       btns: [
         {
           permission: 'dict:items:save',
-          title: '修改',
+          label: '修改',
           type: 'text',
           icon: 'ElEdit',
           click: (row) => {
@@ -108,7 +108,7 @@ const tableOptions = reactive({
         },
         {
           permission: 'dict:items:delete',
-          title: '删除',
+          label: '删除',
           type: 'text',
           icon: 'ElDelete',
           click: (row) => {

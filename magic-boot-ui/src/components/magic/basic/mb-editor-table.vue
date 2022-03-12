@@ -49,16 +49,16 @@ export default {
       this.tableOptions.cols.push({
         type: 'dynamic',
         field: col.field,
-        title: col.title
+        label: col.label
       })
     }
     this.tableOptions.cols.push({
-      title: '操作',
+      label: '操作',
       type: 'btns',
       width: 85,
       fixed: 'right',
       btns: [{
-        title: '删除',
+        label: '删除',
         type: 'danger',
         click: (row, index) => {
           this.tableOptions.data.splice(index, 1)

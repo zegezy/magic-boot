@@ -87,37 +87,37 @@ const tableOptions = reactive({
   cols: [
     {
       field: 'type',
-      title: '类型'
+      label: '类型'
     },
     {
       field: 'descRibe',
-      title: '描述'
+      label: '描述'
     },
     {
       field: 'dictType',
-      title: '字典类型',
+      label: '字典类型',
       width: 200,
       dictType: 'dict_type'
     },
     {
       field: 'remarks',
-      title: '备注',
+      label: '备注',
       width: 200
     },
     {
       field: 'sort',
-      title: '排序',
+      label: '排序',
       width: 100
     },
     {
-      title: '操作',
+      label: '操作',
       type: 'btns',
       width: 220,
       fixed: 'right',
       btns: [
         {
           permission: 'dict:save',
-          title: '修改',
+          label: '修改',
           type: 'text',
           icon: 'ElEdit',
           click: (row) => {
@@ -126,7 +126,7 @@ const tableOptions = reactive({
         },
         {
           permission: 'dict:delete',
-          title: '删除',
+          label: '删除',
           type: 'text',
           icon: 'ElDelete',
           click: (row) => {
@@ -142,7 +142,7 @@ const tableOptions = reactive({
         },
         {
           permission: 'dict:items:view',
-          title: '字典项',
+          label: '字典项',
           type: 'text',
           icon: 'ElList',
           click: (row) => {

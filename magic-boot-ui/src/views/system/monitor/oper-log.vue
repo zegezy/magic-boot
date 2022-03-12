@@ -20,35 +20,35 @@
     cols: [
       {
         field: 'apiName',
-        title: '接口名'
+        label: '接口名'
       },
       {
         field: 'apiPath',
-        title: '路径'
+        label: '路径'
       },
       {
         field: 'apiMethod',
-        title: '方法'
+        label: '方法'
       },
       {
         field: 'userIp',
-        title: 'ip'
+        label: 'ip'
       },
       {
         field: 'costTime',
-        title: '耗时'
+        label: '耗时'
       },
       {
         field: 'userAgent',
-        title: '用户代理'
+        label: '用户代理'
       },
       {
         field: 'username',
-        title: '操作人'
+        label: '操作人'
       },
       {
         field: 'createDate',
-        title: '操作时间'
+        label: '操作时间'
       }
     ]
   })

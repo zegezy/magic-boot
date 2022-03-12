@@ -82,30 +82,30 @@ const tableOptions = reactive({
   cols: [
     {
       field: 'username',
-      title: '登录名称',
+      label: '登录名称',
       sortable: 'custom'
     },
     {
       field: 'name',
-      title: '姓名/昵称',
+      label: '姓名/昵称',
       sortable: 'custom'
     },
     {
       field: 'officeName',
-      title: '所属机构'
+      label: '所属机构'
     },
     {
       field: 'roles',
-      title: '角色'
+      label: '角色'
     },
     {
       field: 'phone',
-      title: '手机号',
+      label: '手机号',
       sortable: 'custom'
     },
     {
       field: 'isLogin',
-      title: '禁止登录',
+      label: '禁止登录',
       type: 'switch',
       width: 100,
       change: (row) => {
@@ -117,18 +117,18 @@ const tableOptions = reactive({
     },
     {
       field: 'createDate',
-      title: '创建时间',
+      label: '创建时间',
       width: 180
     },
     {
-      title: '操作',
+      label: '操作',
       type: 'btns',
       width: 140,
       fixed: 'right',
       btns: [
         {
           permission: 'user:save',
-          title: '修改',
+          label: '修改',
           type: 'text',
           icon: 'ElEdit',
           click: (row) => {
@@ -137,7 +137,7 @@ const tableOptions = reactive({
         },
         {
           permission: 'user:delete',
-          title: '删除',
+          label: '删除',
           type: 'text',
           icon: 'ElDelete',
           click: (row) => {

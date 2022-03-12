@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :fullscreen="fullscreen" :width="width" :title="title" v-model="dialogVisible" :close-on-click-modal="false" :append-to-body="true" draggable @opened="opened">
+  <el-dialog :fullscreen="fullscreen" :width="width" :title="title" v-model="dialogVisible" :close-on-click-modal="false" :key="dialogKey" :append-to-body="true" draggable @opened="opened">
     <slot name="content" />
     <template #footer>
       <div slot="footer" class="dialog-footer">
@@ -36,12 +36,17 @@ export default {
     opened: {
       type: Function,
       default: () => {}
+    },
+    autoKey: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
     return {
       dialogVisible: false,
-      confirmLoading: false
+      confirmLoading: false,
+      dialogKey: 'mbDialog',
     }
   },
   created() {
@@ -66,6 +71,9 @@ export default {
       this.confirmLoading = false
     },
     show() {
+      if(this.autoKey){
+        this.dialogKey = Math.random()
+      }
       this.dialogVisible = true
     },
     hide() {

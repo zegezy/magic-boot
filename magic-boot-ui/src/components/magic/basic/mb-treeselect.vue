@@ -3,7 +3,8 @@
 </template>
 
 <script setup>
-  import { ref, getCurrentInstance } from "vue";
+  import { ref, getCurrentInstance, watch } from "vue"
+  const emit = defineEmits(['update:modelValue'])
   const { proxy } = getCurrentInstance()
   const props = defineProps({
     modelValue: {
@@ -18,6 +19,10 @@
     label: String,
     placeholder: String,
     props: Object
+  })
+
+  watch(() => props.modelValue, (value) => {
+    emit('update:modelValue', value)
   })
 
   const options = ref([])

@@ -2,7 +2,7 @@
   <mb-list ref="magicList" v-bind="listOptions" />
   <mb-dialog ref="formDialog" @confirm-click="magicForm.save($event)" width="50%">
     <template #content>
-      <mb-form ref="magicForm" @reload-table="magicList.reload" :key="magicFormKey" v-bind="formOptions" />
+      <mb-form ref="magicForm" @reload="magicList.reload" v-bind="formOptions" />
     </template>
   </mb-dialog>
 </template>
@@ -13,7 +13,6 @@ const { proxy } = getCurrentInstance()
 const formDialog = ref()
 const magicList = ref()
 const magicForm = ref()
-const magicFormKey = ref()
 const listOptions = reactive({
   search: {
     noReset: 'id'
@@ -22,7 +21,7 @@ const listOptions = reactive({
     type: 'add',
     permission: 'user:save',
     click: () => {
-      magicFormKey.value = Math.random()
+      formOptions.form.rows[0].cols[1].rules = [{ required: true, message: '请输入密码', trigger: 'change' }]
       formOptions.detail.formData = null
       formDialog.value.show()
     }
@@ -96,7 +95,7 @@ const listOptions = reactive({
             icon: 'ElEdit',
             click: (row) => {
               // magicForm.value.getDetail(row.id)
-              magicFormKey.value = Math.random()
+              formOptions.form.rows[0].cols[1].rules = []
               formOptions.detail.formData = proxy.$common.copyNew(row)
               formDialog.value.show()
             }
@@ -148,7 +147,6 @@ const formOptions = reactive({
         span: 12,
         name: 'password',
         label: '密码',
-        rules: [{ required: true, message: '请输入密码', trigger: 'change' }],
         props: {
           type: 'password',
           autocomplete: 'new-password'
@@ -173,7 +171,7 @@ const formOptions = reactive({
         name: 'officeId',
         label: '组织机构',
         defaultValue: null,
-        // rules: [{ required: true, message: '请选择组织机构', trigger: 'change' }],
+        rules: [{ required: true, message: '请选择组织机构', trigger: 'change' }],
         props: {
           url: 'user/offices'
         }

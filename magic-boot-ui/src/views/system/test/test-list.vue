@@ -45,7 +45,7 @@ const tableOptions = reactive({
   cols: [
     {
       field: 'name',
-      title: 'name'
+      label: 'name'
     },
   ]
 })

@@ -55,21 +55,21 @@ const tableOptions = reactive({
         cols: [
           {
             field: 'name',
-            title: '组件名称'
+            label: '组件名称'
           },
           {
             field: 'descRibe',
-            title: '组件描述'
+            label: '组件描述'
           },
           {
-            title: '操作',
+            label: '操作',
             type: 'btns',
             width: 270,
             fixed: 'right',
             btns: [
               {
                 permission: 'component:save',
-                title: '修改',
+                label: '修改',
                 type: 'text',
                 icon: 'ElEdit',
                 click: (row) => {
@@ -78,7 +78,7 @@ const tableOptions = reactive({
               },
               {
                 permission: 'component:delete',
-                title: '删除',
+                label: '删除',
                 type: 'text',
                 icon: 'ElDelete',
                 click: (row) => {

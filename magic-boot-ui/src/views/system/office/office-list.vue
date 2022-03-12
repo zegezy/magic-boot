@@ -94,13 +94,13 @@ const tableOptions = reactive({
   cols: [
     {
       field: 'name',
-      title: '机构名称',
+      label: '机构名称',
       align: 'left',
       type: 'html'
     },
     {
       field: 'code',
-      title: '机构编码',
+      label: '机构编码',
       width: 300,
       align: 'left',
       type: 'html'
@@ -108,22 +108,22 @@ const tableOptions = reactive({
     {
       field: 'type',
       dictType: 'office_type',
-      title: '机构类型',
+      label: '机构类型',
       width: 300,
       align: 'left'
     },
     {
       field: 'sort',
-      title: '序号',
+      label: '序号',
       width: 60
     },
     {
-      title: '排序',
+      label: '排序',
       type: 'btns',
       width: 150,
       btns: [
         {
-          title: '上移',
+          label: '上移',
           type: 'text',
           icon: 'ElSortUp',
           click: (row) => {
@@ -137,7 +137,7 @@ const tableOptions = reactive({
           }
         },
         {
-          title: '下移',
+          label: '下移',
           type: 'text',
           icon: 'ElSortDown',
           click: (row) => {
@@ -153,14 +153,14 @@ const tableOptions = reactive({
       ]
     },
     {
-      title: '操作',
+      label: '操作',
       type: 'btns',
       width: 310,
       fixed: 'right',
       align: 'left',
       btns: [
         {
-          title: '添加下级机构',
+          label: '添加下级机构',
           type: 'text',
           permission: 'office:save',
           icon: 'ElPlus',
@@ -169,7 +169,7 @@ const tableOptions = reactive({
           }
         },
         {
-          title: '修改',
+          label: '修改',
           type: 'text',
           permission: 'office:save',
           icon: 'ElEdit',
@@ -178,7 +178,7 @@ const tableOptions = reactive({
           }
         },
         {
-          title: '删除',
+          label: '删除',
           type: 'text',
           permission: 'office:delete',
           icon: 'ElDelete',
@@ -192,7 +192,7 @@ const tableOptions = reactive({
         },
         {
           permission: 'office:user:list',
-          title: '用户列表',
+          label: '用户列表',
           type: 'text',
           icon: 'ElUserFilled',
           click: (row) => {

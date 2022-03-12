@@ -20,23 +20,23 @@
     cols: [
       {
         field: 'username',
-        title: '登录名'
+        label: '登录名'
       },
       {
         field: 'failPassword',
-        title: '失败密码'
+        label: '失败密码'
       },
       {
         field: 'type',
-        title: '登录状态'
+        label: '登录状态'
       },
       {
         field: 'ip',
-        title: 'ip'
+        label: 'ip'
       },
       {
         field: 'createDate',
-        title: '操作时间'
+        label: '操作时间'
       }
     ]
   })

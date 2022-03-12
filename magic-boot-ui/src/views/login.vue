@@ -1,221 +1,202 @@
 <template>
-  <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-      <div class="login-box">
-        <div class="title-container">
-          Magic-Boot
-        </div>
-        <el-form-item prop="username">
-          <span class="svg-container">
-            <svg-icon icon-class="user" />
-          </span>
-          <el-input ref="username" v-model="loginForm.username" placeholder="用户名" name="username" type="text" tabindex="1" auto-complete="on" />
-        </el-form-item>
-        <el-form-item prop="password">
-          <span class="svg-container">
-            <svg-icon icon-class="password" />
-          </span>
-          <el-input :key="passwordType" ref="password" v-model="loginForm.password" :type="passwordType" placeholder="密码" name="password" tabindex="2" auto-complete="on" @keyup.enter.native="handleLogin" />
-          <span class="show-pwd" @click="showPwd">
-            <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
-          </span>
-        </el-form-item>
-        <el-button :loading="loading" type="primary" size="medium" style="width:100%;margin-bottom:20px;font-size: 14px;" @click.native.prevent="handleLogin">登录</el-button>
+  <div class="magic-login">
+    <div class="magic-login-box">
+<!--      <div class="magic-login-logo"></div>-->
+      <div class="magic-login-text">{{ $global.title }}</div>
+      <div class="magic-login-row error" v-if="error"><mb-icon icon="error"/><span>{{ error }}</span></div>
+      <div class="magic-login-row">
+        <mb-icon icon="user"/>
+        <input ref="username" class="magic-input" v-model="loginForm.username" placeholder="用户名" name="username" type="text" tabindex="1" auto-complete="on" />
       </div>
-    </el-form>
-    <div class="copyright">Copyright © 2020-{{new Date().getYear() + 1900}} <a href="https://ssssssss.org.cn" target="_blank">ssssssss.org.cn</a> All rights reserved.</div>
+      <div class="magic-login-row">
+        <mb-icon icon="password"/>
+        <input class="magic-input" ref="password" v-model="loginForm.password" type="password" placeholder="密码" name="password" tabindex="2" auto-complete="on" @keyup.enter.native="handleLogin" />
+      </div>
+      <div class="magic-login-row">
+        <button :loading="loading" class="magic-button" type="primary" size="medium" @click.native.prevent="handleLogin">登录</button>
+      </div>
+    </div>
+    <div class="magic-login-copyright">Copyright © 2020-{{new Date().getYear() + 1900}} <a href="https://ssssssss.org.cn" target="_blank">ssssssss.org.cn</a> All rights reserved.</div>
   </div>
 </template>
 
-<script>
-import { login } from '@/scripts/auth'
+<script setup>
+  import { reactive, ref, getCurrentInstance } from 'vue'
+  import { login } from '@/scripts/auth'
+  const { proxy } = getCurrentInstance()
 
-export default {
-  name: 'Login',
-  data() {
-    return {
-      loginForm: {
-        username: '',
-        password: ''
-      },
-      loginRules: {
-        username: [{ required: true, trigger: 'blur', message: '请输入用户名' }],
-        password: [{ required: true, trigger: 'blur', message: '请输入密码' }]
-      },
-      loading: false,
-      passwordType: 'password',
-      redirect: undefined
-    }
-  },
-  watch: {
-    $route: {
-      handler: function(route) {
-        this.redirect = route.query && route.query.redirect
-      },
-      immediate: true
-    }
-  },
-  methods: {
-    showPwd() {
-      if (this.passwordType === 'password') {
-        this.passwordType = ''
-      } else {
-        this.passwordType = 'password'
-      }
-      this.$nextTick(() => {
-        this.$refs.password.focus()
+  const loginForm = reactive({
+    username: '',
+    password: ''
+  })
+  const loading = ref(false)
+  function handleLogin() {
+    if(!loginForm.username){
+      proxy.$message({
+        message: '请输入用户名',
+        type: 'error',
+        duration: 2000,
+        showClose: true
       })
-    },
-    handleLogin() {
-      this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          this.loading = true
-          login(this.loginForm).then((res) => {
-            console.log(this.$router)
-            this.$router.push({ path: '/home' })
-            this.loading = false
-          }).catch(() => {
-            this.loading = false
-          })
-        }
+      return
+    }else if(!loginForm.password){
+      proxy.$message({
+        message: '请输入密码',
+        type: 'error',
+        duration: 2000,
+        showClose: true
+      })
+      return
+    }else{
+      loading.value = true
+      login(loginForm).then((res) => {
+        proxy.$router.push({ path: '/home' })
+        loading.value = false
+      }).catch(() => {
+        loading.value = false
       })
     }
   }
-}
 </script>
 
-
-<style lang="scss">
-/* 修复input 背景不协调 和光标变色 */
-/* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
-
-$bg: white;
-$light_gray: rgba(0,0,0,.65);
-$cursor: rgba(0,0,0,.65);
-
-@supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
-  .login-container .el-input input {
-    color: $cursor;
-  }
+<style scoped>
+*{
+  box-sizing: border-box;
 }
-
-/* reset element-ui css */
-.login-container {
-  .el-input {
-    display: inline-block;
-    height: 30px;
-    width: 85%;
-
-    input {
-      background: transparent;
-      border: 0px;
-      -webkit-appearance: none;
-      border-radius: 0px;
-      padding: 3px;
-      color: $light_gray;
-      height: 30px;
-      caret-color: $cursor;
-
-      &:-webkit-autofill {
-        box-shadow: 0 0 0px 1000px $bg inset !important;
-        -webkit-text-fill-color: $cursor !important;
-      }
-    }
-  }
-
-  .el-form-item {
-    border: 1px solid #D9D9D9;
-    background: white;
-    color: rgba(0,0,0,.65);
-    border-radius: 5px;
-  }
-}
-</style>
-
-<style lang="scss" scoped>
-$dark_gray:#889aa4;
-$light_gray: rgba(0,0,0,.65);
-
-.login-container {
-  min-height: 100%;
+input{
   width: 100%;
-  background-image: url(../assets/images/login-bg.svg);
-  overflow: hidden;
-
-  .login-form {
-    position: relative;
-    width: 450px;
-    max-width: 100%;
-    padding: 160px 35px 35px;
-    margin: 0 auto;
-    overflow: hidden;
-
-    .login-box {
-      background: white;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 7px 25px rgba(0,0,0,.08);
-    }
-
-  }
-
-  .tips {
-    font-size: 14px;
-    color: #fff;
-    margin-bottom: 10px;
-
-    span {
-      &:first-of-type {
-        margin-right: 16px;
-      }
-    }
-  }
-
-  .svg-container {
-    padding-left: 10px;
-    color: $dark_gray;
-    width: 25px;
-    display: inline-block;
-  }
-
-  .title-container {
-    position: relative;
-    text-align: center;
-    margin-bottom: 20px;
-    font-family: PoetsenOne;
-    color: #808080;
-    font-size: 26px;
-
-    .title {
-      font-size: 26px;
-      color: $light_gray;
-      margin: 0px auto 40px auto;
-      text-align: center;
-      font-weight: bold;
-    }
-  }
-
-  .show-pwd {
-    position: absolute;
-    right: 10px;
-    font-size: 16px;
-    color: $dark_gray;
-    cursor: pointer;
-    user-select: none;
-  }
 }
-.copyright{
+label {
+  width: 60px;
+  text-align: right;
+  display: inline-block;
+}
+.magic-login{
+  position: fixed;
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(../assets/images/login-bg.svg);
+}
+.magic-login .magic-login-box{
+  border-radius: 5px;
+  width: 450px;
+  box-shadow: 0 7px 25px rgba(0,0,0,.08);
+  position: absolute;
+  box-sizing: border-box;
+  /*padding-top:60px;*/
+  padding-top:30px;
+  top:33.333333%;
+  margin-top: -125px;
+  background-color: #fff;
+}
+.magic-login-logo{
+  background-image: url(../assets/images/logo-magic-boot.png);
+  width: 128px;
+  height: 128px;
+  background-size: 90px 90px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: absolute;
+  top: -64px;
+  left: 50%;
+  margin-left: -64px;
+  border-radius: 64px;
+  box-shadow: 0 0 20px 5px rgba(0,0,0,.08);
+  padding: 10px;
+  background-color: #fff;
+}
+.magic-login-text{
+  height: 70px;
+  line-height: 70px;
+  display: block;
   text-align: center;
-  color: white;
+  font-family: PoetsenOne;
+  font-size: 28px;
+  color: #808080;
+}
+.magic-login-text span{
+  font-size: 16px;
+}
+.magic-login-copyright{
+  text-align: center;
+  color: #999;
   font-size: 18px;
   font-family: Avenir,Helvetica,Arial,sans-serif;
   position: absolute;
   bottom: 50px;
-  width: 100%;
 }
-.copyright a{
+.magic-login-copyright a{
   text-decoration: none;
   color: #2196f3;
   outline: 0;
+}
+.magic-login-row{
+  width: 400px;
+  margin:25px auto;
+  position: relative;
+}
+.magic-login-row.error{
+  background-color: #fff1f0;
+  border: 1px solid #ffa39e;
+  color: #000;
+  border-radius: 4px;
+  padding:10px 0;
+  padding-left: 40px;
+}
+.magic-login-row.error span{
+  font-size: 14px;
+  word-break: break-all;
+}
+.magic-login-row svg{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 15px;
+  left: 15px;
+}
+.magic-login-row :deep(.magic-icon-error){
+  fill: red;
+}
+.magic-login-box .magic-input{
+  height: 50px;
+  line-height: 50px;
+  background-color: transparent;
+  display: block;
+  border: 1px solid #D9D9D9;
+  border-radius: 4px;
+  padding-left: 40px;
+  color: rgba(0,0,0,.65);
+  transition: all .3s;
+  font-size: 16px;
+  outline: 0;
+}
+.magic-login-box .magic-input:focus{
+  border-color:#0784de;
+}
+.magic-login-box .magic-button{
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background-color: #2196f3;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 18px;
+  border: 1px solid #ADADAD;
+  border-color: #2196f3;
+  transition: all .3s;
+  cursor: pointer;
+}
+.magic-login-box .magic-button:hover,
+.magic-login-box .magic-button:focus{
+  background-color: #4db5ff !important;
+  border-color: #4db5ff !important;
+}
+.magic-login-box .magic-button:active{
+  background-color: #1272cc;
+  border-color: #1272cc;
 }
 </style>
