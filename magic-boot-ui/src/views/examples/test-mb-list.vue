@@ -51,25 +51,25 @@ const listOptions = reactive({
     cols: [
       {
         field: 'username',
-        title: '登录名称',
+        label: '登录名称',
         sortable: 'custom'
       }, {
         field: 'name',
-        title: '姓名/昵称',
+        label: '姓名/昵称',
         sortable: 'custom'
       }, {
         field: 'officeName',
-        title: '所属机构'
+        label: '所属机构'
       }, {
         field: 'roles',
-        title: '角色'
+        label: '角色'
       }, {
         field: 'phone',
-        title: '手机号',
+        label: '手机号',
         sortable: 'custom'
       }, {
         field: 'isLogin',
-        title: '禁止登录',
+        label: '禁止登录',
         type: 'switch',
         width: 100,
         change: (row) => {
@@ -80,17 +80,17 @@ const listOptions = reactive({
         }
       }, {
         field: 'createDate',
-        title: '创建时间',
+        label: '创建时间',
         width: 180
       }, {
-        title: '操作',
+        label: '操作',
         type: 'btns',
         width: 140,
         fixed: 'right',
         btns: [
           {
             permission: 'user:save',
-            title: '修改',
+            label: '修改',
             type: 'text',
             icon: 'ElEdit',
             click: (row) => {
@@ -101,7 +101,7 @@ const listOptions = reactive({
             }
           }, {
             permission: 'user:delete',
-            title: '删除',
+            label: '删除',
             type: 'text',
             icon: 'ElDelete',
             click: (row) => {
@@ -137,6 +137,12 @@ const formOptions = reactive({
       gutter: 24,
       cols: [{
         span: 12,
+        name: 'head',
+        component: 'upload-image',
+        label: '头像',
+        rules: [{ required: true, message: '请选择头像', trigger: 'change' }]
+      },{
+        span: 12,
         name: 'username',
         label: '登录名称',
         rules: [{ required: true, message: '请输入登录名称', trigger: 'change' }],
@@ -170,7 +176,6 @@ const formOptions = reactive({
         span: 12,
         name: 'officeId',
         label: '组织机构',
-        defaultValue: null,
         rules: [{ required: true, message: '请选择组织机构', trigger: 'change' }],
         props: {
           url: 'user/offices'
@@ -180,7 +185,6 @@ const formOptions = reactive({
         span: 12,
         name: 'roles',
         label: '选择角色',
-        defaultValue: null,
         rules: [{ required: true, message: '请选择角色', trigger: 'change' }],
         props: {
           url: 'role/all',

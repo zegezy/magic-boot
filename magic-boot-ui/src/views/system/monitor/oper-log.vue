@@ -40,7 +40,10 @@
       },
       {
         field: 'userAgent',
-        label: '用户代理'
+        label: '用户代理',
+        props: {
+          "show-overflow-tooltip": true
+        }
       },
       {
         field: 'username',

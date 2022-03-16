@@ -47,6 +47,8 @@ export function login(data){
       var token = res.data
       setToken(token)
       resolve(token)
+    }).catch((e) => {
+      reject(e)
     })
   })
 }

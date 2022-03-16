@@ -26,11 +26,11 @@
 
 <script setup>
 
-import { watch, ref, reactive, defineExpose, nextTick, getCurrentInstance, onBeforeMount } from 'vue'
+import { watch, ref, reactive, defineExpose, nextTick, getCurrentInstance, onBeforeMount, onMounted } from 'vue'
 
 const { proxy } = getCurrentInstance()
 
-const emit = defineEmits(['update:select-values', 'check-change', 'node-click'])
+const emit = defineEmits(['update:select-values', 'check-change', 'node-click', 'mounted'])
 
 const props = defineProps({
   url: {
@@ -75,6 +75,10 @@ const props = defineProps({
   }
 })
 
+watch(() => props.checkedIds, (value) => {
+  console.log(value)
+})
+
 const tree = ref()
 const treeData = ref([])
 const searchData = ref([])
@@ -89,6 +93,10 @@ const searchValue = ref('')
 
 onBeforeMount(async () => {
   await loadTreeData()
+})
+
+onMounted(() => {
+  emit('mounted')
 })
 
 watch(() => props.selectValues, async () => {

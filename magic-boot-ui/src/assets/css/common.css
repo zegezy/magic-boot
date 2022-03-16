@@ -23,10 +23,6 @@
   border: 1px solid #efefef
 }
 body{
-  --el-dialog__wrapper-bottom: 15vh;
-  --el-dialog__wrapper-top: 15vh;
-  --el-dialog__body-max-height: 60vh;
-
   --mb-main-color: #409EFF;
   --mb-sidebar-width: 240px;
   --mb-main-icon-color: #909399;

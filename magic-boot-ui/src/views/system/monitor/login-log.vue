@@ -28,11 +28,25 @@
       },
       {
         field: 'type',
-        label: '登录状态'
+        label: '登录状态',
+        templet: (row) => {
+          return row.type == '成功' ? '<b style="color: #409EFF">成功</b>' : '<b style="color: red">失败</b>'
+        }
       },
       {
         field: 'ip',
         label: 'ip'
+      },
+      {
+        field: 'browser',
+        label: '浏览器'
+      },
+      {
+        field: 'os',
+        label: '系统',
+        props: {
+          "show-overflow-tooltip": true
+        }
       },
       {
         field: 'createDate',

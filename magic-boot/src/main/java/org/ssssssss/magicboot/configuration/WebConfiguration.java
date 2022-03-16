@@ -1,4 +1,4 @@
-package org.ssssssss.magicboot.config;
+package org.ssssssss.magicboot.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;

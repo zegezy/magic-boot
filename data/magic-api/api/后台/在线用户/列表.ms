@@ -1,0 +1,126 @@
+{
+  "properties" : { },
+  "id" : "d5ccf62c6d2c482e995ce7fe237e9ed3",
+  "script" : null,
+  "groupId" : "d95a58e77d314370862ffc4cdfdb8283",
+  "name" : "列表",
+  "createTime" : null,
+  "updateTime" : 1647396892675,
+  "lock" : null,
+  "createBy" : null,
+  "updateBy" : null,
+  "path" : "/list",
+  "method" : "POST",
+  "parameters" : [ ],
+  "options" : [ ],
+  "requestBody" : "",
+  "headers" : [ ],
+  "paths" : [ ],
+  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [\"cb63a01c-63d7-4722-a2c4-48fffa4b3502\", \"876dd178-0065-42d5-989a-a6ef460113b1\"],\n    \"timestamp\": 1647396771372,\n    \"executeTime\": 11\n}",
+  "description" : null,
+  "requestBodyDefinition" : null,
+  "responseBodyDefinition" : {
+    "name" : "",
+    "value" : "",
+    "description" : "",
+    "required" : false,
+    "dataType" : "Object",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : "",
+    "error" : "",
+    "expression" : "",
+    "children" : [ {
+      "name" : "code",
+      "value" : "200",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Integer",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "message",
+      "value" : "success",
+      "description" : "",
+      "required" : false,
+      "dataType" : "String",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "data",
+      "value" : "",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Object",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ {
+        "name" : "",
+        "value" : "cb63a01c-63d7-4722-a2c4-48fffa4b3502",
+        "description" : "",
+        "required" : false,
+        "dataType" : "String",
+        "type" : null,
+        "defaultValue" : null,
+        "validateType" : "",
+        "error" : "",
+        "expression" : "",
+        "children" : [ ]
+      } ]
+    }, {
+      "name" : "timestamp",
+      "value" : "1647396771372",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Long",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "executeTime",
+      "value" : "11",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Object",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    } ]
+  }
+}
+================================
+import cn.dev33.satoken.stp.StpUtil
+var tokens = StpUtil.searchTokenValue("", -1, 0).map(it => it.replace('token:login:token:', ''))
+
+return db.page("""
+    select 
+        su.username,
+        so.name office_name,
+        sll.token,
+        sll.ip,
+        sll.browser,
+        sll.os,
+        sll.create_date
+    from sys_login_log sll left join sys_user su on sll.username = su.username left join sys_office so on su.office_id = so.id
+    where sll.token in (#{tokens})
+    ?{username, and su.username like concat('%', #{username}, '%')}
+    ?{ip, and sll.ip like concat('%', #{ip}, '%')}
+    order by sll.create_date desc
+""")

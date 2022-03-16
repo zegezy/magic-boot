@@ -11,9 +11,12 @@
   import { watch } from 'vue'
   const emit = defineEmits(['update:modelValue'])
   const props = defineProps({
-    modelValue: String,
-    activeValue: String,
-    inactiveValue: String,
+    modelValue: {
+      type: Boolean,
+      default: false
+    },
+    activeValue: Boolean | String | Number,
+    inactiveValue: Boolean | String | Number,
     props: Object
   })
   watch(() => props.modelValue, (value) => {

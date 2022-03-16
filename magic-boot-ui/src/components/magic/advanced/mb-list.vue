@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
 
-    <mb-search v-if="table.where" :where="table.where" :no-reset="search.noReset" @search="reload" />
+    <mb-search v-if="table.where" :where="table.where" :no-reset="search && search.noReset" @search="reload" />
 
     <el-row class="toolbar-container">
       <div v-for="(it, i) in tools" :key="i">

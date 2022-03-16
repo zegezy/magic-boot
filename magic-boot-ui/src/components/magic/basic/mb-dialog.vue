@@ -1,10 +1,22 @@
 <template>
-  <el-dialog :fullscreen="fullscreen" :width="width" :title="title" v-model="dialogVisible" :close-on-click-modal="false" :key="dialogKey" :append-to-body="true" draggable @opened="opened">
+  <el-dialog
+    v-model="dialogVisible"
+    :custom-class="customClass"
+    :fullscreen="fullscreen"
+    :width="width"
+    :title="title"
+    :close-on-click-modal="false"
+    :destroy-on-close="destroyOnClose"
+    :append-to-body="true"
+    draggable
+    @open="$emit('open')"
+    @close="$emit('close')"
+  >
     <slot name="content" />
     <template #footer>
       <div slot="footer" class="dialog-footer">
         <slot name="btns">
-          <el-button @click="dialogVisible = false">
+          <el-button @click="hide">
             关闭
           </el-button>
           <el-button type="primary" :loading="confirmLoading" @click="confirmClick">
@@ -17,9 +29,8 @@
 </template>
 
 <script>
-
 export default {
-  emits: ['confirm-click'],
+  emits: ['confirm-click', 'open', 'close'],
   props: {
     title: {
       type: String,
@@ -33,11 +44,7 @@ export default {
       type: Boolean,
       default: false
     },
-    opened: {
-      type: Function,
-      default: () => {}
-    },
-    autoKey: {
+    destroyOnClose: {
       type: Boolean,
       default: true
     }
@@ -46,19 +53,20 @@ export default {
     return {
       dialogVisible: false,
       confirmLoading: false,
-      dialogKey: 'mbDialog',
+      customClass: 'mbDialog' + this.$common.uuid()
+    }
+  },
+  watch: {
+    dialogVisible(value) {
+      if(value){
+        this.addStyle()
+      }else{
+        this.removeStyle()
+      }
     }
   },
   created() {
-    if (this.fullscreen) {
-      document.body.style.setProperty('--el-dialog__wrapper-bottom', '0vh')
-      document.body.style.setProperty('--el-dialog__wrapper-top', '0vh')
-      document.body.style.setProperty('--el-dialog__body-max-height', '100vh')
-    } else {
-      document.body.style.setProperty('--el-dialog__wrapper-bottom', '15vh')
-      document.body.style.setProperty('--el-dialog__wrapper-top', '15vh')
-      document.body.style.setProperty('--el-dialog__body-max-height', '60vh')
-    }
+    this.addStyle()
   },
   methods: {
     confirmClick() {
@@ -71,33 +79,43 @@ export default {
       this.confirmLoading = false
     },
     show() {
-      if(this.autoKey){
-        this.dialogKey = Math.random()
-      }
       this.dialogVisible = true
     },
     hide() {
       this.dialogVisible = false
+    },
+    addStyle(){
+      var componentStyle = document.createElement("style");
+      var cc = this.customClass
+      if (this.fullscreen) {
+        componentStyle.innerHTML = `
+        .${cc}{
+          margin-top: 0vh;
+          margin-bottom: 0vh;
+        }
+        .${cc} .el-dialog__body{
+          max-height: 100vh;
+        }
+      `
+      } else {
+        componentStyle.innerHTML = `
+        .${cc}{
+          margin-top: 10vh;
+          margin-bottom: 10vh;
+        }
+        .${cc} .el-dialog__body{
+          max-height: 60vh;
+          overflow: auto;
+        }
+      `
+      }
+      componentStyle.id = cc
+      document.head.appendChild(componentStyle);
+    },
+    removeStyle(){
+      document.getElementById(this.customClass) && document.getElementById(this.customClass).remove()
     }
   }
 }
 
 </script>
-
-<style scoped>
-
-.el-dialog__wrapper{
-  padding-bottom: var(--el-dialog__wrapper-bottom);
-  padding-top: var(--el-dialog__wrapper-top);
-  overflow: hidden;
-}
-.el-dialog__wrapper >>> .el-dialog{
-  margin-top: 0vh!important;
-}
-.el-dialog__wrapper >>> .el-dialog__body{
-  max-height: var(--el-dialog__body-max-height);
-  overflow: auto;
-  padding: 25px!important;
-}
-
-</style>

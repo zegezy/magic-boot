@@ -1,5 +1,6 @@
 <template>
   <el-table-column
+    v-bind="col.props"
     :key="col.field"
     :label="col.label"
     :prop="col.field"

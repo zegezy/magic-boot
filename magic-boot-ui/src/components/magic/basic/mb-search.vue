@@ -37,7 +37,7 @@
 
 <script setup>
 
-import { nextTick, watch } from 'vue'
+import { nextTick, watch, onMounted } from 'vue'
 
 const props = defineProps({
   where: {
@@ -60,7 +60,7 @@ watch(() => props.where,() => {
   console.log(props.where)
 })
 
-const emit = defineEmits(['search'])
+const emit = defineEmits(['search', 'mounted'])
 
 function input(input){
   if(input){
@@ -100,6 +100,10 @@ function reset() {
   }
   nextTick(() => emit('search'))
 }
+
+onMounted(() => {
+  emit('mounted')
+})
 
 </script>
 

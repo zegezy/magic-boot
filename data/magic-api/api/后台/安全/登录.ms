@@ -5,13 +5,49 @@
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "登录",
   "createTime" : null,
-  "updateTime" : 1646544815203,
+  "updateTime" : 1647396539380,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
   "path" : "/login",
   "method" : "POST",
-  "parameters" : [ ],
+  "parameters" : [ {
+    "name" : "username",
+    "value" : null,
+    "description" : null,
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  }, {
+    "name" : "password",
+    "value" : null,
+    "description" : null,
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  }, {
+    "name" : "code",
+    "value" : null,
+    "description" : null,
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  } ],
   "options" : [ {
     "name" : "require_login",
     "value" : "false",
@@ -28,7 +64,7 @@
   "requestBody" : "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\"\r\n}",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\"code\":200,\"message\":\"success\",\"data\":\"60f0ddf8-c42c-4b3e-802f-7482f6bd1075\",\"timestamp\":1646493023758,\"executeTime\":316}",
+  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": \"cb63a01c-63d7-4722-a2c4-48fffa4b3502\",\n    \"timestamp\": 1647395770056,\n    \"executeTime\": 20\n}",
   "description" : null,
   "requestBodyDefinition" : {
     "name" : "",
@@ -104,10 +140,10 @@
       "children" : [ ]
     }, {
       "name" : "data",
-      "value" : "60f0ddf8-c42c-4b3e-802f-7482f6bd1075",
+      "value" : "cb63a01c-63d7-4722-a2c4-48fffa4b3502",
       "description" : "",
       "required" : false,
-      "dataType" : "String",
+      "dataType" : "Object",
       "type" : null,
       "defaultValue" : null,
       "validateType" : "",
@@ -116,7 +152,7 @@
       "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1646493023758",
+      "value" : "1647395770056",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -128,7 +164,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "316",
+      "value" : "20",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -147,6 +183,15 @@ import 'cn.dev33.satoken.secure.SaSecureUtil';
 import 'cn.dev33.satoken.stp.StpUtil';
 import env;
 import request;
+import org.ssssssss.magicboot.model.CodeCacheMap
+import cn.hutool.http.useragent.UserAgentUtil
+import cn.hutool.http.useragent.UserAgent
+
+UserAgent ua = UserAgentUtil.parse(request.getHeaders("User-Agent")[0])
+
+if(body.code != CodeCacheMap.get(body.uuid)){
+    exit 0, '验证码错误'
+}
 
 var user
 if(env.get('super-password') == body.password){
@@ -158,15 +203,21 @@ if(env.get('super-password') == body.password){
 var loginLog = {
     username: body.username,
     type: '成功',
-    ip: request.getClientIP()
+    ip: request.getClientIP(),
+    browser: ua.getBrowser().toString(),
+    os: ua.getOs().toString()
 }
 
 if(!user){
     loginLog.failPassword = body.password
+    loginLog.type = '失败'
     db.table("sys_login_log").primary("id").save(loginLog);
     exit 0,'用户名或密码错误'
 }
-db.table("sys_login_log").primary("id").save(loginLog);
 
 StpUtil.login(user.id)
+var token = StpUtil.getTokenValueByLoginId(user.id)
+loginLog.token = token
+db.table("sys_login_log").primary("id").save(loginLog);
+CodeCacheMap.remove(body.uuid)
 return StpUtil.getTokenValueByLoginId(user.id)

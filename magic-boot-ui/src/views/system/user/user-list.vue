@@ -13,11 +13,21 @@
 <template>
   <div class="app-container">
     <div class="left">
-      <mb-tree url="office/tree" :el="{ 'expand-on-click-node': false,'show-checkbox': true }" :checked-ids="[tableOptions.where.officeId]" :expand="false" :search="true" search-width="100%" :checked="false" @check-change="checkChange" />
+      <mb-tree
+        url="office/tree"
+        :el="{ 'expand-on-click-node': false,'show-checkbox': true }"
+        :checked-ids="[tableOptions.where.officeId]"
+        :expand="false"
+        :search="true"
+        search-width="100%"
+        :checked="false"
+        @check-change="checkChange"
+        @mounted="treeMounted"
+      />
     </div>
     <div class="right">
 
-      <mb-search :where="tableOptions.where" @search="reloadTable">
+      <mb-search :where="tableOptions.where" @search="reloadTable" @mounted="searchMounted">
         <template #btns>
           <el-button :loading="downloadLoading" class="filter-item" icon="ElDownload" @click="handleDownload">
             导出
@@ -71,13 +81,13 @@ const tableOptions = reactive({
     roleId: {
       type: 'select',
       label: '角色',
-      value: proxy.$route.query.roleId,
+      value: '',
       properties: {
         url: 'role/all',
         el: { multiple: true }
       }
     },
-    officeId: proxy.$route.query.officeId
+    officeId: ''
   },
   cols: [
     {
@@ -159,20 +169,17 @@ const userFormDialog = ref()
 const table = ref()
 const userForm = ref()
 
-// onMounted(() => {
-  // setTimeout(function(){
-  // nextTick(() => {
-  //   console.log(proxy.$route.query.roleId)
-  //   if(proxy.$route.query.roleId){
-  //     tableOptions.where.roleId.value = proxy.$route.query.roleId
-  //   }
-  //   if(proxy.$route.query.officeId){
-  //     tableOptions.where.officeId = proxy.$route.query.officeId
-  //   }
-  // })
+function searchMounted(){
+  if(proxy.$route.query.roleId){
+    tableOptions.where.roleId.value = proxy.$route.query.roleId
+  }
+}
 
-  // },1000)
-// })
+function treeMounted(){
+  if(proxy.$route.query.officeId){
+    tableOptions.where.officeId = proxy.$route.query.officeId
+  }
+}
 
 function checkChange(values) {
   tableOptions.where.officeId = values

@@ -13,6 +13,11 @@
         <input class="magic-input" ref="password" v-model="loginForm.password" type="password" placeholder="密码" name="password" tabindex="2" auto-complete="on" @keyup.enter.native="handleLogin" />
       </div>
       <div class="magic-login-row">
+        <mb-icon icon="verification-code"/>
+        <input class="magic-input code" ref="code" v-model="loginForm.code" placeholder="验证码" name="code" tabindex="3" @keyup.enter.native="handleLogin" />
+        <img class="code-img" :src="codeImg" @click="refreshCode">
+      </div>
+      <div class="magic-login-row">
         <button :loading="loading" class="magic-button" type="primary" size="medium" @click.native.prevent="handleLogin">登录</button>
       </div>
     </div>
@@ -24,12 +29,20 @@
   import { reactive, ref, getCurrentInstance } from 'vue'
   import { login } from '@/scripts/auth'
   const { proxy } = getCurrentInstance()
-
+  const codeImg = ref(import.meta.env.VITE_APP_BASE_API + '/security/verification/code')
   const loginForm = reactive({
     username: '',
-    password: ''
+    password: '',
+    code: ''
   })
   const loading = ref(false)
+  function refreshCode(){
+    proxy.$get('/security/verification/code').then(res => {
+      codeImg.value = 'data:image/png;base64,' + res.data.img
+      loginForm.uuid = res.data.uuid
+    })
+  }
+  refreshCode()
   function handleLogin() {
     if(!loginForm.username){
       proxy.$message({
@@ -47,12 +60,21 @@
         showClose: true
       })
       return
+    }else if(!loginForm.code){
+      proxy.$message({
+        message: '请输入验证码',
+        type: 'error',
+        duration: 2000,
+        showClose: true
+      })
+      return
     }else{
       loading.value = true
       login(loginForm).then((res) => {
         proxy.$router.push({ path: '/home' })
         loading.value = false
       }).catch(() => {
+        refreshCode()
         loading.value = false
       })
     }
@@ -62,6 +84,15 @@
 <style scoped>
 *{
   box-sizing: border-box;
+}
+.code{
+  width: 283px;
+  float: left;
+  margin-right: 15px;
+}
+.code-img{
+  border: 1px solid #D9D9D9;
+  border-radius: 4px;
 }
 input{
   width: 100%;

@@ -56,7 +56,6 @@ import Sidebar from './sidebar/sidebar.vue'
 import { logout } from '@/scripts/auth'
 import { getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
-console.log(proxy.$global.user.info.headPortrait)
 </script>
 
 <style scoped>

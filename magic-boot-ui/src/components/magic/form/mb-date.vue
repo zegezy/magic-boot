@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-  import { watch } from 'vue'
+  import { watch, ref } from 'vue'
   const emit = defineEmits(['update:modelValue'])
   const props = defineProps({
     modelValue: String,
@@ -23,11 +23,7 @@
     },
     format: {
       type: String,
-      default: 'yyyy-MM-dd'
-    },
-    valueFormat: {
-      type: String,
-      default: 'yyyy-MM-dd'
+      default: 'YYYY-MM-DD'
     },
     startPlaceholder: {
       type: String,
@@ -39,6 +35,7 @@
     },
     props: Object
   })
+  const valueFormat = ref(props.format)
   watch(() => props.modelValue, (value) => {
     emit('update:modelValue', value)
   })

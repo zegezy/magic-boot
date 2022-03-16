@@ -196,7 +196,10 @@ const tableOptions = reactive({
           type: 'text',
           icon: 'ElUserFilled',
           click: (row) => {
-            proxy.$router.push({ path: `/system/user/user-list?officeId=${row.id}` })
+            proxy.$router.push({
+              path: '/system/user/user-list',
+              query: { officeId: row.id }
+            })
           }
         }
       ]

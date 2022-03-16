@@ -24,7 +24,7 @@
   import {ref, reactive, getCurrentInstance, defineExpose } from 'vue'
   const { proxy } = getCurrentInstance()
   const rules = reactive(getRules())
-  const formData = ref(getFormData())
+  const formData = ref(initFormData())
   const dataForm = ref()
   const props = defineProps({
     form: {
@@ -42,14 +42,14 @@
   proxy.$common.setDefaultValue(props.form.props, 'labelPosition', 'right')
   proxy.$common.setDefaultValue(props.form.props, 'labelWidth', '120px')
 
-  if(props.detail.formData){
+  if(props.detail && props.detail.formData){
     if(props.detail.handlerFormData){
       props.detail.handlerFormData(props.detail.formData)
     }
     formData.value = props.detail.formData
   }
 
-  if(props.detail.request){
+  if(props.detail && props.detail.request){
 
   }
 
@@ -65,14 +65,19 @@
     return _rules
   }
 
-  function getFormData() {
+  function initFormData() {
     var data = {}
     props.form.rows.forEach(row => {
       row.cols.forEach(col => {
-        data[col.name] = col.defaultValue === null ? col.defaultValue : col.defaultValue || ''
+        // data[col.name] = col.defaultValue === null ? col.defaultValue : col.defaultValue || ''
+        data[col.name] = undefined
       })
     })
     return data
+  }
+
+  function getFormData(){
+    return formData.value
   }
 
   function save(d) {
@@ -87,7 +92,7 @@
             type: 'success',
             duration: 2000
           })
-          if(props.detail.formData){
+          if(props.detail && props.detail.formData){
             props.detail.formData = {}
           }
           d.hide()
@@ -109,6 +114,6 @@
     })
   }
 
-  defineExpose({ save, getDetail })
+  defineExpose({ save, getDetail, getFormData })
 
 </script>
