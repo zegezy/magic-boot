@@ -37,6 +37,9 @@ body{
   --el-avatar-bg-color: var(--mb-main-color);
   border: 1px solid white;
 }
+.el-dialog__body{
+  padding: 5px 20px;
+}
 .app-container hr {
   border: none;
   height: 1px;

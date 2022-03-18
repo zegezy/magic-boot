@@ -196,11 +196,12 @@ const formOptions = reactive({
       gutter: 24,
       cols: [{
         span: 24,
-        component: 'radio-button',
+        component: 'radio-group',
         name: 'isLogin',
         label: '登录状态',
         defaultValue: '0',
         props: {
+          button: true,
           options: [{
             label: '有效',
             value: '0'

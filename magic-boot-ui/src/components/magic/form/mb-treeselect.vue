@@ -1,5 +1,5 @@
 <template>
-  <treeselect v-model="modelValue" :options="options" :key="modelValue" :placeholder="placeholder || (label && '请选择' + label)" :show-count="true" v-bind="props.props" />
+  <treeselect v-model="modelValue" :options="options" :key="modelValue" :placeholder="placeholder || (itemLabel && '请选择' + itemLabel)" :show-count="true" v-bind="props.props" />
 </template>
 
 <script setup>
@@ -16,7 +16,7 @@
       default: '',
       required: true
     },
-    label: String,
+    itemLabel: String,
     placeholder: String,
     props: Object
   })

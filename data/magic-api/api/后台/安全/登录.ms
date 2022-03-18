@@ -5,7 +5,7 @@
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "登录",
   "createTime" : null,
-  "updateTime" : 1647396539380,
+  "updateTime" : 1647561372842,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -178,6 +178,7 @@
   }
 }
 ================================
+import org.ssssssss.magicboot.utils.AddressUtil
 import log
 import 'cn.dev33.satoken.secure.SaSecureUtil';
 import 'cn.dev33.satoken.stp.StpUtil';
@@ -205,7 +206,8 @@ var loginLog = {
     type: '成功',
     ip: request.getClientIP(),
     browser: ua.getBrowser().toString(),
-    os: ua.getOs().toString()
+    os: ua.getOs().toString(),
+    address: AddressUtil.getAddress(request.getClientIP())
 }
 
 if(!user){

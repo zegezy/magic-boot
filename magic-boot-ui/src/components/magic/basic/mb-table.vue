@@ -154,6 +154,9 @@ function reloadList() {
     listCurrent.value = 1
     getList()
   }
+  if (props.data) {
+    handlerData()
+  }
 }
 
 function handlerData() {

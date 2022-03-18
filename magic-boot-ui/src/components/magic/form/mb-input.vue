@@ -1,5 +1,5 @@
 <template>
-  <el-input v-model="modelValue" :type="type" :placeholder="placeholder || (label && '请输入' + label)" v-bind="props.props" />
+  <el-input v-model="modelValue" :type="type" :placeholder="placeholder || (itemLabel && '请输入' + itemLabel)" v-bind="props.props" />
 </template>
 
 <script setup>
@@ -7,7 +7,7 @@
   const emit = defineEmits(['update:modelValue'])
   const props = defineProps({
     modelValue: String,
-    label: String,
+    itemLabel: String,
     placeholder: String,
     type: String,
     props: Object

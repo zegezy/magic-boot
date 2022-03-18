@@ -5,7 +5,7 @@
   "groupId" : "d95a58e77d314370862ffc4cdfdb8283",
   "name" : "列表",
   "createTime" : null,
-  "updateTime" : 1647396892675,
+  "updateTime" : 1647433235510,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -113,6 +113,7 @@ return db.page("""
     select 
         su.username,
         so.name office_name,
+        sll.address,
         sll.token,
         sll.ip,
         sll.browser,

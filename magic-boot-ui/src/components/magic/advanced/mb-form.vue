@@ -11,7 +11,7 @@
           <component
             :is="!col.component ? 'mb-input' : col.component.startsWith('el-') ? col.component : 'mb-' + col.component"
             v-model="formData[col.name]"
-            :label="col.label"
+            :item-label="col.label"
             v-bind="col.props"
           />
         </el-form-item>

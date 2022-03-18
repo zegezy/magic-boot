@@ -1,77 +1,85 @@
 <template>
   <div>
     <el-row style="margin-bottom: 6px">
-      <el-button type="primary" @click="tableOptions.data.push({})">添加一行</el-button>
+      <el-button type="primary" @click="addRow">添加一行</el-button>
     </el-row>
-    <mb-table v-bind="tableOptions">
+    <mb-table ref="magicTable" v-bind="tableOptions">
       <template v-for="col in cols" #[col.field]="{ index }">
-        <el-input v-if="col.type === 'input'" v-bind="col.properties" v-model="tableOptions.data[index][col.field]" @change="dataChange" />
-        <mb-select v-else-if="col.type === 'select'" v-bind="col.properties" v-model="tableOptions.data[index][col.field]" @change="dataChange" />
+        <component
+          :is="!col.component ? 'mb-input' : col.component.startsWith('el-') ? col.component : 'mb-' + col.component"
+          v-model="tableOptions.data[index][col.field]"
+          v-bind="col.props"
+          @change="dataChange"
+        />
       </template>
     </mb-table>
   </div>
 </template>
 
-<script>
+<script setup>
 
-export default {
-  name: 'MbEditorTable',
-  model: {
-    prop: 'value',
-    event: 'change'
+import { reactive, ref, watch } from 'vue'
+
+const emit = defineEmits(['update:modelValue', 'change'])
+
+const magicTable = ref()
+const props = defineProps({
+  modelValue: Array,
+  cols: {
+    type: Array,
+    default: () => []
   },
-  props: {
-    // eslint-disable-next-line vue/require-prop-types
-    value: {
-      required: true
-    },
-    cols: {
-      type: Array,
-      default: () => []
-    },
-    showNo: {
-      type: Boolean,
-      default: true
-    }
-  },
-  data() {
-    return {
-      tableOptions: {
-        data: [],
-        cols: [],
-        showNo: this.showNo
-      }
-    }
-  },
-  created() {
-    for (var i in this.cols) {
-      var col = this.cols[i]
-      this.tableOptions.cols.push({
-        type: 'dynamic',
-        field: col.field,
-        label: col.label
-      })
-    }
-    this.tableOptions.cols.push({
-      label: '操作',
-      type: 'btns',
-      width: 85,
-      fixed: 'right',
-      btns: [{
-        label: '删除',
-        type: 'danger',
-        click: (row, index) => {
-          this.tableOptions.data.splice(index, 1)
-        }
-      }]
-    })
-  },
-  methods: {
-    dataChange() {
-      console.log('更新')
-      this.$emit('update:value', this.tableOptions.data)
-      this.$emit('change', this.tableOptions.data)
-    }
+  showNo: {
+    type: Boolean,
+    default: true
   }
+})
+
+const tableOptions = reactive({
+  data: [],
+  cols: [],
+  showNo: props.showNo
+})
+
+for (var i in props.cols) {
+  var col = props.cols[i]
+  tableOptions.cols.push({
+    type: 'dynamic',
+    field: col.field,
+    label: col.label
+  })
 }
+
+tableOptions.cols.push({
+  label: '操作',
+  type: 'btns',
+  width: 85,
+  fixed: 'right',
+  btns: [{
+    label: '删除',
+    type: 'danger',
+    click: (row, index) => {
+      tableOptions.data.splice(index, 1)
+    }
+  }]
+})
+
+watch(() => props.modelValue, (value) => {
+  tableOptions.data = value
+}, {
+  deep: true
+})
+
+function addRow(){
+  tableOptions.data.push({})
+  magicTable.value.reloadList()
+}
+
+function dataChange() {
+  console.log('更新')
+  console.log(tableOptions.data)
+  emit('update:modelValue', tableOptions.data)
+  emit('change', tableOptions.data)
+}
+
 </script>

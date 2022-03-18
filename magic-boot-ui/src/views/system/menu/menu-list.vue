@@ -198,6 +198,7 @@ function reloadTable(){
   proxy.$get('menu/tree').then(res => {
     menuData.value = res.data.list
     tableOptions.data = menuData.value
+    searchMenu()
   })
 }
 

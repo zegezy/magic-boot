@@ -31,7 +31,7 @@ const formOptions = reactive({
       },{
         span: 12,
         name: 'checkbox',
-        component: 'checkbox',
+        component: 'checkbox-group',
         label: 'checkbox',
         props: {
           type: 'office_type'
@@ -39,7 +39,7 @@ const formOptions = reactive({
       },{
         span: 12,
         name: 'checkboxButton',
-        component: 'checkbox',
+        component: 'checkbox-group',
         label: 'checkboxButton',
         props: {
           type: 'office_type',
@@ -48,7 +48,7 @@ const formOptions = reactive({
       },{
         span: 12,
         name: 'radio',
-        component: 'radio',
+        component: 'radio-group',
         label: 'radio',
         props: {
           type: 'is_login'
@@ -56,7 +56,7 @@ const formOptions = reactive({
       },{
         span: 12,
         name: 'radioButton',
-        component: 'radio',
+        component: 'radio-group',
         label: 'radioButton',
         props: {
           type: 'is_login',

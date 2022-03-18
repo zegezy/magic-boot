@@ -88,7 +88,6 @@ import {watch, ref, getCurrentInstance} from "vue";
   }
 
   watch(() => props.modelValue, (value) => {
-    console.log(value)
     emit('update:modelValue', value)
   })
 </script>

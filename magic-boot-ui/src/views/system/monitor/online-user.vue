@@ -59,6 +59,9 @@
           field: 'officeName',
           label: '所属机构'
         }, {
+          field: 'address',
+          label: '登录地址'
+        }, {
           field: 'ip',
           label: 'IP'
         }, {
