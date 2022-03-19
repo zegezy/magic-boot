@@ -72,29 +72,29 @@ common.renderWhere = (where) => {
   return newWhere
 }
 
-common.exportExcel = (options) => {
-  var where = options.where || {}
-  where = common.renderWhere(where)
-  where.current = 1
-  where.size = 99999999
-  const url = options.url
-  const headers = options.headers
-  const columns = options.columns
-  request({
-    url: url,
-    method: 'post',
-    params: where
-  }).then(res => {
-    import('@/vendor/Export2Excel').then(excel => {
-      const data = formatJson(res.data, columns)
-      excel.export_json_to_excel({
-        header: headers,
-        data,
-        filename: 'table-list'
-      })
-    })
-  })
-}
+// common.exportExcel = (options) => {
+//   var where = options.where || {}
+//   where = common.renderWhere(where)
+//   where.current = 1
+//   where.size = 99999999
+//   const url = options.url
+//   const headers = options.headers
+//   const columns = options.columns
+//   request({
+//     url: url,
+//     method: 'post',
+//     params: where
+//   }).then(res => {
+//     import('@/vendor/Export2Excel').then(excel => {
+//       const data = formatJson(res.data, columns)
+//       excel.export_json_to_excel({
+//         header: headers,
+//         data,
+//         filename: 'table-list'
+//       })
+//     })
+//   })
+// }
 
 common.handlerTreeData = (data, id, pid, sort, pidVal) => {
   var treeData = []

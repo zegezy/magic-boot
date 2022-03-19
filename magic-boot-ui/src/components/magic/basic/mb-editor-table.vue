@@ -5,8 +5,12 @@
     </el-row>
     <mb-table ref="magicTable" v-bind="tableOptions">
       <template v-for="col in cols" #[col.field]="{ index }">
+        <div v-if="!col.component">
+          {{ tableOptions.data[index][col.field] }}
+        </div>
         <component
-          :is="!col.component ? 'mb-input' : col.component.startsWith('el-') ? col.component : 'mb-' + col.component"
+          v-else
+          :is="col.component.startsWith('el-') ? col.component : 'mb-' + col.component"
           v-model="tableOptions.data[index][col.field]"
           v-bind="col.props"
           @change="dataChange"
@@ -65,6 +69,7 @@ tableOptions.cols.push({
 })
 
 watch(() => props.modelValue, (value) => {
+  console.log(value)
   tableOptions.data = value
 }, {
   deep: true

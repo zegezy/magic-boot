@@ -1,6 +1,8 @@
 import request from '@/scripts/request'
 import common from '@/scripts/common'
-import { defineAsyncComponent } from 'vue'
+
+const viewModules = import.meta.glob("../views/**/**.vue")
+const layoutModules = import.meta.glob("../layout/**.vue")
 
 export const filterAsyncRouter = (routers, level) => {
   level = level || 0
@@ -13,7 +15,7 @@ export const filterAsyncRouter = (routers, level) => {
         const component = router.component
         if (component === 'Layout') {
           router.path = "/" + common.uuid()
-          router.component = level > 0 ? import(`../layout/none.vue`) : loadLayoutView(component)
+          router.component = level > 0 ? layoutModules[`../layout/none.vue`] : loadLayoutView(component)
         } else {
           router.path = router.path = router.path.startsWith('/') ? router.path : '/' + router.path
           router.component = loadView(component)
@@ -30,12 +32,12 @@ export const filterAsyncRouter = (routers, level) => {
 }
 
 export const loadLayoutView = (view) => {
-  return import(`../layout/layout.vue`)
+  return layoutModules[`../layout/layout.vue`]
 }
 
 export const loadView = (view) => {
   view = view.substring(0, 1) === '/' ? view : '/' + view
-  return defineAsyncComponent(() => import(`../views${view}.vue`))
+  return viewModules[`../views${view}.vue`]
 }
 
 export function generateRoutes(){
