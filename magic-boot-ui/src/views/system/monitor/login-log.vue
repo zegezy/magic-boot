@@ -29,13 +29,19 @@
       {
         field: 'type',
         label: '登录状态',
+        width: '100px',
         templet: (row) => {
           return row.type == '成功' ? '<b style="color: #409EFF">成功</b>' : '<b style="color: red">失败</b>'
         }
       },
       {
+        field: 'address',
+        label: '登录地址'
+      },
+      {
         field: 'ip',
-        label: 'ip'
+        label: 'ip',
+        width: '150px'
       },
       {
         field: 'browser',
@@ -50,7 +56,8 @@
       },
       {
         field: 'createDate',
-        label: '操作时间'
+        label: '操作时间',
+        width: '180px'
       }
     ]
   })

@@ -92,9 +92,17 @@ function reset() {
   for(var key in props.where){
     if(props.notReset.indexOf(key) == -1){
       if(props.where[key] instanceof Object){
-        props.where[key].value = null
+        if(props.where[key].value instanceof Array){
+          props.where[key].value = []
+        }else{
+          props.where[key].value = null
+        }
       }else{
-        props.where[key] = null
+        if(props.where[key] instanceof Array){
+          props.where[key] = []
+        }else{
+          props.where[key] = null
+        }
       }
     }
   }

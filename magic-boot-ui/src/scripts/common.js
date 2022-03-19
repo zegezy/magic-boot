@@ -171,4 +171,8 @@ common.setDefaultValue = (obj, attr, value) => {
   obj[attr] = obj[attr] === undefined ? value : obj[attr]
 }
 
+common.isComma = (value) => {
+  return value.toString().indexOf(',') !== -1
+}
+
 export default common

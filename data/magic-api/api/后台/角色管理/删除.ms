@@ -5,7 +5,7 @@
   "groupId" : "89130d496f6f467c88b22ae4a7f688eb",
   "name" : "删除",
   "createTime" : null,
-  "updateTime" : 1646553106085,
+  "updateTime" : 1647615829916,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -47,6 +47,12 @@
 }
 ================================
 import '@get:/role/cache/delete' as cacheDelete
+
+var userCount = db.selectInt("select count(1) from sys_user_role where role_id = #{id}")
+if(userCount > 0){
+    exit 500, '角色已分配,不允许删除'
+}
+
 var roleId = id
 cacheDelete()
 

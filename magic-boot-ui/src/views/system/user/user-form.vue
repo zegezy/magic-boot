@@ -32,11 +32,11 @@
       </el-col>
       <el-col :span="12">
         <el-form-item label="选择角色" prop="roles">
-          <mb-select v-model="temp.roles" url="role/all" placeholder="请选择角色" :el="{ multiple: true }" />
+          <mb-select v-model="temp.roles" url="role/all" placeholder="请选择角色" multiple />
         </el-form-item>
       </el-col>
     </el-row>
-    <el-form-item label="登录状态" prop="isLogin">
+    <el-form-item label="登录状态" prop="isLogin" v-if="temp.id != '1'">
       <el-radio-group v-model="temp.isLogin">
         <el-radio-button label="0">有效</el-radio-button>
         <el-radio-button label="1">锁定</el-radio-button>

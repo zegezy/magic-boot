@@ -18,7 +18,8 @@ const formOptions = reactive({
       cols: [{
         span: 12,
         name: 'input',
-        label: 'input'
+        label: 'input',
+        rules: [{ required: true, message: '请输入input', trigger: 'change' }]
       },{
         span: 12,
         name: 'switch',
@@ -114,7 +115,7 @@ const formOptions = reactive({
         props: {
           url: 'role/all',
           placeholder: '请选择角色',
-          el: { multiple: true }
+          multiple: true
         }
       },{
         span: 12,
@@ -127,6 +128,6 @@ const formOptions = reactive({
   }
 })
 function getFormData(){
-  console.log(magicForm.value.getFormData())
+  console.log(magicForm.value.getFormData().select)
 }
 </script>

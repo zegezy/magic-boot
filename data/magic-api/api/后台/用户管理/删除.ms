@@ -5,7 +5,7 @@
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "删除",
   "createTime" : null,
-  "updateTime" : 1646553121622,
+  "updateTime" : 1647618260057,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -47,6 +47,10 @@
 }
 ================================
 import org.ssssssss.magicapi.modules.db.cache.SqlCache
+
+if(Arrays.asList(id.split(',')).contains('1')){
+    exit 500, '不允许删除超级管理员'
+}
 
 for(userId in id.split(',')){
     SqlCache.delete(`permissions:${userId}`)

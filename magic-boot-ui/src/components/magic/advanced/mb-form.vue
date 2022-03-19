@@ -69,8 +69,7 @@
     var data = {}
     props.form.rows.forEach(row => {
       row.cols.forEach(col => {
-        // data[col.name] = col.defaultValue === null ? col.defaultValue : col.defaultValue || ''
-        data[col.name] = undefined
+        data[col.name] = col.defaultValue || undefined
       })
     })
     return data

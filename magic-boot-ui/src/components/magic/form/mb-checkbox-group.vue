@@ -1,6 +1,6 @@
 <template>
   <el-checkbox-group
-    v-model="modelValue"
+    v-model="selectValue"
     :size="size"
     :disabled="disabled"
     :min="min"
@@ -9,25 +9,24 @@
     :fill="fill"
     @change="change"
   >
-    <el-checkbox-button v-if="button" v-for="it in options" v-bind="it" :label="it[valueField]">
+    <el-checkbox-button v-if="button" v-for="it in checkboxOptions" v-bind="it" :label="it[valueField]">
       {{ it[labelField] }}
     </el-checkbox-button>
-    <el-checkbox v-if="!button" v-for="it in options" v-bind="it" :label="it[valueField]">
+    <el-checkbox v-if="!button" v-for="it in checkboxOptions" v-bind="it" :label="it[valueField]">
       {{ it[labelField] }}
     </el-checkbox>
   </el-checkbox-group>
 </template>
 
 <script setup>
-import {watch, ref, getCurrentInstance} from "vue";
+  import {watch, ref, getCurrentInstance, onMounted} from "vue";
   import request from '@/scripts/request'
   const emit = defineEmits(['update:modelValue', 'change'])
   const { proxy } = getCurrentInstance()
 
   const props = defineProps({
     modelValue: {
-      type: Array,
-      default: () => []
+      required: true
     },
     type: String,
     button: {
@@ -36,7 +35,7 @@ import {watch, ref, getCurrentInstance} from "vue";
     },
     options: Array,
     url: String,
-    params: Object,
+    data: Object,
     method: {
       type: String,
       default: 'get'
@@ -63,31 +62,72 @@ import {watch, ref, getCurrentInstance} from "vue";
     fill: {
       type: String,
       default: '#409EFF'
+    },
+    join: {
+      type: Boolean,
+      default: true
     }
   })
 
-  const options = ref([])
+  const selectValue = ref([])
+  const checkboxOptions = ref([])
 
-  if(props.type){
-    options.value = proxy.$common.getDictType(props.type)
-  }else if(props.url){
-    request({
-      url: props.url,
-      method: props.method,
-      params: props.params,
-      data: props.params
-    }).then(res => {
-      options.value = res.data.list || res.data
-    })
-  }else if(props.options){
-    options.value = props.options
+  watch(() => [props.type, props.url, props.options], () => {
+    loadData()
+  }, { deep: true })
+
+  watch(() => props.modelValue, (value) => {
+    setValue(value)
+  })
+
+  watch(selectValue, (value) => {
+    if(props.join){
+      emit('update:modelValue', value.join(','))
+      emit('change', value.join(','))
+    }else{
+      emit('update:modelValue', value)
+      emit('change', value)
+    }
+  })
+
+  onMounted(() => {
+    loadData()
+  })
+
+  function setValue(value){
+    if(value){
+      if(props.join){
+        selectValue.value = value.split(',')
+      }else{
+        selectValue.value = value
+      }
+    }
+  }
+
+  function loadData(){
+    if(props.type){
+      checkboxOptions.value = proxy.$common.getDictType(props.type)
+      setValue(props.modelValue)
+    }else if(props.url){
+      if(props.method.toLowerCase() == 'post'){
+        proxy.$post(props.url, props.data).then(res => {
+          checkboxOptions.value = res.data.list || res.data
+          setValue(props.modelValue)
+        })
+      }else{
+        proxy.$get(props.url, props.data).then(res => {
+          checkboxOptions.value = res.data.list || res.data
+          setValue(props.modelValue)
+        })
+      }
+    }else if(props.options){
+      checkboxOptions.value = props.options
+      setValue(props.modelValue)
+    }
   }
 
   function change(value){
     emit('change', value)
   }
 
-  watch(() => props.modelValue, (value) => {
-    emit('update:modelValue', value)
-  })
 </script>

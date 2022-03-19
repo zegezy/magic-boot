@@ -118,18 +118,22 @@ function getList() {
   } else {
     newWhere.size = 99999999
   }
-  request({
-    url: props.url,
-    method: props.method,
-    params: newWhere,
-    data: newWhere
-  }).then(res => {
+  var then = (res) => {
     const { data } = res
     total.value = data.total
     list.value = data.list
     listLoading.value = false
     props.done()
-  })
+  }
+  if(props.method.toLowerCase() == 'post'){
+    proxy.$post(props.url, newWhere).then(res => {
+      then(res)
+    })
+  }else{
+    proxy.$get(props.url, newWhere).then(res => {
+      then(res)
+    })
+  }
 }
 
 function sortChange(column) {

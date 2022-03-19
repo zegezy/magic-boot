@@ -28,6 +28,7 @@ body{
   --mb-main-icon-color: #909399;
   --mb-header-height: 60px;
   --mb-avatar-text-size: 18px;
+  /*--mb-menu-item-height: 50px;*/
 }
 .el-header{
   --el-header-height: var(--mb-header-height);
@@ -40,6 +41,9 @@ body{
 .el-dialog__body{
   padding: 5px 20px;
 }
+/*.el-sub-menu__title, .el-menu-item{*/
+/*  height: var(--mb-menu-item-height) !important;*/
+/*}*/
 .app-container hr {
   border: none;
   height: 1px;

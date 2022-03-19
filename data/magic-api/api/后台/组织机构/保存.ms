@@ -4,8 +4,8 @@
   "script" : null,
   "groupId" : "8295fc13678d4144bf7363c465247a50",
   "name" : "保存",
-  "createTime" : 1646490239492,
-  "updateTime" : 1644121675551,
+  "createTime" : null,
+  "updateTime" : 1647615397163,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -42,7 +42,19 @@
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
-  "requestBodyDefinition" : null,
+  "requestBodyDefinition" : {
+    "name" : "",
+    "value" : "",
+    "description" : "",
+    "required" : false,
+    "dataType" : "Object",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : "",
+    "error" : "",
+    "expression" : "",
+    "children" : [ ]
+  },
   "responseBodyDefinition" : null
 }
 ================================

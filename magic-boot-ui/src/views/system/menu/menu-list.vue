@@ -47,148 +47,147 @@ let menuTree = ref([])
 const menuData = ref([])
 let searchValue = ref('')
 const tableOptions = reactive({
-        el: {
-          'default-expand-all': true,
-          'tree-props': { children: 'children', hasChildren: 'hasChildren' },
-          'row-key': 'id'
-        },
-        showNo: false,
-        page: false,
-        cols: [
-          {
-            field: 'name',
-            label: '菜单名称',
-            align: 'left',
-            type: 'html'
-          },
-          {
-            field: 'url',
-            label: '路径',
-            align: 'left',
-            type: 'html'
-          },
-          {
-            field: 'permission',
-            label: '权限标识',
-            width: 150,
-            align: 'left',
-            type: 'html'
-          },
-          {
-            field: 'icon',
-            label: '图标',
-            width: 55,
-            align: 'center',
-            templet: (row) => {
-              return generateIconCode(row.icon)
-            }
-          },
-          {
-            field: 'sort',
-            label: '序号',
-            width: 60
-          },
-          {
-            label: '排序',
-            type: 'btns',
-            width: 150,
-            btns: [
-              {
-                label: '上移',
-                type: 'text',
-                icon: 'ElSortUp',
-                click: (row) => {
-                  proxy.$get('menu/sort/up',{
-                    id: row.id,
-                    pid: row.pid,
-                    sort: row.sort
-                  }).then(() => {
-                    reloadTable()
-                  })
-                }
-              },
-              {
-                label: '下移',
-                type: 'text',
-                icon: 'ElSortDown',
-                click: (row) => {
-                  proxy.$get('menu/sort/down',{
-                    id: row.id,
-                    pid: row.pid,
-                    sort: row.sort
-                  }).then(() => {
-                    reloadTable()
-                  })
-                }
-              }
-            ]
-          },
-          {
-            field: 'isShow',
-            label: '是否显示',
-            type: 'switch',
-            width: 100,
-            change: (row) => {
-              proxy.$get('menu/change', {
-                id: row.id,
-                isShow: row.isShow
-              })
-            }
-          },
-          {
-            field: 'keepAlive',
-            label: '是否缓存',
-            type: 'switch',
-            width: 100,
-            change: (row) => {
-              proxy.$get('menu/change', {
-                id: row.id,
-                keepAlive: row.keepAlive
-              })
-            }
-          },
-          {
-            label: '操作',
-            type: 'btns',
-            width: 260,
-            fixed: 'right',
-            align: 'left',
-            btns: [
-              {
-                label: '添加下级菜单',
-                type: 'text',
-                permission: 'menu:save',
-                icon: 'ElPlus',
-                click: (row) => {
-                  addSubMenu(row.id)
-                }
-              },
-              {
-                label: '修改',
-                type: 'text',
-                permission: 'menu:save',
-                icon: 'ElEdit',
-                click: (row) => {
-                  handleUpdate(row)
-                }
-              },
-              {
-                label: '删除',
-                type: 'text',
-                permission: 'menu:delete',
-                icon: 'ElDelete',
-                click: (row) => {
-                  proxy.$common.handleDelete({
-                    url: 'menu/delete',
-                    id: row.id,
-                    done: () => reloadTable()
-                  })
-                }
-              }
-            ]
+  el: {
+    'tree-props': { children: 'children', hasChildren: 'hasChildren' },
+    'row-key': 'id'
+  },
+  showNo: false,
+  page: false,
+  cols: [
+    {
+      field: 'name',
+      label: '菜单名称',
+      align: 'left',
+      type: 'html'
+    },
+    {
+      field: 'url',
+      label: '路径',
+      align: 'left',
+      type: 'html'
+    },
+    {
+      field: 'permission',
+      label: '权限标识',
+      width: 150,
+      align: 'left',
+      type: 'html'
+    },
+    {
+      field: 'icon',
+      label: '图标',
+      width: 55,
+      align: 'center',
+      templet: (row) => {
+        return generateIconCode(row.icon)
+      }
+    },
+    {
+      field: 'sort',
+      label: '序号',
+      width: 60
+    },
+    {
+      label: '排序',
+      type: 'btns',
+      width: 150,
+      btns: [
+        {
+          label: '上移',
+          type: 'text',
+          icon: 'ElSortUp',
+          click: (row) => {
+            proxy.$get('menu/sort/up',{
+              id: row.id,
+              pid: row.pid,
+              sort: row.sort
+            }).then(() => {
+              reloadTable()
+            })
           }
-        ]
-      })
+        },
+        {
+          label: '下移',
+          type: 'text',
+          icon: 'ElSortDown',
+          click: (row) => {
+            proxy.$get('menu/sort/down',{
+              id: row.id,
+              pid: row.pid,
+              sort: row.sort
+            }).then(() => {
+              reloadTable()
+            })
+          }
+        }
+      ]
+    },
+    {
+      field: 'isShow',
+      label: '是否显示',
+      type: 'switch',
+      width: 100,
+      change: (row) => {
+        proxy.$get('menu/change', {
+          id: row.id,
+          isShow: row.isShow
+        })
+      }
+    },
+    {
+      field: 'keepAlive',
+      label: '是否缓存',
+      type: 'switch',
+      width: 100,
+      change: (row) => {
+        proxy.$get('menu/change', {
+          id: row.id,
+          keepAlive: row.keepAlive
+        })
+      }
+    },
+    {
+      label: '操作',
+      type: 'btns',
+      width: 260,
+      fixed: 'right',
+      align: 'left',
+      btns: [
+        {
+          label: '添加下级菜单',
+          type: 'text',
+          permission: 'menu:save',
+          icon: 'ElPlus',
+          click: (row) => {
+            addSubMenu(row.id)
+          }
+        },
+        {
+          label: '修改',
+          type: 'text',
+          permission: 'menu:save',
+          icon: 'ElEdit',
+          click: (row) => {
+            handleUpdate(row)
+          }
+        },
+        {
+          label: '删除',
+          type: 'text',
+          permission: 'menu:delete',
+          icon: 'ElDelete',
+          click: (row) => {
+            proxy.$common.handleDelete({
+              url: 'menu/delete',
+              id: row.id,
+              done: () => reloadTable()
+            })
+          }
+        }
+      ]
+    }
+  ]
+})
 let dialogTitle = ref('')
 let searchTimeout = reactive()
 const menuFormDialog = ref()

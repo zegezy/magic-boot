@@ -15,13 +15,15 @@
         {{ $common.getDictLabel(col.dictType, scope.row[col.field] + '') }}
       </span>
       <slot v-else-if="col.type == 'dynamic'" :name="col.field" :row="scope.row" :index="scope.$index" />
-      <el-switch
-        v-else-if="col.type == 'switch'"
-        v-model="scope.row[col.field]"
-        :active-value="col.activeValue || 1"
-        :inactive-value="col.inactiveValue || 0"
-        @change="col.change(scope.row)"
-      />
+      <div v-else-if="col.type == 'switch'">
+        <el-switch
+            v-if="col.if === undefined ? true : col.if(scope.row)"
+            v-model="scope.row[col.field]"
+            :active-value="col.activeValue || 1"
+            :inactive-value="col.inactiveValue || 0"
+            @change="col.change(scope.row)"
+        />
+      </div>
       <div v-else-if="col.type == 'btns'">
         <template v-for="btn in col.btns">
           <el-button v-if="btn.if === undefined ? true : btn.if(scope.row)" :icon="btn.icon" :key="btn.label" v-permission="btn.permission" :type="btn.type" :size="btn.size || 'small'" :class="btn.class" @click="btn.click(scope.row, scope.$index)">

@@ -28,15 +28,18 @@
       },
       {
         field: 'apiMethod',
-        label: '方法'
+        label: '方法',
+        width: '100px'
       },
       {
         field: 'userIp',
-        label: 'ip'
+        label: 'ip',
+        width: '150px'
       },
       {
         field: 'costTime',
-        label: '耗时'
+        label: '耗时',
+        width: '100px'
       },
       {
         field: 'userAgent',
@@ -47,11 +50,13 @@
       },
       {
         field: 'username',
-        label: '操作人'
+        label: '操作人',
+        width: '150px'
       },
       {
         field: 'createDate',
-        label: '操作时间'
+        label: '操作时间',
+        width: '180px'
       }
     ]
   })

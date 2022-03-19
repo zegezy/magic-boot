@@ -1,5 +1,5 @@
 <template>
-  <el-select v-if="mbType === 'select'" v-model="selectValue" v-bind="el" :style="{ width }" :placeholder="placeholder || '请选择'" filterable clearable>
+  <el-select v-model="selectValue" v-bind="props.props" :multiple="multiple" :style="{ width }" :placeholder="placeholder || (itemLabel && '请输入' + itemLabel)" filterable clearable>
     <el-option
       v-for="item in selectList"
       :key="item.value"
@@ -7,11 +7,6 @@
       :value="item.value"
     />
   </el-select>
-  <el-radio-group v-if="mbType === 'radio'" v-model="selectValue">
-    <el-radio v-for="item in selectList" :key="item.value" :label="item.value">
-      {{ item.label }}
-    </el-radio>
-  </el-radio-group>
 </template>
 
 <script setup>
@@ -23,25 +18,16 @@ const { proxy } = getCurrentInstance()
 const emit = defineEmits(['update:modelValue', 'change'])
 
 const props = defineProps({
-  data: {
-    type: Array,
-    default: () => []
+  modelValue: {
+    required: true
   },
   type: {
     type: String,
     default: ''
   },
-  // eslint-disable-next-line vue/require-prop-types
-  modelValue: {
-    required: true
-  },
-  width: {
-    type: String,
-    default: '100%'
-  },
-  allOption: {
-    type: Boolean,
-    default: false
+  options: {
+    type: Array,
+    default: () => []
   },
   url: {
     type: String,
@@ -59,72 +45,77 @@ const props = defineProps({
     type: String,
     default: 'value'
   },
-  mbType: {
-    type: String,
-    default: 'select'
-  },
-  el: {
+  props: {
     type: Object,
     default: () => {}
+  },
+  width: {
+    type: String,
+    default: '100%'
+  },
+  allOption: {
+    type: Boolean,
+    default: false
   },
   placeholder: {
     type: String,
     default: ''
+  },
+  itemLabel: String,
+  multiple: {
+    type: Boolean,
+    default: false
+  },
+  join: {
+    type: Boolean,
+    default: true
   }
 })
 
 const selectList = ref([])
-const selectValue = ref('')
+const selectValue = ref(props.multiple ? [] : '')
 
-watch(() => props.type, () => {
-  if (props.modelValue instanceof Array || props.modelValue.toString().indexOf(',') !== -1) {
-    selectValue.value = []
-  } else {
-    selectValue.value = ''
-  }
+watch(() => [props.type, props.url, props.options], () => {
   loadData()
-})
+}, { deep: true })
 
-watch(() => props.modelValue, () => {
-  loadData()
+watch(() => props.modelValue, (value) => {
+  setValue(value)
 })
 
 watch(selectValue, (value) => {
-  if (props.el && props.el.multiple && value.length > 0) {
-    value = value.join(',')
+  if(props.multiple && props.join){
+    emit('update:modelValue', value.join(','))
+    emit('change', value.join(','))
+  }else{
+    emit('update:modelValue', value)
+    emit('change', value)
   }
-  emit('update:modelValue', value)
-  emit('change', value)
 })
 
 onMounted(() => {
   loadData()
 })
 
-async function loadData() {
-  if (props.modelValue || props.modelValue == '') {
-    if ((!(props.modelValue instanceof Array) && props.modelValue.toString().indexOf(',') !== -1)) {
-      selectValue.value = props.modelValue.split(',')
-    } else {
-      if (props.el && props.el.multiple && !(props.modelValue instanceof Array)) {
-        selectValue.value = [props.modelValue]
-      } else {
-        selectValue.value = props.modelValue
-      }
-    }
-  } else {
-    if (props.el && props.el.multiple) {
-      selectValue.value = []
+function setValue(value){
+  if(value){
+    if(props.multiple && props.join){
+      selectValue.value = value.split(',')
+    }else{
+      selectValue.value = value
     }
   }
-  if (props.data && props.data.length > 0) {
-    listConcat(handlerData(props.data))
-  } else if (props.url) {
+}
+
+function loadData() {
+  if(props.type){
+    listConcat(proxy.$common.getDictType(props.type))
+  }else if(props.url){
     proxy.$get(props.url, props.params).then(res => {
       listConcat(handlerData(res.data.list || res.data))
     })
-  } else {
-    listConcat(proxy.$common.getDictType(props.type))
+  }else if(props.options && props.options.length > 0){
+    listConcat(handlerData(props.options))
   }
 }
 
@@ -138,6 +129,7 @@ function listConcat(dictData) {
   } else {
     selectList.value = dictData
   }
+  setValue(props.modelValue)
 }
 
 function handlerData(data) {

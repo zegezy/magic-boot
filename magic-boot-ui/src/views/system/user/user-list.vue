@@ -84,7 +84,7 @@ const tableOptions = reactive({
       value: '',
       properties: {
         url: 'role/all',
-        el: { multiple: true }
+        multiple: true
       }
     },
     officeId: ''
@@ -118,6 +118,9 @@ const tableOptions = reactive({
       label: '禁止登录',
       type: 'switch',
       width: 100,
+      if: (row) => {
+        return row.id != '1'
+      },
       change: (row) => {
         proxy.$get('/user/change/login/status', {
           id: row.id,
@@ -150,6 +153,9 @@ const tableOptions = reactive({
           label: '删除',
           type: 'text',
           icon: 'ElDelete',
+          if: (row) => {
+            return row.id != '1'
+          },
           click: (row) => {
             proxy.$common.handleDelete({
               url: 'user/delete',

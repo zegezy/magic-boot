@@ -46,7 +46,7 @@
             </el-col>
             <el-col :span="12">
               <el-form-item label="数据权限" prop="permission">
-                <mb-select v-model="temp.permission" :data="permissionData" />
+                <mb-select v-model="temp.permission" :options="permissionData" />
                 <mb-tree v-if="temp.permission == 1" max-height="270px" :el="{ 'check-strictly': true, 'show-checkbox': true }" ref="office" url="office/tree" v-model:select-values="temp.offices" />
               </el-form-item>
             </el-col>
@@ -55,7 +55,7 @@
       </template>
     </mb-dialog>
 
-    <mb-dialog ref="assignPermissionsDialog" title="分配权限" width="750px" @confirm-click="assignPermissions.save($event)">
+    <mb-dialog ref="assignPermissionsDialog" title="分配权限" width="550px" @confirm-click="assignPermissions.save($event)">
       <template #content>
         <role-assign-permissions ref="assignPermissions" :key="Math.random()" :id="temp.id" @close="() => { assignPermissionsDialog.value.hide(); temp.id = '' }" />
       </template>

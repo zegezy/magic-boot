@@ -31,7 +31,7 @@
     },
     options: Array,
     url: String,
-    params: Object,
+    data: Object,
     method: {
       type: String,
       default: 'get'
@@ -64,14 +64,18 @@
   if(props.type){
     options.value = proxy.$common.getDictType(props.type)
   }else if(props.url){
-    request({
-      url: props.url,
-      method: props.method,
-      params: props.params,
-      data: props.params
-    }).then(res => {
+    var then = (res) => {
       options.value = res.data.list || res.data
-    })
+    }
+    if(props.method.toLowerCase() == 'post'){
+      proxy.$post(props.url, props.data).then(res => {
+        then(res)
+      })
+    }else{
+      proxy.$get(props.url, props.data).then(res => {
+        then(res)
+      })
+    }
   }else if(props.options){
     options.value = props.options
   }

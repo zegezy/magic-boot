@@ -182,6 +182,9 @@ const tableOptions = reactive({
           type: 'text',
           permission: 'office:delete',
           icon: 'ElDelete',
+          if: (row) => {
+            return row.pid != '0';
+          },
           click: (row) => {
             proxy.$common.handleDelete({
               url: 'office/delete',
