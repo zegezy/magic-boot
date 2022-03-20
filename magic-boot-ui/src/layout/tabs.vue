@@ -43,8 +43,10 @@
     tabValue.value = global.tabValue.value
   })
   function openTab(item){
+    console.log(global.visitedViews.map(it => it.name))
     proxy.$router.push({
-      path: item.props.name
+      path: item.props.name,
+      query: global.visitedViews.filter(it => it.path == item.props.name)[0].query
     })
   }
   function removeTab(path){
@@ -58,7 +60,8 @@
         if(it.path == path){
           global.visitedViews.splice(i, 1)
           proxy.$router.push({
-            path: global.visitedViews[global.visitedViews.length - 1].path
+            path: global.visitedViews[global.visitedViews.length - 1].path,
+            query: global.visitedViews[global.visitedViews.length - 1].query
           })
         }
       })
@@ -66,7 +69,8 @@
   }
   function refresh(path){
     proxy.$router.replace({
-      path: `/redirect${path}`
+      path: `/redirect${path}`,
+      query: global.visitedViews.filter(it => it.path == path)[0].query
     })
   }
   function close(type, path){
@@ -85,16 +89,17 @@
         }
       }
     }else{
-      for(var i = 0; i < global.visitedViews.length; i++){
-        if(global.visitedViews[i].path != path){
-          global.visitedViews.splice(i, 1)
+      for(var i = 0, len = global.visitedViews.length; i < len; i++){
+        if(global.visitedViews[0].path != path){
+          global.visitedViews.splice(0, 1)
         }else{
           break;
         }
       }
     }
     proxy.$router.push({
-      path: path
+      path: path,
+      query: global.visitedViews.filter(it => it.path == path)[0].query
     })
   }
 </script>

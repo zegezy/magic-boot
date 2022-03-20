@@ -24,9 +24,13 @@ document.title = global.title
 router.beforeEach((to, from) => {
   global.tabValue.value = to.path
   if((to.name && global.visitedViews.length === 0 || global.visitedViews.every(it => it.path !== to.path)) && !to.path.startsWith('/redirect') && !to.path.startsWith('/login')){
-    console.log(to)
     global.visitedViews.push(to)
   }
+  global.visitedViews.forEach((it, i) => {
+    if(it.path == to.path){
+      global.visitedViews[i] = to
+    }
+  })
   return true
 })
 app.use(globalProperties)

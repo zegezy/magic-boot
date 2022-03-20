@@ -75,10 +75,6 @@ const props = defineProps({
   }
 })
 
-watch(() => props.checkedIds, (value) => {
-  console.log(value)
-})
-
 const tree = ref()
 const treeData = ref([])
 const searchData = ref([])

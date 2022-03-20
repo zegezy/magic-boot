@@ -22,12 +22,11 @@
         search-width="100%"
         :checked="false"
         @check-change="checkChange"
-        @mounted="treeMounted"
       />
     </div>
     <div class="right">
 
-      <mb-search :where="tableOptions.where" @search="reloadTable" @mounted="searchMounted">
+      <mb-search :where="tableOptions.where" @search="reloadTable">
         <template #btns>
           <el-button :loading="downloadLoading" class="filter-item" icon="ElDownload" @click="handleDownload">
             导出
@@ -175,16 +174,12 @@ const userFormDialog = ref()
 const table = ref()
 const userForm = ref()
 
-function searchMounted(){
-  if(proxy.$route.query.roleId){
-    tableOptions.where.roleId.value = proxy.$route.query.roleId
-  }
+if(proxy.$route.query.roleId){
+  tableOptions.where.roleId.value = proxy.$route.query.roleId
 }
 
-function treeMounted(){
-  if(proxy.$route.query.officeId){
-    tableOptions.where.officeId = proxy.$route.query.officeId
-  }
+if(proxy.$route.query.officeId){
+  tableOptions.where.officeId = proxy.$route.query.officeId
 }
 
 function checkChange(values) {

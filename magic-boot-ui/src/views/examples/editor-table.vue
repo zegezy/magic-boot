@@ -1,7 +1,7 @@
 <template>
   <div style="padding: 50px;">
     <el-button type="primary" @click="getData" style="margin-bottom: 10px">获取数据</el-button>
-    <mb-editor-table v-model="tableDatas" :cols="cols" :show-no="false" />
+    <mb-editor-table v-model="tableDatas" :cols="cols" :show-no="false" :operation="false" />
   </div>
 </template>
 

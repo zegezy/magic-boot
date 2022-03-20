@@ -28,7 +28,10 @@ const emit = defineEmits(['update:modelValue', 'change'])
 
 const magicTable = ref()
 const props = defineProps({
-  modelValue: Array,
+  modelValue: {
+    type: Array,
+    default: () => []
+  },
   cols: {
     type: Array,
     default: () => []
@@ -36,11 +39,15 @@ const props = defineProps({
   showNo: {
     type: Boolean,
     default: true
+  },
+  operation: {
+    type: Boolean,
+    default: true
   }
 })
 
 const tableOptions = reactive({
-  data: [],
+  data: props.modelValue,
   cols: [],
   showNo: props.showNo
 })
@@ -48,25 +55,26 @@ const tableOptions = reactive({
 for (var i in props.cols) {
   var col = props.cols[i]
   tableOptions.cols.push({
-    type: 'dynamic',
-    field: col.field,
-    label: col.label
+    ...col,
+    type: 'dynamic'
   })
 }
 
-tableOptions.cols.push({
-  label: '操作',
-  type: 'btns',
-  width: 85,
-  fixed: 'right',
-  btns: [{
-    label: '删除',
-    type: 'danger',
-    click: (row, index) => {
-      tableOptions.data.splice(index, 1)
-    }
-  }]
-})
+if(props.operation){
+  tableOptions.cols.push({
+    label: '操作',
+    type: 'btns',
+    width: 85,
+    fixed: 'right',
+    btns: [{
+      label: '删除',
+      type: 'danger',
+      click: (row, index) => {
+        tableOptions.data.splice(index, 1)
+      }
+    }]
+  })
+}
 
 watch(() => props.modelValue, (value) => {
   console.log(value)

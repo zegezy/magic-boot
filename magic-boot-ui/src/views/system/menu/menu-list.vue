@@ -188,8 +188,8 @@ const tableOptions = reactive({
     }
   ]
 })
-let dialogTitle = ref('')
-let searchTimeout = reactive()
+const dialogTitle = ref('')
+var searchTimeout = reactive()
 const menuFormDialog = ref()
 const menuFormRef = ref()
 
@@ -197,7 +197,6 @@ function reloadTable(){
   proxy.$get('menu/tree').then(res => {
     menuData.value = res.data.list
     tableOptions.data = menuData.value
-    searchMenu()
   })
 }
 
@@ -208,6 +207,9 @@ function expand(){
 }
 
 function searchMenu() {
+  refreshTable.value = false
+  tableOptions.el["default-expand-all"] = true
+  nextTick(() => refreshTable.value = true)
   clearTimeout(searchTimeout)
   searchTimeout = setTimeout(() => {
     if(searchValue.value){

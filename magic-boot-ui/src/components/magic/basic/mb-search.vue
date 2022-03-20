@@ -56,10 +56,6 @@ for(var key in props.where){
   }
 }
 
-watch(() => props.where,() => {
-  console.log(props.where)
-})
-
 const emit = defineEmits(['search', 'mounted'])
 
 function input(input){

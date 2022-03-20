@@ -218,7 +218,7 @@ const rules = reactive({
   name: [{ required: true, message: '请输入机构名称', trigger: 'change' }],
   code: [{ required: true, message: '请输入机构编码', trigger: 'change' }]
 })
-const searchTimeout = null
+var searchTimeout = null
 const officeFormDialog = ref()
 const dataForm = ref()
 
@@ -237,9 +237,7 @@ watch(officeData, () => {
 function expand(){
   refreshTable.value = false
   tableOptions.el["default-expand-all"] = !tableOptions.el["default-expand-all"]
-  nextTick(() => {
-    refreshTable.value = true
-  })
+  nextTick(() => refreshTable.value = true)
 }
 
 function searchOffice() {
