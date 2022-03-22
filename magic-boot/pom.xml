@@ -52,6 +52,16 @@
             <artifactId>sa-token-spring-boot-starter</artifactId>
             <version>${sa-token.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.ssssssss</groupId>
+            <artifactId>magic-api-plugin-task</artifactId>
+            <version>${magic-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ssssssss</groupId>
+            <artifactId>magic-api-plugin-component</artifactId>
+            <version>${magic-api.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
