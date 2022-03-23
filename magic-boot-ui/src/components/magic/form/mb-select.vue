@@ -5,7 +5,10 @@
       :key="item.value"
       :label="item.label"
       :value="item.value"
-    />
+    >
+      <span style="float: left">{{ item.label }}</span>
+      <span v-if="showValue" style="float: right;color: var(--el-text-color-secondary);font-size: 13px;">{{ item.value }}</span>
+    </el-option>
   </el-select>
 </template>
 
@@ -69,6 +72,10 @@ const props = defineProps({
   join: {
     type: Boolean,
     default: true
+  },
+  showValue: {
+    type: Boolean,
+    default: false
   }
 })
 

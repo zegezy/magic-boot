@@ -43,12 +43,17 @@ const props = defineProps({
   operation: {
     type: Boolean,
     default: true
+  },
+  page: {
+    type: Boolean,
+    default: false
   }
 })
 
 const tableOptions = reactive({
   data: props.modelValue,
   cols: [],
+  page: props.page,
   showNo: props.showNo
 })
 
