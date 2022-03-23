@@ -27,8 +27,15 @@
     <el-form-item label="菜单链接" prop="url" v-if="menuType == 'menu'">
       <el-input v-model="temp.url" />
     </el-form-item>
-    <el-form-item label="关联组件" prop="componentId" v-if="menuType == 'menu'">
-      <mb-select v-model="temp.componentId" url="/component/select" width="100%" />
+    <el-form-item label="关联组件" prop="componentName" v-if="menuType == 'menu'">
+      <treeselect
+        v-model="temp.componentName"
+        :disable-branch-nodes="true"
+        :show-count="true"
+        :options="componentTree"
+        :key="temp.componentName"
+        style="position: fixed;z-index:999999;width: 850px;"
+      />
     </el-form-item>
     <el-form-item label="权限标识" prop="permission" v-if="menuType == 'button'">
       <el-input v-model="temp.permission" />
@@ -97,7 +104,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['reload-table'])
-
+const componentTree = ref()
 const dataForm = ref()
 const iconDialog = ref()
 const menuType = ref('menu')
@@ -113,9 +120,14 @@ const getTemp = () => {
     pid: 0,
     icon: '',
     keepAlive: 1,
-    componentId: ''
+    componentName: ''
   }
 }
+
+proxy.$get('component/select').then(res => {
+  componentTree.value = res.data
+})
+
 const temp = ref(getTemp())
 
 var validateUrl = (rule, value, callback) => {
