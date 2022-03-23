@@ -57,7 +57,7 @@
 
     <mb-dialog ref="assignPermissionsDialog" title="分配权限" width="550px" @confirm-click="assignPermissions.save($event)">
       <template #content>
-        <role-assign-permissions ref="assignPermissions" :key="Math.random()" :id="temp.id" @close="() => { assignPermissionsDialog.value.hide(); temp.id = '' }" />
+        <role-assign-permissions ref="assignPermissions" :key="temp.id" :id="temp.id" @close="() => { assignPermissionsDialog.hide(); temp.id = '' }" />
       </template>
     </mb-dialog>
 
@@ -83,6 +83,7 @@ const permissionData = reactive([{
         label: '本级',
         value: '3'
       }])
+const assignPermissions = ref()
 const assignPermissionsDialog = ref()
 const table = ref()
 const roleFormDialog = ref()
@@ -150,7 +151,7 @@ const tableOptions = reactive({
                 type: 'text',
                 icon: 'ElPlus',
                 click: (row) => {
-                  temp.id = row.id
+                  temp.value.id = row.id
                   assignPermissionsDialog.value.show()
                 }
               },
