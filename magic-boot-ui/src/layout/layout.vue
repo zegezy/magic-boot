@@ -54,8 +54,10 @@ import { ArrowDown } from '@element-plus/icons-vue'
 import Tabs from './tabs.vue'
 import Sidebar from './sidebar/sidebar.vue'
 import { logout } from '@/scripts/auth'
+import dynamicComponent from '@/scripts/dynamicComponent'
 import { getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
+dynamicComponent(getCurrentInstance().appContext.app)
 </script>
 
 <style scoped>
@@ -67,7 +69,6 @@ const { proxy } = getCurrentInstance()
   }
   .title{
     font-family: PoetsenOne;
-    width: var(--mb-sidebar-width);
     line-height: 60px;
     font-size: 24px;
     color: white;

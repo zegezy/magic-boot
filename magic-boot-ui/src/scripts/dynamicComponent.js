@@ -1,5 +1,6 @@
 import { babelParse } from '@vue/compiler-sfc'
 import { compileFile } from '@/compiler/sfc-compiler.js'
+import { ElLoading } from 'element-plus'
 
 function appComponent(app, item){
     var compiled = {}
@@ -27,10 +28,15 @@ function appComponent(app, item){
 }
 
 const install = (app) => {
-    app.config.globalProperties.$post('/component/list', { size: 999999 }).then((res) => {
+    const loading = ElLoading.service({
+        lock: true,
+        background: 'rgba(255, 255, 255, 0)',
+    })
+    app.config.globalProperties.$post('/component/list').then((res) => {
         res.data.forEach(it => {
             appComponent(app, it)
         })
+        loading.close()
     })
 }
 export default install
