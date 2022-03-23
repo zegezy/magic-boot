@@ -1,8 +1,10 @@
 <template>
 	<div class="magic-component-info">
 		<form>
-			<label>{{ $i('component.form.componentName') }}</label>
-			<magic-input v-model:value="info.name" :placeholder="$i('component.form.placeholder.componentName')" width="250px"/>
+			<label>{{ $i('component.form.name') }}</label>
+			<magic-input v-model:value="info.name" :placeholder="$i('component.form.placeholder.name')" width="250px"/>
+      <label>{{ $i('component.form.path') }}</label>
+      <magic-input v-model:value="info.path" :placeholder="$i('component.form.placeholder.path')" width="auto" style="flex:1"/>
 		</form>
 		<div style="flex:1;padding-top:5px;">
 			<magic-textarea v-model:value="info.description" :placeholder="$i('component.form.placeholder.description')"/>

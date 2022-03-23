@@ -3,10 +3,12 @@ export default {
         title: '组件信息',
         name: '组件',
         form: {
-            componentName: '组件名称',
+            name: '组件名称',
+            path: '组件路径',
             description: '组件描述',
             placeholder: {
-                componentName: '请输入组件名称',
+                name: '请输入组件名称',
+                path: '请输入组件路径',
                 description: '请输入组件描述'
             }
         }

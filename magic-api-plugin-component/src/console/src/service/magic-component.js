@@ -19,7 +19,7 @@ export default function (bus, constants, $i, Message, request) {
         // 是否允许执行测试
         runnable: false,
         // 是否需要填写路径
-        requirePath: false,
+        requirePath: true,
         // 合并
         merge: item => item
     }

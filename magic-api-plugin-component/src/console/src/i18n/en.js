@@ -3,10 +3,12 @@ export default {
         title: 'Component Info',
         name: 'Component',
         form: {
-            componentName: 'Component Name',
+            name: 'Component Name',
+            path: 'Component Path',
             description: 'Component Description',
             placeholder: {
-                componentName: 'Please Enter Component Name',
+                name: 'Please Enter Component Name',
+                path: 'Please Enter Component Path',
                 description: 'Please Enter Component Description'
             }
         }

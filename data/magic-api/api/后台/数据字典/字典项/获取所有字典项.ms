@@ -4,8 +4,8 @@
   "script" : null,
   "groupId" : "376f26eb43a44a3daeafd27020a96f48",
   "name" : "获取所有字典项",
-  "createTime" : 1646490239446,
-  "updateTime" : 1634735167647,
+  "createTime" : null,
+  "updateTime" : 1647790331786,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -16,9 +16,21 @@
   "requestBody" : "{\r\n\t\r\n}",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1634093797926,\n    \"executeTime\": null\n}",
+  "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1647790314936,\n    \"executeTime\": null\n}",
   "description" : null,
-  "requestBodyDefinition" : null,
+  "requestBodyDefinition" : {
+    "name" : "",
+    "value" : "",
+    "description" : "",
+    "required" : false,
+    "dataType" : "Object",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : "",
+    "error" : "",
+    "expression" : "",
+    "children" : [ ]
+  },
   "responseBodyDefinition" : {
     "name" : "",
     "value" : "",
@@ -68,7 +80,7 @@
       "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1634093797926",
+      "value" : "1647790314936",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
