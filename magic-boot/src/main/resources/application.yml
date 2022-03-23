@@ -97,7 +97,7 @@ magic-api:
   crud: # CRUD相关配置
     logic-delete-column: is_del #逻辑删除列
     logic-delete-value: 1 #逻辑删除值
-#  security-config:
+#  security:
 #    username: admin
 #    password: 123456
 

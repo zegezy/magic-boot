@@ -12,7 +12,7 @@ const install = (app) => {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    transformRequest: [data => Object.keys(data).map(it => encodeURIComponent(it) + '=' + encodeURIComponent(data[it] === null || data[it] === undefined ? '' : data[it])).join('&')]
+    transformRequest: [data => data && Object.keys(data).map(it => encodeURIComponent(it) + '=' + encodeURIComponent(data[it] === null || data[it] === undefined ? '' : data[it])).join('&')]
   })
   app.config.globalProperties.$postJson = (url, data) => request.post(url, JSON.stringify(data), {
     headers: {
