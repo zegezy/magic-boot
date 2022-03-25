@@ -1,10 +1,11 @@
 <template>
-  <treeselect v-model="modelValue" :options="options" :key="modelValue" :placeholder="placeholder || (itemLabel && '请选择' + itemLabel)" :show-count="true" v-bind="props.props" />
+  <treeselect v-model="selectValue" :options="options" :key="modelValue" :placeholder="placeholder || (itemLabel && '请选择' + itemLabel)" :show-count="true" v-bind="props.props" />
 </template>
 
 <script setup>
   import { ref, getCurrentInstance, watch } from "vue"
   const emit = defineEmits(['update:modelValue'])
+  const selectValue = ref(null)
   const { proxy } = getCurrentInstance()
   const props = defineProps({
     modelValue: {
@@ -21,7 +22,11 @@
     props: Object
   })
 
+  selectValue.value = props.modelValue
   watch(() => props.modelValue, (value) => {
+    selectValue.value = value
+  })
+  watch(selectValue, (value) => {
     emit('update:modelValue', value)
   })
 

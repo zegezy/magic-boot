@@ -1,6 +1,6 @@
 <template>
   <el-date-picker
-    v-model="modelValue"
+    v-model="selectValue"
     :type="type"
     :format="format"
     :value-format="valueFormat"
@@ -14,6 +14,7 @@
 <script setup>
   import { watch, ref } from 'vue'
   const emit = defineEmits(['update:modelValue'])
+  const selectValue = ref('')
   const props = defineProps({
     modelValue: String,
     type: String,
@@ -35,8 +36,13 @@
     },
     props: Object
   })
-  const valueFormat = ref(props.format)
+
+  selectValue.value = props.modelValue
   watch(() => props.modelValue, (value) => {
+    selectValue.value = value
+  })
+  const valueFormat = ref(props.format)
+  watch(selectValue, (value) => {
     emit('update:modelValue', value)
   })
 </script>

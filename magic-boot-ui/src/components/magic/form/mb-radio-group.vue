@@ -1,6 +1,6 @@
 <template>
   <el-radio-group
-    v-model="modelValue"
+    v-model="selectValue"
     :size="size"
     :disabled="disabled"
     :text-color="textColor"
@@ -22,6 +22,7 @@
   const emit = defineEmits(['update:modelValue', 'change'])
   const { proxy } = getCurrentInstance()
 
+  const selectValue = ref('')
   const props = defineProps({
     modelValue: String | Number | Boolean,
     type: String,
@@ -59,6 +60,8 @@
     }
   })
 
+  selectValue.value = props.modelValue
+
   const options = ref([])
 
   if(props.type){
@@ -83,8 +86,10 @@
   function change(value){
     emit('change', value)
   }
-
   watch(() => props.modelValue, (value) => {
+    selectValue.value = value
+  })
+  watch(selectValue, (value) => {
     emit('update:modelValue', value)
   })
 </script>
