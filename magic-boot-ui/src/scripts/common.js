@@ -158,14 +158,14 @@ common.getUrl = (url, data) => {
   return url
 }
 
-common.loadConfig = async() => {
-  await request({
-    url: 'config/list'
-  }).then(res => {
-    const { data } = res
-    global.filePrefix = data.filePrefix
-  })
-}
+// common.loadConfig = async() => {
+//   await request({
+//     url: 'config/list'
+//   }).then(res => {
+//     const { data } = res
+//     global.filePrefix = data.filePrefix
+//   })
+// }
 
 common.setDefaultValue = (obj, attr, value) => {
   obj[attr] = obj[attr] === undefined ? value : obj[attr]

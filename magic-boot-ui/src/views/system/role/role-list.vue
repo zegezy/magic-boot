@@ -186,7 +186,7 @@ watch(() => temp.value.permission,() => {
 })
 
 function reloadTable() {
-  table.value.reloadList()
+  table.value.reload()
 }
 
 function getTemp(){

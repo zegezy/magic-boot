@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-row style="margin-bottom: 6px">
+    <el-row style="margin-bottom: 6px" v-if="toolbar">
       <el-button type="primary" @click="addRow">添加一行</el-button>
     </el-row>
     <mb-table ref="magicTable" v-bind="tableOptions">
@@ -22,7 +22,7 @@
 
 <script setup>
 
-import { reactive, ref, watch } from 'vue'
+import { reactive, ref, watch, nextTick } from 'vue'
 
 const emit = defineEmits(['update:modelValue', 'change'])
 
@@ -47,6 +47,10 @@ const props = defineProps({
   page: {
     type: Boolean,
     default: false
+  },
+  toolbar: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -90,7 +94,6 @@ watch(() => props.modelValue, (value) => {
 
 function addRow(){
   tableOptions.data.push({})
-  magicTable.value.reloadList()
 }
 
 function dataChange() {

@@ -44,7 +44,7 @@
   })
 
   function reload(){
-    tableRef.value.reloadList()
+    tableRef.value.reload()
   }
 
   function selectionChange(columns) {

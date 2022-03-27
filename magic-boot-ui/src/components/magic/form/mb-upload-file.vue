@@ -140,7 +140,7 @@ export default {
       this.$delete('file/delete', { url: encodeURI(url) })
     },
     handlePreview(file) {
-      window.open(this.$global.filePrefix + file.response.data.url)
+      window.open(this.$global.baseApi + file.response.data.url)
     },
     handleExceed(files, fileList) {
       this.$message.warning(`当前限制选择 ${this.limit} 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)

@@ -138,7 +138,7 @@ const formDialog = ref()
 const dataForm = ref()
 
 function reloadTable() {
-  table.value.reloadList()
+  table.value.reload()
 }
 
 function getTemp() {

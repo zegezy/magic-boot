@@ -119,7 +119,7 @@ const getTemp = () => {
     isShow: 1,
     pid: 0,
     icon: '',
-    keepAlive: 1,
+    keepAlive: 0,
     componentName: ''
   }
 }

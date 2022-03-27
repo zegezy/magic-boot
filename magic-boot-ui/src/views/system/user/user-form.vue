@@ -53,6 +53,7 @@ const emit = defineEmits(['reload-table'])
 const { proxy } = getCurrentInstance()
 
 const rules = reactive({
+  name: [{ required: true, message: '请输入姓名/昵称', trigger: 'change' }],
   username: [{ required: true, message: '请输入登录名称', trigger: 'change' }],
   roles: [{ required: true, message: '请选择角色', trigger: 'change' }],
   officeId: [{ required: true, message: '请选择组织机构', trigger: 'change' }]

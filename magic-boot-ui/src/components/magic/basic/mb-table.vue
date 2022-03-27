@@ -145,14 +145,14 @@ function sortChange(column) {
     order = null
   }
   newWhere.orderBy = order
-  reloadList()
+  reload()
 }
 
 function selectionChange(columns) {
   emit('selection-change', columns)
 }
 
-function reloadList() {
+function reload() {
   if (props.url) {
     newWhere.current = 1
     listCurrent.value = 1
@@ -207,7 +207,7 @@ function keyup(){
 watch(() => props.data, () => {
   listCurrent.value = 1
   handlerData()
-})
+},{ deep: true })
 
 watch(() => props.where,() => {
   renderWhere()
@@ -225,7 +225,7 @@ onMounted(() => {
   }
 })
 
-defineExpose({ reloadList })
+defineExpose({ reload })
 
 </script>
 

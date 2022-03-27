@@ -62,6 +62,6 @@
     ]
   })
   function reloadTable(){
-    table.value.reloadList()
+    table.value.reload()
   }
 </script>

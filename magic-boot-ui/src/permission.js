@@ -34,7 +34,7 @@ router.beforeEach(async(to, from, next) => {
           // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
           await getUserInfo()
           await common.getDictData()
-          await common.loadConfig()
+          // await common.loadConfig()
           // generate accessible routes map based on roles
           await generateRoutes().then(accessRoutes => {
             global.user.permissionRoutes.push(...accessRoutes)

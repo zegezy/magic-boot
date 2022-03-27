@@ -181,7 +181,7 @@ function getTemp() {
 }
 
 function reloadTable() {
-  table.value.reloadList()
+  table.value.reload()
 }
 
 function getSort() {

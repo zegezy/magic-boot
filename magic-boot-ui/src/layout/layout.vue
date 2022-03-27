@@ -6,7 +6,7 @@
       </div>
       <div class="header-right">
         <div class="avatar">
-          <el-avatar :size="40" fit="contain" :src="$global.filePrefix + $global.user.info.headPortrait">
+          <el-avatar :size="40" fit="contain" :src="$global.baseApi + $global.user.info.headPortrait">
             {{ !$global.user.info.headPortrait ? $global.user.info.name.substring(0,1) : '' }}
           </el-avatar>
           <el-dropdown>

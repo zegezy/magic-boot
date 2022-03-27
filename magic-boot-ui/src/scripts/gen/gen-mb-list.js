@@ -26,35 +26,39 @@ function gen(groupPath, data){
         }],
         table: {
             url: '${groupPath}/list',
-            where: {
-    `
+            where: {`
     for(var i in data){
         var d = data[i]
         if(d.query){
             html += `
                 ${d.columnName}: {
                     label: '${d.columnComment}'
-                },
-            `
+                },`
         }
     }
+    html = html.substring(0, html.length - 1)
     html += `
             },
-            cols: [
-    `
+            cols: [`
     for(var i in data){
         var d = data[i]
         if(d.list){
-            html += `
+            if(d.dictType){
+                html += `
                 {
+                    dictType: '${d.dictType}',`
+            }else{
+                html += `
+                {
+                `
+            }
+            html += `
                     field: '${d.columnName}',
                     label: '${d.columnComment}'
-                },
-            `
+                },`
         }
     }
-    html += `
-                {
+    html += `{
                     label: '操作',
                     type: 'btns',
                     width: 140,
@@ -85,7 +89,42 @@ function gen(groupPath, data){
                     ]
                 }
             ]
+        }
+    })
     `
+    html += `
+    const formOptions = reactive({
+        detail: {
+            request: {
+              url: '${groupPath}/get'
+            }
+        },
+        form: {
+            request: {
+                url: "${groupPath}/save",
+                method: "post"
+            },
+            rows: [{
+                gutter: 24,
+                cols: [`
+    for(var i in data){
+        var d = data[i]
+        if(d.save){
+            html += `{
+                    span: 12,
+                    name: '${d.columnName}',
+                    label: '${d.columnComment}',
+                    ${d.component}
+                },`
+        }
+    }
+    html = html.substring(0, html.length - 1)
+    html += `]
+            }]
+        }
+    })
+    `
+
     console.log(html)
 }
 export default gen

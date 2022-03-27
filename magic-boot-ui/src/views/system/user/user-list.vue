@@ -193,7 +193,7 @@ function selectionChange(columns) {
 
 function reloadTable() {
   userFormDialog.value.hide()
-  table.value.reloadList()
+  table.value.reload()
 }
 
 function handleCreate() {

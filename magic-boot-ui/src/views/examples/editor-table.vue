@@ -12,12 +12,12 @@ import genCode from '@/scripts/gen/gen-mb-list.js'
 const { proxy } = getCurrentInstance()
 const tableDatas = reactive([])
 
-proxy.$get('/code/gen/columns', { tableName: 'sys_user' }).then(res => {
+proxy.$get('/code/gen/columns', { tableName: 'sys_test' }).then(res => {
   var columns = res.data.columns
   var primary = res.data.primary
   columns.forEach(it => {
     tableDatas.push({
-      columnName: it.columnName,
+      columnName: it.columnName.replace(/\_(\w)/g, (all, letter) => letter.toUpperCase()),
       columnComment: it.columnComment,
       dataType: it.dataType
     })
@@ -99,34 +99,61 @@ const cols = reactive([{
   props: {
     options: [{
       label: '单行文本框',
-      value: 'input'
+      value: `component: 'input'`
     },{
       label: '多行文本框',
-      value: 'textarea'
+      value: `component: 'input',
+                    props: {
+                        type: 'textarea'
+                    }
+      `
     },{
       label: '单选下拉框',
-      value: 'radioSelect'
+      value: `component: 'select'`
     },{
       label: '多选下拉框',
-      value: 'multipleSelect'
+      value: `component: 'select',
+                    props: {
+                        multiple: true
+                    }
+      `
     },{
-      label: '单选按钮',
-      value: 'radio'
+      label: '单选框',
+      value: `component: 'radio-group'`
     },{
       label: '复选框',
-      value: 'checkbox'
+      value: `component: 'checkbox-group'`
     },{
       label: '日期选择',
-      value: 'date'
+      value: `component: 'date'`
     },{
       label: '日期时间',
-      value: 'datetime'
+      value: `component: 'date',
+                    props: {
+                        type: 'datetime',
+                        format: 'YYYY-MM-DD HH:mm:ss'
+                    }
+      `
     },{
       label: '图片上传',
-      value: 'uploadImage'
+      value: `component: 'upload-image'`
     },{
       label: '文件上传',
-      value: 'uploadFile'
+      value: `component: 'upload-file'`
+    },{
+      label: '多图片上传',
+      value: `component: 'upload-image',
+                    props: {
+                        multiple: true
+                    }
+      `
+    },{
+      label: '多文件上传',
+      value: `component: 'upload-file',
+                    props: {
+                        multiple: true
+                    }
+      `
     }]
   }
 }, {
@@ -140,7 +167,7 @@ const cols = reactive([{
 }])
 
 function gen(){
-  genCode('user', tableDatas)
+  genCode('test', tableDatas)
 }
 
 function getData(){

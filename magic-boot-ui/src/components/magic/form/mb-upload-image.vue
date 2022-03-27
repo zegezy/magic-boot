@@ -13,8 +13,8 @@
           :style="{ width: width.replace('px', '') + 'px', height: height.replace('px', '') + 'px' }"
         >
           <el-image
-            :src="$global.filePrefix + element"
-            :preview-src-list="[$global.filePrefix + element]"
+            :src="$global.baseApi + element"
+            :preview-src-list="[$global.baseApi + element]"
           />
           <div class="tools">
             <div class="shadow" @click="handleRemove(element)">
@@ -227,7 +227,7 @@ export default {
       })
     },
     beforeCropper(url) {
-      this.cropperOption.img = this.$global.filePrefix + url
+      this.cropperOption.img = this.$global.baseApi + url
       this.cropperOption.relativeImg = url
       this.$refs.cropperDialog.show()
     },

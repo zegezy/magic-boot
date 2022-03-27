@@ -119,13 +119,8 @@ const listOptions = reactive({
 })
 const formOptions = reactive({
   detail: {
-    // request: {
-    //   url: 'user/get'
-    // },
-    handlerFormData: (formData) => {
-      proxy.$get('user/roles', { userId: formData.id }).then((res) => {
-        formData.roles = res.data.join(',')
-      })
+    request: {
+      url: 'user/get'
     }
   },
   form: {
@@ -145,18 +140,11 @@ const formOptions = reactive({
         span: 12,
         name: 'username',
         label: '登录名称',
-        rules: [{ required: true, message: '请输入登录名称', trigger: 'change' }],
-        props: {
-          autocomplete: 'new-password'
-        }
+        rules: [{ required: true, message: '请输入登录名称', trigger: 'change' }]
       }, {
         span: 12,
         name: 'password',
-        label: '密码',
-        props: {
-          type: 'password',
-          autocomplete: 'new-password'
-        }
+        label: '密码'
       }]
     },{
       gutter: 24,
