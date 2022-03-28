@@ -127,7 +127,7 @@ const tableOptions = reactive({
           type: 'text',
           icon: 'ElSortUp',
           click: (row) => {
-            proxy.$get('office/sort/up',{
+            proxy.$get('/system/office/sort/up',{
               id: row.id,
               pid: row.pid,
               sort: row.sort
@@ -141,7 +141,7 @@ const tableOptions = reactive({
           type: 'text',
           icon: 'ElSortDown',
           click: (row) => {
-            proxy.$get('office/sort/down',{
+            proxy.$get('/system/office/sort/down',{
               id: row.id,
               pid: row.pid,
               sort: row.sort
@@ -187,7 +187,7 @@ const tableOptions = reactive({
           },
           click: (row) => {
             proxy.$common.handleDelete({
-              url: 'office/delete',
+              url: '/system/office/delete',
               id: row.id,
               done: () => reloadTable()
             })
@@ -267,7 +267,7 @@ function resetTemp() {
 }
 
 function getSort() {
-  proxy.$get('office/sort', { pid: temp.value.pid }).then(res => {
+  proxy.$get('/system/office/sort', { pid: temp.value.pid }).then(res => {
     temp.value.sort = res.data
   })
 }
@@ -306,7 +306,7 @@ function save(d) {
         })
         return
       }
-      proxy.$post('office/save', temp.value).then(() => {
+      proxy.$post('/system/office/save', temp.value).then(() => {
         d.hideLoading()
         proxy.$notify({
           title: '成功',
@@ -322,7 +322,7 @@ function save(d) {
 }
 
 function reloadTable() {
-  proxy.$get('office/tree').then(res => {
+  proxy.$get('/system/office/tree').then(res => {
     officeData.value = res.data.list
     tableOptions.data = officeData.value
   })

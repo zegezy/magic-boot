@@ -37,7 +37,7 @@
   })
   const loading = ref(false)
   function refreshCode(){
-    proxy.$get('/security/verification/code').then(res => {
+    proxy.$get('/system/security/verification/code').then(res => {
       codeImg.value = 'data:image/png;base64,' + res.data.img
       loginForm.uuid = res.data.uuid
     })

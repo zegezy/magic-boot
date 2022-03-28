@@ -32,7 +32,7 @@ const install = (app) => {
         lock: true,
         background: 'rgba(255, 255, 255, 0)',
     })
-    app.config.globalProperties.$post('/component/list').then((res) => {
+    app.config.globalProperties.$post('/system/component/list').then((res) => {
         res.data.forEach(it => {
             appComponent(app, it)
         })

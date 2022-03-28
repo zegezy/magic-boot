@@ -24,7 +24,7 @@
       }
     }],
     table: {
-      url: 'code/gen/list',
+      url: '/system/code/gen/list',
       where: {
         tableName: {
           label: '表名'
@@ -72,7 +72,7 @@
               icon: 'ElDelete',
               click: (row) => {
                 proxy.$common.handleDelete({
-                  url: 'code/gen/delete',
+                  url: '/system/code/gen/delete',
                   id: row.id,
                   done: () => magicList.value.reload()
                 })

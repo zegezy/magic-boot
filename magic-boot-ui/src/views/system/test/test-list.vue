@@ -40,7 +40,7 @@ import { ref, reactive, nextTick, getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
 
 const tableOptions = reactive({
-  url: 'test/list',
+  url: '/system/test/list',
   page: true,
   cols: [
     {
@@ -81,7 +81,7 @@ function handleCreate() {
 function save() {
   dataForm.value.validate((valid) => {
     if (valid) {
-      proxy.$post('test/save', temp.value).then((response) => {
+      proxy.$post('/system/test/save', temp.value).then((response) => {
         dialogFormVisible.value = false
         proxy.$notify({
           title: '成功',

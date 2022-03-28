@@ -156,7 +156,7 @@ export default {
     this.cropperOption = this.cropperConfig || {}
     this.cropperOption.img = ''
     if (this.externalId) {
-      this.$get('file/files', { externalId: this.externalId, externalType: this.externalType }).then(res => {
+      this.$get('/system/file/files', { externalId: this.externalId, externalType: this.externalType }).then(res => {
         this.urls = res.data
       })
       this.action = this.action + `?externalId=${this.externalId}&externalType=${this.externalType}`
@@ -218,7 +218,7 @@ export default {
       this.urls.forEach(url => {
         newUrls.push(encodeURI(url))
       })
-      this.$get('file/resort', { urls: newUrls.join(',') })
+      this.$get('/system/file/resort', { urls: newUrls.join(',') })
     },
     onExceed() {
       this.$message({
@@ -238,7 +238,7 @@ export default {
         formData.append('file', dataFile)
         formData.append('url', encodeURI(this.cropperOption.relativeImg))
         this.$request({
-          url: 'file/cropper',
+          url: '/system/file/cropper',
           method: 'post',
           data: formData
         }).then(res => {

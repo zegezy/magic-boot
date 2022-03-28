@@ -22,7 +22,7 @@ export function removeToken() {
 
 export async function getUserInfo() {
   await request({
-    url: 'user/info',
+    url: '/system/user/info',
     method: 'get'
   }).then(response => {
     const { data } = response
@@ -40,7 +40,7 @@ export async function getUserInfo() {
 export function login(data){
   return new Promise((resolve, reject) => {
     request({
-      url: 'security/login',
+      url: '/system/security/login',
       method: 'post',
       data
     }).then(res => {
@@ -55,7 +55,7 @@ export function login(data){
 
 export function logout(){
   request({
-    url: 'security/logout',
+    url: '/system/security/logout',
     method: 'get'
   }).then(() => {
     removeToken()

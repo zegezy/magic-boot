@@ -59,7 +59,7 @@ const props = defineProps({
 })
 
 const tableOptions = reactive({
-  url: 'dict/items/list',
+  url: '/system/dict/items/list',
   page: true,
   where: {
     label: {
@@ -113,7 +113,7 @@ const tableOptions = reactive({
           icon: 'ElDelete',
           click: (row) => {
             proxy.$common.handleDelete({
-              url: 'dict/items/delete',
+              url: '/system/dict/items/delete',
               id: row.id,
               done: () => {
                 reloadTable()
@@ -153,7 +153,7 @@ function getTemp() {
 }
 
 function getSort() {
-  proxy.$get('dict/items/sort', { dictId: props.dictId }).then(res => {
+  proxy.$get('/system/dict/items/sort', { dictId: props.dictId }).then(res => {
     temp.value.sort = res.data
   })
 }
@@ -172,7 +172,7 @@ function save(d) {
   dataForm.value.validate((valid) => {
     if (valid) {
       d.loading()
-      proxy.$post('dict/items/save', temp.value).then(() => {
+      proxy.$post('/system/dict/items/save', temp.value).then(() => {
         d.hideLoading()
         formDialog.value.hide()
         proxy.$notify({

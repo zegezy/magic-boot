@@ -77,7 +77,7 @@ function resetTemp() {
 function save() {
   dataForm.value.validate((valid) => {
     if (valid) {
-      proxy.$post('user/center/update', temp.value).then(() => {
+      proxy.$post('/system/user/center/update', temp.value).then(() => {
         proxy.$notify({
           title: '成功',
           message: '修改成功',

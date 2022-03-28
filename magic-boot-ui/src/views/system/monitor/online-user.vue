@@ -42,7 +42,7 @@
   // }])
   const listOptions = reactive({
     table: {
-      url: 'online/list',
+      url: '/system/online/list',
       where: {
         username: {
           label: '登录名称',
@@ -94,7 +94,7 @@
                   confirmButtonText: '确定',
                   callback: (action) => {
                     if (action === 'confirm') {
-                      proxy.$get('online/logout',{ token: row.token }).then(() => {
+                      proxy.$get('/system/online/logout',{ token: row.token }).then(() => {
                         magicList.value.reload()
                       })
                     }
@@ -108,7 +108,7 @@
     }
   })
   // function disable(){
-  //   proxy.$get('online/logout',{ id: currRow.value.id, time: time.value }).then(() => {
+  //   proxy.$get('/system/online/logout',{ id: currRow.value.id, time: time.value }).then(() => {
   //     magicDialog.value.hide()
   //     magicList.value.reload()
   //   })

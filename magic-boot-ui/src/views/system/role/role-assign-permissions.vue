@@ -17,13 +17,13 @@ console.log(props.id)
 
 const menus = ref('')
 
-proxy.$get('menu/by/role',{ roleId: props.id }).then(res => {
+proxy.$get('/system/menu/by/role',{ roleId: props.id }).then(res => {
   menus.value = res.data.join(',')
 })
 
 function save(d) {
   d.loading()
-  proxy.$post('role/save', {
+  proxy.$post('/system/role/save', {
     id: props.id,
     menus: menus.value
   }).then((response) => {

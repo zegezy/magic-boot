@@ -7,7 +7,7 @@ const common = {}
 let dictData = []
 common.getDictData = async function() {
   await request({
-    url: 'dict/items/all',
+    url: '/system/dict/items/all',
     method: 'get'
   }).then((response) => {
     const { data } = response
@@ -160,7 +160,7 @@ common.getUrl = (url, data) => {
 
 // common.loadConfig = async() => {
 //   await request({
-//     url: 'config/list'
+//     url: '/system/config/list'
 //   }).then(res => {
 //     const { data } = res
 //     global.filePrefix = data.filePrefix

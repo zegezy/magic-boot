@@ -4,8 +4,8 @@
   "script" : null,
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "获取用户信息",
-  "createTime" : 1646490239479,
-  "updateTime" : 1643710783720,
+  "createTime" : null,
+  "updateTime" : 1648431786861,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -18,7 +18,19 @@
   "paths" : [ ],
   "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1643710751531,\n    \"executeTime\": null\n}",
   "description" : null,
-  "requestBodyDefinition" : null,
+  "requestBodyDefinition" : {
+    "name" : "",
+    "value" : "",
+    "description" : "",
+    "required" : false,
+    "dataType" : "Object",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : "",
+    "error" : "",
+    "expression" : "",
+    "children" : [ ]
+  },
   "responseBodyDefinition" : {
     "name" : "",
     "value" : "",
@@ -95,7 +107,7 @@
 }
 ================================
 import 'cn.dev33.satoken.stp.StpUtil';
-import "@post:/security/permissions" as authoritiesList; 
+import "@post:/system/security/permissions" as authoritiesList; 
 
 var user = db.table("sys_user").where().eq("id",StpUtil.getLoginId()).selectOne()
 user.authorities = authoritiesList()

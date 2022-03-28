@@ -12,7 +12,7 @@ import genCode from '@/scripts/gen/gen-mb-list.js'
 const { proxy } = getCurrentInstance()
 const tableDatas = reactive([])
 
-proxy.$get('/code/gen/columns', { tableName: 'sys_test' }).then(res => {
+proxy.$get('/system/code/gen/columns', { tableName: 'sys_test' }).then(res => {
   var columns = res.data.columns
   var primary = res.data.primary
   columns.forEach(it => {
@@ -161,7 +161,7 @@ const cols = reactive([{
   field: 'dictType',
   label: '字典类型',
   props: {
-    url: 'dict/all',
+    url: '/system/dict/all',
     showValue: true
   }
 }])

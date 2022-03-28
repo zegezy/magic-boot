@@ -28,10 +28,10 @@ const listOptions = reactive({
   },{
     type: 'delete',
     permission: 'user:delete',
-    url: 'user/delete'
+    url: '/system/user/delete'
   }],
   table: {
-    url: 'user/list',
+    url: '/system/user/list',
     where: {
       username: {
         label: '登录名称',
@@ -43,7 +43,7 @@ const listOptions = reactive({
         type: 'select',
         label: '角色',
         props: {
-          url: 'role/all',
+          url: '/system/role/all',
           el: { multiple: true }
         }
       }
@@ -73,7 +73,7 @@ const listOptions = reactive({
         type: 'switch',
         width: 100,
         change: (row) => {
-          proxy.$get('/user/change/login/status', {
+          proxy.$get('/system/user/change/login/status', {
             id: row.id,
             isLogin: row.isLogin
           })
@@ -106,7 +106,7 @@ const listOptions = reactive({
             icon: 'ElDelete',
             click: (row) => {
               proxy.$common.handleDelete({
-                url: 'user/delete',
+                url: '/system/user/delete',
                 id: row.id,
                 done: () => magicList.value.reload()
               })
@@ -120,7 +120,7 @@ const listOptions = reactive({
 const formOptions = reactive({
   detail: {
     request: {
-      url: 'user/get'
+      url: '/system/user/get'
     }
   },
   form: {
@@ -166,7 +166,7 @@ const formOptions = reactive({
         label: '组织机构',
         rules: [{ required: true, message: '请选择组织机构', trigger: 'change' }],
         props: {
-          url: 'user/offices'
+          url: '/system/user/offices'
         }
       }, {
         component: 'select',
@@ -175,7 +175,7 @@ const formOptions = reactive({
         label: '选择角色',
         rules: [{ required: true, message: '请选择角色', trigger: 'change' }],
         props: {
-          url: 'role/all',
+          url: '/system/role/all',
           placeholder: '请选择角色',
           el: { multiple: true }
         }

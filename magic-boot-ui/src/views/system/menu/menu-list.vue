@@ -97,7 +97,7 @@ const tableOptions = reactive({
           type: 'text',
           icon: 'ElSortUp',
           click: (row) => {
-            proxy.$get('menu/sort/up',{
+            proxy.$get('/system/menu/sort/up',{
               id: row.id,
               pid: row.pid,
               sort: row.sort
@@ -111,7 +111,7 @@ const tableOptions = reactive({
           type: 'text',
           icon: 'ElSortDown',
           click: (row) => {
-            proxy.$get('menu/sort/down',{
+            proxy.$get('/system/menu/sort/down',{
               id: row.id,
               pid: row.pid,
               sort: row.sort
@@ -128,7 +128,7 @@ const tableOptions = reactive({
       type: 'switch',
       width: 100,
       change: (row) => {
-        proxy.$get('menu/change', {
+        proxy.$get('/system/menu/change', {
           id: row.id,
           isShow: row.isShow
         })
@@ -140,7 +140,7 @@ const tableOptions = reactive({
       type: 'switch',
       width: 100,
       change: (row) => {
-        proxy.$get('menu/change', {
+        proxy.$get('/system/menu/change', {
           id: row.id,
           keepAlive: row.keepAlive
         })
@@ -178,7 +178,7 @@ const tableOptions = reactive({
           icon: 'ElDelete',
           click: (row) => {
             proxy.$common.handleDelete({
-              url: 'menu/delete',
+              url: '/system/menu/delete',
               id: row.id,
               done: () => reloadTable()
             })
@@ -194,7 +194,7 @@ const menuFormDialog = ref()
 const menuFormRef = ref()
 
 function reloadTable(){
-  proxy.$get('menu/tree').then(res => {
+  proxy.$get('/system/menu/tree').then(res => {
     menuData.value = res.data.list
     tableOptions.data = menuData.value
   })

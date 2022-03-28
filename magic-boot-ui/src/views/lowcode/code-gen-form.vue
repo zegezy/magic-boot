@@ -16,8 +16,6 @@
         </el-row>
       </el-tab-pane>
       <el-tab-pane label="字段信息" name="field">
-        <el-button type="primary" @click="getData" style="margin-bottom: 10px">获取数据</el-button>
-        <el-button type="primary" @click="gen" style="margin-bottom: 10px">代码生成</el-button>
         <mb-editor-table v-model="genInfo.columns" :cols="cols" :show-no="false" :operation="false" :toolbar="false" />
       </el-tab-pane>
       <el-tab-pane label="生成信息" name="gen">
@@ -71,6 +69,17 @@
               <el-input v-model="genInfo.info.businessPath"></el-input>
             </el-form-item>
           </el-col>
+          <el-col :span="24">
+            <el-form-item>
+              <template #label>
+                代码生成
+                <el-tooltip content="接口和页面直接生成到magic-api的api,component" placement="top">
+                  <el-icon><ElQuestionFilled /></el-icon>
+                </el-tooltip>
+              </template>
+              <el-button type="primary" @click="gen" style="margin-bottom: 10px">代码生成</el-button>
+            </el-form-item>
+          </el-col>
         </el-row>
       </el-tab-pane>
     </el-tabs>
@@ -84,14 +93,23 @@
   const dataForm = ref()
   const tables = ref([])
   const emit = defineEmits(['reload'])
+  var validatePath = (rule, value, callback) => {
+    if(!value.startsWith('/')){
+      callback(new Error('请以“/”开头'));
+    }else if(value.endsWith('/')){
+      callback(new Error('不能以“/”结尾'));
+    }else{
+      callback();
+    }
+  }
   const genInfoRules = reactive({
     tableName: [{ required: true, message: '请选择表', trigger: 'change' }],
     tableComment: [{ required: true, message: '请输入描述', trigger: 'change' }],
     'info.template': [{ required: true, message: '请选择模板', trigger: 'change' }],
     'info.moduleName': [{ required: true, message: '请输入模块名称', trigger: 'change' }],
-    'info.modulePath': [{ required: true, message: '请输入模块路径', trigger: 'change' }],
+    'info.modulePath': [{ required: true, message: '请输入模块路径', trigger: 'change' },  { validator: validatePath }],
     'info.businessName': [{ required: true, message: '请输入功能名称', trigger: 'change' }],
-    'info.businessPath': [{ required: true, message: '请输入功能路径', trigger: 'change' }]
+    'info.businessPath': [{ required: true, message: '请输入功能路径', trigger: 'change' },  { validator: validatePath }]
   })
   const genInfo = ref({
     tableName: '',
@@ -107,13 +125,13 @@
   })
 
   async function watchTableName(){
-    await proxy.$get('/code/gen/tables').then(res => {
+    await proxy.$get('/system/code/gen/tables').then(res => {
       tables.value = res.data
     })
     watch(() => genInfo.value.tableName, (value) => {
       genInfo.value.tableComment = tables.value.filter(it => it.value == value)[0].label.replace(value, '').replace('(','').replace(')','')
       genInfo.value.columns = []
-      proxy.$get('/code/gen/columns', { tableName: value }).then(res => {
+      proxy.$get('/system/code/gen/columns', { tableName: value }).then(res => {
         var columns = res.data.columns
         var primary = res.data.primary
         columns.forEach(it => {
@@ -274,17 +292,13 @@
     field: 'dictType',
     label: '字典类型',
     props: {
-      url: 'dict/all',
+      url: '/system/dict/all',
       showValue: true
     }
   }])
 
   function gen(){
     genCode('test', genInfo.value.columns)
-  }
-
-  function getData(){
-    console.log(genInfo.value.columns)
   }
 
   function save(d){
@@ -294,7 +308,7 @@
         formData.info = JSON.stringify(genInfo.value.info)
         formData.columns = JSON.stringify(genInfo.value.columns)
         d.loading()
-        proxy.$post('/code/gen/save', formData).then(() => {
+        proxy.$post('/system/code/gen/save', formData).then(() => {
           d.hideLoading()
           proxy.$notify({
             title: '成功',
@@ -312,7 +326,7 @@
   }
 
   function getDetail(id){
-    proxy.$get('/code/gen/get', { id: id }).then(res => {
+    proxy.$get('/system/code/gen/get', { id: id }).then(res => {
       var formData = {...res.data}
       formData.info = JSON.parse(formData.info)
       formData.columns = JSON.parse(formData.columns)

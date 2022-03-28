@@ -50,7 +50,7 @@ public class PermissionInterceptor implements RequestInterceptor, HandlerInterce
             return StatusCode.CERTIFICATE_EXPIRED.json();
         } else {
             // TODO
-            List<String> permissions = (List<String>) magicAPIService.execute("post", "/security/permissions", null);
+            List<String> permissions = (List<String>) magicAPIService.execute("post", "/system/security/permissions", null);
             String permission = Objects.toString(info.getOptionValue(Options.PERMISSION), "");
             if (StringUtils.isNotBlank(permission) && !permissions.contains(permission)) {
                 return StatusCode.FORBIDDEN.json();
@@ -61,21 +61,23 @@ public class PermissionInterceptor implements RequestInterceptor, HandlerInterce
 
     @Override
     public Object postHandle(RequestEntity requestEntity, Object returnValue) throws Exception {
-        try {
-            HttpServletRequest request = requestEntity.getRequest();
-            ApiInfo info = requestEntity.getApiInfo();
-            template.update("insert into sys_oper_log(api_name, api_path, api_method, cost_time, create_by, create_date, user_agent, user_ip) values(?,?,?,?,?,?,?,?)",
+        if(StpUtil.isLogin()){
+            try {
+                HttpServletRequest request = requestEntity.getRequest();
+                ApiInfo info = requestEntity.getApiInfo();
+                template.update("insert into sys_oper_log(api_name, api_path, api_method, cost_time, create_by, create_date, user_agent, user_ip) values(?,?,?,?,?,?,?,?)",
 //                    PathUtils.replaceSlash(groupServiceProvider.getFullName(info.getGroupId()) + "/" + info.getName()).replace("/","-"),
-                    PathUtils.replaceSlash(String.format("/%s/%s", magicResourceService.getGroupName(info.getGroupId()), info.getName())),
-                    request.getRequestURI(),
-                    request.getMethod(),
-                    System.currentTimeMillis() - requestEntity.getRequestTime(),
-                    StpUtil.getLoginId(),
-                    new Date(requestEntity.getRequestTime()),
-                    request.getHeader("User-Agent"),
-                    ServletUtil.getClientIP(request));
-        } catch (Exception ignored){
-            ignored.printStackTrace();
+                        PathUtils.replaceSlash(String.format("/%s/%s", magicResourceService.getGroupName(info.getGroupId()), info.getName())),
+                        request.getRequestURI(),
+                        request.getMethod(),
+                        System.currentTimeMillis() - requestEntity.getRequestTime(),
+                        StpUtil.getLoginId(),
+                        new Date(requestEntity.getRequestTime()),
+                        request.getHeader("User-Agent"),
+                        ServletUtil.getClientIP(request));
+            } catch (Exception ignored){
+                ignored.printStackTrace();
+            }
         }
         return null;
     }

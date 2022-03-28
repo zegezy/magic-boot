@@ -86,7 +86,7 @@ export default {
   },
   created() {
     if (this.externalId) {
-      this.$get('file/files', { externalId: this.externalId, externalType: this.externalType }).then(res => {
+      this.$get('/system/file/files', { externalId: this.externalId, externalType: this.externalType }).then(res => {
         const { data } = res
         this.fileList = data
       })

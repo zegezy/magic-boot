@@ -63,7 +63,7 @@ import { ref, reactive, getCurrentInstance, onMounted, nextTick } from 'vue'
 const { proxy } = getCurrentInstance()
 
 const tableOptions = reactive({
-  url: 'user/list',
+  url: '/system/user/list',
   page: true,
   selection: true,
   where: {
@@ -82,7 +82,7 @@ const tableOptions = reactive({
       label: '角色',
       value: '',
       properties: {
-        url: 'role/all',
+        url: '/system/role/all',
         multiple: true
       }
     },
@@ -121,7 +121,7 @@ const tableOptions = reactive({
         return row.id != '1'
       },
       change: (row) => {
-        proxy.$get('/user/change/login/status', {
+        proxy.$get('/system/user/change/login/status', {
           id: row.id,
           isLogin: row.isLogin
         })
@@ -157,7 +157,7 @@ const tableOptions = reactive({
           },
           click: (row) => {
             proxy.$common.handleDelete({
-              url: 'user/delete',
+              url: '/system/user/delete',
               id: row.id,
               done: () => reloadTable()
             })

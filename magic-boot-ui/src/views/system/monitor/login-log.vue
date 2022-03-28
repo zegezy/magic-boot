@@ -9,7 +9,7 @@
   import { ref, reactive } from 'vue'
   const table = ref()
   const tableOptions = reactive({
-    url: 'log/login/list',
+    url: '/system/log/login/list',
     where: {
       createDate: {
         type: 'datetimerange',

@@ -182,7 +182,7 @@ function reloadTable() {
 }
 
 function getSort() {
-  proxy.$get('dict/sort').then(res => {
+  proxy.$get('/system/dict/sort').then(res => {
     temp.value.sort = res.data
   })
 }
@@ -201,7 +201,7 @@ function save(d) {
   dataForm.value.validate((valid) => {
     if (valid) {
       d.loading()
-      proxy.$post('dict/save', temp.value).then((response) => {
+      proxy.$post('/system/dict/save', temp.value).then((response) => {
         d.hideLoading()
         temp.value.id = response.data
         dictDialog.value.hide()

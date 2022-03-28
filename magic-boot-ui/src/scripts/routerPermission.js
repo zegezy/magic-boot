@@ -43,7 +43,7 @@ export const loadView = (view) => {
 export function generateRoutes(){
   return new Promise((resolve, reject) => {
     request({
-      url: 'menu/current/menus',
+      url: '/system/menu/current/menus',
       method: 'post'
     }).then(response => {
       const { data } = response

@@ -124,7 +124,7 @@ const getTemp = () => {
   }
 }
 
-proxy.$get('component/select').then(res => {
+proxy.$get('/system/component/select').then(res => {
   componentTree.value = res.data
 })
 
@@ -202,7 +202,7 @@ function save(d) {
         temp.value.icon = ''
         temp.value.url = ''
       }
-      proxy.$post('menu/save', temp.value).then(() => {
+      proxy.$post('/system/menu/save', temp.value).then(() => {
         d.hideLoading()
         proxy.$notify({
           title: '成功',
@@ -252,7 +252,7 @@ function openIcons() {
 }
 
 function getSort() {
-  proxy.$get('menu/sort', { pid: temp.value.pid }).then(res => {
+  proxy.$get('/system/menu/sort', { pid: temp.value.pid }).then(res => {
     temp.value.sort = res.data
   })
 }

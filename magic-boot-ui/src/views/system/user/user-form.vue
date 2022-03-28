@@ -64,7 +64,7 @@ const isForm = ref(true)
 const dataForm = ref()
 
 onBeforeMount(() => {
-  proxy.$get('user/offices').then(res => {
+  proxy.$get('/system/user/offices').then(res => {
     officeTree.value = res.data.list
     proxy.$treeTable.deleteEmptyChildren(officeTree.value)
   })
@@ -99,7 +99,7 @@ function save(d) {
   dataForm.value.validate((valid) => {
     if (valid) {
       d.loading()
-      proxy.$post('user/save', temp.value).then(() => {
+      proxy.$post('/system/user/save', temp.value).then(() => {
         d.hideLoading()
         proxy.$notify({
           title: '成功',
@@ -124,7 +124,7 @@ function getInfo(row) {
       temp.value[t] = row[t]
     }
   }
-  proxy.$get('user/roles', { userId: temp.value.id }).then((res) => {
+  proxy.$get('/system/user/roles', { userId: temp.value.id }).then((res) => {
     temp.value.roles = res.data.join(',')
   })
 }

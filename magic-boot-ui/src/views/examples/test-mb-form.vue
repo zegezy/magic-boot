@@ -104,7 +104,7 @@ const formOptions = reactive({
         label: 'treeselect',
         rules: [{ required: true, message: '请选择组织机构', trigger: 'change' }],
         props: {
-          url: 'user/offices'
+          url: '/system/user/offices'
         }
       }, {
         component: 'select',
@@ -113,7 +113,7 @@ const formOptions = reactive({
         label: 'select',
         rules: [{ required: true, message: '请选择角色', trigger: 'change' }],
         props: {
-          url: 'role/all',
+          url: '/system/role/all',
           placeholder: '请选择角色',
           multiple: true
         }

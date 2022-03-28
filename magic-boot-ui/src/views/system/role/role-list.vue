@@ -89,7 +89,7 @@ const table = ref()
 const roleFormDialog = ref()
 const dataForm = ref()
 const tableOptions = reactive({
-        url: 'role/list',
+        url: '/system/role/list',
         where: {
           name: {
             type: 'input',
@@ -139,7 +139,7 @@ const tableOptions = reactive({
                 icon: 'ElDelete',
                 click: (row) => {
                   proxy.$common.handleDelete({
-                    url: 'role/delete',
+                    url: '/system/role/delete',
                     id: row.id,
                     done: () => reloadTable()
                   })
@@ -218,7 +218,7 @@ function save(d) {
   dataForm.value.validate((valid) => {
     if (valid) {
       d.loading()
-      proxy.$post('role/save', temp.value).then(() => {
+      proxy.$post('/system/role/save', temp.value).then(() => {
         d.hideLoading()
         reloadTable()
         roleFormDialog.value.hide()
@@ -237,10 +237,10 @@ function handleUpdate(row) {
   for (var t in temp.value) {
     temp.value[t] = row[t]
   }
-  proxy.$get('menu/by/role',{ roleId: row.id }).then(res => {
+  proxy.$get('/system/menu/by/role',{ roleId: row.id }).then(res => {
     temp.value.menus = res.data.join(',')
   })
-  proxy.$get('office/by/role',{ roleId: row.id }).then(res => {
+  proxy.$get('/system/office/by/role',{ roleId: row.id }).then(res => {
     temp.value.offices = res.data.join(',')
   })
   dialogTitle.value = '修改'
