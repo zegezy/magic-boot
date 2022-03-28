@@ -5,20 +5,116 @@
   "groupId" : "f2538e0f370a4cabab0ae920f5e77ae7",
   "name" : "执行生成",
   "createTime" : null,
-  "updateTime" : 1648426498457,
+  "updateTime" : 1648486047810,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
   "path" : "/execute",
-  "method" : "GET",
-  "parameters" : [ ],
+  "method" : "POST",
+  "parameters" : [ {
+    "name" : "info",
+    "value" : "{\"moduleName\":\"数据管理\",\"modulePath\":\"/data\",\"businessName\":\"测试生成\",\"businessPath\":\"/test\",\"template\":\"singleTable\"}",
+    "description" : null,
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  }, {
+    "name" : "columns",
+    "value" : "[{\"columnName\":\"name\",\"columnComment\":\"名字\",\"columnType\":\"varchar(255)\",\"component\":\"component: 'input'\",\"where\":\"like\",\"save\":true,\"query\":true,\"list\":true,\"required\":false},{\"columnName\":\"sex\",\"columnComment\":\"性别\",\"columnType\":\"varchar(255)\",\"component\":\"component: 'radio-group'\",\"where\":\"=\",\"save\":true,\"query\":true,\"list\":true,\"required\":false,\"dictType\":\"sex\"},{\"columnName\":\"headPortrait\",\"columnComment\":\"头像\",\"columnType\":\"varchar(255)\",\"component\":\"component: 'upload-image'\",\"where\":\"in\",\"save\":true,\"query\":true,\"list\":true,\"required\":false},{\"columnName\":\"remarks\",\"columnComment\":\"备注\",\"columnType\":\"text\",\"component\":\"component: 'input',\\n                    props: {\\n                        type: 'textarea'\\n                    }\\n      \",\"where\":\"<=\",\"save\":true,\"query\":true,\"list\":true,\"required\":false}]",
+    "description" : null,
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  }, {
+    "name" : "tableName",
+    "value" : "t_data_test",
+    "description" : null,
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  }, {
+    "name" : "tableComment",
+    "value" : "测试生成",
+    "description" : null,
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  } ],
   "options" : [ ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": \"02df51e4d7184780a98b632f43dc5848\",\n    \"timestamp\": 1648309158679,\n    \"executeTime\": 8\n}",
+  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [{\n        \"columnName\": \"is_del\"\n    }, {\n        \"columnName\": \"create_by\"\n    }, {\n        \"columnName\": \"create_date\"\n    }, {\n        \"columnName\": \"update_by\"\n    }, {\n        \"columnName\": \"update_date\"\n    }],\n    \"timestamp\": 1648485740429,\n    \"executeTime\": 51\n}",
   "description" : null,
-  "requestBodyDefinition" : null,
+  "requestBodyDefinition" : {
+    "name" : "root",
+    "value" : "",
+    "description" : "",
+    "required" : false,
+    "dataType" : "Object",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : "",
+    "error" : "",
+    "expression" : "",
+    "children" : [ {
+      "name" : "info",
+      "value" : "",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Object",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ {
+        "name" : "moduleName",
+        "value" : "数据管理",
+        "description" : "",
+        "required" : false,
+        "dataType" : "String",
+        "type" : null,
+        "defaultValue" : null,
+        "validateType" : "",
+        "error" : "",
+        "expression" : "",
+        "children" : [ ]
+      }, {
+        "name" : "modulePath",
+        "value" : "/data",
+        "description" : "",
+        "required" : false,
+        "dataType" : "String",
+        "type" : null,
+        "defaultValue" : null,
+        "validateType" : "",
+        "error" : "",
+        "expression" : "",
+        "children" : [ ]
+      } ]
+    } ]
+  },
   "responseBodyDefinition" : {
     "name" : "",
     "value" : "",
@@ -56,7 +152,7 @@
       "children" : [ ]
     }, {
       "name" : "data",
-      "value" : "02df51e4d7184780a98b632f43dc5848",
+      "value" : "",
       "description" : "",
       "required" : false,
       "dataType" : "Object",
@@ -65,10 +161,34 @@
       "validateType" : "",
       "error" : "",
       "expression" : "",
-      "children" : [ ]
+      "children" : [ {
+        "name" : "",
+        "value" : "",
+        "description" : "",
+        "required" : false,
+        "dataType" : "Object",
+        "type" : null,
+        "defaultValue" : null,
+        "validateType" : "",
+        "error" : "",
+        "expression" : "",
+        "children" : [ {
+          "name" : "columnName",
+          "value" : "is_del",
+          "description" : "",
+          "required" : false,
+          "dataType" : "String",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        } ]
+      } ]
     }, {
       "name" : "timestamp",
-      "value" : "1648309158679",
+      "value" : "1648485740429",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -80,7 +200,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "8",
+      "value" : "51",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -94,7 +214,120 @@
   }
 }
 ================================
+import org.ssssssss.magicapi.core.model.ApiInfo
+import org.ssssssss.magicapi.core.model.Group
 import org.ssssssss.magicapi.core.service.MagicResourceService
+import log
 
+info = info::json
+var moduleGroup = MagicResourceService.tree('api').children.filter(it => {
+    return it.node.path == info.modulePath || it.node.path == info.modulePath.substring(1, info.modulePath.length())
+})
+if(moduleGroup.length == 0){
+    Group group = new Group();
+    group.setId(UUID.randomUUID().toString().replace('-', ''));
+    group.setName(info.moduleName);
+    group.setPath(info.modulePath);
+    group.setParentId("0");
+    group.setType('api')
+    MagicResourceService.saveGroup(group);
+    moduleGroup = group;
+}else{
+    moduleGroup = moduleGroup[0].node
+}
 
-return MagicResourceService.tree('api').children.filter(it => it.node.path == '')[0].node.id
+var businessGroup = MagicResourceService.tree('api').children.filter(it => it.node.id == moduleGroup.id)[0].children.filter(it => {
+    return it.node.path == info.businessPath || it.node.path == info.businessPath.substring(1, info.businessPath.length())
+})
+if(businessGroup.length == 0){
+    Group group = new Group();
+    group.setId(UUID.randomUUID().toString().replace('-', ''));
+    group.setName(info.businessName);
+    group.setPath(info.businessPath);
+    group.setParentId(moduleGroup.getId());
+    group.setType('api')
+    MagicResourceService.saveGroup(group);
+    businessGroup = group;
+}else{
+    businessGroup = businessGroup[0].node
+}
+columns = columns::json
+var listFields = columns.filter(it => it.list).map(it => it.columnName.replace(/([A-Z])/g,"_$1").toLowerCase()).join(',')
+var wheres = '';
+columns.forEach(it => {
+    var field = it.columnName.replace(/([A-Z])/g,"_$1").toLowerCase()
+    if(it.query){
+        if(it.where == 'in'){
+            wheres += `    ?{${it.columnName}, and ${field} in(#{`+it.columnName+`.split(',')}) }\n`
+        }else if(it.where == 'like'){
+            wheres += `    ?{${it.columnName}, and ${field} like concat('%',#{${it.columnName}},'%') }\n`
+        }else{
+            wheres += `    ?{${it.columnName}, and ${field} ${it.where} #{${it.columnName}} }\n`
+        }
+    }
+})
+wheres = wheres.substring(0,wheres.length() - 1)
+
+var commonField = db.select("""
+    SELECT
+        column_name
+    FROM
+        information_schema.COLUMNS 
+    WHERE
+        table_name = #{tableName} AND column_name IN ( 'is_del', 'create_by', 'create_date', 'update_by', 'update_date' ) AND table_schema = DATABASE()
+""")
+commonField = commonField.map(it => it.columnName)
+var primary = db.selectValue("SELECT column_name FROM information_schema.COLUMNS WHERE table_name = #{tableName} and column_key = 'PRI' and table_schema = database() limit 1")
+var primaryLowerCamelCase = primary.replace(/([A-Z])/g,"_$1").toLowerCase()
+
+ApiInfo listApi = new ApiInfo()
+listApi.setName("列表")
+listApi.setPath("/list")
+listApi.setMethod("POST")
+listApi.setGroupId(businessGroup.getId())
+listApi.setScript(`return db.page("""
+    select ${primary},${listFields} from ${tableName} where 1=1
+${wheres}
+""")`)
+MagicResourceService.saveFile(listApi)
+
+var saveMethod = 'save(data)'
+if(commonField.size() >= 4){
+    saveMethod = 'saveOrUpdate(data)'
+}
+
+ApiInfo saveApi = new ApiInfo()
+saveApi.setName("保存")
+saveApi.setPath("/save")
+saveApi.setMethod("POST")
+saveApi.setGroupId(businessGroup.getId())
+saveApi.setScript(`return db.table('${tableName}').primary('${primary}').${saveMethod}`)
+saveApi.setOption([{ name: 'wrap_request_parameter', value: 'data' }])
+MagicResourceService.saveFile(saveApi)
+
+var logic = ''
+if(commonField.contains('is_del')){
+    logic = '.logic()'
+}
+
+ApiInfo deleteApi = new ApiInfo()
+deleteApi.setName("删除")
+deleteApi.setPath("/delete")
+deleteApi.setMethod("DELETE")
+deleteApi.setGroupId(businessGroup.getId())
+deleteApi.setScript(`return db.table('${tableName}')${logic}.where().eq('${primary}', ${primaryLowerCamelCase}).delete()`)
+MagicResourceService.saveFile(deleteApi)
+
+var saveFields = columns.filter(it => it.save).map(it => it.columnName.replace(/([A-Z])/g,"_$1").toLowerCase()).join(',')
+
+ApiInfo getApi = new ApiInfo()
+getApi.setName("详情")
+getApi.setPath("/get")
+getApi.setMethod("GET")
+getApi.setGroupId(businessGroup.getId())
+getApi.setScript(`return db.selectOne("""
+    select ${primary},${saveFields} from ${tableName} where ${primary} = #{${primaryLowerCamelCase}}
+""")`)
+MagicResourceService.saveFile(getApi)
+
+return commonField

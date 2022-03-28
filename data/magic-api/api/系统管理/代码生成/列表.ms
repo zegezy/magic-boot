@@ -5,7 +5,7 @@
   "groupId" : "f2538e0f370a4cabab0ae920f5e77ae7",
   "name" : "列表",
   "createTime" : null,
-  "updateTime" : 1648391602307,
+  "updateTime" : 1648475787119,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -124,4 +124,5 @@ return db.page("""
     ?{tableComment, and table_comment like concat('%',#{tableComment},'%')}
     ?{createDate && createDate.split(',')[0], and create_date >= #{createDate.split(',')[0]}}
     ?{createDate && createDate.split(',')[1], and create_date <= #{createDate.split(',')[1]}}
+    order by create_date desc
 """)

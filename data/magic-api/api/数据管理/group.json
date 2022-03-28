@@ -1,0 +1,10 @@
+{
+  "properties" : { },
+  "id" : "20316fcfa94644d685fa1b464f135f9a",
+  "name" : "数据管理",
+  "type" : "api",
+  "parentId" : "0",
+  "path" : "/data",
+  "paths" : [ ],
+  "options" : [ ]
+}

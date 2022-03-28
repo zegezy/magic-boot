@@ -5,7 +5,7 @@
   "groupId" : "f2538e0f370a4cabab0ae920f5e77ae7",
   "name" : "根据表名查出所有列",
   "createTime" : null,
-  "updateTime" : 1648312786910,
+  "updateTime" : 1648484373195,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -204,5 +204,5 @@ return {
             AND column_name NOT IN ( 'id', 'is_del', 'create_by', 'create_date', 'update_by', 'update_date' ) 
             AND table_schema = DATABASE()
     """),
-    primary: db.selectValue("SELECT column_name FROM information_schema.COLUMNS WHERE table_name = #{tableName} and column_key = 'PRI' and table_schema = database()")
+    primary: db.selectValue("SELECT column_name FROM information_schema.COLUMNS WHERE table_name = #{tableName} and column_key = 'PRI' and table_schema = database() limit 1")
 }

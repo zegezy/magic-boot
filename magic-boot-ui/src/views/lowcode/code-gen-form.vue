@@ -140,7 +140,7 @@
             columnComment: it.columnComment,
             columnType: it.columnType,
             component: `component: 'input'`,
-            where: 'eq',
+            where: '=',
             save: true,
             query: true,
             list: true,
@@ -187,35 +187,29 @@
     component: 'select',
     props: {
       options: [{
-        label: 'eq',
-        value: 'eq'
+        label: '=',
+        value: '='
       },{
-        label: 'ne',
-        value: 'ne'
+        label: '!=',
+        value: '!='
       },{
-        label: 'lt',
-        value: 'lt'
+        label: '<',
+        value: '<'
       },{
-        label: 'lte',
-        value: 'lte'
+        label: '<=',
+        value: '<='
       },{
-        label: 'gt',
-        value: 'gt'
+        label: '>',
+        value: '>'
       },{
-        label: 'gte',
-        value: 'gte'
+        label: '>=',
+        value: '>='
       },{
         label: 'in',
         value: 'in'
       },{
-        label: 'notIn',
-        value: 'notIn'
-      },{
         label: 'like',
         value: 'like'
-      },{
-        label: 'notLike',
-        value: 'notLike'
       }]
     }
   }, {
