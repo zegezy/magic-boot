@@ -127,7 +127,7 @@ export default {
   },
   data() {
     return {
-      action: import.meta.env.VITE_APP_BASE_API + 'file/upload',
+      action: import.meta.env.VITE_APP_BASE_API + '/system/file/upload',
       headers: {
         token: getToken()
       },
@@ -179,7 +179,7 @@ export default {
           this.fileList.splice(i, 1)
         }
       })
-      this.$delete('file/delete', { url: encodeURI(url) })
+      this.$delete('/system/file/delete', { url: encodeURI(url) })
       if (this.multiple) {
         this.$emit('update:modelValue', this.urls)
         this.$emit('change', this.urls)

@@ -1,9 +1,9 @@
 {
   "properties" : { },
-  "id" : "152b9ad78aaf49a7a8945b5de088c1da",
+  "id" : "7bdcc43555b9419caba2ee722e1aa2d3",
   "name" : "测试生成",
   "type" : "api",
-  "parentId" : "20316fcfa94644d685fa1b464f135f9a",
+  "parentId" : "8d60ba6788ef4a75b93f3c77683c7f89",
   "path" : "/test",
   "paths" : [ ],
   "options" : [ ]

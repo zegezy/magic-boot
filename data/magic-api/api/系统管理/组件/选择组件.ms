@@ -5,7 +5,7 @@
   "groupId" : "6f106ebdee21489db34b956f7770ff03",
   "name" : "选择组件",
   "createTime" : null,
-  "updateTime" : 1648025271406,
+  "updateTime" : 1648647253717,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -230,7 +230,7 @@ import org.ssssssss.magicapi.utils.PathUtils
 import org.ssssssss.magicapi.core.service.MagicResourceService
 var getFiles = (groupId) => {
     return MagicResourceService.listFiles(groupId).map(file => { 
-        id: PathUtils.replaceSlash(String.format("%s-%s", MagicResourceService.getGroupPath(file.groupId), file.path)).replace('/', '-'),
+        id: PathUtils.replaceSlash(String.format("%s/%s", MagicResourceService.getGroupPath(file.groupId), file.path)).replace(/^\//,'').replace(/\/\//, '/').replace('/', '-'),
         label: `${file.name}(${file.path})`
     })
 }

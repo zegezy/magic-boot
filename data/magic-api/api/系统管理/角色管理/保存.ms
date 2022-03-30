@@ -4,8 +4,8 @@
   "script" : null,
   "groupId" : "89130d496f6f467c88b22ae4a7f688eb",
   "name" : "保存",
-  "createTime" : 1646490239526,
-  "updateTime" : 1644121680268,
+  "createTime" : null,
+  "updateTime" : 1648647133039,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -30,11 +30,23 @@
   "paths" : [ ],
   "responseBody" : null,
   "description" : null,
-  "requestBodyDefinition" : null,
+  "requestBodyDefinition" : {
+    "name" : "",
+    "value" : "",
+    "description" : "",
+    "required" : false,
+    "dataType" : "Object",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : "",
+    "error" : "",
+    "expression" : "",
+    "children" : [ ]
+  },
   "responseBodyDefinition" : null
 }
 ================================
-import '@get:/role/cache/delete' as cacheDelete
+import '@get:/system/role/cache/delete' as cacheDelete
 
 var codeCount = db.selectInt("select count(1) from sys_role where is_del = 0 and code = #{code} ?{id, and id != #{id}}")
 if(codeCount > 0){

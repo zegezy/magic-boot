@@ -1,10 +1,10 @@
 {
   "properties" : { },
-  "id" : "f0e1cfcf4f254e17b75d7647f4f09f25",
+  "id" : "c999de118aa04594bc14c0e3f5ade568",
   "script" : null,
-  "groupId" : "152b9ad78aaf49a7a8945b5de088c1da",
+  "groupId" : "7bdcc43555b9419caba2ee722e1aa2d3",
   "name" : "详情",
-  "createTime" : 1648486052778,
+  "createTime" : 1648655132931,
   "updateTime" : null,
   "lock" : null,
   "createBy" : null,

@@ -1,10 +1,10 @@
 {
   "properties" : { },
-  "id" : "90986654bb2d4560ada10c309195f500",
+  "id" : "d94a4788e17a4e0f9b67ca86b171e231",
   "script" : null,
-  "groupId" : "152b9ad78aaf49a7a8945b5de088c1da",
+  "groupId" : "7bdcc43555b9419caba2ee722e1aa2d3",
   "name" : "列表",
-  "createTime" : 1648486052761,
+  "createTime" : 1648655132912,
   "updateTime" : null,
   "lock" : null,
   "createBy" : null,
@@ -28,4 +28,5 @@ return db.page("""
     ?{sex, and sex = #{sex} }
     ?{headPortrait, and head_portrait in(#{headPortrait.split(',')}) }
     ?{remarks, and remarks <= #{remarks} }
+    and is_del = 0
 """)

@@ -1,10 +1,5 @@
 import * as vue from 'vue'
-const libs = { vue }
-window.___magic__import__ = function(lib, name){
-  return (libs[lib] || {})[name]
-}
-
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 const app = createApp(App)
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
@@ -16,13 +11,37 @@ import router from './scripts/router'
 import components from '@/components/index'
 import globalProperties from './scripts/globalProperties'
 import hasPermission from './scripts/hasPermission'
-
+import { appComponent } from './scripts/dynamicComponent'
 import '@/permission'
 import global from '@/scripts/global.js'
+const libs = {
+  vue,
+  'element-plus': ElementPlus
+}
+window.___magic__import__ = function(lib, name){
+  return (libs[lib] || {})[name]
+}
+app.use(globalProperties)
+
+var loadDynamicComponent = false
+import { ElLoading } from 'element-plus'
 document.title = global.title
-router.beforeEach((to, from) => {
+router.beforeEach(async (to, from) => {
   global.tabValue.value = to.path
   if((to.name && global.visitedViews.length === 0 || global.visitedViews.every(it => it.path !== to.path)) && !to.path.startsWith('/redirect') && !to.path.startsWith('/login')){
+    if(!loadDynamicComponent){
+      loadDynamicComponent = true
+      const loading = ElLoading.service({
+        lock: true,
+        background: 'rgba(255, 255, 255, 0)',
+      })
+      await app.config.globalProperties.$post('/system/component/list').then((res) => {
+        res.data.forEach(it => {
+          appComponent(app, it)
+        })
+        loading.close()
+      })
+    }
     global.visitedViews.push(to)
   }
   global.visitedViews.forEach((it, i) => {
@@ -32,7 +51,6 @@ router.beforeEach((to, from) => {
   })
   return true
 })
-app.use(globalProperties)
 app.use(hasPermission)
 app.use(components)
 app.use(ElementPlus, {

@@ -34,6 +34,10 @@
     detail: {
       type: Object,
       default: () => {}
+    },
+    primaryField: {
+      type: String,
+      default: 'id'
     }
   })
   const emit = defineEmits(['reload'])
@@ -87,7 +91,7 @@
           d.hideLoading()
           proxy.$notify({
             title: '成功',
-            message: (!formData.value.id ? '创建' : '修改') + '成功',
+            message: (!formData.value[props.primaryField] ? '创建' : '修改') + '成功',
             type: 'success',
             duration: 2000
           })
@@ -102,8 +106,8 @@
   }
 
   function getDetail(id) {
-    formData.value.id = id
-    proxy.$get(props.detail.request.url, { id: id }).then(res => {
+    formData.value[props.primaryField] = id
+    proxy.$get(props.detail.request.url, { [props.primaryField]: id }).then(res => {
       const { data } = res
       for (var t in formData.value) {
         if (data[t] && (!props.detail.excludeAssign || props.detail.excludeAssign.indexOf(t) === -1)) {

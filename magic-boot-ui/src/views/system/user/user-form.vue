@@ -32,7 +32,7 @@
       </el-col>
       <el-col :span="12">
         <el-form-item label="选择角色" prop="roles">
-          <mb-select v-model="temp.roles" url="role/all" placeholder="请选择角色" multiple />
+          <mb-select v-model="temp.roles" url="/system/role/all" placeholder="请选择角色" multiple />
         </el-form-item>
       </el-col>
     </el-row>

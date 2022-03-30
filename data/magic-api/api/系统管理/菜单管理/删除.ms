@@ -5,7 +5,7 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "删除",
   "createTime" : null,
-  "updateTime" : 1646553101301,
+  "updateTime" : 1648647114911,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -130,7 +130,7 @@
   }
 }
 ================================
-import '@get:/menu/cache/delete' as cacheDelete;
+import '@get:/system/menu/cache/delete' as cacheDelete;
 var menuId = id
 cacheDelete();
 

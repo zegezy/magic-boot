@@ -70,7 +70,7 @@ export default {
         video: 'avi,flv,mp4,mpeg,mov'
       },
       imageUrl: '',
-      action: import.meta.env.VITE_APP_BASE_API + 'file/upload',
+      action: import.meta.env.VITE_APP_BASE_API + '/system/file/upload',
       headers: {
         token: getToken()
       },
@@ -137,7 +137,7 @@ export default {
         this.$emit('update:modelValue', '')
         this.$emit('change', '')
       }
-      this.$delete('file/delete', { url: encodeURI(url) })
+      this.$delete('/system/file/delete', { url: encodeURI(url) })
     },
     handlePreview(file) {
       window.open(this.$global.baseApi + file.response.data.url)

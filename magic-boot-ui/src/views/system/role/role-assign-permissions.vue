@@ -1,5 +1,5 @@
 <template>
-  <mb-tree ref="tree" :el="{ 'show-checkbox': true }" url="menu/tree" :search="true" search-width="230px" v-model:select-values="menus" />
+  <mb-tree ref="tree" :el="{ 'show-checkbox': true }" url="/system/menu/tree" :search="true" search-width="230px" v-model:select-values="menus" />
 </template>
 
 <script setup>

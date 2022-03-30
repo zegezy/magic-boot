@@ -29,7 +29,7 @@
   import { reactive, ref, getCurrentInstance } from 'vue'
   import { login } from '@/scripts/auth'
   const { proxy } = getCurrentInstance()
-  const codeImg = ref(import.meta.env.VITE_APP_BASE_API + '/security/verification/code')
+  const codeImg = ref()
   const loginForm = reactive({
     username: '',
     password: '',

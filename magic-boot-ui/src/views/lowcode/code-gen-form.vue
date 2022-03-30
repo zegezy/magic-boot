@@ -77,7 +77,7 @@
                   <el-icon><ElQuestionFilled /></el-icon>
                 </el-tooltip>
               </template>
-              <el-button type="primary" @click="gen" style="margin-bottom: 10px">代码生成</el-button>
+              <el-button type="primary" @click="executeGen()" style="margin-bottom: 10px">代码生成</el-button>
             </el-form-item>
           </el-col>
         </el-row>
@@ -291,8 +291,27 @@
     }
   }])
 
-  function gen(){
-    genCode('test', genInfo.value.columns)
+  function executeGen(){
+    dataForm.value.validate((valid) => {
+      if (valid) {
+        var formData = {...genInfo.value}
+        formData.info = JSON.stringify(genInfo.value.info)
+        formData.columns = JSON.stringify(genInfo.value.columns)
+        formData.componentScript = genCode(genInfo.value.info.modulePath+genInfo.value.info.businessPath, genInfo.value.columns)
+        proxy.$post('/system/code/gen/execute', formData).then((res) => {
+          if(res.data == 1){
+            proxy.$notify({
+              title: '成功',
+              message: '生成成功',
+              type: 'success',
+              duration: 2000
+            })
+          }
+        })
+      }else{
+        proxy.$message.error('表单校验未通过，请重新检查提交内容')
+      }
+    })
   }
 
   function save(d){

@@ -1,7 +1,7 @@
 export default function (bus, constants, $i, Message, request) {
     return {
         // svg text
-        getIcon: item => ['COMPONENT', '#9012FE'],
+        getIcon: item => ['Vue', '#41B883'],
         // 任务名称
         name: $i('component.name'),
         // 脚本语言

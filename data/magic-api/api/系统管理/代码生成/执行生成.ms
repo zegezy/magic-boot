@@ -5,7 +5,7 @@
   "groupId" : "f2538e0f370a4cabab0ae920f5e77ae7",
   "name" : "执行生成",
   "createTime" : null,
-  "updateTime" : 1648486047810,
+  "updateTime" : 1648651494341,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -214,43 +214,66 @@
   }
 }
 ================================
+import org.ssssssss.magicapi.core.model.Option
+import org.ssssssss.magicapi.component.model.ComponentInfo
 import org.ssssssss.magicapi.core.model.ApiInfo
 import org.ssssssss.magicapi.core.model.Group
 import org.ssssssss.magicapi.core.service.MagicResourceService
 import log
 
 info = info::json
-var moduleGroup = MagicResourceService.tree('api').children.filter(it => {
-    return it.node.path == info.modulePath || it.node.path == info.modulePath.substring(1, info.modulePath.length())
-})
-if(moduleGroup.length == 0){
-    Group group = new Group();
-    group.setId(UUID.randomUUID().toString().replace('-', ''));
-    group.setName(info.moduleName);
-    group.setPath(info.modulePath);
-    group.setParentId("0");
-    group.setType('api')
-    MagicResourceService.saveGroup(group);
-    moduleGroup = group;
-}else{
-    moduleGroup = moduleGroup[0].node
+
+var getGroup = (type) => {
+    var moduleGroup = MagicResourceService.tree(type).children.filter(it => {
+        return it.node.path == info.modulePath || it.node.path == info.modulePath.substring(1, info.modulePath.length())
+    })
+    if(moduleGroup.length == 0){
+        Group group = new Group();
+        group.setId(UUID.randomUUID().toString().replace('-', ''));
+        group.setName(info.moduleName);
+        group.setPath(info.modulePath);
+        group.setParentId("0");
+        group.setType(type)
+        MagicResourceService.saveGroup(group);
+        moduleGroup = group;
+    }else{
+        moduleGroup = moduleGroup[0].node
+    }
+
+    var businessGroup = MagicResourceService.tree(type).children.filter(it => it.node.id == moduleGroup.id)[0].children.filter(it => {
+        return it.node.path == info.businessPath || it.node.path == info.businessPath.substring(1, info.businessPath.length())
+    })
+    if(businessGroup.length == 0){
+        Group group = new Group();
+        group.setId(UUID.randomUUID().toString().replace('-', ''));
+        group.setName(info.businessName);
+        group.setPath(info.businessPath);
+        group.setParentId(moduleGroup.getId());
+        group.setType(type)
+        MagicResourceService.saveGroup(group);
+        businessGroup = group;
+    }else{
+        businessGroup = businessGroup[0].node
+    }
+    return {
+        moduleGroup,
+        businessGroup
+    }
 }
 
-var businessGroup = MagicResourceService.tree('api').children.filter(it => it.node.id == moduleGroup.id)[0].children.filter(it => {
-    return it.node.path == info.businessPath || it.node.path == info.businessPath.substring(1, info.businessPath.length())
-})
-if(businessGroup.length == 0){
-    Group group = new Group();
-    group.setId(UUID.randomUUID().toString().replace('-', ''));
-    group.setName(info.businessName);
-    group.setPath(info.businessPath);
-    group.setParentId(moduleGroup.getId());
-    group.setType('api')
-    MagicResourceService.saveGroup(group);
-    businessGroup = group;
-}else{
-    businessGroup = businessGroup[0].node
+var deleteFiles = (groupId, paths) => {
+    var listFiles = MagicResourceService.listFiles(groupId)
+    listFiles.forEach(it => {
+        if(paths.indexOf(it.path) != -1){
+            MagicResourceService.delete(it.id)
+        }
+    })
 }
+
+var businessGroup = getGroup('api').businessGroup
+
+deleteFiles(businessGroup.getId(),['/list', '/save', '/get', '/delete'])
+
 columns = columns::json
 var listFields = columns.filter(it => it.list).map(it => it.columnName.replace(/([A-Z])/g,"_$1").toLowerCase()).join(',')
 var wheres = '';
@@ -266,7 +289,6 @@ columns.forEach(it => {
         }
     }
 })
-wheres = wheres.substring(0,wheres.length() - 1)
 
 var commonField = db.select("""
     SELECT
@@ -279,6 +301,13 @@ var commonField = db.select("""
 commonField = commonField.map(it => it.columnName)
 var primary = db.selectValue("SELECT column_name FROM information_schema.COLUMNS WHERE table_name = #{tableName} and column_key = 'PRI' and table_schema = database() limit 1")
 var primaryLowerCamelCase = primary.replace(/([A-Z])/g,"_$1").toLowerCase()
+
+var logic = ''
+if(commonField.contains('is_del')){
+    logic = '.logic()'
+    wheres += `    and is_del = 0\n`
+}
+wheres = wheres.substring(0,wheres.length() - 1)
 
 ApiInfo listApi = new ApiInfo()
 listApi.setName("列表")
@@ -302,13 +331,8 @@ saveApi.setPath("/save")
 saveApi.setMethod("POST")
 saveApi.setGroupId(businessGroup.getId())
 saveApi.setScript(`return db.table('${tableName}').primary('${primary}').${saveMethod}`)
-saveApi.setOption([{ name: 'wrap_request_parameter', value: 'data' }])
+saveApi.setOption([new Option('wrap_request_parameter', 'data')])
 MagicResourceService.saveFile(saveApi)
-
-var logic = ''
-if(commonField.contains('is_del')){
-    logic = '.logic()'
-}
 
 ApiInfo deleteApi = new ApiInfo()
 deleteApi.setName("删除")
@@ -330,4 +354,16 @@ getApi.setScript(`return db.selectOne("""
 """)`)
 MagicResourceService.saveFile(getApi)
 
-return commonField
+
+var componentBusinessGroup = getGroup('component').businessGroup
+
+deleteFiles(componentBusinessGroup.getId(),['/list'])
+
+ComponentInfo componentInfo = new ComponentInfo()
+componentInfo.setGroupId(componentBusinessGroup.getId())
+componentInfo.setName("列表")
+componentInfo.setPath("/list")
+componentInfo.setScript(componentScript)
+MagicResourceService.saveFile(componentInfo)
+
+return 1

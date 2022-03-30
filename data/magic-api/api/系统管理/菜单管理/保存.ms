@@ -5,7 +5,7 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "保存",
   "createTime" : null,
-  "updateTime" : 1646576146705,
+  "updateTime" : 1648647102120,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -59,7 +59,7 @@
 }
 ================================
 import org.ssssssss.magicapi.modules.db.cache.SqlCache;
-import '@get:/menu/cache/delete' as cacheDelete;
+import '@get:/system/menu/cache/delete' as cacheDelete;
 
 if(data.url){
     var urlCount = db.selectInt("select count(1) from sys_menu where is_del = 0 and url = #{data.url} ?{data.id, and id != #{data.id}}")

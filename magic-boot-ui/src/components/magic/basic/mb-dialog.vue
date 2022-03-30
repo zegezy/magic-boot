@@ -10,6 +10,7 @@
     :append-to-body="true"
     draggable
     @open="$emit('open')"
+    @opened="opened"
     @close="$emit('close')"
   >
     <slot name="content" />
@@ -30,7 +31,7 @@
 
 <script>
 export default {
-  emits: ['confirm-click', 'open', 'close'],
+  emits: ['confirm-click', 'open', 'opened', 'close'],
   props: {
     title: {
       type: String,
@@ -53,7 +54,8 @@ export default {
     return {
       dialogVisible: false,
       confirmLoading: false,
-      customClass: 'mbDialog' + this.$common.uuid()
+      customClass: 'mbDialog' + this.$common.uuid(),
+      isOpen: false
     }
   },
   watch: {
@@ -69,6 +71,10 @@ export default {
     this.addStyle()
   },
   methods: {
+    opened(){
+      this.$emit('opened')
+      this.isOpen = true
+    },
     confirmClick() {
       this.$emit('confirm-click', this)
     },
@@ -78,8 +84,17 @@ export default {
     hideLoading(){
       this.confirmLoading = false
     },
-    show() {
+    show(callback) {
       this.dialogVisible = true
+      if(callback){
+        var callbackInterval = setInterval(() => {
+          if(this.isOpen){
+            this.isOpen = false
+            clearInterval(callbackInterval)
+            callback()
+          }
+        },1)
+      }
     },
     hide() {
       this.dialogVisible = false

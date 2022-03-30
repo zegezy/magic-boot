@@ -1,26 +1,26 @@
 function gen(groupPath, data){
-    var permissionPrefix = groupPath.replace('/', ':')
-    var html = `
-    <template>
-      <mb-list ref="magicList" v-bind="listOptions" />
-      <mb-dialog ref="formDialog" @confirm-click="magicForm.save($event)" width="50%">
+    var permissionPrefix = groupPath.replace(/^\//,'').replace(/\/\//, '/').replace('/', ':')
+    var html = `<template>
+    <mb-list ref="magicList" v-bind="listOptions" />
+    <mb-dialog ref="formDialog" :title="magicFormTitle" @confirm-click="magicForm.save($event)" width="50%">
         <template #content>
-          <mb-form ref="magicForm" @reload="magicList.reload" v-bind="formOptions" />
+            <mb-form ref="magicForm" @reload="magicList.reload" v-bind="formOptions" />
         </template>
-      </mb-dialog>
-    </template>
-    <script setup>
-    import { ref, reactive, getCurrentInstance } from 'vue'
+    </mb-dialog>
+</template>
+<script setup>
+    import { ref, reactive, getCurrentInstance, nextTick } from 'vue'
     const { proxy } = getCurrentInstance()
     const formDialog = ref()
     const magicList = ref()
     const magicForm = ref()
+    const magicFormTitle = ref()
     const listOptions = reactive({
         tools: [{
             type: 'add',
             permission: '${permissionPrefix}:save',
             click: () => {
-                formOptions.detail.formData = null
+                magicFormTitle.value = '添加'
                 formDialog.value.show()
             }
         }],
@@ -70,8 +70,8 @@ function gen(groupPath, data){
                             type: 'text',
                             icon: 'ElEdit',
                             click: (row) => {
-                                magicForm.value.getDetail(row.id)
-                                formDialog.value.show()
+                                magicFormTitle.value = '修改'
+                                formDialog.value.show(() => magicForm.value.getDetail(row.id))
                             }
                         }, {
                             permission: '${permissionPrefix}:delete',
@@ -101,8 +101,7 @@ function gen(groupPath, data){
         },
         form: {
             request: {
-                url: "${groupPath}/save",
-                method: "post"
+                url: "${groupPath}/save"
             },
             rows: [{
                 gutter: 24,
@@ -110,11 +109,18 @@ function gen(groupPath, data){
     for(var i in data){
         var d = data[i]
         if(d.save){
+            var props = ''
+            if(d.dictType){
+                props = `props: {
+                        type: '${d.dictType}'
+                    }`
+            }
             html += `{
                     span: 12,
                     name: '${d.columnName}',
                     label: '${d.columnComment}',
-                    ${d.component}
+                    ${d.component},
+                    ${props}
                 },`
         }
     }
@@ -123,8 +129,7 @@ function gen(groupPath, data){
             }]
         }
     })
-    `
-
-    console.log(html)
+</script>`
+    return html
 }
 export default gen
