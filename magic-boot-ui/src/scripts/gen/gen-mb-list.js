@@ -43,18 +43,22 @@ function gen(groupPath, data){
     for(var i in data){
         var d = data[i]
         if(d.list){
+            var type = ''
+            if(d.component){
+                if(d.component.indexOf('upload-image') != -1){
+                    type = `,
+                    type: 'image'`
+                }
+            }
+            var dictType = ''
             if(d.dictType){
-                html += `
-                {
-                    dictType: '${d.dictType}',`
-            }else{
-                html += `
-                {
-                `
+                dictType = `,
+                    dictType: '${d.dictType}'`
             }
             html += `
+                {
                     field: '${d.columnName}',
-                    label: '${d.columnComment}'
+                    label: '${d.columnComment}'${type}${dictType}
                 },`
         }
     }
@@ -111,16 +115,25 @@ function gen(groupPath, data){
         if(d.save){
             var props = ''
             if(d.dictType){
-                props = `props: {
+                props = `,
+                    props: {
                         type: '${d.dictType}'
                     }`
+            }
+            var rules = ''
+            if(d.required){
+                var messagePrefix = '请选择'
+                if(d.component.indexOf('input') != -1){
+                    messagePrefix = '请输入'
+                }
+                rules = `,
+                    rules: [{ required: true, message: '${messagePrefix}${d.columnComment}', trigger: 'change' }]`
             }
             html += `{
                     span: 12,
                     name: '${d.columnName}',
                     label: '${d.columnComment}',
-                    ${d.component},
-                    ${props}
+                    ${d.component}${props}${rules}
                 },`
         }
     }

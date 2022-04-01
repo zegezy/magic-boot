@@ -1,5 +1,5 @@
 <template>
-  <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px" v-if="isForm">
+  <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="90px" v-if="isForm">
     <el-row :gutter="24">
       <el-col :span="12">
         <el-form-item label="登录名称" prop="username">

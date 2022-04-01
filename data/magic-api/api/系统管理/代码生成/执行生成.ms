@@ -5,7 +5,7 @@
   "groupId" : "f2538e0f370a4cabab0ae920f5e77ae7",
   "name" : "执行生成",
   "createTime" : null,
-  "updateTime" : 1648651494341,
+  "updateTime" : 1648780783577,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -308,7 +308,7 @@ if(commonField.contains('is_del')){
     wheres += `    and is_del = 0\n`
 }
 wheres = wheres.substring(0,wheres.length() - 1)
-
+var permissionPrefix = (info.modulePath + info.businessPath).replace(/^\//,'').replace(/\/\//, '/').replace('/', ':')
 ApiInfo listApi = new ApiInfo()
 listApi.setName("列表")
 listApi.setPath("/list")
@@ -318,6 +318,7 @@ listApi.setScript(`return db.page("""
     select ${primary},${listFields} from ${tableName} where 1=1
 ${wheres}
 """)`)
+listApi.setOption([new Option('permission', `${permissionPrefix}:view`, '允许拥有该权限的访问')])
 MagicResourceService.saveFile(listApi)
 
 var saveMethod = 'save(data)'
@@ -331,7 +332,7 @@ saveApi.setPath("/save")
 saveApi.setMethod("POST")
 saveApi.setGroupId(businessGroup.getId())
 saveApi.setScript(`return db.table('${tableName}').primary('${primary}').${saveMethod}`)
-saveApi.setOption([new Option('wrap_request_parameter', 'data')])
+saveApi.setOption([new Option('wrap_request_parameter', 'data'), new Option('permission', `${permissionPrefix}:save`, '允许拥有该权限的访问')])
 MagicResourceService.saveFile(saveApi)
 
 ApiInfo deleteApi = new ApiInfo()
@@ -340,6 +341,7 @@ deleteApi.setPath("/delete")
 deleteApi.setMethod("DELETE")
 deleteApi.setGroupId(businessGroup.getId())
 deleteApi.setScript(`return db.table('${tableName}')${logic}.where().eq('${primary}', ${primaryLowerCamelCase}).delete()`)
+deleteApi.setOption([new Option('permission', `${permissionPrefix}:delete`, '允许拥有该权限的访问')])
 MagicResourceService.saveFile(deleteApi)
 
 var saveFields = columns.filter(it => it.save).map(it => it.columnName.replace(/([A-Z])/g,"_$1").toLowerCase()).join(',')
@@ -352,6 +354,7 @@ getApi.setGroupId(businessGroup.getId())
 getApi.setScript(`return db.selectOne("""
     select ${primary},${saveFields} from ${tableName} where ${primary} = #{${primaryLowerCamelCase}}
 """)`)
+getApi.setOption([new Option('permission', `${permissionPrefix}:view`, '允许拥有该权限的访问')])
 MagicResourceService.saveFile(getApi)
 
 

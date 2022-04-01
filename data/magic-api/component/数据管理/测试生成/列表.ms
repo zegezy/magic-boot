@@ -1,10 +1,10 @@
 {
   "properties" : { },
-  "id" : "f4ebe91beaef452498879a98556481eb",
+  "id" : "64c78249fafd4ddcbcac12d734645b67",
   "script" : null,
   "groupId" : "eb5dbed949de4f50ba4bf59f483252a5",
   "name" : "列表",
-  "createTime" : 1648655132940,
+  "createTime" : 1648780777685,
   "updateTime" : null,
   "lock" : null,
   "createBy" : null,
@@ -55,22 +55,20 @@
             },
             cols: [
                 {
-                
                     field: 'name',
                     label: '名字'
                 },
                 {
-                    dictType: 'sex',
                     field: 'sex',
-                    label: '性别'
+                    label: '性别',
+                    dictType: 'sex'
                 },
                 {
-                
                     field: 'headPortrait',
-                    label: '头像'
+                    label: '头像',
+                    type: 'image'
                 },
                 {
-                
                     field: 'remarks',
                     label: '备注'
                 },{
@@ -124,7 +122,7 @@
                     name: 'name',
                     label: '名字',
                     component: 'input',
-                    
+                    rules: [{ required: true, message: '请输入名字', trigger: 'change' }]
                 },{
                     span: 12,
                     name: 'sex',
@@ -138,7 +136,7 @@
                     name: 'headPortrait',
                     label: '头像',
                     component: 'upload-image',
-                    
+                    rules: [{ required: true, message: '请选择头像', trigger: 'change' }]
                 },{
                     span: 12,
                     name: 'remarks',
@@ -147,8 +145,7 @@
                     props: {
                         type: 'textarea'
                     }
-      ,
-                    
+      
                 }]
             }]
         }

@@ -14,7 +14,7 @@
     @close="$emit('close')"
   >
     <slot name="content" />
-    <template #footer>
+    <template v-if="showFooter" #footer>
       <div slot="footer" class="dialog-footer">
         <slot name="btns">
           <el-button @click="hide">
@@ -46,6 +46,10 @@ export default {
       default: false
     },
     destroyOnClose: {
+      type: Boolean,
+      default: true
+    },
+    showFooter: {
       type: Boolean,
       default: true
     }

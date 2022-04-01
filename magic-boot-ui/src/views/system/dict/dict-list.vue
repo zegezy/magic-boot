@@ -49,7 +49,7 @@
       </template>
     </mb-dialog>
 
-    <mb-dialog ref="dictItemsDialog" title="字典项" width="1400px">
+    <mb-dialog ref="dictItemsDialog" title="字典项" width="1400px" :show-footer="false">
       <template #content>
         <dict-items :key="Math.random()" v-model:dict-id="dictId" />
       </template>
