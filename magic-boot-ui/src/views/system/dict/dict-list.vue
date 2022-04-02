@@ -17,7 +17,7 @@
           <el-row :gutter="24">
             <el-col :span="12">
               <el-form-item label="字典类型" prop="dictType">
-                <mb-select v-model="temp.dictType" type="dict_type" width="185px" />
+                <mb-select v-model="temp.dictType" type="dict_type" />
               </el-form-item>
             </el-col>
             <el-col :span="12">

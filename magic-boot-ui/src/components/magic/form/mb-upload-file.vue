@@ -2,7 +2,8 @@
   <el-upload
     :id="uploadDomId"
     class="upload-demo"
-    :action="action"
+    ref="uploadRef"
+    :action="actionUrl"
     :headers="headers"
     :on-preview="handlePreview"
     :on-remove="handleRemove"
@@ -11,11 +12,12 @@
     :limit="limit"
     :on-exceed="handleExceed"
     :file-list="fileList"
+    :show-file-list="showFileList"
     :before-upload="beforeAvatarUpload"
     :on-success="handleAvatarSuccess"
   >
-    <el-button size="small" type="primary" :disabled="!multiple && fileList.length == 1">点击上传</el-button>
-    <div slot="tip" class="el-upload__tip">支持上传{{ getSettingSuffixs().replaceAll(',', '，') }}文件，且不超过{{ maxFileSize }}MB</div>
+    <el-button type="primary" :loading="uploadLoading" :disabled="!multiple && fileList.length == 1">{{ label }}</el-button>
+    <div slot="tip" v-if="showTip" class="el-upload__tip">支持上传{{ getSettingSuffixs().replaceAll(',', '，') }}文件，且不超过{{ maxFileSize }}MB</div>
   </el-upload>
 </template>
 
@@ -59,6 +61,30 @@ export default {
     formats: {
       type: String,
       default: ''
+    },
+    label: {
+      type: String,
+      default: '点击上传'
+    },
+    showTip: {
+      type: Boolean,
+      default: () => true
+    },
+    action: {
+      type: String,
+      default: ''
+    },
+    showFileList: {
+      type: Boolean,
+      default: () => true
+    },
+    onSuccess: {
+      type: Function,
+      default: () => {}
+    },
+    showRemoveTip: {
+      type: Boolean,
+      default: () => true
     }
   },
   data() {
@@ -70,13 +96,14 @@ export default {
         video: 'avi,flv,mp4,mpeg,mov'
       },
       imageUrl: '',
-      action: import.meta.env.VITE_APP_BASE_API + '/system/file/upload',
+      actionUrl: import.meta.env.VITE_APP_BASE_API + '/system/file/upload',
       headers: {
         token: getToken()
       },
       urls: [],
       uploadDomId: Math.random(),
-      fileList: []
+      fileList: [],
+      uploadLoading: false
     }
   },
   watch: {
@@ -90,12 +117,18 @@ export default {
         const { data } = res
         this.fileList = data
       })
-      this.action = this.action + `?externalId=${this.externalId}&externalType=${this.externalType}`
+      this.actionUrl = this.actionUrl + `?externalId=${this.externalId}&externalType=${this.externalType}`
     } else {
       this.renderFile()
     }
+    if(this.action){
+      this.actionUrl = import.meta.env.VITE_APP_BASE_API + this.action
+    }
   },
   methods: {
+    handlerRemove(file){
+      this.$refs.uploadRef.handleRemove(file)
+    },
     renderFile() {
       if (this.value instanceof Array && this.value.length > 0) {
         this.fileList = this.value.map(it => {
@@ -146,9 +179,13 @@ export default {
       this.$message.warning(`当前限制选择 ${this.limit} 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
     },
     beforeRemove(file, fileList) {
+      if(!this.showRemoveTip){
+        return true
+      }
       return this.$confirm(`确定移除 ${file.name}？`)
     },
     handleAvatarSuccess(res, file, fileList) {
+      this.uploadLoading = false
       if (res.data) {
         if (this.multiple) {
           this.urls.push(res.data.url)
@@ -159,6 +196,9 @@ export default {
           this.$emit('update:modelValue', res.data.url)
           this.$emit('change', res.data.url)
         }
+      }
+      if(this.onSuccess){
+        this.onSuccess(res, file, fileList)
       }
     },
     getSettingSuffixs() {
@@ -172,6 +212,7 @@ export default {
       return suffixs
     },
     beforeAvatarUpload(file, fileList) {
+      this.uploadLoading = true
       var fileName = file.name
       var accepts = this.accept.split(',')
       if (accepts) {

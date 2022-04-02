@@ -32,6 +32,7 @@
         v-model="temp.componentName"
         :disable-branch-nodes="true"
         :show-count="true"
+        placeholder=""
         :options="componentTree"
         :key="temp.componentName"
         style="position: fixed;z-index:999999;width: 850px;"
@@ -120,7 +121,7 @@ const getTemp = () => {
     pid: 0,
     icon: '',
     keepAlive: 0,
-    componentName: ''
+    componentName: null
   }
 }
 

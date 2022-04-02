@@ -18,6 +18,7 @@
         <druid.version>1.1.10</druid.version>
         <hutool-all.version>5.7.22</hutool-all.version>
         <sa-token.version>1.26.0</sa-token.version>
+        <poi.version>4.1.2</poi.version>
     </properties>
     <dependencies>
         <dependency>
@@ -61,6 +62,11 @@
             <groupId>org.ssssssss</groupId>
             <artifactId>magic-api-plugin-component</artifactId>
             <version>${magic-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
         </dependency>
     </dependencies>
 

@@ -5,7 +5,7 @@
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "登录",
   "createTime" : null,
-  "updateTime" : 1648567495848,
+  "updateTime" : 1648818736705,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -64,7 +64,7 @@
   "requestBody" : "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\"\r\n}",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": \"319e2efb-9e42-4b86-9658-a60d3585a7fe\",\n    \"timestamp\": 1648565675784,\n    \"executeTime\": 12\n}",
+  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": \"8dbc9feb-410a-4c7f-8805-0013e5ae1363\",\n    \"timestamp\": 1648818573075,\n    \"executeTime\": 347\n}",
   "description" : null,
   "requestBodyDefinition" : {
     "name" : "",
@@ -140,7 +140,7 @@
       "children" : [ ]
     }, {
       "name" : "data",
-      "value" : "319e2efb-9e42-4b86-9658-a60d3585a7fe",
+      "value" : "8dbc9feb-410a-4c7f-8805-0013e5ae1363",
       "description" : "",
       "required" : false,
       "dataType" : "Object",
@@ -152,7 +152,7 @@
       "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1648565675784",
+      "value" : "1648818573075",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -164,7 +164,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "12",
+      "value" : "347",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",

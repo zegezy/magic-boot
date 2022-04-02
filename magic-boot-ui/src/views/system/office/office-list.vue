@@ -60,7 +60,7 @@
             </el-col>
           </el-row>
           <el-row :gutter="24">
-            <el-col :span="6">
+            <el-col :span="12">
               <el-form-item label="排序" prop="sort">
                 <el-input-number v-model="temp.sort" controls-position="right" />
               </el-form-item>

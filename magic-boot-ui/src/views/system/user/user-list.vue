@@ -34,14 +34,21 @@
         </template>
       </mb-search>
 
-      <el-row style="margin-bottom: 15px">
+      <el-row class="toolbar-container">
         <el-button v-permission="'user:save'" class="filter-item" type="primary" icon="ElEdit" @click="handleCreate">
           添加
         </el-button>
         <mb-button v-permission="'user:delete'" :el="{ plain: true }" :request-url="'/system/user/delete'" :btn-type="'delete'" :request-data="{ id: ids }" :after-handler="reloadTable" />
+        <mb-upload-file ref="importUserRef" action="/system/user/import/preview" label="导入用户" :show-tip="false" :show-file-list="false" :show-remove-tip="false" :on-success="importUserSuccess" />
       </el-row>
 
       <mb-table ref="table" v-bind="tableOptions" @selection-change="selectionChange" />
+
+      <mb-dialog ref="previewUsersDialog" title="预览数据" @confirm-click="importUsers">
+        <template #content>
+          <mb-table v-bind="importUserTableOptions" />
+        </template>
+      </mb-dialog>
 
       <mb-dialog ref="userFormDialog" :title="dialogTitle" @confirm-click="userForm.save($event)" width="670px">
         <template #content>
@@ -58,10 +65,50 @@
 <script setup>
 import UserForm from './user-form.vue'
 
-import { ref, reactive, getCurrentInstance, onMounted, nextTick } from 'vue'
+import { ref, reactive, getCurrentInstance, nextTick, watch } from 'vue'
 
 const { proxy } = getCurrentInstance()
+const importUserRef = ref()
+const previewUsersDialog = ref()
+const importUserTableOptions = reactive({
 
+})
+const sourceDatas = ref()
+function importUserSuccess(res, file, fileList){
+  const { datas } = res.data
+  sourceDatas.value = res.data.sourceDatas
+  console.log(JSON.stringify(res.data.sourceDatas))
+  importUserRef.value.handlerRemove(file)
+  if(datas && datas.length){
+    var cols = []
+    for(var key in datas[0]){
+      cols.push({
+        field: key,
+        label: key
+      })
+    }
+    previewUsersDialog.value.show(() => {
+      importUserTableOptions.data = datas
+      importUserTableOptions.cols = cols
+    })
+  }
+}
+function importUsers(){
+  proxy.$postJson('/system/user/import', {
+    datas: sourceDatas.value
+  }).then(res => {
+    if(res.data){
+      proxy.$notify({
+        title: '成功',
+        message: '导入成功',
+        type: 'success',
+        duration: 2000
+      })
+      previewUsersDialog.value.hide()
+      table.value.reload()
+    }
+  })
+}
 const tableOptions = reactive({
   url: '/system/user/list',
   page: true,
