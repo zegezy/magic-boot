@@ -38,7 +38,7 @@
 
 <script setup>
 import { ref, reactive, watch, onMounted, getCurrentInstance,defineExpose } from 'vue'
-import request from '@/scripts/request'
+import common from "../../../scripts/common";
 
 const { proxy } = getCurrentInstance()
 
@@ -163,6 +163,53 @@ function reload() {
   }
 }
 
+function renderExportData(sourceData){
+  var data = []
+  var fields = props.cols.filter(it => it.type != 'btns')
+  sourceData.forEach(it => {
+    var row = {}
+    fields.forEach(f => {
+      if(f.exportTemplet){
+        row[f.label] = f.exportTemplet(it)
+      }else if(f.templet){
+        row[f.label] = f.templet(it)
+      }else{
+        row[f.label] = it[f.field]
+      }
+    })
+    data.push(row)
+  })
+  return data
+}
+
+function exportExcel(){
+  if(props.url){
+    var where = proxy.$common.renderWhere(props.where)
+    where.size = 99999999
+    var then = (res) => {
+      const { data } = res
+      proxy.$common.exportExcel({
+        data: renderExportData(data.list),
+        fileName: '用户数据'
+      })
+    }
+    if(props.method.toLowerCase() == 'post'){
+      proxy.$post(props.url, where).then(res => {
+        then(res)
+      })
+    }else{
+      proxy.$get(props.url, where).then(res => {
+        then(res)
+      })
+    }
+  }else if(props.data){
+    proxy.$common.exportExcel({
+      data: props.data,
+      fileName: '用户数据'
+    })
+  }
+}
+
 function handlerData() {
   listLoading.value = true
   total.value = props.data.length
@@ -225,7 +272,7 @@ onMounted(() => {
   }
 })
 
-defineExpose({ reload })
+defineExpose({ reload, exportExcel })
 
 </script>
 

@@ -5,7 +5,7 @@
   "groupId" : "9ec6f9ec92d24a369952bb13eddc134f",
   "name" : "操作日志",
   "createTime" : null,
-  "updateTime" : 1646552462421,
+  "updateTime" : 1649001507013,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -252,7 +252,13 @@
 ================================
 return db.page("""
     select sol.*,su.username from sys_oper_log sol left join sys_user su on sol.create_by = su.id where 1=1
+    ?{userIp, and sol.user_ip like concat('%', #{userIp}, '%')}
+    ?{username, and su.username like concat('%', #{username}, '%')}
+    ?{apiName, and sol.api_name like concat('%', #{apiName}, '%')}
+    ?{apiPath, and sol.api_path like concat('%', #{apiPath}, '%')}
     ?{createDate && createDate.split(',')[0], and sol.create_date >= #{createDate.split(',')[0]}}
     ?{createDate && createDate.split(',')[1], and sol.create_date <= #{createDate.split(',')[1]}}
+    ?{costTime && costTime.split(',')[0], and sol.cost_time >= #{costTime.split(',')[0]}}
+    ?{costTime && costTime.split(',')[1], and sol.cost_time <= #{costTime.split(',')[1]}}
     order by create_date desc
 """)

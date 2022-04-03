@@ -1,6 +1,7 @@
 import request from '@/scripts/request'
 import { ElMessageBox, ElNotification } from 'element-plus'
 import global from '@/scripts/global'
+import { utils, writeFile } from 'xlsx'
 
 const common = {}
 
@@ -173,6 +174,14 @@ common.setDefaultValue = (obj, attr, value) => {
 
 common.isComma = (value) => {
   return value.toString().indexOf(',') !== -1
+}
+
+common.exportExcel = (options) => {
+  options.suffix = options.suffix || 'xlsx'
+  const workBook = utils.json_to_sheet(options.data);
+  const wb = utils.book_new()
+  utils.book_append_sheet(wb, workBook, 'sheet1');
+  writeFile(wb, `${options.fileName}.${options.suffix || 'xlsx'}`);
 }
 
 export default common

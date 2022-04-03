@@ -17,6 +17,9 @@
             :placeholder="it.type.startsWith('datetime') ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD'"
           >
           </el-date-picker>
+          <span v-if="it.type == 'inputrange'">
+            <mb-inputrange v-model="it.value" />
+          </span>
           <component v-else :is="it.type" v-model="it.value" v-bind="it.properties" />
         </el-form-item>
       </span>
@@ -27,8 +30,6 @@
         <el-button class="filter-item" icon="ElDelete" @click="reset">
           清空
         </el-button>
-      </el-form-item>
-      <el-form-item>
         <slot name="btns" />
       </el-form-item>
     </el-form>
@@ -67,7 +68,7 @@ function input(input){
 function search(){
   for(var key in props.where){
     if(props.where[key] instanceof Object){
-      if(props.where[key].type && props.where[key].type.startsWith('date') && props.where[key].value instanceof Array){
+      if(props.where[key].type && props.where[key].type.startsWith('date') && props.where[key].value instanceof Array && props.where[key].value.join(',')){
         props.where[key].value = props.where[key].value.join(',')
       }
     }
@@ -76,7 +77,7 @@ function search(){
     emit('search')
     for(var key in props.where){
       if(props.where[key] instanceof Object){
-        if(props.where[key].type && props.where[key].type.startsWith('date')){
+        if(props.where[key].type && props.where[key].type.startsWith('date') && props.where[key].value){
           props.where[key].value = props.where[key].value.split(',')
         }
       }

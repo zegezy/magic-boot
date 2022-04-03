@@ -116,5 +116,6 @@ import { logout } from '@/scripts/auth'
     background-color: white;
     height: 100%;
     overflow: auto;
+    position: relative;
   }
 </style>

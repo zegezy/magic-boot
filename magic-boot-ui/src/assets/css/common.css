@@ -52,10 +52,12 @@ body{
 .toolbar-container{
   margin-bottom: 10px
 }
-.toolbar-container > div{
+.toolbar-container > div,
+.toolbar-container > button{
   margin-left: 12px;
 }
-.toolbar-container > div:nth-child(1){
+.toolbar-container > div:nth-child(1),
+.toolbar-container > button:nth-child(1){
   margin-left: 0px;
 }
 .clear{

@@ -1,6 +1,12 @@
 <template>
   <div class="app-container">
-    <mb-search :where="tableOptions.where" @search="reloadTable" />
+    <mb-search :where="tableOptions.where" @search="reloadTable">
+      <template #btns>
+        <el-button class="filter-item" type="primary" icon="ElDownload" @click="table.exportExcel()">
+          导出
+        </el-button>
+      </template>
+    </mb-search>
     <mb-table ref="table" v-bind="tableOptions" />
   </div>
 </template>
@@ -11,10 +17,25 @@
   const tableOptions = reactive({
     url: '/system/log/oper/list',
     where: {
+      userIp: {
+        label: 'IP'
+      },
+      username: {
+        label: '操作人'
+      },
+      apiName: {
+        label: '接口名'
+      },
+      apiPath: {
+        label: '路径'
+      },
+      costTime: {
+        label: '耗时区间',
+        type: 'inputrange'
+      },
       createDate: {
         type: 'datetimerange',
-        label: '创建时间',
-        value: ''
+        label: '创建时间'
       }
     },
     cols: [

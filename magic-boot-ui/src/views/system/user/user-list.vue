@@ -28,7 +28,7 @@
 
       <mb-search :where="tableOptions.where" @search="reloadTable">
         <template #btns>
-          <el-button :loading="downloadLoading" class="filter-item" icon="ElDownload" @click="handleDownload">
+          <el-button class="filter-item" type="primary" icon="ElDownload" @click="table.exportExcel()">
             导出
           </el-button>
         </template>
@@ -163,6 +163,9 @@ const tableOptions = reactive({
       field: 'isLogin',
       label: '禁止登录',
       type: 'switch',
+      exportTemplet: (row) => {
+        return row.isLogin == 1 ? '已禁用' : '未禁用'
+      },
       width: 100,
       if: (row) => {
         return row.id != '1'
@@ -256,15 +259,6 @@ function handleUpdate(row) {
   userFormDialog.value.show()
   nextTick(() => {
     userForm.value.getInfo(row)
-  })
-}
-
-function handleDownload() {
-  proxy.$common.exportExcel({
-    url: tableOptions.url,
-    headers: ['登录名称', '姓名'],
-    columns: ['username', 'name'],
-    where: tableOptions.where
   })
 }
 
