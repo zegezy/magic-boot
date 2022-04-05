@@ -1,5 +1,7 @@
 <template>
-  <el-input v-model="input1" /> - <el-input v-model="input2" />
+  <el-input v-model="input1" />
+  <span>-</span>
+  <el-input v-model="input2" />
 </template>
 
 <script setup>
@@ -26,6 +28,9 @@ watch([input1, input2], () => {
 <style scoped>
   .el-input{
     display: inline-block;
-    width: 48%;
+    width: 47%;
+  }
+  span{
+    margin: 0px 8px;
   }
 </style>

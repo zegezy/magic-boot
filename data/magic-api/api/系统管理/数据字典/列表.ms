@@ -5,7 +5,7 @@
   "groupId" : "c7ce65f5b3cf4aaa913f6fec7d35d176",
   "name" : "列表",
   "createTime" : null,
-  "updateTime" : 1646552464246,
+  "updateTime" : 1649169225411,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -119,7 +119,7 @@
 }
 ================================
 return db.page("""
-    select id,dict_type,desc_ribe,type,remarks,sort from sys_dict
+    select id,dict_type,desc_ribe,type,remarks,create_date from sys_dict
     where is_del = 0
     ?{type, and type like concat('%',#{type},'%')}
     ?{dictType, and dict_type = #{dictType}}

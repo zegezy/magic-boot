@@ -17,9 +17,7 @@
             :placeholder="it.type.startsWith('datetime') ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD'"
           >
           </el-date-picker>
-          <span v-if="it.type == 'inputrange'">
-            <mb-inputrange v-model="it.value" />
-          </span>
+          <mb-inputrange v-model="it.value" v-else-if="it.type == 'inputrange'" />
           <component v-else :is="it.type" v-model="it.value" v-bind="it.properties" />
         </el-form-item>
       </span>

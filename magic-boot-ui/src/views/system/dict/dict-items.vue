@@ -88,6 +88,41 @@ const tableOptions = reactive({
       label: '排序'
     },
     {
+      label: '排序',
+      type: 'btns',
+      width: 150,
+      btns: [
+        {
+          label: '上移',
+          type: 'text',
+          icon: 'ElSortUp',
+          click: (row) => {
+            proxy.$get('/system/dict/items/sort/up',{
+              id: row.id,
+              sort: row.sort,
+              dictId: props.dictId
+            }).then(() => {
+              reloadTable()
+            })
+          }
+        },
+        {
+          label: '下移',
+          type: 'text',
+          icon: 'ElSortDown',
+          click: (row) => {
+            proxy.$get('/system/dict/items/sort/down',{
+              id: row.id,
+              sort: row.sort,
+              dictId: props.dictId
+            }).then(() => {
+              reloadTable()
+            })
+          }
+        }
+      ]
+    },
+    {
       field: 'remarks',
       label: '备注'
     },

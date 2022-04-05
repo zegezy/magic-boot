@@ -5,7 +5,7 @@
   "groupId" : "376f26eb43a44a3daeafd27020a96f48",
   "name" : "列表",
   "createTime" : null,
-  "updateTime" : 1646552463663,
+  "updateTime" : 1649169185265,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -232,5 +232,5 @@ return db.page("""
     ?{label, and label like concat('%',#{label},'%')}
     ?{dictId, and dict_id = #{dictId}}
     ?{value, and value like concat('%',#{value},'%')}
-    order by create_date desc
+    order by sort
 """)

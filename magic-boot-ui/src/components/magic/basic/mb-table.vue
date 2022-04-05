@@ -277,10 +277,13 @@ defineExpose({ reload, exportExcel })
 </script>
 
 <style scoped>
-  .el-image >>> .el-image__inner {
+  .el-table :deep(.el-image .el-image__inner) {
     max-height: 100px;
     width: auto;
     height: auto;
+  }
+  .el-table :deep(.el-table__cell){
+    z-index: auto;
   }
 </style>
 

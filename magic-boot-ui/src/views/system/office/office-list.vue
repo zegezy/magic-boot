@@ -10,7 +10,7 @@
     <div class="filter-container">
       <el-form :inline="true">
         <el-form-item label="机构搜索">
-          <el-input v-model="searchValue" @input="searchOffice" placeholder="机构名称、链接、权限标识"></el-input>
+          <el-input v-model="searchValue" @input="searchOffice" placeholder="机构名称、机构编码"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button class="filter-item" type="primary" icon="ElSearch" @click="searchOffice">
@@ -114,7 +114,7 @@ const tableOptions = reactive({
     },
     {
       field: 'sort',
-      label: '序号',
+      label: '排序',
       width: 60
     },
     {

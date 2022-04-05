@@ -84,7 +84,7 @@ const tableOptions = reactive({
     },
     {
       field: 'sort',
-      label: '序号',
+      label: '排序',
       width: 60
     },
     {

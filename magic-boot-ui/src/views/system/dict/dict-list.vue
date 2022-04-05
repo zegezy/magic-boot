@@ -28,17 +28,10 @@
           </el-row>
           <el-row :gutter="24">
             <el-col :span="12">
-              <el-form-item label="排序" prop="sort">
-                <el-input v-model="temp.sort" />
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
               <el-form-item label="描述" prop="descRibe">
                 <el-input v-model="temp.descRibe" />
               </el-form-item>
             </el-col>
-          </el-row>
-          <el-row :gutter="24">
             <el-col :span="12">
               <el-form-item label="备注" prop="remarks">
                 <el-input v-model="temp.remarks" />
@@ -100,14 +93,13 @@ const tableOptions = reactive({
       dictType: 'dict_type'
     },
     {
+      field: 'createDate',
+      label: '创建时间'
+    },
+    {
       field: 'remarks',
       label: '备注',
       width: 200
-    },
-    {
-      field: 'sort',
-      label: '排序',
-      width: 100
     },
     {
       label: '操作',
@@ -161,7 +153,6 @@ const dialogTitle = ref('')
 const rules = reactive({
   dictType: [{ required: true, message: '请输入标签', trigger: 'change' }],
   type: [{ required: true, message: '请输入类型', trigger: 'change' }],
-  sort: [{ required: true, message: '请输入排序', trigger: 'change' }],
   descRibe: [{ required: true, message: '请输入描述', trigger: 'change' }]
 })
 const table = ref()
@@ -174,7 +165,6 @@ function getTemp() {
     id: '',
     dictType: '',
     type: '',
-    sort: 0,
     descRibe: '',
     remarks: ''
   }
@@ -184,15 +174,8 @@ function reloadTable() {
   table.value.reload()
 }
 
-function getSort() {
-  proxy.$get('/system/dict/sort').then(res => {
-    temp.value.sort = res.data
-  })
-}
-
 function handleCreate() {
   temp.value = getTemp()
-  getSort()
   dialogTitle.value = '添加'
   dictDialog.value.show()
   nextTick(() => {
