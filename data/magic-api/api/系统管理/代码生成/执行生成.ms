@@ -5,7 +5,7 @@
   "groupId" : "f2538e0f370a4cabab0ae920f5e77ae7",
   "name" : "执行生成",
   "createTime" : null,
-  "updateTime" : 1648780783577,
+  "updateTime" : 1649260158450,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -220,8 +220,31 @@ import org.ssssssss.magicapi.core.model.ApiInfo
 import org.ssssssss.magicapi.core.model.Group
 import org.ssssssss.magicapi.core.service.MagicResourceService
 import log
+import org.ssssssss.magicapi.modules.db.cache.SqlCache;
+import '@get:/system/menu/cache/delete' as cacheDelete;
 
 info = info::json
+var permissionPrefix = (info.modulePath + info.businessPath).replace(/^\//,'').replace(/\/\//, '/').replace('/', ':')
+
+if(!db.selectValue("""select id from sys_menu where url = #{info.modulePath + info.businessPath} and is_del = 0""")){
+    var menuId = uuid()
+    var sort = db.selectInt("""select max(sort) + 10 from sys_menu where pid = #{info.pid} and is_del = 0""") || 10
+    db.update("""
+        insert into sys_menu(id, pid,name,url,component_name,sort,is_show)
+        values(#{menuId}, #{info.pid}, #{info.businessName},#{info.modulePath + info.businessPath},#{permissionPrefix.replace(':','-') + '-list'},#{sort},1)
+    """)
+    db.update("""
+        insert into sys_menu(id, pid, name, permission, sort, keep_alive) values(#{uuid()}, #{menuId}, '查看', #{permissionPrefix + ':view'}, 10, 0)
+    """)
+    db.update("""
+        insert into sys_menu(id, pid, name, permission, sort, keep_alive) values(#{uuid()}, #{menuId}, '保存', #{permissionPrefix + ':save'}, 20, 0)
+    """)
+    db.update("""
+        insert into sys_menu(id, pid, name, permission, sort, keep_alive) values(#{uuid()}, #{menuId}, '删除', #{permissionPrefix + ':delete'}, 30, 0)
+    """)
+    SqlCache.delete('permissions:1')
+    cacheDelete();
+}
 
 var getGroup = (type) => {
     var moduleGroup = MagicResourceService.tree(type).children.filter(it => {
@@ -308,7 +331,7 @@ if(commonField.contains('is_del')){
     wheres += `    and is_del = 0\n`
 }
 wheres = wheres.substring(0,wheres.length() - 1)
-var permissionPrefix = (info.modulePath + info.businessPath).replace(/^\//,'').replace(/\/\//, '/').replace('/', ':')
+
 ApiInfo listApi = new ApiInfo()
 listApi.setName("列表")
 listApi.setPath("/list")

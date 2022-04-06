@@ -69,7 +69,12 @@
               <el-input v-model="genInfo.info.businessPath"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="24">
+          <el-col :span="12">
+            <el-form-item label="上级菜单" prop="pid">
+              <treeselect v-model="genInfo.info.pid" :options="menuTree" :key="genInfo.info.pid" style="position: fixed;z-index:999999;width: 548px;" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
             <el-form-item>
               <template #label>
                 代码生成
@@ -93,6 +98,14 @@
   const dataForm = ref()
   const tables = ref([])
   const emit = defineEmits(['reload'])
+  const menuTree = ref()
+  proxy.$get('/system/menu/tree').then(res => {
+    menuTree.value = [{
+      label: '根节点',
+      id: '0',
+      children: proxy.$treeTable.genTree(res.data.list)
+    }]
+  })
   var validatePath = (rule, value, callback) => {
     if(!value.startsWith('/')){
       callback(new Error('请以“/”开头'));
@@ -119,7 +132,8 @@
       modulePath: '',
       businessName: '',
       businessPath: '',
-      template: 'singleTable'
+      template: 'singleTable',
+      pid: ''
     },
     columns: []
   })

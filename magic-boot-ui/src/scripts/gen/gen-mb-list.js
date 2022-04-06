@@ -1,5 +1,5 @@
 function gen(groupPath, data){
-    var permissionPrefix = groupPath.replace(/^\//,'').replace(/\/\//, '/').replace('/', ':')
+    var permissionPrefix = groupPath.replace(/^\//,'').replace(/\/\//, '/').replaceAll('/', ':')
     var html = `<template>
     <mb-list ref="magicList" v-bind="listOptions" />
     <mb-dialog ref="formDialog" :title="magicFormTitle" @confirm-click="magicForm.save($event)" width="50%">
