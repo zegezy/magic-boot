@@ -57,6 +57,7 @@
         </el-upload>
       </template>
     </vuedraggable>
+    <div v-if="tip" class="el-upload__tip" :style="{ color: tipColor }">{{ tip }}</div>
     <mb-dialog ref="cropperDialog" @confirm-click="cropper">
       <template #content>
         <div class="cropper-content">
@@ -123,6 +124,14 @@ export default {
     height: {
       type: String,
       default: '100'
+    },
+    tip: {
+      type: String,
+      default: ''
+    },
+    tipColor: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -259,6 +268,7 @@ export default {
 .vue-draggable >>> .el-upload {
   width: 100%;
   height: 100%;
+  display: block;
 }
 </style>
 

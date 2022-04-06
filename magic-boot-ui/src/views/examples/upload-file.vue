@@ -5,7 +5,7 @@
     <h2>上传图片（id）</h2>
     <mb-upload-image :external-id="externalId" multiple :external-type="externalType" />
     <h2>上传图片（url、单图）</h2>
-    <mb-upload-image v-model="imgUrl" @change="imgChange" />
+    <mb-upload-image v-model="imgUrl" @change="imgChange" tip="建议上传尺寸：710*345" />
     <h2>上传图片（url、多图）</h2>
     <mb-upload-image v-model="multipleImgUrl" width="120" height="120" multiple :limit="3" @change="multipleImgChange" />
   </div>
