@@ -107,7 +107,7 @@ export default {
     }
   },
   watch: {
-    value(newValue) {
+    modelValue(newValue) {
       this.renderFile()
     }
   },
@@ -130,8 +130,8 @@ export default {
       this.$refs.uploadRef.handleRemove(file)
     },
     renderFile() {
-      if (this.value instanceof Array && this.value.length > 0) {
-        this.fileList = this.value.map(it => {
+      if (this.modelValue instanceof Array && this.modelValue.length > 0) {
+        this.fileList = this.modelValue.map(it => {
           return {
             name: it.substring(it.lastIndexOf('/') + 1),
             response: {
@@ -142,12 +142,12 @@ export default {
           }
         })
       } else {
-        if (this.value) {
+        if (this.modelValue) {
           this.fileList.push({
-            name: this.value.substring(this.value.lastIndexOf('/') + 1),
+            name: this.modelValue.substring(this.modelValue.lastIndexOf('/') + 1),
             response: {
               data: {
-                url: this.value
+                url: this.modelValue
               }
             }
           })
@@ -267,6 +267,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  :deep(.el-upload){
+    display: block;
+  }
 </style>
