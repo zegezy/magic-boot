@@ -1,4 +1,3 @@
-import * as vue from 'vue'
 import {createApp} from 'vue'
 const app = createApp(App)
 import ElementPlus from 'element-plus'
@@ -14,13 +13,7 @@ import hasPermission from './scripts/hasPermission'
 import { appComponent } from './scripts/dynamicComponent'
 import '@/permission'
 import global from '@/scripts/global.js'
-const libs = {
-  vue,
-  'element-plus': ElementPlus
-}
-window.___magic__import__ = function(lib, name){
-  return (libs[lib] || {})[name]
-}
+import '@/scripts/magic-import'
 app.use(globalProperties)
 
 var loadDynamicComponent = false
@@ -37,6 +30,7 @@ router.beforeEach(async (to, from) => {
       })
       await app.config.globalProperties.$post('/system/component/list').then((res) => {
         res.data.forEach(it => {
+          global.dynamicComponentNames.push(it.name)
           appComponent(app, it)
         })
         loading.close()

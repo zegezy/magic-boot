@@ -9,7 +9,7 @@
       <el-col v-for="(col,j) in row.cols" :key="j" :span="col.span" v-bind="col.colProps">
         <el-form-item :label="col.label" :label-width="col.labelWidth" :prop="col.name" v-bind="col.formItemProps">
           <component
-            :is="!col.component ? 'mb-input' : col.component.startsWith('el-') ? col.component : 'mb-' + col.component"
+            :is="!col.component ? 'mb-input' : col.component.startsWith('el-') || $global.dynamicComponentNames.indexOf(col.component) != -1 ? col.component : 'mb-' + col.component"
             v-model="formData[col.name]"
             :item-label="col.label"
             v-bind="col.props"
