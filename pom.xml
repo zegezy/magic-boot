@@ -6,6 +6,7 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>magic-boot</module>
+		<module>magic-api-plugin-component</module>
 	</modules>
 
 	<parent>
