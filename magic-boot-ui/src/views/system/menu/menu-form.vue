@@ -17,7 +17,7 @@
       </el-col>
       <el-col :span="12">
         <el-form-item label="上级菜单" prop="pid">
-          <treeselect v-model="temp.pid" :options="menuTree" :key="temp.pid" />
+          <treeselect v-model="temp.pid" :options="menuTree" :key="temp.pid" style="position: relative;z-index:999999;" />
         </el-form-item>
       </el-col>
     </el-row>
@@ -35,7 +35,7 @@
         placeholder=""
         :options="componentTree"
         :key="temp.componentName"
-        style="position: fixed;z-index:999999;width: 850px;"
+        style="position: fixed;z-index:999998;width: 850px;"
       />
     </el-form-item>
     <el-form-item label="权限标识" prop="permission" v-if="menuType == 'button'">

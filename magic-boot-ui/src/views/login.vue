@@ -3,7 +3,6 @@
     <div class="magic-login-box">
 <!--      <div class="magic-login-logo"></div>-->
       <div class="magic-login-text">{{ $global.title }}</div>
-      <div class="magic-login-row error" v-if="error"><mb-icon icon="error"/><span>{{ error }}</span></div>
       <div class="magic-login-row">
         <input ref="username" class="magic-input" v-model="loginForm.username" placeholder="用户名" name="username" type="text" tabindex="1" auto-complete="on" />
         <mb-icon icon="user"/>
@@ -170,27 +169,12 @@ label {
   margin:25px auto;
   position: relative;
 }
-.magic-login-row.error{
-  background-color: #fff1f0;
-  border: 1px solid #ffa39e;
-  color: #000;
-  border-radius: 4px;
-  padding:10px 0;
-  padding-left: 40px;
-}
-.magic-login-row.error span{
-  font-size: 14px;
-  word-break: break-all;
-}
 .magic-login-row svg{
   position: absolute;
   width: 20px;
   height: 20px;
   top: 15px;
   left: 15px;
-}
-.magic-login-row :deep(.magic-icon-error){
-  fill: red;
 }
 .magic-login-box .magic-input{
   height: 50px;

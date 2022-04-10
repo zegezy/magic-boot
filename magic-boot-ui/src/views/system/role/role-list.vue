@@ -30,10 +30,10 @@
             <el-col :span="24">
               <el-form-item label="角色描述" prop="descRibe">
                 <el-input
-                  type="textarea"
-                  :rows="4"
-                  placeholder="请输入描述"
-                  v-model="temp.descRibe">
+                    type="textarea"
+                    :rows="4"
+                    placeholder="请输入描述"
+                    v-model="temp.descRibe">
                 </el-input>
               </el-form-item>
             </el-col>
@@ -41,13 +41,13 @@
           <el-row :gutter="24">
             <el-col :span="12">
               <el-form-item label="菜单权限" prop="menus">
-                <mb-tree ref="tree" :el="{ 'show-checkbox': true }" max-height="270px" url="/system/menu/tree" :search="true" v-model:select-values="temp.menus" />
+                <mb-tree ref="tree" :props="{ 'show-checkbox': true }" style="height: 270px; overflow: auto" url="/system/menu/tree" :search="true" :select-values="temp.menus" />
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="数据权限" prop="permission">
                 <mb-select v-model="temp.permission" :options="permissionData" />
-                <mb-tree v-if="temp.permission == 1" max-height="270px" :el="{ 'check-strictly': true, 'show-checkbox': true }" ref="office" url="/system/office/tree" v-model:select-values="temp.offices" />
+                <mb-tree v-if="temp.permission == 1" style="height: 270px; overflow: auto" :props="{ 'check-strictly': true, 'show-checkbox': true }" ref="office" url="/system/office/tree" v-model:select-values="temp.offices" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -71,112 +71,112 @@ import RoleAssignPermissions from './role-assign-permissions'
 const { proxy } = getCurrentInstance()
 
 const permissionData = reactive([{
-        label: '全部',
-        value: '0'
-      }, {
-        label: '自定义',
-        value: '1'
-      }, {
-        label: '本级及子级',
-        value: '2'
-      }, {
-        label: '本级',
-        value: '3'
-      }])
+  label: '全部',
+  value: '0'
+}, {
+  label: '自定义',
+  value: '1'
+}, {
+  label: '本级及子级',
+  value: '2'
+}, {
+  label: '本级',
+  value: '3'
+}])
 const assignPermissions = ref()
 const assignPermissionsDialog = ref()
 const table = ref()
 const roleFormDialog = ref()
 const dataForm = ref()
 const tableOptions = reactive({
-        url: '/system/role/list',
-        where: {
-          name: {
-            type: 'input',
-            label: '角色名称',
-            value: ''
+  url: '/system/role/list',
+  where: {
+    name: {
+      type: 'input',
+      label: '角色名称',
+      value: ''
+    }
+  },
+  cols: [
+    {
+      field: 'name',
+      label: '角色名称'
+    },
+    {
+      field: 'code',
+      label: '角色编码'
+    },
+    {
+      field: 'descRibe',
+      label: '角色描述'
+    },
+    {
+      field: 'permission',
+      label: '数据权限',
+      templet: (row) => {
+        return permissionData[row.permission].label
+      }
+    },
+    {
+      label: '操作',
+      type: 'btns',
+      width: 270,
+      fixed: 'right',
+      btns: [
+        {
+          permission: 'role:save',
+          label: '修改',
+          type: 'text',
+          icon: 'ElEdit',
+          click: (row) => {
+            handleUpdate(row)
           }
         },
-        cols: [
-          {
-            field: 'name',
-            label: '角色名称'
-          },
-          {
-            field: 'code',
-            label: '角色编码'
-          },
-          {
-            field: 'descRibe',
-            label: '角色描述'
-          },
-          {
-            field: 'permission',
-            label: '数据权限',
-            templet: (row) => {
-              return permissionData[row.permission].label
-            }
-          },
-          {
-            label: '操作',
-            type: 'btns',
-            width: 270,
-            fixed: 'right',
-            btns: [
-              {
-                permission: 'role:save',
-                label: '修改',
-                type: 'text',
-                icon: 'ElEdit',
-                click: (row) => {
-                  handleUpdate(row)
-                }
-              },
-              {
-                permission: 'role:delete',
-                label: '删除',
-                type: 'text',
-                icon: 'ElDelete',
-                click: (row) => {
-                  proxy.$common.handleDelete({
-                    url: '/system/role/delete',
-                    id: row.id,
-                    done: () => reloadTable()
-                  })
-                }
-              },
-              {
-                permission: 'role:permission',
-                label: '权限',
-                type: 'text',
-                icon: 'ElPlus',
-                click: (row) => {
-                  temp.value.id = row.id
-                  assignPermissionsDialog.value.show()
-                }
-              },
-              {
-                permission: 'role:user:list',
-                label: '用户列表',
-                type: 'text',
-                icon: 'ElUserFilled',
-                click: (row) => {
-                  proxy.$router.push({
-                    path: '/system/user/user-list',
-                    query: { roleId: row.id }
-                  })
-                }
-              }
-            ]
+        {
+          permission: 'role:delete',
+          label: '删除',
+          type: 'text',
+          icon: 'ElDelete',
+          click: (row) => {
+            proxy.$common.handleDelete({
+              url: '/system/role/delete',
+              id: row.id,
+              done: () => reloadTable()
+            })
           }
-        ]
-      })
+        },
+        {
+          permission: 'role:permission',
+          label: '权限',
+          type: 'text',
+          icon: 'ElPlus',
+          click: (row) => {
+            temp.value.id = row.id
+            assignPermissionsDialog.value.show()
+          }
+        },
+        {
+          permission: 'role:user:list',
+          label: '用户列表',
+          type: 'text',
+          icon: 'ElUserFilled',
+          click: (row) => {
+            proxy.$router.push({
+              path: '/system/user/user-list',
+              query: { roleId: row.id }
+            })
+          }
+        }
+      ]
+    }
+  ]
+})
 const dialogTitle = ref('')
 const temp = ref(getTemp())
 const rules = reactive({
-        name: [{ required: true, message: '请输入角色名称', trigger: 'change' }],
-        code: [{ required: true, message: '请输入角色编码', trigger: 'change' }]
-      })
+  name: [{ required: true, message: '请输入角色名称', trigger: 'change' }],
+  code: [{ required: true, message: '请输入角色编码', trigger: 'change' }]
+})
 const downloadLoading = ref(false)
 
 watch(() => temp.value.permission,() => {

@@ -11,7 +11,7 @@ import { generateRoutes } from '@/scripts/routerPermission'
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login'] // no redirect whitelist
-
+var loadInfo = false
 router.beforeEach(async(to, from, next) => {
   // start progress bar
   NProgress.start()
@@ -26,7 +26,7 @@ router.beforeEach(async(to, from, next) => {
       NProgress.done()
     } else {
       // determine whether the user has obtained his permission roles through getInfo
-      if (global.user.authorities.length > 0) {
+      if (loadInfo) {
         next()
       } else {
         try {
@@ -42,6 +42,7 @@ router.beforeEach(async(to, from, next) => {
               router.addRoute(it)
             })
           })
+          loadInfo = true
           // dynamically add accessible routes
           // hack method to ensure that addRoutes is complete
           // set the replace: true, so the navigation will not leave a history record

@@ -5,7 +5,7 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "当前用户菜单",
   "createTime" : null,
-  "updateTime" : 1648013721548,
+  "updateTime" : 1649558286068,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -598,6 +598,14 @@ nodes.each((key, node) => {
 var treeNodes = []
 nodes.each((key, node) => {
     if(node.pid == '0'){
+        if(node.component != 'Layout'){
+            node = {
+                isShow: 1,
+                component: 'Layout',
+                redirect: node.path,
+                children: [node]
+            }
+        }
         treeNodes.push(node)
     }
 })

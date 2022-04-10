@@ -8,8 +8,9 @@
         <div class="avatar">
           <el-dropdown>
             <el-col>
-              <el-avatar :size="40" fit="contain" :src="$global.baseApi + $global.user.info.headPortrait">
-                {{ !$global.user.info.headPortrait ? $global.user.info.name.substring(0,1) : '' }}
+              <el-avatar v-if="$global.user.info.headPortrait" :size="40" fit="contain" :src="$global.baseApi + $global.user.info.headPortrait"></el-avatar>
+              <el-avatar v-else :size="40" fit="contain">
+                {{ $global.user.info.name.substring(0,1) }}
               </el-avatar>
             </el-col>
             <el-col style="line-height: 40px;">

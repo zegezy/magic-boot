@@ -2,24 +2,24 @@
   <div>
     <div style="margin-bottom: 5px;" v-if="expand || checked">
       <el-button v-if="expand" type="primary" icon="ElSort" plain @click="doExpand">展开/折叠</el-button>
-      <el-button v-if="checked" type="primary" icon="ElCheck" plain @click="() => { treeAllChecked = !treeAllChecked; checkedAll(searchData, treeAllChecked) }">全选/全不选</el-button>
+      <el-button v-if="checked" type="primary" icon="ElCheck" plain @click="() => { treeAllChecked = !treeAllChecked; checkedAll(treeData, treeAllChecked) }">全选/全不选</el-button>
     </div>
     <div style="margin-bottom: 5px;" v-if="search">
-      <el-input v-model="searchValue" placeholder="输入关键字进行过滤" @input="searchTree" :style="{ width: searchWidth }" />
+      <el-input v-model="searchValue" placeholder="输入关键字进行过滤" @input="tree.filter(searchValue)" :style="{ width: searchWidth }" />
     </div>
     <el-tree
-      v-if="refreshTree"
-      ref="tree"
-      :data="searchData"
-      v-bind="el"
-      node-key="id"
-      :default-expand-all="defaultExpandAll"
-      :default-checked-keys="checkedIds"
-      @check-change="checkChange"
-      @node-click="nodeClick"
-      :props="defaultProps"
-      :style="{ 'max-height': maxHeight ? maxHeight : '100%' }"
-      style="overflow: auto"
+        v-if="refreshTree"
+        ref="tree"
+        :data="treeData"
+        v-bind="props.props"
+        node-key="id"
+        :default-expand-all="defaultExpandAll"
+        :default-checked-keys="checkedIds"
+        @check-change="checkChange"
+        @node-click="nodeClick"
+        :props="defaultProps"
+        :filter-node-method="searchTree"
+        :style="style"
     />
   </div>
 </template>
@@ -45,11 +45,11 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  maxHeight: {
+  style: {
     type: String,
     default: ''
   },
-  el: {
+  props: {
     type: Object,
     default: () => {}
   },
@@ -68,22 +68,19 @@ const props = defineProps({
   searchWidth: {
     type: String,
     default: '230px'
-  },
-  checkedIds: {
-    type: Array,
-    default: () => []
   }
 })
 
+const checkedIds = ref(props.selectValues.split(','))
+
 const tree = ref()
 const treeData = ref([])
-const searchData = ref([])
 const defaultProps = reactive({
   children: 'children',
   label: 'name'
 })
 const defaultExpandAll = ref(true)
-const refreshTree = ref(true)
+const refreshTree = ref(false)
 const treeAllChecked = ref(false)
 const searchValue = ref('')
 
@@ -96,20 +93,12 @@ onMounted(() => {
 })
 
 watch(() => props.selectValues, async () => {
-  await loadTreeData()
-  checkedAll(searchData.value, false)
-  var values = props.selectValues.split(',');
-  for(var i in values){
-    tree.value.setChecked(values[i], true, false)
-  }
+  checkedIds.value = props.selectValues.split(',')
 })
 
-function searchTree() {
-  if(searchValue.value){
-    searchData.value = proxy.$treeTable.recursionSearch(['name'], proxy.$common.copyNew(treeData.value), searchValue.value, false)
-  }else{
-    searchData.value = treeData.value
-  }
+function searchTree(value, data) {
+  if (!value) return true
+  return data.name.includes(value)
 }
 
 function doExpand() {
@@ -122,8 +111,8 @@ async function loadTreeData() {
   if(treeData.value.length == 0){
     await proxy.$get(props.url, props.params).then((res) => {
       treeData.value = res.data.list
-      searchData.value = treeData.value
     })
+    refreshTree.value = true
   }
 }
 
