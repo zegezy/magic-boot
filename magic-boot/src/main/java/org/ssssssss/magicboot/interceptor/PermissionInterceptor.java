@@ -21,6 +21,7 @@ import org.ssssssss.script.MagicScriptContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -50,7 +51,7 @@ public class PermissionInterceptor implements RequestInterceptor, HandlerInterce
             return StatusCode.CERTIFICATE_EXPIRED.json();
         } else {
             // TODO
-            List<String> permissions = (List<String>) magicAPIService.execute("post", "/system/security/permissions", null);
+            List<String> permissions = (List<String>) magicAPIService.execute("post", "/system/security/permissions", new HashMap<String, Object>());
             String permission = Objects.toString(info.getOptionValue(Options.PERMISSION), "");
             if (StringUtils.isNotBlank(permission) && !permissions.contains(permission)) {
                 return StatusCode.FORBIDDEN.json();

@@ -84,7 +84,7 @@ service.interceptors.response.use(
           if(currentMessage){
             currentMessage.close()
           }
-          if(res.code == 403 && import.meta.env.NODE_ENV == 'preview'){
+          if(res.code == 403 && import.meta.env.MODE == 'demo'){
             res.message = '演示模式，不允许操作！'
           }
           currentMessage = ElMessage({

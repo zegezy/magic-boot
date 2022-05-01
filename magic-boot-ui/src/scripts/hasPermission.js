@@ -5,7 +5,7 @@ const hasPermission = {
       beforeMount(el, binding) {
         if (binding.value) {
           const permissionList = app.config.globalProperties.$global.user.authorities
-          if (permissionList && permissionList.length && !permissionList.includes(binding.value) && import.meta.env.NODE_ENV != 'preview') {
+          if (permissionList && permissionList.length && !permissionList.includes(binding.value) && import.meta.env.MODE != 'demo') {
             el.style.display = 'none'
           }
         }
