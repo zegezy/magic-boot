@@ -1,5 +1,7 @@
+##
+
 <p align="center">
-    <img src="https://gitee.com/ssssssss-team/magic-boot/raw/master/images/magic-boot.png">
+    <img src="https://gitee.com/ssssssss-team/magic-boot/raw/master/images/magic-boot.png" style="width: 30px;height:30px;" />
 </p>
 
 ## 简介
