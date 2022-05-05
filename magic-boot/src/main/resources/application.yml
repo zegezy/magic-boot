@@ -65,7 +65,7 @@ spring:
 upload:
   # oss,disk（磁盘）
   type: disk
-  dir: D:/psyduck/
+  dir: D:/mb/
   oss:
     endpoint:
     access-key-id:
