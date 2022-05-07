@@ -245,7 +245,7 @@ onMounted(() => reloadTable())
 watch(menuData, () => {
   menuTree.value = [{
     label: '根节点',
-    id: '0',
+    value: '0',
     children: proxy.$treeTable.genTree(menuData.value)
   }]
 })

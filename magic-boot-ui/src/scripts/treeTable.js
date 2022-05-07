@@ -41,7 +41,7 @@ treeTable.genTree = (children) => {
   for(var i in children){
     var chi = {}
     chi.label = children[i].name
-    chi.id = children[i].id
+    chi.value = children[i].id
     if(children[i].children && children[i].children.length > 0){
       chi.children = treeTable.genTree(children[i].children)
     }

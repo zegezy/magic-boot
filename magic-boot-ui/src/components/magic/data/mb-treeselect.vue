@@ -1,5 +1,5 @@
 <template>
-  <treeselect v-model="selectValue" :options="options" :key="modelValue" :placeholder="placeholder || (itemLabel && '请选择' + itemLabel)" :show-count="true" v-bind="props.props" />
+  <el-tree-select v-model="selectValue" :data="options" :key="modelValue" :placeholder="placeholder || (itemLabel && '请选择' + itemLabel)" v-bind="props.props" />
 </template>
 
 <script setup>

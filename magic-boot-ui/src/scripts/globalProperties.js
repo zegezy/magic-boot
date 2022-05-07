@@ -1,6 +1,4 @@
 import * as PlusIcons from '@element-plus/icons-vue'
-import Treeselect from 'vue3-treeselect'
-import 'vue3-treeselect/dist/vue3-treeselect.css'
 import request from './request'
 import global from './global'
 import common from './common'
@@ -27,6 +25,5 @@ const install = (app) => {
   for(var key in PlusIcons) {
     app.component(`El${key}`, PlusIcons[key])
   }
-  app.component('treeselect', Treeselect)
 }
 export default install

@@ -43,7 +43,7 @@
             </el-col>
             <el-col :span="12">
               <el-form-item label="上级机构" prop="pid">
-                <treeselect v-model="temp.pid" :options="officeTree" :key="temp.pid" />
+                <el-tree-select v-model="temp.pid" :key="temp.pid" :data="officeTree" style="width: 100%" check-strictly />
               </el-form-item>
             </el-col>
           </el-row>
@@ -74,8 +74,6 @@
 </template>
 
 <script setup>
-import Treeselect from 'vue3-treeselect'
-import 'vue3-treeselect/dist/vue3-treeselect.css'
 
 import { ref, reactive, onMounted, watch, nextTick, getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
@@ -229,7 +227,7 @@ onMounted(() => {
 watch(officeData, () => {
   officeTree.value = [{
     label: '根节点',
-    id: '0',
+    value: '0',
     children: proxy.$treeTable.genTree(officeData.value)
   }]
 })

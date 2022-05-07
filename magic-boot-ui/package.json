@@ -10,13 +10,12 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
-    "element-plus": "^2.1.7",
+    "element-plus": "^2.1.8",
     "nprogress": "0.2.0",
     "path-browserify": "^1.0.1",
     "vue": "^3.2.25",
     "vue-cropper": "^1.0.2",
     "vue-router": "^4.0.0-0",
-    "vue3-treeselect": "^0.1.10",
     "vuedraggable": "^4.1.0",
     "xlsx": "^0.18.3"
   },

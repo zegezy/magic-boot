@@ -27,7 +27,7 @@
     <el-row :gutter="24">
       <el-col :span="12">
         <el-form-item label="组织机构" prop="officeId">
-          <treeselect v-model="temp.officeId" :options="officeTree" :key="temp.officeId" :show-count="true" placeholder="请选择组织机构" />
+          <mb-treeselect url="/system/user/offices" v-model="temp.officeId" :key="temp.officeId" placeholder="请选择组织机构" check-strictly />
         </el-form-item>
       </el-col>
       <el-col :span="12">
@@ -47,7 +47,7 @@
 
 <script setup>
 
-import { ref, reactive, onBeforeMount, getCurrentInstance, nextTick, defineExpose } from 'vue'
+import { ref, reactive, getCurrentInstance, nextTick, defineExpose } from 'vue'
 
 const emit = defineEmits(['reload-table'])
 const { proxy } = getCurrentInstance()
@@ -59,16 +59,8 @@ const rules = reactive({
   officeId: [{ required: true, message: '请选择组织机构', trigger: 'change' }]
 })
 const temp = ref(getTemp())
-const officeTree = ref([])
 const isForm = ref(true)
 const dataForm = ref()
-
-onBeforeMount(() => {
-  proxy.$get('/system/user/offices').then(res => {
-    officeTree.value = res.data.list
-    proxy.$treeTable.deleteEmptyChildren(officeTree.value)
-  })
-})
 
 function getTemp() {
   return {

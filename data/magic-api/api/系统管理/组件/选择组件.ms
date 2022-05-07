@@ -5,7 +5,7 @@
   "groupId" : "6f106ebdee21489db34b956f7770ff03",
   "name" : "选择组件",
   "createTime" : null,
-  "updateTime" : 1648647253717,
+  "updateTime" : 1651902325727,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -16,7 +16,7 @@
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [{\n        \"id\": \"9bf92d503f4242d39a0f271c577aa3ac\",\n        \"label\": \"系统管理\",\n        \"children\": [{\n            \"id\": \"6bee7576eea04963a573b21bb657784d\",\n            \"label\": \"字典管理\",\n            \"children\": [{\n                \"id\": \"sys-dict-list\",\n                \"label\": \"列表(sys-dict-list)\"\n            }]\n        }]\n    }],\n    \"timestamp\": 1648025200208,\n    \"executeTime\": 14\n}",
+  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [{\n        \"value\": \"55ff62aa20144b7bb5c6dfb5d76c8139\",\n        \"label\": \"数据管理(/data)\",\n        \"children\": [{\n            \"value\": \"eb5dbed949de4f50ba4bf59f483252a5\",\n            \"label\": \"测试生成(/test)\",\n            \"children\": [{\n                \"id\": \"data-test-list\",\n                \"label\": \"列表(/list)\"\n            }]\n        }]\n    }],\n    \"timestamp\": 1651902176780,\n    \"executeTime\": 9\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -77,8 +77,8 @@
         "error" : "",
         "expression" : "",
         "children" : [ {
-          "name" : "id",
-          "value" : "9bf92d503f4242d39a0f271c577aa3ac",
+          "name" : "value",
+          "value" : "55ff62aa20144b7bb5c6dfb5d76c8139",
           "description" : "",
           "required" : false,
           "dataType" : "String",
@@ -90,7 +90,7 @@
           "children" : [ ]
         }, {
           "name" : "label",
-          "value" : "系统管理",
+          "value" : "数据管理(/data)",
           "description" : "",
           "required" : false,
           "dataType" : "String",
@@ -123,8 +123,8 @@
             "error" : "",
             "expression" : "",
             "children" : [ {
-              "name" : "id",
-              "value" : "6bee7576eea04963a573b21bb657784d",
+              "name" : "value",
+              "value" : "eb5dbed949de4f50ba4bf59f483252a5",
               "description" : "",
               "required" : false,
               "dataType" : "String",
@@ -136,7 +136,7 @@
               "children" : [ ]
             }, {
               "name" : "label",
-              "value" : "字典管理",
+              "value" : "测试生成(/test)",
               "description" : "",
               "required" : false,
               "dataType" : "String",
@@ -170,7 +170,7 @@
                 "expression" : "",
                 "children" : [ {
                   "name" : "id",
-                  "value" : "sys-dict-list",
+                  "value" : "data-test-list",
                   "description" : "",
                   "required" : false,
                   "dataType" : "String",
@@ -182,7 +182,7 @@
                   "children" : [ ]
                 }, {
                   "name" : "label",
-                  "value" : "列表(sys-dict-list)",
+                  "value" : "列表(/list)",
                   "description" : "",
                   "required" : false,
                   "dataType" : "String",
@@ -200,7 +200,7 @@
       } ]
     }, {
       "name" : "timestamp",
-      "value" : "1648025200208",
+      "value" : "1651902176780",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -212,7 +212,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "14",
+      "value" : "9",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -230,7 +230,7 @@ import org.ssssssss.magicapi.utils.PathUtils
 import org.ssssssss.magicapi.core.service.MagicResourceService
 var getFiles = (groupId) => {
     return MagicResourceService.listFiles(groupId).map(file => { 
-        id: PathUtils.replaceSlash(String.format("%s/%s", MagicResourceService.getGroupPath(file.groupId), file.path)).replace(/^\//,'').replace(/\/\//, '/').replace('/', '-'),
+        value: PathUtils.replaceSlash(String.format("%s/%s", MagicResourceService.getGroupPath(file.groupId), file.path)).replace(/^\//,'').replace(/\/\//, '/').replace('/', '-'),
         label: `${file.name}(${file.path})`
     })
 }
@@ -238,7 +238,7 @@ var toTree = (children) => {
     var treeData = []
     children.forEach(it => {
         var chi = {}
-        chi.id = it.node.id
+        chi.value = it.node.id
         chi.label = `${it.node.name}(${it.node.path})`
         if(it.children.length > 0){
             chi.children = toTree(it.children)

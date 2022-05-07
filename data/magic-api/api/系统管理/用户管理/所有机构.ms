@@ -4,8 +4,8 @@
   "script" : null,
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "所有机构",
-  "createTime" : 1646490239474,
-  "updateTime" : 1642134606249,
+  "createTime" : null,
+  "updateTime" : 1651892081106,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -16,7 +16,7 @@
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"list\": [{\n            \"id\": \"4c37a80226134bce8bc91c8fc04a7d2f\",\n            \"label\": \"<font color=\\\"yellow\\\">马小东公司</font>\",\n            \"pid\": \"0\",\n            \"children\": [{\n                \"id\": \"81b5493cdb31477f9ceea85b2cd08f15\",\n                \"label\": \"<font color=\\\"yellow\\\">马小东子公司</font>\",\n                \"pid\": \"4c37a80226134bce8bc91c8fc04a7d2f\",\n                \"children\": []\n            }, {\n                \"id\": \"31b365008f994e93850186126fce87cb\",\n                \"label\": \"<font color=\\\"yellow\\\">马小东子公司2</font>\",\n                \"pid\": \"4c37a80226134bce8bc91c8fc04a7d2f\",\n                \"children\": []\n            }]\n        }, {\n            \"id\": \"935126327e2a4f90b3f485f818f61ea5\",\n            \"label\": \"<font color=\\\"yellow\\\">吕金泽公司</font>\",\n            \"pid\": \"0\",\n            \"children\": [{\n                \"id\": \"1ae0299fc79b43c6b0ae2e14756ec41a\",\n                \"label\": \"<font color=\\\"yellow\\\">吕金泽子公司</font>\",\n                \"pid\": \"935126327e2a4f90b3f485f818f61ea5\",\n                \"children\": []\n            }]\n        }],\n        \"total\": 2\n    },\n    \"timestamp\": 1642134574553,\n    \"executeTime\": 5\n}",
+  "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1651892073882,\n    \"executeTime\": null\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -32,7 +32,7 @@
     "expression" : "",
     "children" : [ {
       "name" : "code",
-      "value" : "200",
+      "value" : "402",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -44,7 +44,7 @@
       "children" : [ ]
     }, {
       "name" : "message",
-      "value" : "success",
+      "value" : "凭证已过期",
       "description" : "",
       "required" : false,
       "dataType" : "String",
@@ -56,7 +56,7 @@
       "children" : [ ]
     }, {
       "name" : "data",
-      "value" : "",
+      "value" : "null",
       "description" : "",
       "required" : false,
       "dataType" : "Object",
@@ -65,154 +65,10 @@
       "validateType" : "",
       "error" : "",
       "expression" : "",
-      "children" : [ {
-        "name" : "list",
-        "value" : "",
-        "description" : "",
-        "required" : false,
-        "dataType" : "Array",
-        "type" : null,
-        "defaultValue" : null,
-        "validateType" : "",
-        "error" : "",
-        "expression" : "",
-        "children" : [ {
-          "name" : "",
-          "value" : "",
-          "description" : "",
-          "required" : false,
-          "dataType" : "Object",
-          "type" : null,
-          "defaultValue" : null,
-          "validateType" : "",
-          "error" : "",
-          "expression" : "",
-          "children" : [ {
-            "name" : "id",
-            "value" : "4c37a80226134bce8bc91c8fc04a7d2f",
-            "description" : "",
-            "required" : false,
-            "dataType" : "String",
-            "type" : null,
-            "defaultValue" : null,
-            "validateType" : "",
-            "error" : "",
-            "expression" : "",
-            "children" : [ ]
-          }, {
-            "name" : "label",
-            "value" : "<font color=\\\"yellow\\\">马小东公司</font>",
-            "description" : "",
-            "required" : false,
-            "dataType" : "String",
-            "type" : null,
-            "defaultValue" : null,
-            "validateType" : "",
-            "error" : "",
-            "expression" : "",
-            "children" : [ ]
-          }, {
-            "name" : "pid",
-            "value" : "0",
-            "description" : "",
-            "required" : false,
-            "dataType" : "String",
-            "type" : null,
-            "defaultValue" : null,
-            "validateType" : "",
-            "error" : "",
-            "expression" : "",
-            "children" : [ ]
-          }, {
-            "name" : "children",
-            "value" : "",
-            "description" : "",
-            "required" : false,
-            "dataType" : "Array",
-            "type" : null,
-            "defaultValue" : null,
-            "validateType" : "",
-            "error" : "",
-            "expression" : "",
-            "children" : [ {
-              "name" : "",
-              "value" : "",
-              "description" : "",
-              "required" : false,
-              "dataType" : "Object",
-              "type" : null,
-              "defaultValue" : null,
-              "validateType" : "",
-              "error" : "",
-              "expression" : "",
-              "children" : [ {
-                "name" : "id",
-                "value" : "81b5493cdb31477f9ceea85b2cd08f15",
-                "description" : "",
-                "required" : false,
-                "dataType" : "String",
-                "type" : null,
-                "defaultValue" : null,
-                "validateType" : "",
-                "error" : "",
-                "expression" : "",
-                "children" : [ ]
-              }, {
-                "name" : "label",
-                "value" : "<font color=\\\"yellow\\\">马小东子公司</font>",
-                "description" : "",
-                "required" : false,
-                "dataType" : "String",
-                "type" : null,
-                "defaultValue" : null,
-                "validateType" : "",
-                "error" : "",
-                "expression" : "",
-                "children" : [ ]
-              }, {
-                "name" : "pid",
-                "value" : "4c37a80226134bce8bc91c8fc04a7d2f",
-                "description" : "",
-                "required" : false,
-                "dataType" : "String",
-                "type" : null,
-                "defaultValue" : null,
-                "validateType" : "",
-                "error" : "",
-                "expression" : "",
-                "children" : [ ]
-              }, {
-                "name" : "children",
-                "value" : "",
-                "description" : "",
-                "required" : false,
-                "dataType" : "Array",
-                "type" : null,
-                "defaultValue" : null,
-                "validateType" : "",
-                "error" : "",
-                "expression" : "",
-                "children" : [ ]
-              } ]
-            } ]
-          } ]
-        } ]
-      }, {
-        "name" : "total",
-        "value" : "2",
-        "description" : "",
-        "required" : false,
-        "dataType" : "Integer",
-        "type" : null,
-        "defaultValue" : null,
-        "validateType" : "",
-        "error" : "",
-        "expression" : "",
-        "children" : [ ]
-      } ]
+      "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1642134574553",
+      "value" : "1651892073882",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -224,7 +80,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "5",
+      "value" : "null",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -238,8 +94,8 @@
   }
 }
 ================================
-var toTree = (list,pid) => select t.*,toTree(list,t.id) children from list t where t.pid = pid
-var list = toTree(db.select('select id,name label,pid from sys_office where is_del = 0 order by sort'),'0')
+var toTree = (list,pid) => select t.*,toTree(list,t.value) children from list t where t.pid = pid
+var list = toTree(db.select('select id value,name label,pid from sys_office where is_del = 0 order by sort'),'0')
 
 return {
     list: list,

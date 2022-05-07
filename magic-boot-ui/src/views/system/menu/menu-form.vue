@@ -17,7 +17,7 @@
       </el-col>
       <el-col :span="12">
         <el-form-item label="上级菜单" prop="pid">
-          <treeselect v-model="temp.pid" :options="menuTree" :key="temp.pid" style="position: relative;z-index:999999;" />
+          <el-tree-select v-model="temp.pid" :data="menuTree" :key="temp.pid" style="width: 100%" check-strictly />
         </el-form-item>
       </el-col>
     </el-row>
@@ -28,15 +28,7 @@
       <el-input v-model="temp.url" />
     </el-form-item>
     <el-form-item label="关联组件" prop="componentName" v-if="menuType == 'menu'">
-      <treeselect
-        v-model="temp.componentName"
-        :disable-branch-nodes="true"
-        :show-count="true"
-        placeholder=""
-        :options="componentTree"
-        :key="temp.componentName"
-        style="position: fixed;z-index:999998;width: 850px;"
-      />
+      <el-tree-select v-model="temp.componentName" :data="componentTree" :key="temp.componentName" style="width: 100%" placeholder=" " />
     </el-form-item>
     <el-form-item label="权限标识" prop="permission" v-if="menuType == 'button'">
       <el-input v-model="temp.permission" />
@@ -88,8 +80,6 @@
 <script setup>
 import { ref, reactive, watch, nextTick, getCurrentInstance, defineExpose } from 'vue'
 import MenuIcons from './menu-icons'
-import Treeselect from 'vue3-treeselect'
-import 'vue3-treeselect/dist/vue3-treeselect.css'
 
 const { proxy } = getCurrentInstance()
 
@@ -121,7 +111,7 @@ const getTemp = () => {
     pid: 0,
     icon: '',
     keepAlive: 0,
-    componentName: null
+    componentName: ''
   }
 }
 

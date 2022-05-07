@@ -71,7 +71,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="上级菜单" prop="pid">
-              <treeselect v-model="genInfo.info.pid" :options="menuTree" :key="genInfo.info.pid" style="position: fixed;z-index:999999;width: 548px;" />
+              <el-tree-select v-model="genInfo.info.pid" :data="menuTree" :key="genInfo.info.pid" style="width: 100%" check-strictly />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -102,7 +102,7 @@
   proxy.$get('/system/menu/tree').then(res => {
     menuTree.value = [{
       label: '根节点',
-      id: '0',
+      value: '0',
       children: proxy.$treeTable.genTree(res.data.list)
     }]
   })
