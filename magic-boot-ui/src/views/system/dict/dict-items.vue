@@ -4,7 +4,7 @@
     <mb-search :where="tableOptions.where" @search="reloadTable" not-reset="dictId" />
 
     <el-row class="toolbar-container">
-      <el-button v-permission="'dict:items:save'" class="filter-item" type="primary" icon="ElEdit" @click="handleCreate">
+      <el-button v-permission="'dict:items:save'" class="filter-item" type="primary" icon="ElIconEdit" @click="handleCreate">
         添加
       </el-button>
     </el-row>
@@ -95,7 +95,7 @@ const tableOptions = reactive({
         {
           label: '上移',
           type: 'text',
-          icon: 'ElSortUp',
+          icon: 'ElIconSortUp',
           click: (row) => {
             proxy.$get('/system/dict/items/sort/up',{
               id: row.id,
@@ -109,7 +109,7 @@ const tableOptions = reactive({
         {
           label: '下移',
           type: 'text',
-          icon: 'ElSortDown',
+          icon: 'ElIconSortDown',
           click: (row) => {
             proxy.$get('/system/dict/items/sort/down',{
               id: row.id,
@@ -136,7 +136,7 @@ const tableOptions = reactive({
           permission: 'dict:items:save',
           label: '修改',
           type: 'text',
-          icon: 'ElEdit',
+          icon: 'ElIconEdit',
           click: (row) => {
             handleUpdate(row)
           }
@@ -145,7 +145,7 @@ const tableOptions = reactive({
           permission: 'dict:items:delete',
           label: '删除',
           type: 'text',
-          icon: 'ElDelete',
+          icon: 'ElIconDelete',
           click: (row) => {
             proxy.$common.handleDelete({
               url: '/system/dict/items/delete',

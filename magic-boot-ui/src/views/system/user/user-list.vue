@@ -28,14 +28,14 @@
 
       <mb-search :where="tableOptions.where" @search="reloadTable">
         <template #btns>
-          <el-button class="filter-item" type="primary" icon="ElDownload" @click="table.exportExcel()">
+          <el-button class="filter-item" type="primary" icon="ElIconDownload" @click="table.exportExcel()">
             导出
           </el-button>
         </template>
       </mb-search>
 
       <el-row class="toolbar-container">
-        <el-button v-permission="'user:save'" class="filter-item" type="primary" icon="ElEdit" @click="handleCreate">
+        <el-button v-permission="'user:save'" class="filter-item" type="primary" icon="ElIconEdit" @click="handleCreate">
           添加
         </el-button>
         <mb-button v-permission="'user:delete'" :el="{ plain: true }" :request-url="'/system/user/delete'" :btn-type="'delete'" :request-data="{ id: ids }" :after-handler="reloadTable" />
@@ -192,7 +192,7 @@ const tableOptions = reactive({
           permission: 'user:save',
           label: '修改',
           type: 'text',
-          icon: 'ElEdit',
+          icon: 'ElIconEdit',
           click: (row) => {
             handleUpdate(row)
           }
@@ -201,7 +201,7 @@ const tableOptions = reactive({
           permission: 'user:delete',
           label: '删除',
           type: 'text',
-          icon: 'ElDelete',
+          icon: 'ElIconDelete',
           if: (row) => {
             return row.id != '1'
           },

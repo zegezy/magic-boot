@@ -4,7 +4,7 @@
     <mb-search :where="tableOptions.where" @search="reloadTable" />
 
     <el-row class="toolbar-container">
-      <el-button v-permission="'role:save'" class="filter-item" type="primary" icon="ElPlus" @click="handleCreate">
+      <el-button v-permission="'role:save'" class="filter-item" type="primary" icon="ElIconPlus" @click="handleCreate">
         添加
       </el-button>
     </el-row>
@@ -41,7 +41,7 @@
           <el-row :gutter="24">
             <el-col :span="12">
               <el-form-item label="菜单权限" prop="menus">
-                <mb-tree ref="tree" :props="{ 'show-checkbox': true }" style="height: 270px; overflow: auto" url="/system/menu/tree" :search="true" :select-values="temp.menus" />
+                <mb-tree ref="tree" :props="{ 'show-checkbox': true }" style="height: 270px; overflow: auto" url="/system/menu/tree" :search="true" v-model:select-values="temp.menus" />
               </el-form-item>
             </el-col>
             <el-col :span="12">
@@ -127,7 +127,7 @@ const tableOptions = reactive({
           permission: 'role:save',
           label: '修改',
           type: 'text',
-          icon: 'ElEdit',
+          icon: 'ElIconEdit',
           click: (row) => {
             handleUpdate(row)
           }
@@ -136,7 +136,7 @@ const tableOptions = reactive({
           permission: 'role:delete',
           label: '删除',
           type: 'text',
-          icon: 'ElDelete',
+          icon: 'ElIconDelete',
           click: (row) => {
             proxy.$common.handleDelete({
               url: '/system/role/delete',
@@ -149,7 +149,7 @@ const tableOptions = reactive({
           permission: 'role:permission',
           label: '权限',
           type: 'text',
-          icon: 'ElPlus',
+          icon: 'ElIconPlus',
           click: (row) => {
             temp.value.id = row.id
             assignPermissionsDialog.value.show()
@@ -159,7 +159,7 @@ const tableOptions = reactive({
           permission: 'role:user:list',
           label: '用户列表',
           type: 'text',
-          icon: 'ElUserFilled',
+          icon: 'ElIconUserFilled',
           click: (row) => {
             proxy.$router.push({
               path: '/system/user/user-list',

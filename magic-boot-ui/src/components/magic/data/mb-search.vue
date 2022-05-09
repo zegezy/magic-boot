@@ -22,10 +22,10 @@
         </el-form-item>
       </span>
       <el-form-item>
-        <el-button class="filter-item" type="primary" icon="ElSearch" @click="search">
+        <el-button class="filter-item" type="primary" icon="ElIconSearch" @click="search">
           搜索
         </el-button>
-        <el-button class="filter-item" icon="ElDelete" @click="reset">
+        <el-button class="filter-item" icon="ElIconDelete" @click="reset">
           清空
         </el-button>
         <slot name="btns" />

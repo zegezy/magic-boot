@@ -2,7 +2,7 @@
   <div class="app-container">
     <mb-search :where="tableOptions.where" @search="reloadTable">
       <template #btns>
-        <el-button class="filter-item" type="primary" icon="ElDownload" @click="table.exportExcel()">
+        <el-button class="filter-item" type="primary" icon="ElIconDownload" @click="table.exportExcel()">
           导出
         </el-button>
       </template>

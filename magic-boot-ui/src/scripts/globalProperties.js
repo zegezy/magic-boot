@@ -23,7 +23,7 @@ const install = (app) => {
   app.config.globalProperties.$common = common
   app.config.globalProperties.$treeTable = treeTable
   for(var key in PlusIcons) {
-    app.component(`El${key}`, PlusIcons[key])
+    app.component(`ElIcon${key}`, PlusIcons[key])
   }
 }
 export default install

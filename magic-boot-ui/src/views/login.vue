@@ -59,14 +59,6 @@
         showClose: true
       })
       return
-    }else if(!loginForm.code){
-      proxy.$message({
-        message: '请输入验证码',
-        type: 'error',
-        duration: 2000,
-        showClose: true
-      })
-      return
     }else{
       loading.value = true
       login(loginForm).then((res) => {

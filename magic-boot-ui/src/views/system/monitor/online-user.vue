@@ -86,7 +86,7 @@
               permission: 'online:logout',
               label: '踢人',
               type: 'text',
-              icon: 'ElBicycle',
+              icon: 'ElIconBicycle',
               click: (row) => {
                 // currRow.value = row
                 // magicDialog.value.show()

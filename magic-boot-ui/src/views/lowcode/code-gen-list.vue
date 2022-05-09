@@ -60,7 +60,7 @@
               permission: 'code:gen:save',
               label: '修改',
               type: 'text',
-              icon: 'ElEdit',
+              icon: 'ElIconEdit',
               click: (row) => {
                 formDialog.value.show()
                 nextTick(() => magicForm.value.getDetail(row.id))
@@ -69,7 +69,7 @@
               permission: 'code:gen:delete',
               label: '删除',
               type: 'text',
-              icon: 'ElDelete',
+              icon: 'ElIconDelete',
               click: (row) => {
                 proxy.$common.handleDelete({
                   url: '/system/code/gen/delete',

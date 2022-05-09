@@ -7,10 +7,10 @@
           <el-input v-model="searchValue" @input="searchMenu" placeholder="菜单名称、链接、权限标识" style="width: 200px"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button class="filter-item" type="primary" icon="ElSearch" @click="searchMenu">
+          <el-button class="filter-item" type="primary" icon="ElIconSearch" @click="searchMenu">
             搜索
           </el-button>
-          <el-button class="filter-item" icon="ElDelete" @click="() => { searchValue = ''; searchMenu() }">
+          <el-button class="filter-item" icon="ElIconDelete" @click="() => { searchValue = ''; searchMenu() }">
             清空
           </el-button>
         </el-form-item>
@@ -18,10 +18,10 @@
     </div>
 
     <el-row class="toolbar-container">
-      <el-button class="filter-item" type="primary" icon="ElPlus" @click="addSubMenu('0')" v-permission="'menu:save'">
+      <el-button class="filter-item" type="primary" icon="ElIconPlus" @click="addSubMenu('0')" v-permission="'menu:save'">
         添加菜单
       </el-button>
-      <el-button type="primary" icon="ElSort" plain @click="expand">展开/折叠</el-button>
+      <el-button type="primary" icon="ElIconSort" plain @click="expand">展开/折叠</el-button>
     </el-row>
 
     <mb-table ref="table" v-bind="tableOptions" v-if="menuData && menuData.length > 0 && refreshTable" />
@@ -95,7 +95,7 @@ const tableOptions = reactive({
         {
           label: '上移',
           type: 'text',
-          icon: 'ElSortUp',
+          icon: 'ElIconSortUp',
           click: (row) => {
             proxy.$get('/system/menu/sort/up',{
               id: row.id,
@@ -109,7 +109,7 @@ const tableOptions = reactive({
         {
           label: '下移',
           type: 'text',
-          icon: 'ElSortDown',
+          icon: 'ElIconSortDown',
           click: (row) => {
             proxy.$get('/system/menu/sort/down',{
               id: row.id,
@@ -157,7 +157,7 @@ const tableOptions = reactive({
           label: '添加下级菜单',
           type: 'text',
           permission: 'menu:save',
-          icon: 'ElPlus',
+          icon: 'ElIconPlus',
           click: (row) => {
             addSubMenu(row.id)
           }
@@ -166,7 +166,7 @@ const tableOptions = reactive({
           label: '修改',
           type: 'text',
           permission: 'menu:save',
-          icon: 'ElEdit',
+          icon: 'ElIconEdit',
           click: (row) => {
             handleUpdate(row)
           }
@@ -175,7 +175,7 @@ const tableOptions = reactive({
           label: '删除',
           type: 'text',
           permission: 'menu:delete',
-          icon: 'ElDelete',
+          icon: 'ElIconDelete',
           click: (row) => {
             proxy.$common.handleDelete({
               url: '/system/menu/delete',
@@ -189,7 +189,7 @@ const tableOptions = reactive({
   ]
 })
 const dialogTitle = ref('')
-var searchTimeout = reactive()
+var searchTimeout = null
 const menuFormDialog = ref()
 const menuFormRef = ref()
 

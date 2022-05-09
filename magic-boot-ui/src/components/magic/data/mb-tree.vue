@@ -1,8 +1,8 @@
 <template>
   <div>
     <div style="margin-bottom: 5px;" v-if="expand || checked">
-      <el-button v-if="expand" type="primary" icon="ElSort" plain @click="doExpand">展开/折叠</el-button>
-      <el-button v-if="checked" type="primary" icon="ElCheck" plain @click="() => { treeAllChecked = !treeAllChecked; checkedAll(treeData, treeAllChecked) }">全选/全不选</el-button>
+      <el-button v-if="expand" type="primary" icon="ElIconSort" plain @click="doExpand">展开/折叠</el-button>
+      <el-button v-if="checked" type="primary" icon="ElIconCheck" plain @click="() => { treeAllChecked = !treeAllChecked; checkedAll(treeData, treeAllChecked) }">全选/全不选</el-button>
     </div>
     <div style="margin-bottom: 5px;" v-if="search">
       <el-input v-model="searchValue" placeholder="输入关键字进行过滤" @input="tree.filter(searchValue)" :style="{ width: searchWidth }" />
@@ -46,8 +46,8 @@ const props = defineProps({
     default: ''
   },
   style: {
-    type: String,
-    default: ''
+    type: Object,
+    default: () => {}
   },
   props: {
     type: Object,
@@ -126,6 +126,7 @@ function checkChange(node) {
   for (var i = 0; i < checkedNodes.length; i++) {
     selectMenus.push(checkedNodes[i].id)
   }
+  console.log(selectMenus.join(','))
   emit('update:select-values', selectMenus.join(','))
   emit('check-change', selectMenus.join(','))
 }

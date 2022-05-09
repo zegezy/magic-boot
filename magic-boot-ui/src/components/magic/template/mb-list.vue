@@ -5,7 +5,7 @@
 
     <el-row class="toolbar-container">
       <div v-for="(it, i) in tools" :key="i">
-        <el-button v-if="it.type == 'add'" v-permission="it.permission" class="filter-item" type="primary" icon="ElPlus" @click="it.click">
+        <el-button v-if="it.type == 'add'" v-permission="it.permission" class="filter-item" type="primary" icon="ElIconPlus" @click="it.click">
           {{ it.label || '添加' }}
         </el-button>
         <mb-button v-if="it.type == 'delete'" v-permission="it.permission" :el="{ plain: true }" :request-url="it.url" :btn-type="'delete'" :request-data="{ id: ids }" :after-handler="reload" />

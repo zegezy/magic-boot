@@ -13,10 +13,10 @@
           <el-input v-model="searchValue" @input="searchOffice" placeholder="机构名称、机构编码"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button class="filter-item" type="primary" icon="ElSearch" @click="searchOffice">
+          <el-button class="filter-item" type="primary" icon="ElIconSearch" @click="searchOffice">
             搜索
           </el-button>
-          <el-button class="filter-item" icon="ElDelete" @click="() => { this.searchValue = ''; searchOffice() }">
+          <el-button class="filter-item" icon="ElIconDelete" @click="() => { this.searchValue = ''; searchOffice() }">
             清空
           </el-button>
         </el-form-item>
@@ -24,10 +24,10 @@
     </div>
 
     <el-row class="toolbar-container">
-      <el-button class="filter-item" type="primary" icon="ElEdit" @click="addSubOffice('0')" v-permission="'office:save'">
+      <el-button class="filter-item" type="primary" icon="ElIconEdit" @click="addSubOffice('0')" v-permission="'office:save'">
         添加机构
       </el-button>
-      <el-button type="primary" icon="ElSort" plain @click="expand">展开/折叠</el-button>
+      <el-button type="primary" icon="ElIconSort" plain @click="expand">展开/折叠</el-button>
     </el-row>
 
     <mb-table ref="table" v-bind="tableOptions" v-if="officeData && officeData.length > 0 && refreshTable" />
@@ -123,7 +123,7 @@ const tableOptions = reactive({
         {
           label: '上移',
           type: 'text',
-          icon: 'ElSortUp',
+          icon: 'ElIconSortUp',
           click: (row) => {
             proxy.$get('/system/office/sort/up',{
               id: row.id,
@@ -137,7 +137,7 @@ const tableOptions = reactive({
         {
           label: '下移',
           type: 'text',
-          icon: 'ElSortDown',
+          icon: 'ElIconSortDown',
           click: (row) => {
             proxy.$get('/system/office/sort/down',{
               id: row.id,
@@ -161,7 +161,7 @@ const tableOptions = reactive({
           label: '添加下级机构',
           type: 'text',
           permission: 'office:save',
-          icon: 'ElPlus',
+          icon: 'ElIconPlus',
           click: (row) => {
             addSubOffice(row.id)
           }
@@ -170,7 +170,7 @@ const tableOptions = reactive({
           label: '修改',
           type: 'text',
           permission: 'office:save',
-          icon: 'ElEdit',
+          icon: 'ElIconEdit',
           click: (row) => {
             handleUpdate(row)
           }
@@ -179,7 +179,7 @@ const tableOptions = reactive({
           label: '删除',
           type: 'text',
           permission: 'office:delete',
-          icon: 'ElDelete',
+          icon: 'ElIconDelete',
           if: (row) => {
             return row.pid != '0';
           },
@@ -195,7 +195,7 @@ const tableOptions = reactive({
           permission: 'office:user:list',
           label: '用户列表',
           type: 'text',
-          icon: 'ElUserFilled',
+          icon: 'ElIconUserFilled',
           click: (row) => {
             proxy.$router.push({
               path: '/system/user/user-list',

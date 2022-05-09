@@ -19,12 +19,12 @@
           <div class="tools">
             <div class="shadow" @click="handleRemove(element)">
               <el-icon>
-                <ElDelete />
+                <ElIconDelete />
               </el-icon>
             </div>
             <div class="shadow" @click="beforeCropper(element)">
               <el-icon>
-                <ElScissor />
+                <ElIconScissor />
               </el-icon>
             </div>
           </div>
@@ -47,7 +47,7 @@
           :on-exceed="onExceed"
         >
           <el-icon class="uploadIcon">
-            <ElPlus />
+            <ElIconPlus />
             <span v-show="isUploading" class="uploading">正在上传...</span>
             <span
               v-if="!isUploading && limit && limit!==99 && multiple"

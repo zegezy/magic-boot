@@ -3,7 +3,7 @@
     <div class="filter-container">
       <el-form :inline="true">
         <el-form-item>
-          <el-button class="filter-item" type="primary" icon="ElEdit" @click="handleCreate">
+          <el-button class="filter-item" type="primary" icon="ElIconEdit" @click="handleCreate">
             添加
           </el-button>
         </el-form-item>

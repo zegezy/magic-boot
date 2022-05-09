@@ -4,7 +4,7 @@
     <mb-search :where="tableOptions.where" @search="reloadTable" />
 
     <el-row class="toolbar-container">
-      <el-button v-permission="'dict:save'" class="filter-item" type="primary" icon="ElPlus" @click="handleCreate">
+      <el-button v-permission="'dict:save'" class="filter-item" type="primary" icon="ElIconPlus" @click="handleCreate">
         添加
       </el-button>
     </el-row>
@@ -111,7 +111,7 @@ const tableOptions = reactive({
           permission: 'dict:save',
           label: '修改',
           type: 'text',
-          icon: 'ElEdit',
+          icon: 'ElIconEdit',
           click: (row) => {
             handleUpdate(row)
           }
@@ -120,7 +120,7 @@ const tableOptions = reactive({
           permission: 'dict:delete',
           label: '删除',
           type: 'text',
-          icon: 'ElDelete',
+          icon: 'ElIconDelete',
           click: (row) => {
             proxy.$common.handleDelete({
               url: '/system/dict/delete',
@@ -136,7 +136,7 @@ const tableOptions = reactive({
           permission: 'dict:items:view',
           label: '字典项',
           type: 'text',
-          icon: 'ElList',
+          icon: 'ElIconList',
           click: (row) => {
             dictItemsDialog.value.show()
             dictId.value = row.id

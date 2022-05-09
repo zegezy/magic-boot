@@ -16,7 +16,7 @@
     :before-upload="beforeAvatarUpload"
     :on-success="handleAvatarSuccess"
   >
-    <el-button type="primary" icon="ElUploadFilled" :loading="uploadLoading" :disabled="!multiple && fileList.length == 1">{{ label }}</el-button>
+    <el-button type="primary" icon="ElIconUploadFilled" :loading="uploadLoading" :disabled="!multiple && fileList.length == 1">{{ label }}</el-button>
     <div slot="tip" v-if="showTip" class="el-upload__tip">支持上传{{ getSettingSuffixs().replaceAll(',', '，') }}文件，且不超过{{ maxFileSize }}MB</div>
   </el-upload>
 </template>

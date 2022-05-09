@@ -92,7 +92,7 @@ const listOptions = reactive({
             permission: 'user:save',
             label: '修改',
             type: 'text',
-            icon: 'ElEdit',
+            icon: 'ElIconEdit',
             click: (row) => {
               // magicForm.value.getDetail(row.id)
               formOptions.form.rows[0].cols[1].rules = []
@@ -103,7 +103,7 @@ const listOptions = reactive({
             permission: 'user:delete',
             label: '删除',
             type: 'text',
-            icon: 'ElDelete',
+            icon: 'ElIconDelete',
             click: (row) => {
               proxy.$common.handleDelete({
                 url: '/system/user/delete',

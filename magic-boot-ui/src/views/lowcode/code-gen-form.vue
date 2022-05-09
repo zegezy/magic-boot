@@ -30,7 +30,7 @@
               <template #label>
                 模块名称
                 <el-tooltip content="第一级分组名称，例如：系统功能" placement="top">
-                  <el-icon><ElQuestionFilled /></el-icon>
+                  <el-icon><ElIconQuestionFilled /></el-icon>
                 </el-tooltip>
               </template>
               <el-input v-model="genInfo.info.moduleName"></el-input>
@@ -41,7 +41,7 @@
               <template #label>
                 模块路径
                 <el-tooltip content="第一级分组的路径，例如：/system" placement="top">
-                  <el-icon><ElQuestionFilled /></el-icon>
+                  <el-icon><ElIconQuestionFilled /></el-icon>
                 </el-tooltip>
               </template>
               <el-input v-model="genInfo.info.modulePath"></el-input>
@@ -52,7 +52,7 @@
               <template #label>
                 功能名称
                 <el-tooltip content="第二级分组名称，例如：菜单管理" placement="top">
-                  <el-icon><ElQuestionFilled /></el-icon>
+                  <el-icon><ElIconQuestionFilled /></el-icon>
                 </el-tooltip>
               </template>
               <el-input v-model="genInfo.info.businessName"></el-input>
@@ -63,7 +63,7 @@
               <template #label>
                 功能路径
                 <el-tooltip content="第二级分组路径，例如：/menu" placement="top">
-                  <el-icon><ElQuestionFilled /></el-icon>
+                  <el-icon><ElIconQuestionFilled /></el-icon>
                 </el-tooltip>
               </template>
               <el-input v-model="genInfo.info.businessPath"></el-input>
@@ -79,7 +79,7 @@
               <template #label>
                 代码生成
                 <el-tooltip content="接口和页面直接生成到magic-api的api,component" placement="top">
-                  <el-icon><ElQuestionFilled /></el-icon>
+                  <el-icon><ElIconQuestionFilled /></el-icon>
                 </el-tooltip>
               </template>
               <el-button type="primary" @click="executeGen()" style="margin-bottom: 10px">代码生成</el-button>
