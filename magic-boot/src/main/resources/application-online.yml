@@ -1,1 +1,3 @@
-super-password: 123456
+super-password: dangerous
+magic-api:
+  web:

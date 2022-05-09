@@ -5,7 +5,7 @@
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "登录",
   "createTime" : null,
-  "updateTime" : 1649256868582,
+  "updateTime" : 1651934194042,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -64,10 +64,10 @@
   "requestBody" : "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\"\r\n}",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": \"8dbc9feb-410a-4c7f-8805-0013e5ae1363\",\n    \"timestamp\": 1648818573075,\n    \"executeTime\": 347\n}",
+  "responseBody" : "{\n    \"code\": 0,\n    \"message\": \"请输入验证码\",\n    \"data\": null,\n    \"timestamp\": 1651934108567,\n    \"executeTime\": 5\n}",
   "description" : null,
   "requestBodyDefinition" : {
-    "name" : "",
+    "name" : "root",
     "value" : "",
     "description" : "",
     "required" : false,
@@ -116,7 +116,7 @@
     "expression" : "",
     "children" : [ {
       "name" : "code",
-      "value" : "200",
+      "value" : "0",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -128,7 +128,7 @@
       "children" : [ ]
     }, {
       "name" : "message",
-      "value" : "success",
+      "value" : "请输入验证码",
       "description" : "",
       "required" : false,
       "dataType" : "String",
@@ -140,7 +140,7 @@
       "children" : [ ]
     }, {
       "name" : "data",
-      "value" : "8dbc9feb-410a-4c7f-8805-0013e5ae1363",
+      "value" : "null",
       "description" : "",
       "required" : false,
       "dataType" : "Object",
@@ -152,7 +152,7 @@
       "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1648818573075",
+      "value" : "1651934108567",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -164,7 +164,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "347",
+      "value" : "5",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -189,9 +189,12 @@ import cn.hutool.http.useragent.UserAgentUtil
 import cn.hutool.http.useragent.UserAgent
 
 UserAgent ua = UserAgentUtil.parse(request.getHeaders("User-Agent")[0])
-
-if(body.code != CodeCacheMap.get(body.uuid)){
-    exit 0, '验证码错误'
+if(env.get('verification-code.enable') == 'true'){
+    if(!body.code){
+        exit 0, '请输入验证码'
+    }else if(body.code != CodeCacheMap.get(body.uuid)){
+        exit 0, '验证码错误'
+    }
 }
 
 var user

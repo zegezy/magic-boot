@@ -74,6 +74,9 @@ upload:
     # https,http
     transport-protocol:
 
+verification-code:
+  enable: true
+
 magic-api:
   web: /magic/web
   show-sql: true #配置打印SQL
