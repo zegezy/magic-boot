@@ -38,7 +38,7 @@ var validatePass2 = (rule, value, callback) => {
   if(temp.value.newPassword){
     if (value === '') {
       callback(new Error('请再次输入密码'));
-    } else if (value !== this.temp.newPassword) {
+    } else if (value !== temp.value.newPassword) {
       callback(new Error('两次输入密码不一致!'));
     } else {
       callback();

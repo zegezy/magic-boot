@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50738
 File Encoding         : 65001
 
-Date: 2022-05-10 16:02:54
+Date: 2022-05-10 16:54:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -152,7 +152,7 @@ CREATE TABLE `sys_login_log` (
   `token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'token',
   `create_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=167 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_login_log
@@ -192,10 +192,12 @@ INSERT INTO `sys_menu` VALUES ('06d8c9243e5e43bcbd1c24d10d02fbad', 'b198ae9fec6f
 INSERT INTO `sys_menu` VALUES ('0ca23f378d794b23b935d6045bb54915', '641253af-8ea1-4b5d-8bc3-a7165ef60ff2', '', '', '页面设计', '/examples/page-design', '', '50', null, '0', '1', '2021-06-24 20:16:25', '1', '2021-06-24 20:16:25', '0', '1');
 INSERT INTO `sys_menu` VALUES ('0eb611a9ef2b44f5a8337974109ae270', null, '', null, null, null, null, null, null, '0', '1', '2021-10-15 21:58:07', null, null, null, null);
 INSERT INTO `sys_menu` VALUES ('10fc3bdde0c642aea2af34d281a49cf9', 'b1851d1b13594e71840103c11a37a669', 'home', '', '测试数据', '/system/test/test-list', '', '100', 'data-test-list', '0', '1', '2022-01-16 13:43:03', '1', '2022-03-30 21:35:27', '1', '1');
+INSERT INTO `sys_menu` VALUES ('11ac1fc1d2864f079a48d29f82dbb820', '99c6e9aeb6694c349f5db66e2516f069', '', '', '执行生成', '', 'code:gen:execute', '40', '', '0', '1', '2022-05-10 16:22:38', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('1c88a2b21eb5498694e277b94eada54e', null, '', null, null, null, null, null, null, '0', '1', '2021-10-15 21:59:26', null, null, null, null);
 INSERT INTO `sys_menu` VALUES ('24176912aa9e4b2d832f96292be3430e', '81b6845a20da4028a01a42f3eb0b4f4b', '', '', '删除', '', 'dict:items:delete', '20', null, '0', '1', '2020-12-10 10:38:43', '1', '2021-04-30 21:37:39', '0', '0');
 INSERT INTO `sys_menu` VALUES ('25162c30ae0d4297ade09539bcf81d86', '81b6845a20da4028a01a42f3eb0b4f4b', null, null, '查看', null, 'dict:items:view', '30', null, '0', '1', '2022-02-05 22:07:33', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('2664b76cb2904227bce5b0f7d1dd6e7b', '641253af-8ea1-4b5d-8bc3-a7165ef60ff2', '', '', '下拉框', '/examples/select-example', '', '60', null, '0', '1', '2021-08-29 17:35:17', '1', '2022-01-21 21:57:29', '0', '1');
+INSERT INTO `sys_menu` VALUES ('2b8742fc1d2e4c92937517b95b09c50b', '81b6845a20da4028a01a42f3eb0b4f4b', '', '', '下移', '', 'dict:items:sort:down', '50', '', '0', '1', '2022-05-10 16:21:40', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('2c0dfae696b84994981461231dd82599', 'f481f745ef8f40deae861b57390f9130', null, null, '1', null, null, '40', null, '0', '1', '2022-01-01 23:08:07', '1', '2022-01-02 21:12:40', null, '1');
 INSERT INTO `sys_menu` VALUES ('35e56d173b5f4e6790883572d3104137', '99c6e9aeb6694c349f5db66e2516f069', '', '', '生成', '', 'code:gen', '20', '', '0', '1', '2022-03-18 08:07:03', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('36329aad6f8e444dae4338b2124da7ba', '28216291e6a84b14aefbad91ed2b0f34', null, null, '保存', null, 'data:test:save', '20', null, '0', null, null, null, null, '1', '0');
@@ -210,6 +212,7 @@ INSERT INTO `sys_menu` VALUES ('414e5d31-fe05-4e69-9983-217c10b9740a', '39be13ef
 INSERT INTO `sys_menu` VALUES ('4526eb9c-4b7a-4945-bfa9-cddc01f36c22', '6f3594d0-5445-41e1-a13c-890a57485036', '', '', '保存', '', 'office:save', '10', null, '0', '1', '2021-04-22 20:43:09', '1', '2022-02-05 22:04:03', '0', '0');
 INSERT INTO `sys_menu` VALUES ('4807e74954c1443c811c701bacb878df', '116182d1349a464fa89e24ddb349fea9', null, null, '查看', null, 'data:test:view', '10', null, '0', null, null, null, null, '1', '0');
 INSERT INTO `sys_menu` VALUES ('4a57f57fc7324c94b6390f1a2dd1f49a', '0', 'monitor', null, '系统监控', '/system/monitor', null, '40', null, '0', '1', '2022-03-05 17:24:21', '1', '2022-03-05 23:26:36', '0', '1');
+INSERT INTO `sys_menu` VALUES ('4a9047e1c44a4e69907ca8bfe077e38a', '81b6845a20da4028a01a42f3eb0b4f4b', '', '', '上移', '', 'dict:items:sort:up', '40', '', '0', '1', '2022-05-10 16:21:21', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('4bf506637f094a38903345c906ca13f9', 'def5a6402307471498447e17e48daf32', null, null, '1-1-2', null, null, '20', null, '0', '1', '2022-01-02 21:13:08', null, null, null, '1');
 INSERT INTO `sys_menu` VALUES ('4e0f340982ea477f9b66beca5f5d7218', '39be13ef6f0745568c80bf35202ddb2b', '', '', '上移', '', 'menu:sort:up', '40', '', '0', '1', '2022-05-09 21:41:01', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('4fc65edbe0544c369b58fdfed1523537', '4a57f57fc7324c94b6390f1a2dd1f49a', 'oper-log', null, '操作日志', '/system/monitor/oper-log', null, '10', null, '0', '1', '2022-03-05 17:24:45', '1', '2022-03-05 23:19:40', '0', '1');
@@ -239,16 +242,20 @@ INSERT INTO `sys_menu` VALUES ('91bdb7d742a64a8c8a8fdc6d3bb61581', '641253af-8ea
 INSERT INTO `sys_menu` VALUES ('94071254597d4da286bb8112ad93f4ff', '8e9455740091486c914495cfb0c7faa5', '', '', '保存', '', 'role:save', '10', null, '0', '1', '2020-11-11 13:59:27', '1', '2021-04-30 21:36:51', '0', '0');
 INSERT INTO `sys_menu` VALUES ('98a47d57680f4759816028a035ccc7d3', '39be13ef6f0745568c80bf35202ddb2b', '', '', '是否显示/缓存', '', 'menu:change', '60', '', '0', '1', '2022-05-09 21:41:37', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('99c6e9aeb6694c349f5db66e2516f069', 'd7f8d052d4864bd285c575c3cf2dce69', 'examples', '', '代码生成', '/lowcode/code-gen-list', '', '30', '', '0', '1', '2022-03-18 08:01:25', '1', '2022-04-04 00:48:32', '1', '1');
+INSERT INTO `sys_menu` VALUES ('9fe1eaae168e4b719dc880f039ccd7b7', 'fdbdcf8b8d674ae38154bc1e57498a91', '', '', '查看', '', 'online:view', '20', '', '0', '1', '2022-05-10 16:16:11', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('a2c99f09bbe24cc1be6344fe99c8a612', '9de78e0a6042469c891af82fbc21ba90', null, null, '删除', null, 'component:delete', '20', null, '0', '1', '2022-03-04 21:51:48', null, null, '0', '0');
+INSERT INTO `sys_menu` VALUES ('a52bc9968c324813bd93a5642f5011ea', 'bccc28641f4647d3beeaef0381fdf079', null, null, '查看', null, 'system:role:view', '10', null, '0', null, null, null, null, '0', null);
 INSERT INTO `sys_menu` VALUES ('a5f2cb418ac348bca3d51b98958c4a80', '8e9455740091486c914495cfb0c7faa5', null, null, '查看', null, 'role:view', '30', null, '0', '1', '2022-02-05 22:04:56', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('a7a7ba2e31504b27a02465ecf6e014c6', 'b198ae9fec6f4de8a44b7f6e097a44b3', null, null, '删除', null, 'data:test:delete', '30', null, '0', null, null, null, null, '1', '0');
 INSERT INTO `sys_menu` VALUES ('b1851d1b13594e71840103c11a37a669', '0', 'settings', null, '系统设置', '/system', '', '10', null, '0', null, null, '1', '2022-02-05 12:50:14', '0', '1');
 INSERT INTO `sys_menu` VALUES ('b353de07f3624b4fa1c6f8b1b1e80cad', 'c5f407478c4e4c9cbcdbee6389d2c909', '', '', '保存', '', 'dict:save', '10', null, '0', '1', '2020-11-11 14:11:28', '1', '2021-04-30 21:37:14', '0', '0');
 INSERT INTO `sys_menu` VALUES ('b5a77ce22eef40cba2eb1ca2794d9d8a', '6f3594d0-5445-41e1-a13c-890a57485036', null, null, '用户列表', null, 'office:user:list', '40', null, '0', '1', '2022-02-04 17:44:08', null, null, '0', '0');
+INSERT INTO `sys_menu` VALUES ('bccc28641f4647d3beeaef0381fdf079', null, null, null, '角色管理', '/system/role', null, '10', 'system-role-list', '0', null, null, null, null, '1', '1');
 INSERT INTO `sys_menu` VALUES ('bee5c6cb1b484133a4b8e72fe5c5eed0', '06b8a427e4cd4c1ba11752070f565f20', '', '', '保存', '', 'user:save', '10', null, '0', '1', '2020-11-11 13:27:06', '1', '2021-04-30 21:37:01', '0', '0');
 INSERT INTO `sys_menu` VALUES ('bf41ddc3ea314b158e21e4efc1ed5a25', '8e9455740091486c914495cfb0c7faa5', null, null, '权限', null, 'role:permission', '40', null, '0', '1', '2022-01-11 20:31:02', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('bf5c1e44546341de9acee52d148d5a76', 'd7f8d052d4864bd285c575c3cf2dce69', null, null, '测试生成', '/data/test', null, '40', 'data-test-list', '0', null, null, null, null, '1', '1');
 INSERT INTO `sys_menu` VALUES ('c38e9fe9521a4294bda2ab6ed8273719', '116182d1349a464fa89e24ddb349fea9', null, null, '保存', null, 'data:test:save', '20', null, '0', null, null, null, null, '1', '0');
+INSERT INTO `sys_menu` VALUES ('c4352b75954a47de84cd896c6e2093b9', '99c6e9aeb6694c349f5db66e2516f069', '', '', '查看', '', 'code:gen:view', '50', '', '0', '1', '2022-05-10 16:23:08', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('c50388914fab408c8b74f83d0d43e557', '641253af-8ea1-4b5d-8bc3-a7165ef60ff2', null, null, '测试列表', '/examples/test-mb-list', null, '70', null, '0', '1', '2022-03-06 15:13:30', null, null, '0', '1');
 INSERT INTO `sys_menu` VALUES ('c5f407478c4e4c9cbcdbee6389d2c909', 'b1851d1b13594e71840103c11a37a669', 'dict', '', '数据字典', '/system/dict/dict-list', '', '60', null, '0', '1', '2019-11-15 10:22:28', '1', '2022-01-01 14:07:07', '0', '1');
 INSERT INTO `sys_menu` VALUES ('c6e7b5866ce64bfdabeb5dd6342ca55f', '06b8a427e4cd4c1ba11752070f565f20', '', '', '删除', '', 'user:delete', '20', null, '0', '1', '2020-11-11 13:27:22', '1', '2021-04-30 21:37:05', '0', '0');
@@ -263,10 +270,12 @@ INSERT INTO `sys_menu` VALUES ('dc332875-831e-4937-86ff-0c7420915ce9', '641253af
 INSERT INTO `sys_menu` VALUES ('def5a6402307471498447e17e48daf32', '2c0dfae696b84994981461231dd82599', null, null, '1-1', null, null, '10', null, '0', '1', '2022-01-02 21:10:37', '1', '2022-01-02 21:12:44', null, '1');
 INSERT INTO `sys_menu` VALUES ('e3f851a5df7e4e08a3de996c670deccb', null, '', null, null, null, null, null, null, '0', '1', '2021-10-15 21:57:12', null, null, null, null);
 INSERT INTO `sys_menu` VALUES ('e46a01397a01459bb478a5f31a6220ee', '81b6845a20da4028a01a42f3eb0b4f4b', '', '', '保存', '', 'dict:items:save', '10', null, '0', '1', '2020-12-10 10:38:27', '1', '2021-04-30 21:37:35', '0', '0');
+INSERT INTO `sys_menu` VALUES ('e950b960890d4fb3916cd1c561dba035', 'bccc28641f4647d3beeaef0381fdf079', null, null, '保存', null, 'system:role:save', '20', null, '0', null, null, null, null, '0', null);
 INSERT INTO `sys_menu` VALUES ('eb2f8b86ad994986862a705168da875b', 'f481f745ef8f40deae861b57390f9130', null, null, '测试2', null, null, '40', null, '0', '1', '2022-01-01 23:08:18', '1', '2022-01-04 13:43:52', null, '1');
 INSERT INTO `sys_menu` VALUES ('eee27ca353fb440aa5ac0bd7b38cad1d', '4a57f57fc7324c94b6390f1a2dd1f49a', 'login-log', null, '登录日志', '/system/monitor/login-log', null, '20', null, '0', '1', '2022-03-05 17:25:05', '1', '2022-03-05 23:32:33', '0', '1');
 INSERT INTO `sys_menu` VALUES ('f09410d5-5043-4164-9f68-8d135de71b29', '641253af-8ea1-4b5d-8bc3-a7165ef60ff2', '', '', '上传文件', '/examples/upload-file', '', '20', null, '0', '1', '2021-04-23 22:52:04', '1', '2021-05-23 10:34:47', '0', '1');
 INSERT INTO `sys_menu` VALUES ('f7436d87359445c093d6499d6a01b592', 'bf5c1e44546341de9acee52d148d5a76', null, null, '删除', null, 'data:test:delete', '30', null, '0', null, null, null, null, '0', '0');
+INSERT INTO `sys_menu` VALUES ('f79ec17944f5485b9cf7c12ad2553a2b', 'bccc28641f4647d3beeaef0381fdf079', null, null, '删除', null, 'system:role:delete', '30', null, '0', null, null, null, null, '0', null);
 INSERT INTO `sys_menu` VALUES ('fa201e3353ba4591923a0f1798acc855', 'bf5c1e44546341de9acee52d148d5a76', null, null, '查看', null, 'data:test:view', '10', null, '0', null, null, null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('fdbdcf8b8d674ae38154bc1e57498a91', '4a57f57fc7324c94b6390f1a2dd1f49a', 'user', '', '在线用户', '/system/monitor/online-user', '', '40', '', '0', '1', '2022-03-15 23:19:04', '1', '2022-03-15 23:19:53', '0', '1');
 INSERT INTO `sys_menu` VALUES ('ff7d37f87ab749f9836af74dbcdf033d', '8e9455740091486c914495cfb0c7faa5', null, null, '用户列表', null, 'role:user:list', '50', null, '0', '1', '2022-02-04 17:33:20', null, null, '0', '0');
@@ -313,7 +322,7 @@ CREATE TABLE `sys_oper_log` (
   `user_agent` varchar(255) DEFAULT NULL COMMENT '用户代理',
   `user_ip` varchar(255) DEFAULT NULL COMMENT '用户IP',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=28306 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='操作日志';
+) ENGINE=InnoDB AUTO_INCREMENT=28574 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='操作日志';
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -362,7 +371,7 @@ CREATE TABLE `sys_role` (
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES ('1', '1', '管理员', 'admin', '0', null, '管理员', '0', null, null, '1', '2022-05-10 15:54:16');
+INSERT INTO `sys_role` VALUES ('1', '1', '管理员', 'admin', '0', null, '管理员', '0', null, null, '1', '2022-05-10 16:23:26');
 INSERT INTO `sys_role` VALUES ('1d183eaec667423fa9adb20e24356a86', null, '全部', 'qb', '0', null, null, '0', '1', '2022-01-16 13:56:10', null, null);
 INSERT INTO `sys_role` VALUES ('3a408f5157c841ea8884ade4fa56d0f4', null, '自定义', 'zdy', '1', null, null, '0', '1', '2022-01-16 13:55:22', '1', '2022-01-16 17:49:09');
 INSERT INTO `sys_role` VALUES ('d71c32ace3bb4d959a652ee99ecd1b26', null, '测试2', 'test2', '1', null, null, '0', '1', '2022-02-04 16:39:26', '1', '2022-02-04 16:45:11');
@@ -425,6 +434,16 @@ INSERT INTO `sys_role_menu` VALUES ('1', 'c5f407478c4e4c9cbcdbee6389d2c909');
 INSERT INTO `sys_role_menu` VALUES ('1', '710c0a9195934e73b11123b62283fdc5');
 INSERT INTO `sys_role_menu` VALUES ('1', '81b6845a20da4028a01a42f3eb0b4f4b');
 INSERT INTO `sys_role_menu` VALUES ('1', '25162c30ae0d4297ade09539bcf81d86');
+INSERT INTO `sys_role_menu` VALUES ('1', 'd7f8d052d4864bd285c575c3cf2dce69');
+INSERT INTO `sys_role_menu` VALUES ('1', 'c7445e2ac6144a15a76d723607fbfb9d');
+INSERT INTO `sys_role_menu` VALUES ('1', '99c6e9aeb6694c349f5db66e2516f069');
+INSERT INTO `sys_role_menu` VALUES ('1', 'c4352b75954a47de84cd896c6e2093b9');
+INSERT INTO `sys_role_menu` VALUES ('1', '4a57f57fc7324c94b6390f1a2dd1f49a');
+INSERT INTO `sys_role_menu` VALUES ('1', '4fc65edbe0544c369b58fdfed1523537');
+INSERT INTO `sys_role_menu` VALUES ('1', 'eee27ca353fb440aa5ac0bd7b38cad1d');
+INSERT INTO `sys_role_menu` VALUES ('1', '3a0e3107402449698d86ee3cbc5272c0');
+INSERT INTO `sys_role_menu` VALUES ('1', 'fdbdcf8b8d674ae38154bc1e57498a91');
+INSERT INTO `sys_role_menu` VALUES ('1', '9fe1eaae168e4b719dc880f039ccd7b7');
 
 -- ----------------------------
 -- Table structure for sys_role_office
@@ -489,7 +508,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '管理员', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '1', '13888888888', 'userfiles/2022-05-05/5d616e5eb79c43d8a5e3404283e4f06d/QQ图片20220505165410.jpg', '0', null, '31b365008f994e93850186126fce87cb', '0', null, '2020-05-15 22:25:20', '1', '2022-01-21 22:11:11');
+INSERT INTO `sys_user` VALUES ('1', 'admin', '管理员', '7eaa968417c5dbde79321a909d78692367c3c21608327b491116e39cbae8ef3b', '1', '13888888888', 'userfiles/2022-05-05/5d616e5eb79c43d8a5e3404283e4f06d/QQ图片20220505165410.jpg', '0', null, '31b365008f994e93850186126fce87cb', '0', null, '2020-05-15 22:25:20', '1', '2022-01-21 22:11:11');
 INSERT INTO `sys_user` VALUES ('1b47d4758336487890147fc5cd64ebb9', 'zlt', null, '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', null, null, null, '0', null, 'a8b62a271c2a4492bd5c0653cac8f33d', '0', '1', '2022-01-16 17:48:20', null, null);
 INSERT INTO `sys_user` VALUES ('534a37c366ec47878a6b0c85703d0bc2', 'system', '管理员', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', null, null, null, '0', null, '4c37a80226134bce8bc91c8fc04a7d2f', '0', '1', '2022-01-30 19:28:47', '1', '2022-02-05 22:12:45');
 INSERT INTO `sys_user` VALUES ('7217ee3f9d6e49f1a7e327183013226b', 'db', null, '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', null, null, null, '0', null, '31b365008f994e93850186126fce87cb', '0', '1', '2022-01-16 17:24:56', null, null);

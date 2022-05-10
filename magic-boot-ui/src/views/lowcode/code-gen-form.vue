@@ -94,6 +94,7 @@
 <script setup>
   import {reactive, ref, watch, getCurrentInstance, defineExpose, onMounted} from 'vue'
   import genCode from '@/scripts/gen/gen-mb-list.js'
+  import { ElMessageBox } from 'element-plus'
   const { proxy } = getCurrentInstance()
   const dataForm = ref()
   const tables = ref([])
@@ -308,19 +309,25 @@
   function executeGen(){
     dataForm.value.validate((valid) => {
       if (valid) {
-        var formData = {...genInfo.value}
-        formData.info = JSON.stringify(genInfo.value.info)
-        formData.columns = JSON.stringify(genInfo.value.columns)
-        formData.componentScript = genCode(genInfo.value.info.modulePath+genInfo.value.info.businessPath, genInfo.value.columns)
-        proxy.$post('/system/code/gen/execute', formData).then((res) => {
-          if(res.data == 1){
-            proxy.$notify({
-              title: '成功',
-              message: '生成成功',
-              type: 'success',
-              duration: 2000
-            })
-          }
+        ElMessageBox.confirm('此操作会生成代码并覆盖, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          var formData = {...genInfo.value}
+          formData.info = JSON.stringify(genInfo.value.info)
+          formData.columns = JSON.stringify(genInfo.value.columns)
+          formData.componentScript = genCode(genInfo.value.info.modulePath+genInfo.value.info.businessPath, genInfo.value.columns)
+          proxy.$post('/system/code/gen/execute', formData).then((res) => {
+            if(res.data == 1){
+              proxy.$notify({
+                title: '成功',
+                message: '生成成功',
+                type: 'success',
+                duration: 2000
+              })
+            }
+          })
         })
       }else{
         proxy.$message.error('表单校验未通过，请重新检查提交内容')

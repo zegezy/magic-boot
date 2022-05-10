@@ -5,18 +5,30 @@
   "groupId" : "f2538e0f370a4cabab0ae920f5e77ae7",
   "name" : "列表",
   "createTime" : null,
-  "updateTime" : 1648475787119,
+  "updateTime" : 1652170803372,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
   "path" : "/list",
   "method" : "POST",
   "parameters" : [ ],
-  "options" : [ ],
+  "options" : [ {
+    "name" : "permission",
+    "value" : "code:gen:view",
+    "description" : "允许拥有该权限的访问",
+    "required" : false,
+    "dataType" : "String",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : null,
+    "error" : null,
+    "expression" : null,
+    "children" : null
+  } ],
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": {\n        \"total\": 0,\n        \"list\": null\n    },\n    \"timestamp\": 1648372190810,\n    \"executeTime\": 10\n}",
+  "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1652170783940,\n    \"executeTime\": null\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -32,7 +44,7 @@
     "expression" : "",
     "children" : [ {
       "name" : "code",
-      "value" : "200",
+      "value" : "402",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -44,7 +56,7 @@
       "children" : [ ]
     }, {
       "name" : "message",
-      "value" : "success",
+      "value" : "凭证已过期",
       "description" : "",
       "required" : false,
       "dataType" : "String",
@@ -56,7 +68,7 @@
       "children" : [ ]
     }, {
       "name" : "data",
-      "value" : "",
+      "value" : "null",
       "description" : "",
       "required" : false,
       "dataType" : "Array",
@@ -65,34 +77,10 @@
       "validateType" : "",
       "error" : "",
       "expression" : "",
-      "children" : [ {
-        "name" : "total",
-        "value" : "0",
-        "description" : "",
-        "required" : false,
-        "dataType" : "Integer",
-        "type" : null,
-        "defaultValue" : null,
-        "validateType" : "",
-        "error" : "",
-        "expression" : "",
-        "children" : [ ]
-      }, {
-        "name" : "list",
-        "value" : "null",
-        "description" : "",
-        "required" : false,
-        "dataType" : "Array",
-        "type" : null,
-        "defaultValue" : null,
-        "validateType" : "",
-        "error" : "",
-        "expression" : "",
-        "children" : [ ]
-      } ]
+      "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1648372190810",
+      "value" : "1652170783940",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -104,7 +92,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "10",
+      "value" : "null",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",

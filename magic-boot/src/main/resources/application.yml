@@ -7,8 +7,6 @@ server:
 spring:
   profiles:
     active: dev
-    include:
-      - online
   servlet:
     multipart:
       max-file-size: 200MB
