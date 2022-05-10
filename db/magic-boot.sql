@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50738
 File Encoding         : 65001
 
-Date: 2022-05-10 16:54:37
+Date: 2022-05-10 17:18:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -133,7 +133,6 @@ CREATE TABLE `sys_gen_info` (
 -- ----------------------------
 -- Records of sys_gen_info
 -- ----------------------------
-INSERT INTO `sys_gen_info` VALUES ('4', 'sys_role', '角色表', '[{\"columnName\":\"type\",\"columnComment\":\"类型\",\"columnType\":\"varchar(1)\",\"component\":\"component: \'input\'\",\"where\":\"eq\",\"save\":true,\"query\":true,\"list\":true,\"required\":false},{\"columnName\":\"name\",\"columnComment\":\"角色名称\",\"columnType\":\"varchar(255)\",\"component\":\"component: \'input\'\",\"where\":\"eq\",\"save\":true,\"query\":true,\"list\":true,\"required\":false},{\"columnName\":\"code\",\"columnComment\":\"角色编码\",\"columnType\":\"varchar(255)\",\"component\":\"component: \'input\'\",\"where\":\"eq\",\"save\":true,\"query\":true,\"list\":true,\"required\":false},{\"columnName\":\"permission\",\"columnComment\":\"0：全部，1：自定义，2：本级级子级，3：本级\",\"columnType\":\"varchar(255)\",\"component\":\"component: \'input\'\",\"where\":\"eq\",\"save\":true,\"query\":true,\"list\":true,\"required\":false},{\"columnName\":\"sort\",\"columnComment\":\"排序\",\"columnType\":\"int(12)\",\"component\":\"component: \'input\'\",\"where\":\"eq\",\"save\":true,\"query\":true,\"list\":true,\"required\":false},{\"columnName\":\"descRibe\",\"columnComment\":\"描述\",\"columnType\":\"varchar(1000)\",\"component\":\"component: \'input\'\",\"where\":\"eq\",\"save\":true,\"query\":true,\"list\":true,\"required\":false}]', '{\"moduleName\":\"系统功能\",\"modulePath\":\"/system\",\"businessName\":\"角色管理\",\"businessPath\":\"/role\",\"template\":\"singleTable\"}', '2022-03-27 22:29:01', '2022-03-27 22:29:26');
 INSERT INTO `sys_gen_info` VALUES ('5', 't_data_test', '测试生成', '[{\"columnName\":\"name\",\"columnComment\":\"名字\",\"columnType\":\"varchar(255)\",\"component\":\"component: \'input\'\",\"where\":\"like\",\"save\":true,\"query\":true,\"list\":true,\"required\":true},{\"columnName\":\"sex\",\"columnComment\":\"性别\",\"columnType\":\"varchar(255)\",\"component\":\"component: \'radio-group\'\",\"where\":\"=\",\"save\":true,\"query\":true,\"list\":true,\"required\":false,\"dictType\":\"sex\"},{\"columnName\":\"headPortrait\",\"columnComment\":\"头像\",\"columnType\":\"varchar(255)\",\"component\":\"component: \'upload-image\'\",\"where\":\"in\",\"save\":true,\"query\":true,\"list\":true,\"required\":true},{\"columnName\":\"remarks\",\"columnComment\":\"备注\",\"columnType\":\"text\",\"component\":\"component: \'input\',\\n                    props: {\\n                        type: \'textarea\'\\n                    }\\n      \",\"where\":\"<=\",\"save\":true,\"query\":true,\"list\":true,\"required\":false}]', '{\"moduleName\":\"数据管理\",\"modulePath\":\"/data\",\"businessName\":\"测试生成\",\"businessPath\":\"/test\",\"template\":\"singleTable\",\"pid\":\"d7f8d052d4864bd285c575c3cf2dce69\"}', '2022-03-28 21:56:09', '2022-04-06 23:43:44');
 
 -- ----------------------------
@@ -322,7 +321,7 @@ CREATE TABLE `sys_oper_log` (
   `user_agent` varchar(255) DEFAULT NULL COMMENT '用户代理',
   `user_ip` varchar(255) DEFAULT NULL COMMENT '用户IP',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=28574 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='操作日志';
+) ENGINE=InnoDB AUTO_INCREMENT=28586 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='操作日志';
 
 -- ----------------------------
 -- Records of sys_oper_log
