@@ -8,29 +8,28 @@
       <el-input v-model="searchValue" placeholder="输入关键字进行过滤" @input="tree.filter(searchValue)" :style="{ width: searchWidth }" />
     </div>
     <el-tree
-        v-if="refreshTree"
-        ref="tree"
-        :data="treeData"
-        v-bind="props.props"
-        node-key="id"
-        :default-expand-all="defaultExpandAll"
-        :default-checked-keys="checkedIds"
-        @check-change="checkChange"
-        @node-click="nodeClick"
-        :props="defaultProps"
-        :filter-node-method="searchTree"
-        :style="style"
+      v-if="refreshTree"
+      ref="tree"
+      :data="treeData"
+      v-bind="props.props"
+      node-key="id"
+      :default-expand-all="defaultExpandAll"
+      @check-change="checkChange"
+      @node-click="nodeClick"
+      :props="defaultProps"
+      :filter-node-method="searchTree"
+      :style="style"
     />
   </div>
 </template>
 
 <script setup>
 
-import { watch, ref, reactive, defineExpose, nextTick, getCurrentInstance, onBeforeMount, onMounted } from 'vue'
+import { watch, ref, reactive, defineExpose, nextTick, getCurrentInstance, onBeforeMount } from 'vue'
 
 const { proxy } = getCurrentInstance()
 
-const emit = defineEmits(['update:select-values', 'check-change', 'node-click', 'mounted'])
+const emit = defineEmits(['update:modelValue', 'check-change', 'node-click', 'mounted'])
 
 const props = defineProps({
   url: {
@@ -41,7 +40,7 @@ const props = defineProps({
     type: Object,
     default: () => {}
   },
-  selectValues: {
+  modelValue: {
     type: String,
     default: ''
   },
@@ -71,8 +70,6 @@ const props = defineProps({
   }
 })
 
-const checkedIds = ref(props.selectValues.split(','))
-
 const tree = ref()
 const treeData = ref([])
 const defaultProps = reactive({
@@ -88,13 +85,16 @@ onBeforeMount(async () => {
   await loadTreeData()
 })
 
-onMounted(() => {
-  emit('mounted')
+watch(() => props.modelValue, (value) => {
+  nextTick(() => selectIds(value))
 })
 
-watch(() => props.selectValues, async () => {
-  checkedIds.value = props.selectValues.split(',')
-})
+function selectIds(ids){
+  ids = ids.split(',')
+  for(var i=0;i<ids.length;i++){
+    tree.value && tree.value.setChecked(ids[i],true,false)
+  }
+}
 
 function searchTree(value, data) {
   if (!value) return true
@@ -113,6 +113,7 @@ async function loadTreeData() {
       treeData.value = res.data.list
     })
     refreshTree.value = true
+    nextTick(() => selectIds(props.modelValue))
   }
 }
 
@@ -126,8 +127,7 @@ function checkChange(node) {
   for (var i = 0; i < checkedNodes.length; i++) {
     selectMenus.push(checkedNodes[i].id)
   }
-  console.log(selectMenus.join(','))
-  emit('update:select-values', selectMenus.join(','))
+  emit('update:modelValue', selectMenus.join(','))
   emit('check-change', selectMenus.join(','))
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <mb-tree ref="tree" :props="{ 'show-checkbox': true }" url="/system/menu/tree" :search="true" search-width="230px" v-model:select-values="menus" />
+  <mb-tree ref="tree" v-model="menus" :props="{ 'show-checkbox': true }" url="/system/menu/tree" :search="true" search-width="230px" />
 </template>
 
 <script setup>

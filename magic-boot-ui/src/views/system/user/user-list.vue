@@ -15,7 +15,7 @@
     <div class="left">
       <mb-tree
         url="/system/office/tree"
-        :el="{ 'expand-on-click-node': false,'show-checkbox': true }"
+        :props="{ 'expand-on-click-node': false,'show-checkbox': true }"
         :checked-ids="[tableOptions.where.officeId]"
         :expand="false"
         :search="true"

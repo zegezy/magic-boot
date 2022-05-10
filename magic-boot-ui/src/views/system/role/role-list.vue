@@ -41,13 +41,13 @@
           <el-row :gutter="24">
             <el-col :span="12">
               <el-form-item label="菜单权限" prop="menus">
-                <mb-tree ref="tree" :props="{ 'show-checkbox': true }" style="height: 270px; overflow: auto" url="/system/menu/tree" :search="true" v-model:select-values="temp.menus" />
+                <mb-tree ref="tree" v-model="temp.menus" :props="{ 'show-checkbox': true }" style="height: 270px; overflow: auto" url="/system/menu/tree" :search="true" />
               </el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item label="数据权限" prop="permission">
                 <mb-select v-model="temp.permission" :options="permissionData" />
-                <mb-tree v-if="temp.permission == 1" style="height: 270px; overflow: auto" :props="{ 'check-strictly': true, 'show-checkbox': true }" ref="office" url="/system/office/tree" v-model:select-values="temp.offices" />
+                <mb-tree v-if="temp.permission == 1" style="height: 270px; overflow: auto" :props="{ 'check-strictly': true, 'show-checkbox': true }" ref="office" url="/system/office/tree" v-model="temp.offices" />
               </el-form-item>
             </el-col>
           </el-row>
