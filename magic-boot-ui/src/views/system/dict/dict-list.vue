@@ -71,7 +71,7 @@ const tableOptions = reactive({
       type: 'select',
       label: '字典类型',
       value: '',
-      properties: {
+      props: {
         'all-option': true,
         type: 'dict_type'
       }

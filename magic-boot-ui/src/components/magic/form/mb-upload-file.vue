@@ -11,7 +11,7 @@
     :multiple="multiple"
     :limit="limit"
     :on-exceed="handleExceed"
-    :file-list="fileList"
+    v-bind="uploadDynamicProps"
     :show-file-list="showFileList"
     :before-upload="beforeAvatarUpload"
     :on-success="handleAvatarSuccess"
@@ -103,7 +103,8 @@ export default {
       urls: [],
       uploadDomId: Math.random(),
       fileList: [],
-      uploadLoading: false
+      uploadLoading: false,
+      uploadDynamicProps: {}
     }
   },
   watch: {
@@ -120,6 +121,14 @@ export default {
       this.actionUrl = this.actionUrl + `?externalId=${this.externalId}&externalType=${this.externalType}`
     } else {
       this.renderFile()
+    }
+    // 解决多文件上传时，第一次上传的多个的时候 只能有一个成功的bug
+    if (this.modelValue instanceof Array && this.modelValue.length > 0) {
+      this.uploadDynamicProps.fileList = this.fileList
+    } else {
+      if (this.modelValue) {
+        this.uploadDynamicProps.fileList = this.fileList
+      }
     }
     if(this.action){
       this.actionUrl = import.meta.env.VITE_APP_BASE_API + this.action

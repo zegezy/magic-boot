@@ -47,7 +47,7 @@ let menuTree = ref([])
 const menuData = ref([])
 let searchValue = ref('')
 const tableOptions = reactive({
-  el: {
+  props: {
     'tree-props': { children: 'children', hasChildren: 'hasChildren' },
     'row-key': 'id'
   },

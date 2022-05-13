@@ -44,7 +44,7 @@ const listOptions = reactive({
         label: '角色',
         props: {
           url: '/system/role/all',
-          el: { multiple: true }
+          multiple: true
         }
       }
     },
@@ -177,7 +177,7 @@ const formOptions = reactive({
         props: {
           url: '/system/role/all',
           placeholder: '请选择角色',
-          el: { multiple: true }
+          multiple: true
         }
       }]
     }, {

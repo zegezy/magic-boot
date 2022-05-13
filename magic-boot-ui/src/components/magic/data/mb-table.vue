@@ -7,7 +7,7 @@
       border
       fit
       highlight-current-row
-      v-bind="el"
+      v-bind="props.props"
       style="width: 100%;"
       @sort-change="sortChange"
       @selection-change="selectionChange"
@@ -43,7 +43,7 @@ import common from "../../../scripts/common";
 const { proxy } = getCurrentInstance()
 
 const props = defineProps({
-  el: {
+  props: {
     type: Object,
     default: () => {}
   },
@@ -87,9 +87,7 @@ const props = defineProps({
   },
   cols: {
     type: Array,
-    default: () => {
-      return []
-    }
+    default: () => []
   },
   emptyText: {
     type: String,

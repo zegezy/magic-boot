@@ -1,9 +1,10 @@
 <template>
   <el-button
-    v-bind="el_"
+    v-bind="props_"
+    :plain="plain"
     @click="buttonClick"
   >
-    {{ el_.text }}
+    {{ props_.text }}
   </el-button>
 </template>
 
@@ -14,9 +15,13 @@ import {ElNotification} from "element-plus";
 export default {
   name: 'MbButton',
   props: {
-    el: {
+    props: {
       type: Object,
       default: () => {}
+    },
+    plain: {
+      type: Boolean,
+      default: false
     },
     btnType: {
       type: String,
@@ -61,7 +66,7 @@ export default {
   },
   data() {
     return {
-      el_: this.el || {},
+      props_: this.props || {},
       requestMethod_: this.requestMethod,
       beforeConfirm_: this.beforeConfirm,
       successTips_: this.successTips,
@@ -72,9 +77,9 @@ export default {
     if (this.btnType) {
       if (this.btnType === 'delete') {
         this.requestMethod_ = 'delete'
-        this.el_.type = 'danger'
-        this.el_.text = '删除'
-        this.el_.icon = 'ElIconDelete'
+        this.props_.type = 'danger'
+        this.props_.text = '删除'
+        this.props_.icon = 'ElIconDelete'
         this.beforeConfirm_ = '此操作将永久删除该数据, 是否继续?'
         this.successTips_ = '删除成功！'
         this.failTips_ = '删除失败！'

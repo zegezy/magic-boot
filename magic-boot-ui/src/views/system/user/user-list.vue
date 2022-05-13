@@ -38,7 +38,7 @@
         <el-button v-permission="'user:save'" class="filter-item" type="primary" icon="ElIconEdit" @click="handleCreate">
           添加
         </el-button>
-        <mb-button v-permission="'user:delete'" :el="{ plain: true }" :request-url="'/system/user/delete'" :btn-type="'delete'" :request-data="{ id: ids }" :after-handler="reloadTable" />
+        <mb-button v-permission="'user:delete'" plain :request-url="'/system/user/delete'" :btn-type="'delete'" :request-data="{ id: ids }" :after-handler="reloadTable" />
         <mb-upload-file ref="importUserRef" action="/system/user/import/preview" label="导入用户" :show-tip="false" :show-file-list="false" :show-remove-tip="false" :on-success="importUserSuccess" />
       </el-row>
 
@@ -128,7 +128,7 @@ const tableOptions = reactive({
       type: 'select',
       label: '角色',
       value: '',
-      properties: {
+      props: {
         url: '/system/role/all',
         multiple: true
       }

@@ -17,6 +17,11 @@
         />
       </template>
     </mb-table>
+    <mb-table ref="magicTable" v-bind="tableOptions">
+      <template v-for="col in cols" #[col.field]="{ row, index }">
+        {{ row.name }}
+      </template>
+    </mb-table>
   </div>
 </template>
 

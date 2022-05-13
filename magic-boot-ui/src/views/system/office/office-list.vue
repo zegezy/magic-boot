@@ -82,7 +82,7 @@ const officeData = ref([])
 const officeTree = ref([])
 const searchValue = ref('')
 const tableOptions = reactive({
-  el: {
+  props: {
     'default-expand-all': true,
     'tree-props': { children: 'children', hasChildren: 'hasChildren' },
     'row-key': 'id'

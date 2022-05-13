@@ -6,11 +6,12 @@
       tag="div"
       draggable=".draggable-item"
       @end="onDragEnd"
+      item-key="id"
     >
       <template #item="{ element }">
         <div
           class="draggable-item"
-          :style="{ width: width.replace('px', '') + 'px', height: height.replace('px', '') + 'px' }"
+          :style="{ width: width + 'px', height: height + 'px' }"
         >
           <el-image
             :src="$global.baseApi + element"
@@ -35,9 +36,9 @@
           v-if="(!multiple && urls.length == 0) || (multiple && urls.length < limit)"
           ref="uploadRef"
           class="uploadBox"
-          :style="{ width: width.replace('px', '') + 'px', height: height.replace('px', '') + 'px' }"
+          :style="{ width: width + 'px', height: height + 'px' }"
           :action="action"
-          :file-list="fileList"
+          v-bind="uploadDynamicProps"
           :headers="headers"
           accept=".jpg,.jpeg,.png,.gif"
           :show-file-list="false"
@@ -118,12 +119,12 @@ export default {
       default: () => {}
     },
     width: {
-      type: String,
-      default: '100'
+      type: Number,
+      default: 100
     },
     height: {
-      type: String,
-      default: '100'
+      type: Number,
+      default: 100
     },
     tip: {
       type: String,
@@ -146,7 +147,8 @@ export default {
       isUploading: false,
       cropperOption: {},
       urls: [],
-      fileList: []
+      fileList: [],
+      uploadDynamicProps: {}
     }
   },
   watch: {
@@ -179,6 +181,14 @@ export default {
         }
       }
     }
+    // 解决多图片上传时，第一次上传的多个的时候 只能有一个成功的bug
+    if (this.modelValue instanceof Array && this.modelValue.length > 0) {
+      this.uploadDynamicProps.fileList = this.fileList
+    } else {
+      if (this.modelValue) {
+        this.uploadDynamicProps.fileList = this.fileList
+      }
+    }
   },
   methods: {
     handleRemove(url) {
@@ -205,10 +215,11 @@ export default {
       console.log(file)
     },
     handleAvatarSuccess(res, file, fileList) {
+      console.log(res)
       this.fileList = fileList
       if (res.data) {
         this.urls.push(res.data.url)
-        console.log(this.urls)
+        // console.log(this.urls)
         if (this.multiple) {
           this.$emit('update:modelValue', this.urls)
           this.$emit('change', this.urls)
