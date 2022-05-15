@@ -29,7 +29,7 @@ import { watch, ref, reactive, defineExpose, nextTick, getCurrentInstance, onBef
 
 const { proxy } = getCurrentInstance()
 
-const emit = defineEmits(['update:modelValue', 'check-change', 'node-click', 'mounted'])
+const emit = defineEmits(['update:modelValue', 'check-change', 'node-click'])
 
 const props = defineProps({
   url: {

@@ -202,13 +202,13 @@ function reloadTable(){
 
 function expand(){
   refreshTable.value = false
-  tableOptions.el["default-expand-all"] = !tableOptions.el["default-expand-all"]
+  tableOptions.props["default-expand-all"] = !tableOptions.props["default-expand-all"]
   nextTick(() => refreshTable.value = true)
 }
 
 function searchMenu() {
   refreshTable.value = false
-  tableOptions.el["default-expand-all"] = true
+  tableOptions.props["default-expand-all"] = true
   nextTick(() => refreshTable.value = true)
   clearTimeout(searchTimeout)
   searchTimeout = setTimeout(() => {

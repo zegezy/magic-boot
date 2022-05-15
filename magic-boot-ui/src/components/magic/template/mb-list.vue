@@ -8,7 +8,10 @@
         <el-button v-if="it.type == 'add'" v-permission="it.permission" class="filter-item" type="primary" icon="ElIconPlus" @click="it.click">
           {{ it.label || '添加' }}
         </el-button>
-        <mb-button v-if="it.type == 'delete'" v-permission="it.permission" :plain="true" :request-url="it.url" :btn-type="'delete'" :request-data="{ id: ids }" :after-handler="reload" />
+        <mb-button v-else-if="it.type == 'delete'" v-permission="it.permission" :plain="true" :request-url="it.url" :btn-type="'delete'" :request-data="{ id: ids }" :after-handler="reload" />
+        <el-button v-else :icon="it.icon" :key="it.label" v-permission="it.permission" :type="it.type" :size="it.size" :class="it.class" @click="it.click(ids)">
+          {{ it.label }}
+        </el-button>
       </div>
     </el-row>
 

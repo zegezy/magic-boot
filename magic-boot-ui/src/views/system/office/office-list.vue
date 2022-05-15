@@ -234,7 +234,7 @@ watch(officeData, () => {
 
 function expand(){
   refreshTable.value = false
-  tableOptions.el["default-expand-all"] = !tableOptions.el["default-expand-all"]
+  tableOptions.props["default-expand-all"] = !tableOptions.props["default-expand-all"]
   nextTick(() => refreshTable.value = true)
 }
 

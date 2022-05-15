@@ -133,6 +133,10 @@ export default {
     tipColor: {
       type: String,
       default: ''
+    },
+    join: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -200,8 +204,13 @@ export default {
       })
       this.$delete('/system/file/delete', { url: encodeURI(url) })
       if (this.multiple) {
-        this.$emit('update:modelValue', this.urls)
-        this.$emit('change', this.urls)
+        if(this.join){
+          this.$emit('update:modelValue', this.urls.join(','))
+          this.$emit('change', this.urls.join(','))
+        }else{
+          this.$emit('update:modelValue', this.urls)
+          this.$emit('change', this.urls)
+        }
       } else {
         this.$emit('update:modelValue', '')
         this.$emit('change', '')
@@ -221,8 +230,13 @@ export default {
         this.urls.push(res.data.url)
         // console.log(this.urls)
         if (this.multiple) {
-          this.$emit('update:modelValue', this.urls)
-          this.$emit('change', this.urls)
+          if(this.join){
+            this.$emit('update:modelValue', this.urls.join(','))
+            this.$emit('change', this.urls.join(','))
+          }else{
+            this.$emit('update:modelValue', this.urls)
+            this.$emit('change', this.urls)
+          }
         } else {
           this.$emit('update:modelValue', res.data.url)
           this.$emit('change', res.data.url)

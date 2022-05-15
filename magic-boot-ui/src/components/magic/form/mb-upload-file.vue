@@ -85,6 +85,10 @@ export default {
     showRemoveTip: {
       type: Boolean,
       default: () => true
+    },
+    join: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -172,8 +176,13 @@ export default {
         }
       })
       if (this.multiple) {
-        this.$emit('update:modelValue', this.urls)
-        this.$emit('change', this.urls)
+        if(this.join){
+          this.$emit('update:modelValue', this.urls.join(','))
+          this.$emit('change', this.urls.join(','))
+        }else{
+          this.$emit('update:modelValue', this.urls)
+          this.$emit('change', this.urls)
+        }
       } else {
         document.getElementById(this.uploadDomId).getElementsByClassName('el-upload__input')[0].removeAttribute('disabled')
         this.$emit('update:modelValue', '')
@@ -196,10 +205,15 @@ export default {
     handleAvatarSuccess(res, file, fileList) {
       this.uploadLoading = false
       if (res.data) {
+        this.urls.push(res.data.url)
         if (this.multiple) {
-          this.urls.push(res.data.url)
-          this.$emit('update:modelValue', this.urls)
-          this.$emit('change', this.urls)
+          if(this.join){
+            this.$emit('update:modelValue', this.urls.join(','))
+            this.$emit('change', this.urls.join(','))
+          }else{
+            this.$emit('update:modelValue', this.urls)
+            this.$emit('change', this.urls)
+          }
         } else {
           document.getElementById(this.uploadDomId).getElementsByClassName('el-upload__input')[0].setAttribute('disabled', '')
           this.$emit('update:modelValue', res.data.url)

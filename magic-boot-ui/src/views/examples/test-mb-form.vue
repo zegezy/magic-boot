@@ -123,11 +123,20 @@ const formOptions = reactive({
         component: 'upload-image',
         label: '头像',
         rules: [{ required: true, message: '请选择头像', trigger: 'change' }]
+      },{
+        span: 12,
+        name: 'heads',
+        component: 'upload-image',
+        label: '多头像',
+        props: {
+          multiple: true
+        },
+        rules: [{ required: true, message: '请选择头像', trigger: 'change' }]
       }]
     }]
   }
 })
 function getFormData(){
-  console.log(magicForm.value.getFormData().select)
+  console.log(magicForm.value.getFormData())
 }
 </script>

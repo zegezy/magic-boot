@@ -3,7 +3,7 @@
     <h2>上传文件（单文件）</h2>
     <mb-upload-file v-model="fileUrl" @change="fileChange" />
     <h2>上传文件（多文件）</h2>
-    <mb-upload-file v-model="fileUrls" @change="fileChange" multiple />
+    <mb-upload-file v-model="fileUrls" @change="multipleFileChange" multiple />
     <h2>上传图片（id）</h2>
     <mb-upload-image :external-id="externalId" multiple :external-type="externalType" />
     <h2>上传图片（url、单图）</h2>
@@ -22,7 +22,7 @@ export default {
       externalId: this.$common.uuid(),
       externalType: '营业执照',
       imgUrl: '',
-      multipleImgUrl: ['userfiles/2022-05-13/6be62f3203904410a92530f8e300e233/QQ图片20220505165410.jpg'],
+      multipleImgUrl: '',
       fileUrl: '',
       fileUrls: ''
     }
@@ -31,11 +31,14 @@ export default {
     fileChange() {
       console.log(this.fileUrl)
     },
+    multipleFileChange() {
+      console.log(this.fileUrls)
+    },
     imgChange() {
       console.log(this.imgUrl)
     },
     multipleImgChange() {
-      // console.log(this.multipleImgUrl)
+      console.log(this.multipleImgUrl)
     }
   }
 }

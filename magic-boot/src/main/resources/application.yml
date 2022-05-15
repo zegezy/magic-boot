@@ -59,19 +59,11 @@ spring:
         url-pattern: /*
         # 忽略过滤格式
         exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
-
+# 上传路径
 upload:
-  # oss,disk（磁盘）
-  type: disk
   dir: D:/mb/
-  oss:
-    endpoint:
-    access-key-id:
-    access-key-secret:
-    bucket-name:
-    # https,http
-    transport-protocol:
 
+# 是否开启“验证码”验证
 verification-code:
   enable: true
 

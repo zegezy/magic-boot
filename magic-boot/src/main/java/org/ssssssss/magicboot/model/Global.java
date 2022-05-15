@@ -19,7 +19,7 @@ public class Global {
         return dir;
     }
 
-    @Value("${upload.dir:D:/psyduck/}")
+    @Value("${upload.dir:D:/mb/}")
     public void setDir(String dir) {
         this.dir = dir;
     }
