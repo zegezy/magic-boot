@@ -19,9 +19,6 @@ public class WebUtils {
     }
 
     public static String getUeditorPrefix(){
-        if(Global.UPLOAD_TYPE.equals("oss")){
-            return Global.OSS_TRANSPORT_PROTOCOL + "://" + Global.OSS_BUCKET_NAME + "." + Global.OSS_ENDPOINT + "/";
-        }
         return getContextUrl();
     }
 

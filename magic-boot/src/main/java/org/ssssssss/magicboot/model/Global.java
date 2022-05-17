@@ -44,46 +44,4 @@ public class Global {
         return dir;
     }
 
-    public static String OSS_ENDPOINT;
-
-    public static String OSS_ACCESS_KEY_ID;
-
-    public static String OSS_ACCESS_KEY_SECRET;
-
-    public static String OSS_BUCKET_NAME;
-
-    public static String OSS_TRANSPORT_PROTOCOL;
-
-    @Value("${upload.oss.endpoint}")
-    public void setOssEndpoint(String ossEndpoint) {
-        OSS_ENDPOINT = ossEndpoint;
-    }
-
-    @Value("${upload.oss.access-key-id}")
-    public void setOssAccessKeyId(String ossAccessKeyId) {
-        OSS_ACCESS_KEY_ID = ossAccessKeyId;
-    }
-
-    @Value("${upload.oss.access-key-secret}")
-    public void setOssAccessKeySecret(String ossAccessKeySecret) {
-        OSS_ACCESS_KEY_SECRET = ossAccessKeySecret;
-    }
-
-    @Value("${upload.oss.bucket-name}")
-    public void setOssBucketName(String ossBucketName) {
-        OSS_BUCKET_NAME = ossBucketName;
-    }
-
-    @Value("${upload.oss.transport-protocol:https}")
-    public void setOssTransportProtocol(String ossTransportProtocol) {
-        OSS_TRANSPORT_PROTOCOL = ossTransportProtocol;
-    }
-
-    public static String UPLOAD_TYPE;
-
-    @Value("${upload.type}")
-    public void setUploadType(String uploadType) {
-        UPLOAD_TYPE = uploadType;
-    }
-
 }
