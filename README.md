@@ -28,9 +28,11 @@ QQ群（<a href="https://jq.qq.com/?_wv=1027&k=KD6DPvB0" target="_blank"><b>5764
 - 在线用户：当前活跃在系统内的用户，可以选择踢人下线
 
 ## 在线体验
-- 演示地址：
-- 文档地址：
-- admin/123456
+- 演示地址：  
+前台：<a href="https://magic-boot-ui.ssssssss.org.cn/" target="_blank">https://magic-boot-ui.ssssssss.org.cn/</a>  
+后台：<a href="https://magic-boot.ssssssss.org.cn/magic/web/index.html" target="_blank">https://magic-boot.ssssssss.org.cn/magic/web/index.html</a>  
+- 文档地址：<a href="https://www.ssssssss.org/magic-boot/" target="_blank">https://www.ssssssss.org/magic-boot/</a>
+- 账号：system/123456
 
 ## 系统截图
 | ![](https://magicboot.oss-cn-beijing.aliyuncs.com/system/1.png)  | ![](https://magicboot.oss-cn-beijing.aliyuncs.com/system/2.png)  |
