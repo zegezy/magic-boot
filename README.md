@@ -1,7 +1,7 @@
 ##
 
 <p align="center">
-    <img src="https://gitee.com/ssssssss-team/magic-boot/raw/master/images/magic-boot.png" />
+    <img src="https://magicboot.oss-cn-beijing.aliyuncs.com/magic-boot.png" />
 </p>
 
 ## 简介
@@ -12,7 +12,7 @@ QQ群（<a href="https://jq.qq.com/?_wv=1027&k=KD6DPvB0" target="_blank"><b>5764
 
 | 代码 | 效果 |
 |----|----|
-| ![](images/code.png)  | ![](images/view.png)  |
+| ![](https://magicboot.oss-cn-beijing.aliyuncs.com/code.png)  | ![](https://magicboot.oss-cn-beijing.aliyuncs.com/view.png)  |
 
 
 ## 功能
@@ -33,10 +33,10 @@ QQ群（<a href="https://jq.qq.com/?_wv=1027&k=KD6DPvB0" target="_blank"><b>5764
 - admin/123456
 
 ## 系统截图
-| ![](images/1.png)  | ![](images/2.png)  |
+| ![](https://magicboot.oss-cn-beijing.aliyuncs.com/system/1.png)  | ![](https://magicboot.oss-cn-beijing.aliyuncs.com/system/2.png)  |
 |---|---|
-| ![](images/3.png)  | ![](images/4.png)  |
-| ![](images/5.png)  | ![](images/6.png)  |
-| ![](images/7.png)  | ![](images/8.png)  |
+| ![](https://magicboot.oss-cn-beijing.aliyuncs.com/system/3.png)  | ![](https://magicboot.oss-cn-beijing.aliyuncs.com/system/4.png)  |
+| ![](https://magicboot.oss-cn-beijing.aliyuncs.com/system/5.png)  | ![](https://magicboot.oss-cn-beijing.aliyuncs.com/system/6.png)  |
+| ![](https://magicboot.oss-cn-beijing.aliyuncs.com/system/7.png)  | ![](https://magicboot.oss-cn-beijing.aliyuncs.com/system/8.png)  |
 
 
