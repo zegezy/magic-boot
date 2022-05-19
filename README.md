@@ -7,7 +7,7 @@
 ## 简介
 
 基于[ **magic-api** ](https://gitee.com/ssssssss-team/magic-api)搭建的快速开发平台，前端采用Vue3 + Element Plus最新版本搭建，依赖较少，运行速度快。对常用组件进行封装。利用Vue3的`@vue/compiler-sfc`单文件编译，动态编译组件，可以实现在浏览器编写Vue代码，既改即生效快速开发，利用magic-api本身特性安全隔离生产和开发环境。将Vue代码以插件化的方式交给`magic-api`管理。  
-QQ群（<a href="https://jq.qq.com/?_wv=1027&k=KD6DPvB0" target="_blank"><b>576433387</b></a>）
+QQ群（[ **576433387** ](https://jq.qq.com/?_wv=1027&k=KD6DPvB0)）
 
 
 | 代码 | 效果 |
@@ -29,9 +29,9 @@ QQ群（<a href="https://jq.qq.com/?_wv=1027&k=KD6DPvB0" target="_blank"><b>5764
 
 ## 在线体验
 - 演示地址：  
-前台：<a href="https://magic-boot-ui.ssssssss.org.cn/" target="_blank">https://magic-boot-ui.ssssssss.org.cn/</a>  
-后台：<a href="https://magic-boot.ssssssss.org.cn/magic/web/index.html" target="_blank">https://magic-boot.ssssssss.org.cn/magic/web/index.html</a>  
-- 文档地址：<a href="https://www.ssssssss.org/magic-boot/" target="_blank">https://www.ssssssss.org/magic-boot/</a>
+前台：[ **https://magic-boot-ui.ssssssss.org.cn/** ](https://magic-boot-ui.ssssssss.org.cn/)  
+后台：[ **https://magic-boot.ssssssss.org.cn/magic/web/index.html** ](https://magic-boot.ssssssss.org.cn/magic/web/index.html)  
+- 文档地址：[ **https://www.ssssssss.org/magic-boot/** ](https://www.ssssssss.org/magic-boot/)
 - 账号：system/123456
 
 ## 系统截图
