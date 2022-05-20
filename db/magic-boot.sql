@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50738
 File Encoding         : 65001
 
-Date: 2022-05-10 17:18:25
+Date: 2022-05-20 10:21:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -112,7 +112,6 @@ CREATE TABLE `sys_file` (
 -- ----------------------------
 -- Records of sys_file
 -- ----------------------------
-INSERT INTO `sys_file` VALUES ('1658fac2e3794ea093da9639722d974e', 'userfiles/2022-05-05/5d616e5eb79c43d8a5e3404283e4f06d/QQ图片20220505165410.jpg', '1', null, null, '0', '1', '2022-05-05 17:04:25', null, null);
 INSERT INTO `sys_file` VALUES ('6f400447e28f41f28aedaa9f4be49657', 'userfiles/2022-05-05/c6aeb598deef48c385b0da831b7c2b85/QQ图片20220505165410.jpg', '1', null, null, '0', '1', '2022-05-05 16:54:20', null, null);
 
 -- ----------------------------
@@ -151,7 +150,7 @@ CREATE TABLE `sys_login_log` (
   `token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'token',
   `create_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=167 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=182 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_login_log
@@ -188,7 +187,6 @@ INSERT INTO `sys_menu` VALUES ('0', '', '', null, '功能菜单', '', '', '1', n
 INSERT INTO `sys_menu` VALUES ('067343d790fd4d73b3e2ea5bb3d043f1', '99c6e9aeb6694c349f5db66e2516f069', '', '', '删除', '', 'code:gen:delete', '30', '', '0', '1', '2022-03-27 22:25:27', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('06b8a427e4cd4c1ba11752070f565f20', 'b1851d1b13594e71840103c11a37a669', 'user', '', '用户管理', '/system/user/user-list', '', '50', null, '0', null, null, '1', '2022-01-01 14:05:57', '0', '1');
 INSERT INTO `sys_menu` VALUES ('06d8c9243e5e43bcbd1c24d10d02fbad', 'b198ae9fec6f4de8a44b7f6e097a44b3', null, null, '查看', null, 'data:test:view', '10', null, '0', null, null, null, null, '1', '0');
-INSERT INTO `sys_menu` VALUES ('0ca23f378d794b23b935d6045bb54915', '641253af-8ea1-4b5d-8bc3-a7165ef60ff2', '', '', '页面设计', '/examples/page-design', '', '50', null, '0', '1', '2021-06-24 20:16:25', '1', '2021-06-24 20:16:25', '0', '1');
 INSERT INTO `sys_menu` VALUES ('0eb611a9ef2b44f5a8337974109ae270', null, '', null, null, null, null, null, null, '0', '1', '2021-10-15 21:58:07', null, null, null, null);
 INSERT INTO `sys_menu` VALUES ('10fc3bdde0c642aea2af34d281a49cf9', 'b1851d1b13594e71840103c11a37a669', 'home', '', '测试数据', '/system/test/test-list', '', '100', 'data-test-list', '0', '1', '2022-01-16 13:43:03', '1', '2022-03-30 21:35:27', '1', '1');
 INSERT INTO `sys_menu` VALUES ('11ac1fc1d2864f079a48d29f82dbb820', '99c6e9aeb6694c349f5db66e2516f069', '', '', '执行生成', '', 'code:gen:execute', '40', '', '0', '1', '2022-05-10 16:22:38', null, null, '0', '0');
@@ -321,7 +319,7 @@ CREATE TABLE `sys_oper_log` (
   `user_agent` varchar(255) DEFAULT NULL COMMENT '用户代理',
   `user_ip` varchar(255) DEFAULT NULL COMMENT '用户IP',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=28586 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='操作日志';
+) ENGINE=InnoDB AUTO_INCREMENT=29613 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='操作日志';
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -507,7 +505,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '管理员', '7eaa968417c5dbde79321a909d78692367c3c21608327b491116e39cbae8ef3b', '1', '13888888888', 'userfiles/2022-05-05/5d616e5eb79c43d8a5e3404283e4f06d/QQ图片20220505165410.jpg', '0', null, '31b365008f994e93850186126fce87cb', '0', null, '2020-05-15 22:25:20', '1', '2022-01-21 22:11:11');
+INSERT INTO `sys_user` VALUES ('1', 'admin', '管理员', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '1', '13888888888', 'userfiles/2022-05-05/5d616e5eb79c43d8a5e3404283e4f06d/QQ图片20220505165410.jpg', '0', null, '31b365008f994e93850186126fce87cb', '0', null, '2020-05-15 22:25:20', '1', '2022-01-21 22:11:11');
 INSERT INTO `sys_user` VALUES ('1b47d4758336487890147fc5cd64ebb9', 'zlt', null, '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', null, null, null, '0', null, 'a8b62a271c2a4492bd5c0653cac8f33d', '0', '1', '2022-01-16 17:48:20', null, null);
 INSERT INTO `sys_user` VALUES ('534a37c366ec47878a6b0c85703d0bc2', 'system', '管理员', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', null, null, null, '0', null, '4c37a80226134bce8bc91c8fc04a7d2f', '0', '1', '2022-01-30 19:28:47', '1', '2022-02-05 22:12:45');
 INSERT INTO `sys_user` VALUES ('7217ee3f9d6e49f1a7e327183013226b', 'db', null, '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', null, null, null, '0', null, '31b365008f994e93850186126fce87cb', '0', '1', '2022-01-16 17:24:56', null, null);
