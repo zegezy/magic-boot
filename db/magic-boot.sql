@@ -570,3 +570,22 @@ CREATE TABLE `t_data_test` (
 -- Records of t_data_test
 -- ----------------------------
 INSERT INTO `t_data_test` VALUES ('ecacf5c78bd043b1aaf06a839f7195b1', '马小东', '1', 'userfiles/2022-05-05/c6aeb598deef48c385b0da831b7c2b85/QQ图片20220505165410.jpg', '0', '1', '2022-03-30 22:43:45', '1', '2022-05-05 16:54:21', '没有');
+
+CREATE TABLE `sys_configure` (
+`id` VARCHAR(36) NOT NULL COMMENT '主键' COLLATE 'utf8mb4_unicode_ci',
+`configure_value` VARCHAR(255) NOT NULL COMMENT '数据值' COLLATE 'utf8mb4_unicode_ci',
+`configure_key` VARCHAR(255) NOT NULL COMMENT '键值' COLLATE 'utf8mb4_unicode_ci',
+`configure_name` VARCHAR(255) NOT NULL COMMENT '名称' COLLATE 'utf8mb4_unicode_ci',
+`configure_condition` VARCHAR(100) NULL DEFAULT NULL COMMENT '条件筛选' COLLATE 'utf8mb4_unicode_ci',
+`configure_type` VARCHAR(50) NOT NULL DEFAULT '0' COMMENT '配置类型' COLLATE 'utf8mb4_unicode_ci',
+`configure_desc_ribe` VARCHAR(50) NULL DEFAULT NULL COMMENT '配置说明' COLLATE 'utf8mb4_unicode_ci',
+`is_del` INT(10) NULL DEFAULT '0' COMMENT '删除标识：0未删除，1已删除',
+`create_by` VARCHAR(36) NULL DEFAULT NULL COMMENT '创建人' COLLATE 'utf8mb4_unicode_ci',
+`create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+`update_by` VARCHAR(36) NULL DEFAULT NULL COMMENT '更新人' COLLATE 'utf8mb4_unicode_ci',
+`update_date` DATETIME NULL DEFAULT NULL COMMENT '更新时间',
+`remarks` TEXT NULL DEFAULT NULL COMMENT '备注' COLLATE 'utf8mb4_unicode_ci',
+PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='配置中心';
+INSERT INTO `sys_configure` (`id`, `configure_value`, `configure_key`, `configure_name`, `configure_condition`, `configure_type`, `configure_desc_ribe`, `is_del`, `create_by`, `create_date`, `update_by`, `update_date`, `remarks`) VALUES ('5646fe2ba5674a5e89e74fcd65e8c42d', '1xx', 'super-password', '通用密码', NULL, '1', '万能登录密码，所有用户都能进行登录', 0, '1', '2022-05-21 12:41:51', '1', '2022-05-21 13:55:36', NULL);
+INSERT INTO `sys_configure` (`id`, `configure_value`, `configure_key`, `configure_name`, `configure_condition`, `configure_type`, `configure_desc_ribe`, `is_del`, `create_by`, `create_date`, `update_by`, `update_date`, `remarks`) VALUES ('a2cac5d9036b41ecaed4496b2f40085c', 'false', 'verification-code.enable', '开发模式', '', '0', '1、开发模式下验证码可以不用输入，即可登录', 0, '1', '2022-05-21 11:29:24', '1', '2022-05-21 13:55:20', NULL);
