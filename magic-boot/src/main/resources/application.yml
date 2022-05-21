@@ -63,10 +63,6 @@ spring:
 upload:
   dir: D:/mb/
 
-# 是否开启“验证码”验证
-verification-code:
-  enable: true
-
 magic-api:
   web: /magic/web
   show-sql: true #配置打印SQL
