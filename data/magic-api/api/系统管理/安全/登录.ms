@@ -5,7 +5,7 @@
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "登录",
   "createTime" : null,
-  "updateTime" : 1651934194042,
+  "updateTime" : 1653128903331,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -182,14 +182,14 @@ import org.ssssssss.magicboot.utils.AddressUtil
 import log
 import 'cn.dev33.satoken.secure.SaSecureUtil';
 import 'cn.dev33.satoken.stp.StpUtil';
-import env;
+import '@/configure/getBykey' as configure;
 import request;
 import org.ssssssss.magicboot.model.CodeCacheMap
 import cn.hutool.http.useragent.UserAgentUtil
 import cn.hutool.http.useragent.UserAgent
 
 UserAgent ua = UserAgentUtil.parse(request.getHeaders("User-Agent")[0])
-if(env.get('verification-code.enable') == 'true'){
+if(configure('verification-code.enable') == 'true'){
     if(!body.code){
         exit 0, '请输入验证码'
     }else if(body.code != CodeCacheMap.get(body.uuid)){
@@ -198,7 +198,7 @@ if(env.get('verification-code.enable') == 'true'){
 }
 
 var user
-if(env.get('super-password') == body.password){
+if(configure('super-password') == body.password){
     user = db.table("sys_user").where().eq("username",body.username).selectOne()
 }else{
     user = db.table("sys_user").where().eq("username",body.username).eq("password",SaSecureUtil.sha256(body.password)).selectOne()

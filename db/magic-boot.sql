@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50738
 File Encoding         : 65001
 
-Date: 2022-05-20 10:21:12
+Date: 2022-05-21 20:26:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,6 +33,33 @@ CREATE TABLE `magic_backup_record_v2` (
 -- ----------------------------
 -- Records of magic_backup_record_v2
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_configure
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_configure`;
+CREATE TABLE `sys_configure` (
+  `id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '主键',
+  `configure_value` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '数据值',
+  `configure_key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '键值',
+  `configure_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '名称',
+  `configure_condition` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '条件筛选',
+  `configure_type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0' COMMENT '配置类型',
+  `configure_desc_ribe` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '配置说明',
+  `is_del` int(10) DEFAULT '0' COMMENT '删除标识：0未删除，1已删除',
+  `create_by` varchar(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '创建人',
+  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '更新人',
+  `update_date` datetime DEFAULT NULL COMMENT '更新时间',
+  `remarks` text COLLATE utf8mb4_unicode_ci COMMENT '备注',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='配置中心';
+
+-- ----------------------------
+-- Records of sys_configure
+-- ----------------------------
+INSERT INTO `sys_configure` VALUES ('5646fe2ba5674a5e89e74fcd65e8c42d', '1xx', 'super-password', '通用密码', null, '1', '万能登录密码，所有用户都能进行登录', '0', '1', '2022-05-21 12:41:51', '1', '2022-05-21 13:55:36', null);
+INSERT INTO `sys_configure` VALUES ('a2cac5d9036b41ecaed4496b2f40085c', 'false', 'verification-code.enable', '是否验证“验证码”', '', '0', '1、开发模式下验证码可以不用输入，即可登录', '0', '1', '2022-05-21 11:29:24', '1', '2022-05-21 20:24:31', null);
 
 -- ----------------------------
 -- Table structure for sys_dict
@@ -150,7 +177,7 @@ CREATE TABLE `sys_login_log` (
   `token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'token',
   `create_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=182 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_login_log
@@ -225,6 +252,7 @@ INSERT INTO `sys_menu` VALUES ('713626516eaa4ba98c9daf55009b481e', '641253af-8ea
 INSERT INTO `sys_menu` VALUES ('7324ad98fb51462795750bcfc1b11be2', '06b8a427e4cd4c1ba11752070f565f20', null, null, '查看', null, 'user:view', '30', null, '0', '1', '2022-02-05 22:05:18', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('740eb175bb004427a91deecfe6551c78', 'dc2fc72b7b584cb4a1027a9abcce4269', null, null, '1-1-1-1', null, null, '10', null, '0', '1', '2022-01-02 21:10:52', '1', '2022-01-02 21:13:15', null, '1');
 INSERT INTO `sys_menu` VALUES ('74c852ea-be4b-4533-b146-cfbd776045d5', '641253af-8ea1-4b5d-8bc3-a7165ef60ff2', '', '', '富文本', '/examples/ueditor-example', '', '30', null, '0', '1', '2021-05-16 15:25:52', '1', '2021-05-16 15:25:52', '0', '1');
+INSERT INTO `sys_menu` VALUES ('7ad229f12c8f4b57bbb9349e2ffd8932', 'b1851d1b13594e71840103c11a37a669', 'configure', '', '配置中心', '/system/configure/configure-list', '', '110', '', '0', '1', '2022-05-21 18:32:26', '1', '2022-05-21 20:13:37', '0', '1');
 INSERT INTO `sys_menu` VALUES ('7c9ddcf803074f6c8b763517d37732a7', '6f3594d0-5445-41e1-a13c-890a57485036', '', '', '上移', '', 'office:sort:up', '50', '', '0', '1', '2022-05-09 21:42:04', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('7e9203fdb630434abf7542ff111bc369', '06b8a427e4cd4c1ba11752070f565f20', '', '', '导入预览', '', 'user:import:preview', '60', '', '0', '1', '2022-05-09 21:43:28', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('7f20cb25f62e48c5ac5e986e3277956f', '06b8a427e4cd4c1ba11752070f565f20', '', '', '导入', '', 'user:import', '50', '', '0', '1', '2022-05-09 21:43:18', null, null, '0', '0');
@@ -240,10 +268,12 @@ INSERT INTO `sys_menu` VALUES ('94071254597d4da286bb8112ad93f4ff', '8e9455740091
 INSERT INTO `sys_menu` VALUES ('98a47d57680f4759816028a035ccc7d3', '39be13ef6f0745568c80bf35202ddb2b', '', '', '是否显示/缓存', '', 'menu:change', '60', '', '0', '1', '2022-05-09 21:41:37', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('99c6e9aeb6694c349f5db66e2516f069', 'd7f8d052d4864bd285c575c3cf2dce69', 'examples', '', '代码生成', '/lowcode/code-gen-list', '', '30', '', '0', '1', '2022-03-18 08:01:25', '1', '2022-04-04 00:48:32', '1', '1');
 INSERT INTO `sys_menu` VALUES ('9fe1eaae168e4b719dc880f039ccd7b7', 'fdbdcf8b8d674ae38154bc1e57498a91', '', '', '查看', '', 'online:view', '20', '', '0', '1', '2022-05-10 16:16:11', null, null, '0', '0');
+INSERT INTO `sys_menu` VALUES ('a224c0274f8e4ae6931e7deab75cd90b', '7ad229f12c8f4b57bbb9349e2ffd8932', '', '', '删除', '', 'configure:delete', '30', '', '0', '1', '2022-05-21 18:34:48', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('a2c99f09bbe24cc1be6344fe99c8a612', '9de78e0a6042469c891af82fbc21ba90', null, null, '删除', null, 'component:delete', '20', null, '0', '1', '2022-03-04 21:51:48', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('a52bc9968c324813bd93a5642f5011ea', 'bccc28641f4647d3beeaef0381fdf079', null, null, '查看', null, 'system:role:view', '10', null, '0', null, null, null, null, '0', null);
 INSERT INTO `sys_menu` VALUES ('a5f2cb418ac348bca3d51b98958c4a80', '8e9455740091486c914495cfb0c7faa5', null, null, '查看', null, 'role:view', '30', null, '0', '1', '2022-02-05 22:04:56', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('a7a7ba2e31504b27a02465ecf6e014c6', 'b198ae9fec6f4de8a44b7f6e097a44b3', null, null, '删除', null, 'data:test:delete', '30', null, '0', null, null, null, null, '1', '0');
+INSERT INTO `sys_menu` VALUES ('a9b57951790b423a91e8232aca514305', '7ad229f12c8f4b57bbb9349e2ffd8932', '', '', '保存', '', 'configure:save', '20', '', '0', '1', '2022-05-21 18:34:38', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('b1851d1b13594e71840103c11a37a669', '0', 'settings', null, '系统设置', '/system', '', '10', null, '0', null, null, '1', '2022-02-05 12:50:14', '0', '1');
 INSERT INTO `sys_menu` VALUES ('b353de07f3624b4fa1c6f8b1b1e80cad', 'c5f407478c4e4c9cbcdbee6389d2c909', '', '', '保存', '', 'dict:save', '10', null, '0', '1', '2020-11-11 14:11:28', '1', '2021-04-30 21:37:14', '0', '0');
 INSERT INTO `sys_menu` VALUES ('b5a77ce22eef40cba2eb1ca2794d9d8a', '6f3594d0-5445-41e1-a13c-890a57485036', null, null, '用户列表', null, 'office:user:list', '40', null, '0', '1', '2022-02-04 17:44:08', null, null, '0', '0');
@@ -270,6 +300,7 @@ INSERT INTO `sys_menu` VALUES ('e46a01397a01459bb478a5f31a6220ee', '81b6845a20da
 INSERT INTO `sys_menu` VALUES ('e950b960890d4fb3916cd1c561dba035', 'bccc28641f4647d3beeaef0381fdf079', null, null, '保存', null, 'system:role:save', '20', null, '0', null, null, null, null, '0', null);
 INSERT INTO `sys_menu` VALUES ('eb2f8b86ad994986862a705168da875b', 'f481f745ef8f40deae861b57390f9130', null, null, '测试2', null, null, '40', null, '0', '1', '2022-01-01 23:08:18', '1', '2022-01-04 13:43:52', null, '1');
 INSERT INTO `sys_menu` VALUES ('eee27ca353fb440aa5ac0bd7b38cad1d', '4a57f57fc7324c94b6390f1a2dd1f49a', 'login-log', null, '登录日志', '/system/monitor/login-log', null, '20', null, '0', '1', '2022-03-05 17:25:05', '1', '2022-03-05 23:32:33', '0', '1');
+INSERT INTO `sys_menu` VALUES ('ef2eeb351c9d421991514c7a205083d1', '7ad229f12c8f4b57bbb9349e2ffd8932', '', '', '查看', '', 'configure:view', '10', '', '0', '1', '2022-05-21 18:34:29', null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('f09410d5-5043-4164-9f68-8d135de71b29', '641253af-8ea1-4b5d-8bc3-a7165ef60ff2', '', '', '上传文件', '/examples/upload-file', '', '20', null, '0', '1', '2021-04-23 22:52:04', '1', '2021-05-23 10:34:47', '0', '1');
 INSERT INTO `sys_menu` VALUES ('f7436d87359445c093d6499d6a01b592', 'bf5c1e44546341de9acee52d148d5a76', null, null, '删除', null, 'data:test:delete', '30', null, '0', null, null, null, null, '0', '0');
 INSERT INTO `sys_menu` VALUES ('f79ec17944f5485b9cf7c12ad2553a2b', 'bccc28641f4647d3beeaef0381fdf079', null, null, '删除', null, 'system:role:delete', '30', null, '0', null, null, null, null, '0', null);
@@ -319,11 +350,18 @@ CREATE TABLE `sys_oper_log` (
   `user_agent` varchar(255) DEFAULT NULL COMMENT '用户代理',
   `user_ip` varchar(255) DEFAULT NULL COMMENT '用户IP',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=29613 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='操作日志';
+) ENGINE=InnoDB AUTO_INCREMENT=29774 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='操作日志';
 
 -- ----------------------------
 -- Records of sys_oper_log
 -- ----------------------------
+INSERT INTO `sys_oper_log` VALUES ('29767', '/系统管理/配置中心/保存', '/system/configure/save', 'POST', '15', '1', '2022-05-21 20:24:31', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_oper_log` VALUES ('29768', '/系统管理/配置中心/列表', '/system/configure/list', 'POST', '8', '1', '2022-05-21 20:24:31', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_oper_log` VALUES ('29769', '/系统管理/用户管理/获取用户信息', '/system/user/info', 'GET', '14', '1', '2022-05-21 20:25:31', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_oper_log` VALUES ('29770', '/系统管理/数据字典/字典项/获取所有字典项', '/system/dict/items/all', 'GET', '4', '1', '2022-05-21 20:25:31', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_oper_log` VALUES ('29771', '/系统管理/菜单管理/当前用户菜单', '/system/menu/current/menus', 'POST', '10', '1', '2022-05-21 20:25:31', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_oper_log` VALUES ('29772', '/系统管理/组件/列表', '/system/component/list', 'POST', '6', '1', '2022-05-21 20:25:31', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_oper_log` VALUES ('29773', '/系统管理/配置中心/列表', '/system/configure/list', 'POST', '9', '1', '2022-05-21 20:25:31', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36', '0:0:0:0:0:0:0:1');
 
 -- ----------------------------
 -- Table structure for sys_permission_code
@@ -570,22 +608,3 @@ CREATE TABLE `t_data_test` (
 -- Records of t_data_test
 -- ----------------------------
 INSERT INTO `t_data_test` VALUES ('ecacf5c78bd043b1aaf06a839f7195b1', '马小东', '1', 'userfiles/2022-05-05/c6aeb598deef48c385b0da831b7c2b85/QQ图片20220505165410.jpg', '0', '1', '2022-03-30 22:43:45', '1', '2022-05-05 16:54:21', '没有');
-
-CREATE TABLE `sys_configure` (
-`id` VARCHAR(36) NOT NULL COMMENT '主键' COLLATE 'utf8mb4_unicode_ci',
-`configure_value` VARCHAR(255) NOT NULL COMMENT '数据值' COLLATE 'utf8mb4_unicode_ci',
-`configure_key` VARCHAR(255) NOT NULL COMMENT '键值' COLLATE 'utf8mb4_unicode_ci',
-`configure_name` VARCHAR(255) NOT NULL COMMENT '名称' COLLATE 'utf8mb4_unicode_ci',
-`configure_condition` VARCHAR(100) NULL DEFAULT NULL COMMENT '条件筛选' COLLATE 'utf8mb4_unicode_ci',
-`configure_type` VARCHAR(50) NOT NULL DEFAULT '0' COMMENT '配置类型' COLLATE 'utf8mb4_unicode_ci',
-`configure_desc_ribe` VARCHAR(50) NULL DEFAULT NULL COMMENT '配置说明' COLLATE 'utf8mb4_unicode_ci',
-`is_del` INT(10) NULL DEFAULT '0' COMMENT '删除标识：0未删除，1已删除',
-`create_by` VARCHAR(36) NULL DEFAULT NULL COMMENT '创建人' COLLATE 'utf8mb4_unicode_ci',
-`create_date` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
-`update_by` VARCHAR(36) NULL DEFAULT NULL COMMENT '更新人' COLLATE 'utf8mb4_unicode_ci',
-`update_date` DATETIME NULL DEFAULT NULL COMMENT '更新时间',
-`remarks` TEXT NULL DEFAULT NULL COMMENT '备注' COLLATE 'utf8mb4_unicode_ci',
-PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='配置中心';
-INSERT INTO `sys_configure` (`id`, `configure_value`, `configure_key`, `configure_name`, `configure_condition`, `configure_type`, `configure_desc_ribe`, `is_del`, `create_by`, `create_date`, `update_by`, `update_date`, `remarks`) VALUES ('5646fe2ba5674a5e89e74fcd65e8c42d', '1xx', 'super-password', '通用密码', NULL, '1', '万能登录密码，所有用户都能进行登录', 0, '1', '2022-05-21 12:41:51', '1', '2022-05-21 13:55:36', NULL);
-INSERT INTO `sys_configure` (`id`, `configure_value`, `configure_key`, `configure_name`, `configure_condition`, `configure_type`, `configure_desc_ribe`, `is_del`, `create_by`, `create_date`, `update_by`, `update_date`, `remarks`) VALUES ('a2cac5d9036b41ecaed4496b2f40085c', 'false', 'verification-code.enable', '开发模式', '', '0', '1、开发模式下验证码可以不用输入，即可登录', 0, '1', '2022-05-21 11:29:24', '1', '2022-05-21 13:55:20', NULL);

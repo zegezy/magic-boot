@@ -5,7 +5,7 @@
   "groupId" : "0295f2b4af9145f5a0ea29fa4b797214",
   "name" : "保存",
   "createTime" : null,
-  "updateTime" : 1653119087020,
+  "updateTime" : 1653129238531,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -98,7 +98,7 @@
   } ],
   "options" : [ {
     "name" : "permission",
-    "value" : "data:configure:save",
+    "value" : "configure:save",
     "description" : "允许拥有该权限的访问",
     "required" : false,
     "dataType" : "String",

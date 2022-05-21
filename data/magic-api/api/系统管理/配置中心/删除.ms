@@ -5,7 +5,7 @@
   "groupId" : "0295f2b4af9145f5a0ea29fa4b797214",
   "name" : "删除",
   "createTime" : null,
-  "updateTime" : 1653098092821,
+  "updateTime" : 1653129244605,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -14,7 +14,7 @@
   "parameters" : [ ],
   "options" : [ {
     "name" : "permission",
-    "value" : "data:configure:delete",
+    "value" : "configure:delete",
     "description" : "允许拥有该权限的访问",
     "required" : false,
     "dataType" : "String",

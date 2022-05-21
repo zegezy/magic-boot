@@ -5,7 +5,7 @@
   "groupId" : "0295f2b4af9145f5a0ea29fa4b797214",
   "name" : "详情",
   "createTime" : null,
-  "updateTime" : 1653105939624,
+  "updateTime" : 1653129248115,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -14,7 +14,7 @@
   "parameters" : [ ],
   "options" : [ {
     "name" : "permission",
-    "value" : "data:configure:view",
+    "value" : "configure:view",
     "description" : "允许拥有该权限的访问",
     "required" : false,
     "dataType" : "String",

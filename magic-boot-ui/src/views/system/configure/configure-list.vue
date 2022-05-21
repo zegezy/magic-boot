@@ -4,7 +4,7 @@
     <mb-search :where="tableOptions.where" @search="reloadTable" />
 
     <el-row class="toolbar-container">
-      <el-button v-permission="'data:configure:save'" class="filter-item" type="primary" icon="ElIconPlus" @click="handleCreate">
+      <el-button v-permission="'configure:save'" class="filter-item" type="primary" icon="ElIconPlus" @click="handleCreate">
         添加
       </el-button>
     </el-row>
@@ -16,13 +16,13 @@
         <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px">
           <el-row :gutter="24">
             <el-col :span="12">
-              <el-form-item label="数据值" prop="configureValue">
-                <el-input v-model="temp.configureValue" />
+              <el-form-item label="键值" prop="configureKey">
+                <mb-input v-model="temp.configureKey" />
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="键值" prop="configureKey">
-                <mb-input v-model="temp.configureKey" />
+              <el-form-item label="数据值" prop="configureValue">
+                <el-input v-model="temp.configureValue" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -147,7 +147,7 @@ const tableOptions = reactive({
       fixed: 'right',
       btns: [
         {
-          permission: 'data:configure:save',
+          permission: 'configure:save',
           label: '修改',
           type: 'text',
           icon: 'ElIconEdit',
@@ -156,7 +156,7 @@ const tableOptions = reactive({
           }
         },
         {
-          permission: 'data:configure:delete',
+          permission: 'configure:delete',
           label: '删除',
           type: 'text',
           icon: 'ElIconDelete',
