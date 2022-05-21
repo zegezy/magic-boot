@@ -78,7 +78,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch, nextTick, getCurrentInstance, defineExpose } from 'vue'
+import { ref, reactive, watch, nextTick, getCurrentInstance } from 'vue'
 import MenuIcons from './menu-icons'
 
 const { proxy } = getCurrentInstance()

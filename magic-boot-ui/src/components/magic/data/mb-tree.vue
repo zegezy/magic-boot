@@ -25,7 +25,7 @@
 
 <script setup>
 
-import { watch, ref, reactive, defineExpose, nextTick, getCurrentInstance, onBeforeMount } from 'vue'
+import { watch, ref, reactive, nextTick, getCurrentInstance, onBeforeMount } from 'vue'
 
 const { proxy } = getCurrentInstance()
 

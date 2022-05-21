@@ -92,7 +92,7 @@
 </template>
 
 <script setup>
-  import {reactive, ref, watch, getCurrentInstance, defineExpose, onMounted} from 'vue'
+  import {reactive, ref, watch, getCurrentInstance, onMounted} from 'vue'
   import genCode from '@/scripts/gen/gen-mb-list.js'
   import { ElMessageBox } from 'element-plus'
   const { proxy } = getCurrentInstance()

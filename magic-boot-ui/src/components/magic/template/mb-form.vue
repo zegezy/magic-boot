@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-  import {ref, reactive, getCurrentInstance, defineExpose } from 'vue'
+  import {ref, reactive, getCurrentInstance } from 'vue'
   const { proxy } = getCurrentInstance()
   const rules = reactive(getRules())
   const formData = ref(initFormData())

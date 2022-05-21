@@ -47,7 +47,7 @@
 
 <script setup>
 
-import { ref, reactive, getCurrentInstance, nextTick, defineExpose } from 'vue'
+import { ref, reactive, getCurrentInstance, nextTick } from 'vue'
 
 const emit = defineEmits(['reload-table'])
 const { proxy } = getCurrentInstance()

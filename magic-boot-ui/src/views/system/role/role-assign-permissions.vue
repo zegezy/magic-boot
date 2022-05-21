@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import {getCurrentInstance, ref, defineExpose} from 'vue'
+import { getCurrentInstance, ref } from 'vue'
 const { proxy } = getCurrentInstance()
 const emit = defineEmits(['close'])
 const props = defineProps({
