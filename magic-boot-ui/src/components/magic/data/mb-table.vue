@@ -212,11 +212,15 @@ function handlerData() {
   listLoading.value = true
   total.value = props.data.length
   var currPageData = []
-  props.data.forEach((it, i) => {
-    if (i >= ((listCurrent.value - 1) * props.limit) && i < (listCurrent.value * props.limit) && currPageData.length < props.limit) {
-      currPageData.push(it)
-    }
-  })
+  if(props.page){
+    props.data.forEach((it, i) => {
+      if (i >= ((listCurrent.value - 1) * props.limit) && i < (listCurrent.value * props.limit) && currPageData.length < props.limit) {
+        currPageData.push(it)
+      }
+    })
+  }else{
+    currPageData = props.data
+  }
   list.value = currPageData
   props.done()
   listLoading.value = false
