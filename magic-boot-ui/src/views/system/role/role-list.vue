@@ -92,9 +92,7 @@ const tableOptions = reactive({
   url: '/system/role/list',
   where: {
     name: {
-      type: 'input',
-      label: '角色名称',
-      value: ''
+      label: '角色名称'
     }
   },
   cols: [

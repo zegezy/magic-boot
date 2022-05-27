@@ -63,21 +63,17 @@ const tableOptions = reactive({
   page: true,
   where: {
     label: {
-      type: 'input',
-      label: '标签',
-      value: ''
+      label: '标签'
     },
     value: {
-      type: 'input',
-      label: '值',
-      value: ''
+      label: '值'
     },
     dictId: props.dictId
   },
   cols: [
     {
       field: 'label',
-      label: '类型'
+      label: '标签'
     },
     {
       field: 'value',

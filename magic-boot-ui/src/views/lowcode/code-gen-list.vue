@@ -33,8 +33,11 @@
           label: '描述'
         },
         createDate: {
+          component: 'date',
           label: '创建时间',
-          type: 'daterange'
+          props: {
+            type: 'daterange'
+          }
         }
       },
       cols: [

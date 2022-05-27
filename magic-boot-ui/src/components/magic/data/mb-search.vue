@@ -3,22 +3,12 @@
     <el-form :inline="true" @keyup.enter="search">
       <span v-for="(it, i) in where">
         <el-form-item v-if="it && it.label" :label="it.label" :key="i">
-          <el-input v-if="!it.type || it.type == 'input'" @input="input(it.input)" v-model="it.value" :placeholder="it.placeholder || ('请输入' + it.label)" style="width: 200px;" class="filter-item" />
-          <mb-select v-else-if="it.type == 'select'" v-model="it.value" :placeholder="'请选择' + it.label" v-bind="it.props" />
-          <el-date-picker
-            v-else-if="it.type == 'date' || it.type == 'datetime' || it.type == 'daterange' || it.type == 'datetimerange'"
-            v-model="it.value"
-            align="right"
-            :format="it.type.startsWith('datetime') ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD'"
-            :value-format="it.type.startsWith('datetime') ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD'"
-            :type="it.type"
-            start-placeholder="开始时间"
-            end-placeholder="结束时间"
-            :placeholder="it.type.startsWith('datetime') ? 'YYYY-MM-DD HH:mm:ss' : 'YYYY-MM-DD'"
-          >
-          </el-date-picker>
-          <mb-inputrange v-model="it.value" v-else-if="it.type == 'inputrange'" />
-          <component v-else :is="it.type" v-model="it.value" v-bind="it.props" />
+          <component
+              :is="!it.component ? 'mb-input' : it.component.startsWith('el-') || $global.dynamicComponentNames.indexOf(it.component) != -1 ? it.component : 'mb-' + it.component"
+              v-model="it.value"
+              :item-label="it.label"
+              v-bind="it.props"
+          />
         </el-form-item>
       </span>
       <el-form-item>

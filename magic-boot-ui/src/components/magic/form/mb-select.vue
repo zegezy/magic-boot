@@ -105,12 +105,10 @@ onMounted(() => {
 })
 
 function setValue(value){
-  if(value){
-    if(props.multiple && props.join){
-      selectValue.value = value.split(',')
-    }else{
-      selectValue.value = value.toString()
-    }
+  if(props.multiple && props.join){
+    selectValue.value = value ? value.split(',') : []
+  }else{
+    selectValue.value = value ? value.toString() : ''
   }
 }
 

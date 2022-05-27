@@ -12,9 +12,11 @@
     url: '/system/log/login/list',
     where: {
       createDate: {
-        type: 'datetimerange',
+        component: 'date',
         label: '创建时间',
-        value: ''
+        props: {
+          type: 'datetimerange'
+        }
       }
     },
     cols: [

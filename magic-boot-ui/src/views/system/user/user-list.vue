@@ -115,19 +115,14 @@ const tableOptions = reactive({
   selection: true,
   where: {
     username: {
-      type: 'input',
-      label: '登录名称',
-      value: ''
+      label: '登录名称'
     },
     name: {
-      type: 'input',
-      label: '姓名/昵称',
-      value: ''
+      label: '姓名/昵称'
     },
     roleId: {
-      type: 'select',
+      component: 'select',
       label: '角色',
-      value: '',
       props: {
         url: '/system/role/all',
         multiple: true

@@ -92,14 +92,13 @@ const tableOptions = reactive({
   page: true,
   where: {
     configureCondition: {
-      type: 'input',
-      label: '条件',
-      value: ''
+      label: '查询条件'
     },
     configureKey: {
-      type: 'input',
-      label: '键值',
-      value: ''
+      label: '配置键值'
+    },
+    configureValue: {
+      label: '配置数据'
     }
   },
   cols: [

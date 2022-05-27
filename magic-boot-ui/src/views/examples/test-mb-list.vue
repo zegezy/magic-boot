@@ -40,7 +40,7 @@ const listOptions = reactive({
         label: '姓名/昵称',
       },
       roleId: {
-        type: 'select',
+        component: 'select',
         label: '角色',
         props: {
           url: '/system/role/all',

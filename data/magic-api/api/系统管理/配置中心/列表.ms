@@ -5,7 +5,7 @@
   "groupId" : "0295f2b4af9145f5a0ea29fa4b797214",
   "name" : "列表",
   "createTime" : null,
-  "updateTime" : 1653129241574,
+  "updateTime" : 1653634268957,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -110,6 +110,7 @@ return db.page("""
     select id,configure_condition,configure_key,configure_value,configure_name,configure_type,configure_desc_ribe,remarks,create_date from sys_configure
     where is_del = 0
     ?{configureCondition, and configure_condition like concat('%',#{configureCondition},'%')}
-    ?{configureKey, and configure_key = #{configureKey}}
+    ?{configureKey, and configure_key like concat('%',#{configureKey},'%')}
+    ?{configureValue, and configure_value like concat('%',#{configureValue},'%')}
     order by create_date desc
 """)

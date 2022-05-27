@@ -30,9 +30,17 @@ function gen(groupPath, data){
     for(var i in data){
         var d = data[i]
         if(d.query){
+            var props = ''
+            if(d.dictType){
+                props = `,
+                    props: {
+                        type: '${d.dictType}'
+                    }`
+            }
             html += `
                 ${d.columnName}: {
-                    label: '${d.columnComment}'
+                    label: '${d.columnComment}',
+                    ${d.component}${props}
                 },`
         }
     }

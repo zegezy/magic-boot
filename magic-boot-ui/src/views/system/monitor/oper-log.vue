@@ -30,12 +30,15 @@
         label: '路径'
       },
       costTime: {
-        label: '耗时区间',
-        type: 'inputrange'
+        component: 'inputrange',
+        label: '耗时区间'
       },
       createDate: {
-        type: 'datetimerange',
-        label: '创建时间'
+        component: 'date',
+        label: '创建时间',
+        props: {
+          type: 'datetimerange'
+        }
       }
     },
     cols: [
