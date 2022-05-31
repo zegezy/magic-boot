@@ -5,7 +5,7 @@
   "groupId" : "f2538e0f370a4cabab0ae920f5e77ae7",
   "name" : "执行生成",
   "createTime" : null,
-  "updateTime" : 1652170746742,
+  "updateTime" : 1653992145291,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -325,7 +325,7 @@ columns.forEach(it => {
     }
 })
 
-var commonField = db.select("""
+var commonField = db[datasource].select("""
     SELECT
         column_name
     FROM
@@ -334,7 +334,7 @@ var commonField = db.select("""
         table_name = #{tableName} AND column_name IN ( 'is_del', 'create_by', 'create_date', 'update_by', 'update_date' ) AND table_schema = DATABASE()
 """)
 commonField = commonField.map(it => it.columnName)
-var primary = db.selectValue("SELECT column_name FROM information_schema.COLUMNS WHERE table_name = #{tableName} and column_key = 'PRI' and table_schema = database() limit 1")
+var primary = db[datasource].selectValue("SELECT column_name FROM information_schema.COLUMNS WHERE table_name = #{tableName} and column_key = 'PRI' and table_schema = database() limit 1")
 var primaryLowerCamelCase = primary.replace(/([A-Z])/g,"_$1").toLowerCase()
 
 var logic = ''
@@ -344,12 +344,14 @@ if(commonField.contains('is_del')){
 }
 wheres = wheres.substring(0,wheres.length() - 1)
 
+var datasourceScript = datasource ? `.${datasource}` : '';
+
 ApiInfo listApi = new ApiInfo()
 listApi.setName("列表")
 listApi.setPath("/list")
 listApi.setMethod("POST")
 listApi.setGroupId(businessGroup.getId())
-listApi.setScript(`return db.page("""
+listApi.setScript(`return db${datasourceScript}.page("""
     select ${primary},${listFields} from ${tableName} where 1=1
 ${wheres}
 """)`)
@@ -366,7 +368,7 @@ saveApi.setName("保存")
 saveApi.setPath("/save")
 saveApi.setMethod("POST")
 saveApi.setGroupId(businessGroup.getId())
-saveApi.setScript(`return db.table('${tableName}').primary('${primary}').${saveMethod}`)
+saveApi.setScript(`return db${datasourceScript}.table('${tableName}').primary('${primary}').${saveMethod}`)
 saveApi.setOption([new Option('wrap_request_parameter', 'data'), new Option('permission', `${permissionPrefix}:save`, '允许拥有该权限的访问')])
 MagicResourceService.saveFile(saveApi)
 
@@ -375,7 +377,7 @@ deleteApi.setName("删除")
 deleteApi.setPath("/delete")
 deleteApi.setMethod("DELETE")
 deleteApi.setGroupId(businessGroup.getId())
-deleteApi.setScript(`return db.table('${tableName}')${logic}.where().eq('${primary}', ${primaryLowerCamelCase}).delete()`)
+deleteApi.setScript(`return db${datasourceScript}.table('${tableName}')${logic}.where().eq('${primary}', ${primaryLowerCamelCase}).delete()`)
 deleteApi.setOption([new Option('permission', `${permissionPrefix}:delete`, '允许拥有该权限的访问')])
 MagicResourceService.saveFile(deleteApi)
 
@@ -386,7 +388,7 @@ getApi.setName("详情")
 getApi.setPath("/get")
 getApi.setMethod("GET")
 getApi.setGroupId(businessGroup.getId())
-getApi.setScript(`return db.selectOne("""
+getApi.setScript(`return db${datasourceScript}.selectOne("""
     select ${primary},${saveFields} from ${tableName} where ${primary} = #{${primaryLowerCamelCase}}
 """)`)
 getApi.setOption([new Option('permission', `${permissionPrefix}:view`, '允许拥有该权限的访问')])

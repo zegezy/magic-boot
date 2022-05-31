@@ -3,12 +3,17 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="表信息" name="basic">
         <el-row :gutter="24">
-          <el-col :span="12">
+          <el-col :span="8">
+            <el-form-item label="数据源" prop="datasource">
+              <mb-select v-model="genInfo.datasource" url="/system/code/gen/database" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
             <el-form-item label="表名" prop="tableName">
               <mb-select v-model="genInfo.tableName" :options="tables" />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="8">
             <el-form-item label="描述" prop="tableComment">
               <el-input v-model="genInfo.tableComment" />
             </el-form-item>
@@ -92,7 +97,7 @@
 </template>
 
 <script setup>
-  import {reactive, ref, watch, getCurrentInstance, onMounted} from 'vue'
+import {reactive, ref, watch, getCurrentInstance, onMounted, nextTick} from 'vue'
   import genCode from '@/scripts/gen/gen-mb-list.js'
   import { ElMessageBox } from 'element-plus'
   const { proxy } = getCurrentInstance()
@@ -126,6 +131,7 @@
     'info.businessPath': [{ required: true, message: '请输入功能路径', trigger: 'change' },  { validator: validatePath }]
   })
   const genInfo = ref({
+    datasource: '',
     tableName: '',
     tableComment: '',
     info: {
@@ -139,14 +145,41 @@
     columns: []
   })
 
-  async function watchTableName(){
-    await proxy.$get('/system/code/gen/tables').then(res => {
+  function datasourceChange(){
+    proxy.$get('/system/code/gen/tables?datasource='+genInfo.value.datasource).then(res => {
       tables.value = res.data
     })
+  }
+
+  watch(() => genInfo.value.datasource, () => {
+    datasourceChange()
+    genInfo.value.tableName = ''
+  })
+
+  function formInitClearValidate(){
+    genInfo.value.tableComment = ''
+    genInfo.value.info.moduleName = '';
+    genInfo.value.info.modulePath = '';
+    genInfo.value.info.businessName = '';
+    genInfo.value.info.businessPath = '';
+    genInfo.value.info.template = 'singleTable';
+    genInfo.value.info.pid = '';
+    genInfo.value.columns = []
+    setTimeout(() => {
+      dataForm.value.clearValidate()
+    },1)
+  }
+
+  function watchTableName(){
+    datasourceChange()
     watch(() => genInfo.value.tableName, (value) => {
+      if(!value){
+        formInitClearValidate()
+        return
+      }
       genInfo.value.tableComment = tables.value.filter(it => it.value == value)[0].label.replace(value, '').replace('(','').replace(')','')
       genInfo.value.columns = []
-      proxy.$get('/system/code/gen/columns', { tableName: value }).then(res => {
+      proxy.$get('/system/code/gen/columns?datasource='+genInfo.value.datasource, { tableName: value }).then(res => {
         var columns = res.data.columns
         var primary = res.data.primary
         columns.forEach(it => {
@@ -318,6 +351,7 @@
           formData.info = JSON.stringify(genInfo.value.info)
           formData.columns = JSON.stringify(genInfo.value.columns)
           formData.componentScript = genCode(genInfo.value.info.modulePath+genInfo.value.info.businessPath, genInfo.value.columns)
+          formData.datasource = genInfo.value.datasource
           proxy.$post('/system/code/gen/execute', formData).then((res) => {
             if(res.data == 1){
               proxy.$notify({

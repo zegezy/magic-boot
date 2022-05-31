@@ -5,7 +5,7 @@
   "groupId" : "f2538e0f370a4cabab0ae920f5e77ae7",
   "name" : "查出所有表",
   "createTime" : null,
-  "updateTime" : 1648389273779,
+  "updateTime" : 1653990626738,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -16,7 +16,7 @@
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [{\n        \"label\": \"magic_backup_record_v2()\",\n        \"value\": \"magic_backup_record_v2\"\n    }, {\n        \"label\": \"sys_dict(字典表)\",\n        \"value\": \"sys_dict\"\n    }, {\n        \"label\": \"sys_dict_items(字典项表)\",\n        \"value\": \"sys_dict_items\"\n    }, {\n        \"label\": \"sys_file(文件表)\",\n        \"value\": \"sys_file\"\n    }, {\n        \"label\": \"sys_gen_info(生成表信息)\",\n        \"value\": \"sys_gen_info\"\n    }, {\n        \"label\": \"sys_gen_test()\",\n        \"value\": \"sys_gen_test\"\n    }, {\n        \"label\": \"sys_login_log()\",\n        \"value\": \"sys_login_log\"\n    }, {\n        \"label\": \"sys_menu(菜单表)\",\n        \"value\": \"sys_menu\"\n    }, {\n        \"label\": \"sys_office(组织机构表)\",\n        \"value\": \"sys_office\"\n    }, {\n        \"label\": \"sys_oper_log(操作日志)\",\n        \"value\": \"sys_oper_log\"\n    }, {\n        \"label\": \"sys_permission_code(权限code表)\",\n        \"value\": \"sys_permission_code\"\n    }, {\n        \"label\": \"sys_role(角色表)\",\n        \"value\": \"sys_role\"\n    }, {\n        \"label\": \"sys_role_menu(角色和菜单关联表)\",\n        \"value\": \"sys_role_menu\"\n    }, {\n        \"label\": \"sys_role_office(用户组织机构关联表)\",\n        \"value\": \"sys_role_office\"\n    }, {\n        \"label\": \"sys_test_data()\",\n        \"value\": \"sys_test_data\"\n    }, {\n        \"label\": \"sys_user(用户表)\",\n        \"value\": \"sys_user\"\n    }, {\n        \"label\": \"sys_user_code(用户权限code关联表)\",\n        \"value\": \"sys_user_code\"\n    }, {\n        \"label\": \"sys_user_role(用户与角色关联表)\",\n        \"value\": \"sys_user_role\"\n    }],\n    \"timestamp\": 1648372075872,\n    \"executeTime\": 24\n}",
+  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [{\n        \"label\": \"magic_backup_record_v2()\",\n        \"value\": \"magic_backup_record_v2\"\n    }, {\n        \"label\": \"sys_configure(配置中心)\",\n        \"value\": \"sys_configure\"\n    }, {\n        \"label\": \"sys_dict(字典表)\",\n        \"value\": \"sys_dict\"\n    }, {\n        \"label\": \"sys_dict_items(字典项表)\",\n        \"value\": \"sys_dict_items\"\n    }, {\n        \"label\": \"sys_file(文件表)\",\n        \"value\": \"sys_file\"\n    }, {\n        \"label\": \"sys_gen_info(生成表信息)\",\n        \"value\": \"sys_gen_info\"\n    }, {\n        \"label\": \"sys_login_log()\",\n        \"value\": \"sys_login_log\"\n    }, {\n        \"label\": \"sys_menu(菜单表)\",\n        \"value\": \"sys_menu\"\n    }, {\n        \"label\": \"sys_office(组织机构表)\",\n        \"value\": \"sys_office\"\n    }, {\n        \"label\": \"sys_oper_log(操作日志)\",\n        \"value\": \"sys_oper_log\"\n    }, {\n        \"label\": \"sys_permission_code(权限code表)\",\n        \"value\": \"sys_permission_code\"\n    }, {\n        \"label\": \"sys_role(角色表)\",\n        \"value\": \"sys_role\"\n    }, {\n        \"label\": \"sys_role_menu(角色和菜单关联表)\",\n        \"value\": \"sys_role_menu\"\n    }, {\n        \"label\": \"sys_role_office(用户组织机构关联表)\",\n        \"value\": \"sys_role_office\"\n    }, {\n        \"label\": \"sys_test_data()\",\n        \"value\": \"sys_test_data\"\n    }, {\n        \"label\": \"sys_user(用户表)\",\n        \"value\": \"sys_user\"\n    }, {\n        \"label\": \"sys_user_code(用户权限code关联表)\",\n        \"value\": \"sys_user_code\"\n    }, {\n        \"label\": \"sys_user_role(用户与角色关联表)\",\n        \"value\": \"sys_user_role\"\n    }, {\n        \"label\": \"t_data_test(测试生成)\",\n        \"value\": \"t_data_test\"\n    }],\n    \"timestamp\": 1653990585569,\n    \"executeTime\": 11\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -104,7 +104,7 @@
       } ]
     }, {
       "name" : "timestamp",
-      "value" : "1648372075872",
+      "value" : "1653990585569",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -116,7 +116,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "24",
+      "value" : "11",
       "description" : "",
       "required" : false,
       "dataType" : "Object",
@@ -130,6 +130,6 @@
   }
 }
 ================================
-return db.select("""
+return db[datasource].select("""
     select table_name, table_comment from information_schema.tables where table_schema = database()
 """).map(it => { label: it.tableName + `(${it.tableComment})`, value: it.tableName  })
