@@ -147,6 +147,7 @@ INSERT INTO `sys_file` VALUES ('6f400447e28f41f28aedaa9f4be49657', 'userfiles/20
 DROP TABLE IF EXISTS `sys_gen_info`;
 CREATE TABLE `sys_gen_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `datasource` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '数据源',
   `table_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '表名',
   `table_comment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '表注释',
   `columns` text COLLATE utf8mb4_unicode_ci COMMENT '字段信息json',
@@ -159,7 +160,7 @@ CREATE TABLE `sys_gen_info` (
 -- ----------------------------
 -- Records of sys_gen_info
 -- ----------------------------
-INSERT INTO `sys_gen_info` VALUES ('5', 't_data_test', '测试生成', '[{\"columnName\":\"name\",\"columnComment\":\"名字\",\"columnType\":\"varchar(255)\",\"component\":\"component: \'input\'\",\"where\":\"like\",\"save\":true,\"query\":true,\"list\":true,\"required\":true},{\"columnName\":\"sex\",\"columnComment\":\"性别\",\"columnType\":\"varchar(255)\",\"component\":\"component: \'radio-group\'\",\"where\":\"=\",\"save\":true,\"query\":true,\"list\":true,\"required\":false,\"dictType\":\"sex\"},{\"columnName\":\"headPortrait\",\"columnComment\":\"头像\",\"columnType\":\"varchar(255)\",\"component\":\"component: \'upload-image\'\",\"where\":\"in\",\"save\":true,\"query\":true,\"list\":true,\"required\":true},{\"columnName\":\"remarks\",\"columnComment\":\"备注\",\"columnType\":\"text\",\"component\":\"component: \'input\',\\n                    props: {\\n                        type: \'textarea\'\\n                    }\\n      \",\"where\":\"<=\",\"save\":true,\"query\":true,\"list\":true,\"required\":false}]', '{\"moduleName\":\"数据管理\",\"modulePath\":\"/data\",\"businessName\":\"测试生成\",\"businessPath\":\"/test\",\"template\":\"singleTable\",\"pid\":\"d7f8d052d4864bd285c575c3cf2dce69\"}', '2022-03-28 21:56:09', '2022-04-06 23:43:44');
+INSERT INTO `sys_gen_info` VALUES ('5', '', 't_data_test', '测试生成', '[{\"columnName\":\"name\",\"columnComment\":\"名字\",\"columnType\":\"varchar(255)\",\"component\":\"component: \'input\'\",\"where\":\"like\",\"save\":true,\"query\":true,\"list\":true,\"required\":true},{\"columnName\":\"sex\",\"columnComment\":\"性别\",\"columnType\":\"varchar(255)\",\"component\":\"component: \'select\'\",\"where\":\"=\",\"save\":true,\"query\":true,\"list\":true,\"required\":false,\"dictType\":\"sex\"},{\"columnName\":\"headPortrait\",\"columnComment\":\"头像\",\"columnType\":\"varchar(255)\",\"component\":\"component: \'upload-image\'\",\"where\":\"in\",\"save\":true,\"query\":true,\"list\":true,\"required\":true},{\"columnName\":\"remarks\",\"columnComment\":\"备注\",\"columnType\":\"text\",\"component\":\"component: \'input\',\\n                    props: {\\n                        type: \'textarea\'\\n                    }\\n      \",\"where\":\"<=\",\"save\":true,\"query\":true,\"list\":true,\"required\":false}]', '{\"moduleName\":\"数据管理\",\"modulePath\":\"/data\",\"businessName\":\"测试生成\",\"businessPath\":\"/test\",\"template\":\"singleTable\",\"pid\":\"d7f8d052d4864bd285c575c3cf2dce69\"}', '2022-03-28 21:56:09', '2022-05-27 13:36:55');
 
 -- ----------------------------
 -- Table structure for sys_login_log
