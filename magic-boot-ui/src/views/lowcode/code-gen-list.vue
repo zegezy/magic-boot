@@ -20,7 +20,7 @@
       permission: 'code:gen:save',
       click: () => {
         formDialog.value.show()
-        nextTick(() => magicForm.value.watchTableName())
+        nextTick(() => magicForm.value.watchInfo())
       }
     }],
     table: {

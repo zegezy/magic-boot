@@ -5,7 +5,7 @@
   "groupId" : "f2538e0f370a4cabab0ae920f5e77ae7",
   "name" : "根据表名查出所有列",
   "createTime" : null,
-  "updateTime" : 1653991292310,
+  "updateTime" : 1654682348773,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -191,7 +191,7 @@
 }
 ================================
 return {
-    columns: db[datasource].select("""
+    columns: db[datasource || ''].select("""
         SELECT
             column_name,
             column_comment,

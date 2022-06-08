@@ -5,7 +5,7 @@
   "groupId" : "f2538e0f370a4cabab0ae920f5e77ae7",
   "name" : "查出所有表",
   "createTime" : null,
-  "updateTime" : 1653990626738,
+  "updateTime" : 1654682333737,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -130,6 +130,6 @@
   }
 }
 ================================
-return db[datasource].select("""
+return db[datasource || ''].select("""
     select table_name, table_comment from information_schema.tables where table_schema = database()
 """).map(it => { label: it.tableName + `(${it.tableComment})`, value: it.tableName  })

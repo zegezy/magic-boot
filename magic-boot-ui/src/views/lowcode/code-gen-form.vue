@@ -1,6 +1,6 @@
 <template>
   <el-form ref="dataForm" :model="genInfo" :rules="genInfoRules" label-position="right" label-width="120px">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tabs v-model="activeName">
       <el-tab-pane label="表信息" name="basic">
         <el-row :gutter="24">
           <el-col :span="8">
@@ -151,11 +151,6 @@ import {reactive, ref, watch, getCurrentInstance, onMounted, nextTick} from 'vue
     })
   }
 
-  watch(() => genInfo.value.datasource, () => {
-    datasourceChange()
-    genInfo.value.tableName = ''
-  })
-
   function formInitClearValidate(){
     genInfo.value.tableComment = ''
     genInfo.value.info.moduleName = '';
@@ -168,6 +163,13 @@ import {reactive, ref, watch, getCurrentInstance, onMounted, nextTick} from 'vue
     setTimeout(() => {
       dataForm.value.clearValidate()
     },1)
+  }
+
+  function watchDatasource(){
+    watch(() => genInfo.value.datasource, () => {
+      datasourceChange()
+      genInfo.value.tableName = ''
+    })
   }
 
   function watchTableName(){
@@ -197,6 +199,11 @@ import {reactive, ref, watch, getCurrentInstance, onMounted, nextTick} from 'vue
         })
       })
     })
+  }
+
+  function watchInfo(){
+    watchTableName()
+    watchDatasource()
   }
 
   const activeName = ref('basic')
@@ -399,10 +406,10 @@ import {reactive, ref, watch, getCurrentInstance, onMounted, nextTick} from 'vue
       formData.info = JSON.parse(formData.info)
       formData.columns = JSON.parse(formData.columns)
       genInfo.value = formData
-      watchTableName()
+      watchInfo()
     })
   }
 
-  defineExpose({ save, getDetail, watchTableName })
+  defineExpose({ save, getDetail, watchInfo })
 
 </script>

@@ -5,7 +5,7 @@
   "groupId" : "f2538e0f370a4cabab0ae920f5e77ae7",
   "name" : "执行生成",
   "createTime" : null,
-  "updateTime" : 1653992145291,
+  "updateTime" : 1654682481038,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -324,12 +324,12 @@ columns.forEach(it => {
         }
     }
 })
-
+datasource = datasource || ''
 var commonField = db[datasource].select("""
     SELECT
         column_name
     FROM
-        information_schema.COLUMNS 
+        information_schema.COLUMNS
     WHERE
         table_name = #{tableName} AND column_name IN ( 'is_del', 'create_by', 'create_date', 'update_by', 'update_date' ) AND table_schema = DATABASE()
 """)
