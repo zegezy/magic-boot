@@ -147,7 +147,7 @@ INSERT INTO `sys_file` VALUES ('6f400447e28f41f28aedaa9f4be49657', 'userfiles/20
 DROP TABLE IF EXISTS `sys_gen_info`;
 CREATE TABLE `sys_gen_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `datasource` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '数据源',
+  `datasource` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '数据源',
   `table_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '表名',
   `table_comment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '表注释',
   `columns` text COLLATE utf8mb4_unicode_ci COMMENT '字段信息json',
