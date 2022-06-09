@@ -6,5 +6,8 @@ const libs = {
     'element-plus': ElementPlus
 }
 window.___magic__import__ = function(lib, name){
+    if(typeof(libs[lib]) == 'function'){
+        return libs[lib]
+    }
     return (libs[lib] || {})[name]
 }

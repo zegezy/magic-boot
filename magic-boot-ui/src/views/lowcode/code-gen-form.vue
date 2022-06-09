@@ -403,6 +403,7 @@ import {reactive, ref, watch, getCurrentInstance, onMounted, nextTick} from 'vue
   function getDetail(id){
     proxy.$get('/system/code/gen/get', { id: id }).then(res => {
       var formData = {...res.data}
+      formData.datasource = formData.datasource || ''
       formData.info = JSON.parse(formData.info)
       formData.columns = JSON.parse(formData.columns)
       genInfo.value = formData
