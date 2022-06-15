@@ -5,7 +5,7 @@
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "删除",
   "createTime" : null,
-  "updateTime" : 1647618260057,
+  "updateTime" : 1655304921225,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -55,5 +55,8 @@ if(Arrays.asList(id.split(',')).contains('1')){
 for(userId in id.split(',')){
     SqlCache.delete(`permissions:${userId}`)
     db.table("sys_user").logic().where().eq("id",userId).delete();
+    db.update("""
+        delete from sys_user_role where user_id = #{userId}
+    """)
 }
 return true

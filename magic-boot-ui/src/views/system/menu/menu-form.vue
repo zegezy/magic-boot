@@ -28,7 +28,7 @@
       <el-input v-model="temp.url" />
     </el-form-item>
     <el-form-item label="关联组件" prop="componentName" v-if="menuType == 'menu'">
-      <el-tree-select v-model="temp.componentName" :data="componentTree" :key="temp.componentName" style="width: 100%" placeholder=" " />
+      <el-tree-select v-model="temp.componentName" :data="componentTree" :key="temp.componentName" clearable style="width: 100%" placeholder=" " />
     </el-form-item>
     <el-form-item label="权限标识" prop="permission" v-if="menuType == 'button'">
       <el-input v-model="temp.permission" />

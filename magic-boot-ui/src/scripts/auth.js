@@ -13,7 +13,6 @@ export function setToken(token) {
 export function removeToken() {
   localStorage.removeItem(TokenKey);
   global.user = {
-    token: '',
     authorities: [],
     info: {},
     permissionRoutes: []
