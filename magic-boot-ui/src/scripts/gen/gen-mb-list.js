@@ -39,7 +39,7 @@ function gen(groupPath, data){
             }
             html += `
                 ${d.columnName}: {
-                    label: '${d.columnComment}',
+                    label: '${d.columnComment.trim()}',
                     ${d.component}${props}
                 },`
         }
@@ -66,7 +66,7 @@ function gen(groupPath, data){
             html += `
                 {
                     field: '${d.columnName}',
-                    label: '${d.columnComment}'${type}${dictType}
+                    label: '${d.columnComment.trim()}'${type}${dictType}
                 },`
         }
     }
@@ -135,12 +135,12 @@ function gen(groupPath, data){
                     messagePrefix = '请输入'
                 }
                 rules = `,
-                    rules: [{ required: true, message: '${messagePrefix}${d.columnComment}', trigger: 'change' }]`
+                    rules: [{ required: true, message: '${messagePrefix}${d.columnComment.trim()}', trigger: 'change' }]`
             }
             html += `{
                     span: 12,
                     name: '${d.columnName}',
-                    label: '${d.columnComment}',
+                    label: '${d.columnComment.trim()}',
                     ${d.component}${props}${rules}
                 },`
         }
