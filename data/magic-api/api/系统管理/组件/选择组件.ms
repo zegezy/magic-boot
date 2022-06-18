@@ -5,7 +5,7 @@
   "groupId" : "6f106ebdee21489db34b956f7770ff03",
   "name" : "选择组件",
   "createTime" : null,
-  "updateTime" : 1651902325727,
+  "updateTime" : 1655521303906,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -16,7 +16,7 @@
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [{\n        \"value\": \"55ff62aa20144b7bb5c6dfb5d76c8139\",\n        \"label\": \"数据管理(/data)\",\n        \"children\": [{\n            \"value\": \"eb5dbed949de4f50ba4bf59f483252a5\",\n            \"label\": \"测试生成(/test)\",\n            \"children\": [{\n                \"id\": \"data-test-list\",\n                \"label\": \"列表(/list)\"\n            }]\n        }]\n    }],\n    \"timestamp\": 1651902176780,\n    \"executeTime\": 9\n}",
+  "responseBody" : "{\n    \"code\": 500,\n    \"message\": \"系统内部出现错误\",\n    \"data\": null,\n    \"timestamp\": 1655521300755,\n    \"executeTime\": 17\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -32,7 +32,7 @@
     "expression" : "",
     "children" : [ {
       "name" : "code",
-      "value" : "200",
+      "value" : "500",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -44,7 +44,7 @@
       "children" : [ ]
     }, {
       "name" : "message",
-      "value" : "success",
+      "value" : "系统内部出现错误",
       "description" : "",
       "required" : false,
       "dataType" : "String",
@@ -56,7 +56,7 @@
       "children" : [ ]
     }, {
       "name" : "data",
-      "value" : "",
+      "value" : "null",
       "description" : "",
       "required" : false,
       "dataType" : "Object",
@@ -65,142 +65,10 @@
       "validateType" : "",
       "error" : "",
       "expression" : "",
-      "children" : [ {
-        "name" : "",
-        "value" : "",
-        "description" : "",
-        "required" : false,
-        "dataType" : "Object",
-        "type" : null,
-        "defaultValue" : null,
-        "validateType" : "",
-        "error" : "",
-        "expression" : "",
-        "children" : [ {
-          "name" : "value",
-          "value" : "55ff62aa20144b7bb5c6dfb5d76c8139",
-          "description" : "",
-          "required" : false,
-          "dataType" : "String",
-          "type" : null,
-          "defaultValue" : null,
-          "validateType" : "",
-          "error" : "",
-          "expression" : "",
-          "children" : [ ]
-        }, {
-          "name" : "label",
-          "value" : "数据管理(/data)",
-          "description" : "",
-          "required" : false,
-          "dataType" : "String",
-          "type" : null,
-          "defaultValue" : null,
-          "validateType" : "",
-          "error" : "",
-          "expression" : "",
-          "children" : [ ]
-        }, {
-          "name" : "children",
-          "value" : "",
-          "description" : "",
-          "required" : false,
-          "dataType" : "Array",
-          "type" : null,
-          "defaultValue" : null,
-          "validateType" : "",
-          "error" : "",
-          "expression" : "",
-          "children" : [ {
-            "name" : "",
-            "value" : "",
-            "description" : "",
-            "required" : false,
-            "dataType" : "Object",
-            "type" : null,
-            "defaultValue" : null,
-            "validateType" : "",
-            "error" : "",
-            "expression" : "",
-            "children" : [ {
-              "name" : "value",
-              "value" : "eb5dbed949de4f50ba4bf59f483252a5",
-              "description" : "",
-              "required" : false,
-              "dataType" : "String",
-              "type" : null,
-              "defaultValue" : null,
-              "validateType" : "",
-              "error" : "",
-              "expression" : "",
-              "children" : [ ]
-            }, {
-              "name" : "label",
-              "value" : "测试生成(/test)",
-              "description" : "",
-              "required" : false,
-              "dataType" : "String",
-              "type" : null,
-              "defaultValue" : null,
-              "validateType" : "",
-              "error" : "",
-              "expression" : "",
-              "children" : [ ]
-            }, {
-              "name" : "children",
-              "value" : "",
-              "description" : "",
-              "required" : false,
-              "dataType" : "Array",
-              "type" : null,
-              "defaultValue" : null,
-              "validateType" : "",
-              "error" : "",
-              "expression" : "",
-              "children" : [ {
-                "name" : "",
-                "value" : "",
-                "description" : "",
-                "required" : false,
-                "dataType" : "Object",
-                "type" : null,
-                "defaultValue" : null,
-                "validateType" : "",
-                "error" : "",
-                "expression" : "",
-                "children" : [ {
-                  "name" : "id",
-                  "value" : "data-test-list",
-                  "description" : "",
-                  "required" : false,
-                  "dataType" : "String",
-                  "type" : null,
-                  "defaultValue" : null,
-                  "validateType" : "",
-                  "error" : "",
-                  "expression" : "",
-                  "children" : [ ]
-                }, {
-                  "name" : "label",
-                  "value" : "列表(/list)",
-                  "description" : "",
-                  "required" : false,
-                  "dataType" : "String",
-                  "type" : null,
-                  "defaultValue" : null,
-                  "validateType" : "",
-                  "error" : "",
-                  "expression" : "",
-                  "children" : [ ]
-                } ]
-              } ]
-            } ]
-          } ]
-        } ]
-      } ]
+      "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1651902176780",
+      "value" : "1655521300755",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -212,7 +80,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "9",
+      "value" : "17",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -244,7 +112,7 @@ var toTree = (children) => {
             chi.children = toTree(it.children)
             var files = getFiles(it.node.id)
             if(files.length > 0){
-                chi.children.push(...files)
+                chi.children.addAll(files)
             }
         }else{
             var files = getFiles(it.node.id)
@@ -252,7 +120,11 @@ var toTree = (children) => {
                 chi.children = files
             }
         }
-        treeData.push(chi)
+        if(chi instanceof List){
+            treeData.addAll(chi)
+        }else{
+            treeData.add(chi)
+        }
     }) 
     return treeData
 }
