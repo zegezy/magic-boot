@@ -186,7 +186,8 @@ const tableOptions = reactive({
         {
           permission: 'user:save',
           label: '修改',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconEdit',
           click: (row) => {
             handleUpdate(row)
@@ -195,7 +196,8 @@ const tableOptions = reactive({
         {
           permission: 'user:delete',
           label: '删除',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconDelete',
           if: (row) => {
             return row.id != '1'

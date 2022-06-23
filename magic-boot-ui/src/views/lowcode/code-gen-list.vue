@@ -56,13 +56,14 @@
         }, {
           label: '操作',
           type: 'btns',
-          width: 140,
+          width: 180,
           fixed: 'right',
           btns: [
             {
               permission: 'code:gen:save',
               label: '修改',
-              type: 'text',
+              type: 'primary',
+              link: true,
               icon: 'ElIconEdit',
               click: (row) => {
                 formDialog.value.show()
@@ -71,7 +72,8 @@
             }, {
               permission: 'code:gen:delete',
               label: '删除',
-              type: 'text',
+              type: 'primary',
+              link: true,
               icon: 'ElIconDelete',
               click: (row) => {
                 proxy.$common.handleDelete({

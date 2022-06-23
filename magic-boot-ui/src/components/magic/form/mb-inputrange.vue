@@ -11,7 +11,8 @@ const props = defineProps({
   modelValue: {
     type: String,
     default: ''
-  }
+  },
+  itemLabel: String
 })
 const input1 = ref('')
 const input2 = ref('')

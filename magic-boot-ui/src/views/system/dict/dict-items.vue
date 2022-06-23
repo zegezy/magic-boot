@@ -90,7 +90,8 @@ const tableOptions = reactive({
       btns: [
         {
           label: '上移',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconSortUp',
           click: (row) => {
             proxy.$get('/system/dict/items/sort/up',{
@@ -104,7 +105,8 @@ const tableOptions = reactive({
         },
         {
           label: '下移',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconSortDown',
           click: (row) => {
             proxy.$get('/system/dict/items/sort/down',{
@@ -131,7 +133,8 @@ const tableOptions = reactive({
         {
           permission: 'dict:items:save',
           label: '修改',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconEdit',
           click: (row) => {
             handleUpdate(row)
@@ -140,7 +143,8 @@ const tableOptions = reactive({
         {
           permission: 'dict:items:delete',
           label: '删除',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconDelete',
           click: (row) => {
             proxy.$common.handleDelete({

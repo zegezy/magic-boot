@@ -91,7 +91,8 @@ const listOptions = reactive({
           {
             permission: 'user:save',
             label: '修改',
-            type: 'text',
+            type: 'primary',
+            link: true,
             icon: 'ElIconEdit',
             click: (row) => {
               // magicForm.value.getDetail(row.id)
@@ -102,7 +103,8 @@ const listOptions = reactive({
           }, {
             permission: 'user:delete',
             label: '删除',
-            type: 'text',
+            type: 'primary',
+            link: true,
             icon: 'ElIconDelete',
             click: (row) => {
               proxy.$common.handleDelete({

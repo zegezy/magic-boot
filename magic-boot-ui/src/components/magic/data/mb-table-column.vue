@@ -26,7 +26,7 @@
       </div>
       <div v-else-if="col.type == 'btns'">
         <template v-for="btn in col.btns">
-          <el-button v-if="btn.if === undefined ? true : btn.if(scope.row)" :icon="btn.icon" :key="btn.label" v-permission="btn.permission" :type="btn.type" :size="btn.size || 'small'" :class="btn.class" @click="btn.click(scope.row, scope.$index)">
+          <el-button v-if="btn.if === undefined ? true : btn.if(scope.row)" :icon="btn.icon" :key="btn.label" v-permission="btn.permission" :type="btn.type" :link="btn.link" :size="btn.size || 'small'" :class="btn.class" @click="btn.click(scope.row, scope.$index)">
             {{ btn.label }}
           </el-button>
         </template>

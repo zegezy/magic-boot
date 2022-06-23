@@ -43,7 +43,6 @@
     tabValue.value = global.tabValue.value
   })
   function openTab(item){
-    console.log(global.visitedViews.map(it => it.name))
     proxy.$router.push({
       path: item.props.name,
       query: global.visitedViews.filter(it => it.path == item.props.name)[0].query

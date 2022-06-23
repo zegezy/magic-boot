@@ -118,13 +118,14 @@ const tableOptions = reactive({
     {
       label: '操作',
       type: 'btns',
-      width: 270,
+      width: 300,
       fixed: 'right',
       btns: [
         {
           permission: 'role:save',
           label: '修改',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconEdit',
           click: (row) => {
             handleUpdate(row)
@@ -133,7 +134,8 @@ const tableOptions = reactive({
         {
           permission: 'role:delete',
           label: '删除',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconDelete',
           click: (row) => {
             proxy.$common.handleDelete({
@@ -146,7 +148,8 @@ const tableOptions = reactive({
         {
           permission: 'role:permission',
           label: '权限',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconPlus',
           click: (row) => {
             temp.value.id = row.id
@@ -156,7 +159,8 @@ const tableOptions = reactive({
         {
           permission: 'role:user:list',
           label: '用户列表',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconUserFilled',
           click: (row) => {
             proxy.$router.push({

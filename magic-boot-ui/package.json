@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
-    "element-plus": "^2.1.11",
+    "element-plus": "^2.2.6",
     "nprogress": "0.2.0",
     "path-browserify": "^1.0.1",
     "vue": "^3.2.25",

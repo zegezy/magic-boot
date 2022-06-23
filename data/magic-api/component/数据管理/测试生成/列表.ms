@@ -80,7 +80,8 @@
                         {
                             permission: 'data:test:save',
                             label: '修改',
-                            type: 'text',
+                            type: 'primary',
+                            link: true,
                             icon: 'ElEdit',
                             click: (row) => {
                                 magicFormTitle.value = '修改'
@@ -89,7 +90,8 @@
                         }, {
                             permission: 'data:test:delete',
                             label: '删除',
-                            type: 'text',
+                            type: 'primary',
+                            link: true,
                             icon: 'ElDelete',
                             click: (row) => {
                                 proxy.$common.handleDelete({
@@ -104,7 +106,7 @@
             ]
         }
     })
-    
+
     const formOptions = reactive({
         detail: {
             request: {
@@ -145,7 +147,7 @@
                     props: {
                         type: 'textarea'
                     }
-      
+
                 }]
             }]
         }

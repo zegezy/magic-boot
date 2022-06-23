@@ -148,7 +148,8 @@ const tableOptions = reactive({
         {
           permission: 'configure:save',
           label: '修改',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconEdit',
           click: (row) => {
             handleUpdate(row)
@@ -157,7 +158,8 @@ const tableOptions = reactive({
         {
           permission: 'configure:delete',
           label: '删除',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconDelete',
           click: (row) => {
             proxy.$common.handleDelete({

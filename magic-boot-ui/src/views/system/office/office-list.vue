@@ -118,11 +118,12 @@ const tableOptions = reactive({
     {
       label: '排序',
       type: 'btns',
-      width: 150,
+      width: 180,
       btns: [
         {
           label: '上移',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconSortUp',
           click: (row) => {
             proxy.$get('/system/office/sort/up',{
@@ -136,7 +137,8 @@ const tableOptions = reactive({
         },
         {
           label: '下移',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconSortDown',
           click: (row) => {
             proxy.$get('/system/office/sort/down',{
@@ -153,13 +155,14 @@ const tableOptions = reactive({
     {
       label: '操作',
       type: 'btns',
-      width: 310,
+      width: 360,
       fixed: 'right',
       align: 'left',
       btns: [
         {
           label: '添加下级机构',
-          type: 'text',
+          type: 'primary',
+          link: true,
           permission: 'office:save',
           icon: 'ElIconPlus',
           click: (row) => {
@@ -168,7 +171,8 @@ const tableOptions = reactive({
         },
         {
           label: '修改',
-          type: 'text',
+          type: 'primary',
+          link: true,
           permission: 'office:save',
           icon: 'ElIconEdit',
           click: (row) => {
@@ -177,7 +181,8 @@ const tableOptions = reactive({
         },
         {
           label: '删除',
-          type: 'text',
+          type: 'primary',
+          link: true,
           permission: 'office:delete',
           icon: 'ElIconDelete',
           if: (row) => {
@@ -194,7 +199,8 @@ const tableOptions = reactive({
         {
           permission: 'office:user:list',
           label: '用户列表',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconUserFilled',
           click: (row) => {
             proxy.$router.push({

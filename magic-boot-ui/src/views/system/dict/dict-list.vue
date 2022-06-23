@@ -107,7 +107,8 @@ const tableOptions = reactive({
         {
           permission: 'dict:save',
           label: '修改',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconEdit',
           click: (row) => {
             handleUpdate(row)
@@ -116,7 +117,8 @@ const tableOptions = reactive({
         {
           permission: 'dict:delete',
           label: '删除',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconDelete',
           click: (row) => {
             proxy.$common.handleDelete({
@@ -132,7 +134,8 @@ const tableOptions = reactive({
         {
           permission: 'dict:items:view',
           label: '字典项',
-          type: 'text',
+          type: 'primary',
+          link: true,
           icon: 'ElIconList',
           click: (row) => {
             dictItemsDialog.value.show()

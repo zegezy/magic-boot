@@ -85,7 +85,8 @@
             {
               permission: 'online:logout',
               label: '踢人',
-              type: 'text',
+              type: 'primary',
+              link: true,
               icon: 'ElIconBicycle',
               click: (row) => {
                 // currRow.value = row

@@ -4,7 +4,7 @@
     :plain="plain"
     @click="buttonClick"
   >
-    {{ props_.text }}
+    {{ props_.label }}
   </el-button>
 </template>
 
@@ -78,7 +78,7 @@ export default {
       if (this.btnType === 'delete') {
         this.requestMethod_ = 'delete'
         this.props_.type = 'danger'
-        this.props_.text = '删除'
+        this.props_.label = '删除'
         this.props_.icon = 'ElIconDelete'
         this.beforeConfirm_ = '此操作将永久删除该数据, 是否继续?'
         this.successTips_ = '删除成功！'
