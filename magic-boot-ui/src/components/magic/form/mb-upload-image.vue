@@ -38,7 +38,6 @@
           class="uploadBox"
           :style="{ width: width + 'px', height: height + 'px' }"
           :action="action"
-          v-bind="uploadDynamicProps"
           :headers="headers"
           accept=".jpg,.jpeg,.png,.gif"
           :show-file-list="false"
@@ -46,6 +45,7 @@
           :limit="limit"
           :on-success="handleAvatarSuccess"
           :on-exceed="onExceed"
+          :file-list="fileList"
         >
           <el-icon class="uploadIcon">
             <ElIconPlus />
@@ -152,18 +152,18 @@ export default {
       cropperOption: {},
       urls: [],
       fileList: [],
-      uploadDynamicProps: {}
+      emitUpdate: true
     }
   },
   watch: {
-    modelValue(newValue) {
-      if (newValue instanceof Array) {
-        this.urls = newValue
-        this.fileList = this.urls.map(it => { return { response: { data: { url: it }}} })
-      } else {
-        if (newValue && this.urls.length === 0) {
-          this.urls.push(newValue)
+    modelValue() {
+      if(this.emitUpdate){
+        this.emitUpdate = false
+        if(this.fileList.length == 0){
+          this.renderFile()
         }
+      }else{
+        this.renderFile()
       }
     }
   },
@@ -176,25 +176,37 @@ export default {
       })
       this.action = this.action + `?externalId=${this.externalId}&externalType=${this.externalType}`
     } else {
-      if (this.modelValue instanceof Array) {
-        this.urls = this.modelValue
-        this.fileList = this.urls.map(it => { return { response: { data: { url: it }}} })
-      } else {
-        if (this.modelValue) {
-          this.urls.push(this.modelValue)
-        }
-      }
-    }
-    // 解决多图片上传时，第一次上传的多个的时候 只能有一个成功的bug
-    if (this.modelValue instanceof Array && this.modelValue.length > 0) {
-      this.uploadDynamicProps.fileList = this.fileList
-    } else {
-      if (this.modelValue) {
-        this.uploadDynamicProps.fileList = this.fileList
-      }
+      this.renderFile()
     }
   },
   methods: {
+    setFileList(){
+      if(this.urls.length > 0){
+        this.fileList = this.urls.map(it => {
+          return {
+            response: {
+              data: {
+                url: it
+              }
+            }
+          }
+        })
+      }
+    },
+    renderFile(){
+      if(this.multiple && this.join && this.modelValue){
+        this.urls = this.modelValue.split(',')
+      }else{
+        if (this.modelValue instanceof Array) {
+          this.urls = this.modelValue
+          this.fileList = this.urls.map(it => { return { response: { data: { url: it }}} })
+        } else {
+          if (this.modelValue) {
+            this.urls.push(this.modelValue)
+          }
+        }
+      }
+    },
     handleRemove(url) {
       this.urls.splice(this.urls.indexOf(url), 1)
       this.fileList.forEach((it, i) => {
@@ -206,13 +218,16 @@ export default {
       if (this.multiple) {
         if(this.join){
           this.$emit('update:modelValue', this.urls.join(','))
+          this.emitUpdate = true
           this.$emit('change', this.urls.join(','))
         }else{
           this.$emit('update:modelValue', this.urls)
+          this.emitUpdate = true
           this.$emit('change', this.urls)
         }
       } else {
         this.$emit('update:modelValue', '')
+        this.emitUpdate = true
         this.$emit('change', '')
       }
     },
@@ -232,13 +247,16 @@ export default {
         if (this.multiple) {
           if(this.join){
             this.$emit('update:modelValue', this.urls.join(','))
+            this.emitUpdate = true
             this.$emit('change', this.urls.join(','))
           }else{
             this.$emit('update:modelValue', this.urls)
+            this.emitUpdate = true
             this.$emit('change', this.urls)
           }
         } else {
           this.$emit('update:modelValue', res.data.url)
+          this.emitUpdate = true
           this.$emit('change', res.data.url)
         }
         this.onDragEnd()

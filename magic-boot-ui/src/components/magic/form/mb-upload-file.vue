@@ -11,10 +11,10 @@
     :multiple="multiple"
     :limit="limit"
     :on-exceed="handleExceed"
-    v-bind="uploadDynamicProps"
     :show-file-list="showFileList"
     :before-upload="beforeAvatarUpload"
     :on-success="handleAvatarSuccess"
+    :file-list="fileList"
   >
     <el-button type="primary" icon="ElIconUploadFilled" :loading="uploadLoading" :disabled="!multiple && fileList.length == 1">{{ label }}</el-button>
     <div slot="tip" v-if="showTip" class="el-upload__tip">支持上传{{ getSettingSuffixs().replaceAll(',', '，') }}文件，且不超过{{ maxFileSize }}MB</div>
@@ -108,12 +108,19 @@ export default {
       uploadDomId: Math.random(),
       fileList: [],
       uploadLoading: false,
-      uploadDynamicProps: {}
+      emitUpdate: true
     }
   },
   watch: {
-    modelValue(newValue) {
-      this.renderFile()
+    modelValue() {
+      if(this.emitUpdate){
+        this.emitUpdate = false
+        if(this.fileList.length == 0){
+          this.renderFile()
+        }
+      }else{
+        this.renderFile()
+      }
     }
   },
   created() {
@@ -126,25 +133,14 @@ export default {
     } else {
       this.renderFile()
     }
-    // 解决多文件上传时，第一次上传的多个的时候 只能有一个成功的bug
-    if (this.modelValue instanceof Array && this.modelValue.length > 0) {
-      this.uploadDynamicProps.fileList = this.fileList
-    } else {
-      if (this.modelValue) {
-        this.uploadDynamicProps.fileList = this.fileList
-      }
-    }
     if(this.action){
       this.actionUrl = import.meta.env.VITE_APP_BASE_API + this.action
     }
   },
   methods: {
-    handlerRemove(file){
-      this.$refs.uploadRef.handleRemove(file)
-    },
-    renderFile() {
-      if (this.modelValue instanceof Array && this.modelValue.length > 0) {
-        this.fileList = this.modelValue.map(it => {
+    setFileList(){
+      if(this.urls.length > 0){
+        this.fileList = this.urls.map(it => {
           return {
             name: it.substring(it.lastIndexOf('/') + 1),
             response: {
@@ -154,18 +150,21 @@ export default {
             }
           }
         })
-      } else {
-        if (this.modelValue) {
-          this.fileList.push({
-            name: this.modelValue.substring(this.modelValue.lastIndexOf('/') + 1),
-            response: {
-              data: {
-                url: this.modelValue
-              }
-            }
-          })
+      }
+    },
+    renderFile() {
+      if(this.multiple && this.join && this.modelValue){
+        this.urls = this.modelValue.split(',')
+      }else{
+        if (this.modelValue instanceof Array && this.modelValue.length > 0) {
+          this.urls = this.modelValue
+        } else {
+          if (this.modelValue) {
+            this.urls = [this.modelValue]
+          }
         }
       }
+      this.setFileList()
     },
     handleRemove(file, fileList) {
       var url = file.response.data.url
@@ -178,14 +177,17 @@ export default {
       if (this.multiple) {
         if(this.join){
           this.$emit('update:modelValue', this.urls.join(','))
+          this.emitUpdate = true
           this.$emit('change', this.urls.join(','))
         }else{
           this.$emit('update:modelValue', this.urls)
+          this.emitUpdate = true
           this.$emit('change', this.urls)
         }
       } else {
         document.getElementById(this.uploadDomId).getElementsByClassName('el-upload__input')[0].removeAttribute('disabled')
         this.$emit('update:modelValue', '')
+        this.emitUpdate = true
         this.$emit('change', '')
       }
       this.$delete('/system/file/delete', { url: encodeURI(url) })
@@ -209,14 +211,17 @@ export default {
         if (this.multiple) {
           if(this.join){
             this.$emit('update:modelValue', this.urls.join(','))
+            this.emitUpdate = true
             this.$emit('change', this.urls.join(','))
           }else{
             this.$emit('update:modelValue', this.urls)
+            this.emitUpdate = true
             this.$emit('change', this.urls)
           }
         } else {
           document.getElementById(this.uploadDomId).getElementsByClassName('el-upload__input')[0].setAttribute('disabled', '')
           this.$emit('update:modelValue', res.data.url)
+          this.emitUpdate = true
           this.$emit('change', res.data.url)
         }
       }
