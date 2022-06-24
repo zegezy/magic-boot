@@ -5,7 +5,7 @@
   "groupId" : "fd3d225a1cf141bf9998c4ec4bf4a6ab",
   "name" : "下载",
   "createTime" : null,
-  "updateTime" : 1656050052797,
+  "updateTime" : 1656051456794,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -70,4 +70,4 @@ if(urls.length > 1){
     FileUtil.writeToStream(FileUtil.file(Global.getUserFilesBaseDir() + "/" + urls[0]), response.getOutputStream())
 }
 
-response.end()
+return response.end()
