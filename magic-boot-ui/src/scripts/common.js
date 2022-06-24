@@ -2,6 +2,7 @@ import request from '@/scripts/request'
 import { ElMessageBox, ElNotification } from 'element-plus'
 import global from '@/scripts/global'
 import { utils, writeFile } from 'xlsx'
+import { getToken } from '@/scripts/auth'
 
 const common = {}
 
@@ -157,6 +158,14 @@ common.getParam = (data) => {
 common.getUrl = (url, data) => {
   url += (url.indexOf('?') < 0 ? '?' : '') + common.getParam(data)
   return url
+}
+
+common.download = (urls, filename) => {
+  location.href = common.downloadHref(urls, filename)
+}
+
+common.downloadHref = (urls, filename) => {
+  return global.baseApi + `/system/file/download?urls=${encodeURI(urls)}&filename=${filename || ''}&token=${getToken()}`
 }
 
 // common.loadConfig = async() => {
