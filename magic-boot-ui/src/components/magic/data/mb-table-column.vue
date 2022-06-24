@@ -31,6 +31,13 @@
           </el-button>
         </template>
       </div>
+      <div v-else-if="col.type == 'download'">
+        <a v-for="(url, i) in scope.row[col.field].split(',')" @click="$common.downloadMore(url)" href="javascript:;">
+          {{ url.substring(url.lastIndexOf('/') + 1) }}
+          {{ i != scope.row[col.field].split(',').length - 1 ? '，' : '' }}
+        </a>
+      </div>
+      <a v-else-if="col.type == 'downloadAll'" @click="$common.downloadMore(scope.row[col.field])" href="javascript:;">下载</a>
       <el-image
         v-else-if="col.type === 'image'"
         :src="scope.row[col.field].startsWith('http') ? scope.row[col.field] : $global.baseApi + scope.row[col.field]"
