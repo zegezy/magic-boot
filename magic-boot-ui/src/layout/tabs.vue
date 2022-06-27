@@ -8,17 +8,17 @@
   >
     <el-tab-pane
       v-for="(view, key) in global.visitedViews" :key="key"
-      :label="view.name"
+      :label="view.meta.title"
       :name="view.path"
       :closable="!(view.path == '/home')"
     >
       <template #label>
         <el-dropdown trigger="contextmenu">
           <div class="el-tabs__item is-top is-closable is-focus" style="padding: 0px;" v-if="$route.path != view.path">
-            {{ view.name }}
+            {{ view.meta.title }}
           </div>
           <div class="el-tabs__item is-top is-active is-closable is-focus" style="padding: 0px;" v-else>
-            {{ view.name }}
+            {{ view.meta.title }}
           </div>
           <template #dropdown>
             <el-dropdown-menu>

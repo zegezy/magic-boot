@@ -5,7 +5,7 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "当前用户菜单",
   "createTime" : null,
-  "updateTime" : 1649558286068,
+  "updateTime" : 1656340766427,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -557,7 +557,7 @@ var userId = StpUtil.getLoginId()
 var menus = db.select("""
     select
         sm.id,
-        sm.name,
+        sm.name title,
         sm.pid,
         sm.is_show,
         sm.url,
@@ -579,7 +579,7 @@ for(menu in menus){
     menu.component = (menu.url || "Layout");
     menu.path = (menu.component == 'Layout' ? "/" : menu.component);
     menu.meta = {}
-    menu.meta.title = menu.name
+    menu.meta.title = menu.title
     menu.meta.icon = menu.icon
     menu.meta.keepAlive = (menu.keepAlive == '1' ? true : false)
 }

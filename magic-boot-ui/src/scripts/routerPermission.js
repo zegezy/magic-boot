@@ -17,8 +17,8 @@ export const filterAsyncRouter = (routers, level) => {
           router.path = "/" + common.uuid()
           router.component = level > 0 ? layoutModules[`../layout/none.vue`] : loadLayoutView(component)
         } else {
-          router.path = router.path = router.path.startsWith('/') ? router.path : '/' + router.path
-          router.component = loadView(component)
+          router.path = router.path.startsWith('/') ? router.path : '/' + router.path
+          router.component = loadView(component) || layoutModules[`../layout/empty.vue`]
         }
       }
       if (router.children && router.children.length) {
