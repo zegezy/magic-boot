@@ -21,9 +21,9 @@ const routes = [
     redirect: '/home',
     children: [
       {
-        name: '首页',
         path: '/home',
-        component: () => import('@/views/home.vue')
+        component: () => import('@/views/home.vue'),
+        meta: { title: '首页' }
       }
     ]
   },
@@ -35,7 +35,6 @@ const routes = [
     hidden: true,
     children: [{
       path: '/system/user/user-center',
-      name: '个人中心',
       component: () => import('@/views/system/user/user-center'),
       meta: { title: '个人中心' }
     }]

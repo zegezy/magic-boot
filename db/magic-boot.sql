@@ -198,6 +198,7 @@ CREATE TABLE `sys_menu` (
   `permission` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '权限',
   `sort` int(12) DEFAULT NULL COMMENT '排序',
   `component_name` varchar(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '组件名称',
+  `open_mode` char(1) COLLATE utf8mb4_unicode_ci DEFAULT '0' COMMENT '打开方式，0：iframe  1：新标签页',
   `is_del` int(1) DEFAULT '0' COMMENT '是否删除：0未删除，1已删除',
   `create_by` varchar(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '创建人',
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',

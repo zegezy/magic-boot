@@ -5,7 +5,7 @@
 </style>
 
 <template>
-  <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="80px">
+  <el-form ref="dataForm" :rules="rules" :model="temp" label-position="right" label-width="100px">
     <el-row :gutter="24">
       <el-col :span="12">
         <el-form-item label="菜单类型" prop="type">
@@ -24,10 +24,22 @@
     <el-form-item label="菜单名称" prop="name">
       <el-input v-model="temp.name" />
     </el-form-item>
-    <el-form-item label="菜单链接" prop="url" v-if="menuType == 'menu'">
+    <el-form-item prop="url" v-if="menuType == 'menu'">
+      <template #label>
+        <el-tooltip content="如果要打开外链，请以http开头。也可以引用静态页面，比如：/index.html" placement="top">
+          <el-icon style="margin-top: calc(16px - 0.5em);"><ElIconQuestionFilled /></el-icon>
+        </el-tooltip>
+        菜单链接
+      </template>
       <el-input v-model="temp.url" />
     </el-form-item>
-    <el-form-item label="关联组件" prop="componentName" v-if="menuType == 'menu'">
+    <el-form-item label="打开方式" prop="openMode" v-if="menuType == 'menu' && (temp.url.startsWith('http') || (temp.url.startsWith('/') && temp.url.indexOf('.htm') != -1))">
+      <el-radio-group v-model="openModeRef">
+        <el-radio-button label="0">iframe</el-radio-button>
+        <el-radio-button label="1">新标签页</el-radio-button>
+      </el-radio-group>
+    </el-form-item>
+    <el-form-item label="关联组件" prop="componentName" v-if="menuType == 'menu' && !(temp.url.startsWith('http') || (temp.url.startsWith('/') && temp.url.indexOf('.htm') != -1))">
       <el-tree-select v-model="temp.componentName" :data="componentTree" :key="temp.componentName" clearable style="width: 100%" placeholder=" " />
     </el-form-item>
     <el-form-item label="权限标识" prop="permission" v-if="menuType == 'button'">
@@ -99,6 +111,7 @@ const componentTree = ref()
 const dataForm = ref()
 const iconDialog = ref()
 const menuType = ref('menu')
+const openModeRef = ref('0')
 const getTemp = () => {
   return {
     id: '',
@@ -111,7 +124,8 @@ const getTemp = () => {
     pid: 0,
     icon: '',
     keepAlive: 0,
-    componentName: ''
+    componentName: '',
+    openMode: '0'
   }
 }
 
@@ -161,6 +175,10 @@ watch(menuType, (type) => {
   }else{
     temp.value.isShow = 0
   }
+})
+
+watch(openModeRef, (value) => {
+  temp.value.openMode = value
 })
 
 function save(d) {
@@ -222,6 +240,7 @@ function getInfo(row) {
   for (var t in temp.value) {
     temp.value[t] = row[t]
   }
+  openModeRef.value = temp.value.openMode || '0'
   menuType.value = temp.value.url ? 'menu' : 'button'
   temp.value.name = temp.value.name.replaceAll(/<font.*?>(.*?)<\/font>/g,'$1')
   nextTick(() => {

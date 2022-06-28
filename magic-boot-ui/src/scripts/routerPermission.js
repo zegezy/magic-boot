@@ -8,7 +8,22 @@ export const filterAsyncRouter = (routers, level) => {
   level = level || 0
   const accessedRouters = routers.filter(router => {
     if (router.isShow === 1) {
-      if (router.componentName) {
+      var setIframe = () => {
+        router.component = loadView(`/common/iframe`)
+        router.props = { url: router.url }
+        router.path = "/" + common.uuid()
+      }
+      if(router.url.startsWith('http')){
+        if(router.openMode == '0'){
+          setIframe()
+        }
+      } else if(router.url.startsWith('/') && router.url.indexOf('.htm') != -1) {
+        if(router.openMode == '0'){
+          setIframe()
+        }else{
+          router.path = location.href.substring(0, location.href.indexOf('/', location.href.indexOf('/', location.href.indexOf('/') + 1) + 1)) + router.path
+        }
+      } else if (router.componentName) {
         router.component = loadView(`/common/show-component`)
         router.props = { name: router.componentName }
       } else if (router.component) {
