@@ -93,4 +93,10 @@ treeTable.treeNodeReplace = (fields, searchData, treeNode, text, childrenSearch,
   }
 }
 
+treeTable.clearFont = (data, fields) => {
+  fields.forEach(field => {
+    data[field] = data[field].replaceAll(/<font.*?>(.*?)<\/font>/g,'$1')
+  })
+}
+
 export default treeTable

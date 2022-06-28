@@ -242,7 +242,7 @@ function getInfo(row) {
   }
   openModeRef.value = temp.value.openMode || '0'
   menuType.value = temp.value.url ? 'menu' : 'button'
-  temp.value.name = temp.value.name.replaceAll(/<font.*?>(.*?)<\/font>/g,'$1')
+  proxy.$treeTable.clearFont(temp.value, ['name', 'url', 'permission'])
   nextTick(() => {
     dataForm.value.clearValidate()
   })

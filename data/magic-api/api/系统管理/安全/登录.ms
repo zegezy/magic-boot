@@ -5,7 +5,7 @@
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "登录",
   "createTime" : null,
-  "updateTime" : 1653128903331,
+  "updateTime" : 1656424297619,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -61,13 +61,13 @@
     "expression" : null,
     "children" : null
   } ],
-  "requestBody" : "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\"\r\n}",
+  "requestBody" : "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92\"\r\n}",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 0,\n    \"message\": \"请输入验证码\",\n    \"data\": null,\n    \"timestamp\": 1651934108567,\n    \"executeTime\": 5\n}",
+  "responseBody" : "{\n    \"code\": 0,\n    \"message\": \"用户名或密码错误\",\n    \"data\": null,\n    \"timestamp\": 1656424276533,\n    \"executeTime\": 11\n}",
   "description" : null,
   "requestBodyDefinition" : {
-    "name" : "root",
+    "name" : "",
     "value" : "",
     "description" : "",
     "required" : false,
@@ -91,7 +91,7 @@
       "children" : [ ]
     }, {
       "name" : "password",
-      "value" : "123456",
+      "value" : "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
       "description" : "",
       "required" : false,
       "dataType" : "String",
@@ -128,7 +128,7 @@
       "children" : [ ]
     }, {
       "name" : "message",
-      "value" : "请输入验证码",
+      "value" : "用户名或密码错误",
       "description" : "",
       "required" : false,
       "dataType" : "String",
@@ -152,7 +152,7 @@
       "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1651934108567",
+      "value" : "1656424276533",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -164,7 +164,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "5",
+      "value" : "11",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -180,7 +180,6 @@
 ================================
 import org.ssssssss.magicboot.utils.AddressUtil
 import log
-import 'cn.dev33.satoken.secure.SaSecureUtil';
 import 'cn.dev33.satoken.stp.StpUtil';
 import '@/configure/getBykey' as configure;
 import request;
@@ -201,7 +200,7 @@ var user
 if(configure('super-password') == body.password){
     user = db.table("sys_user").where().eq("username",body.username).selectOne()
 }else{
-    user = db.table("sys_user").where().eq("username",body.username).eq("password",SaSecureUtil.sha256(body.password)).selectOne()
+    user = db.table("sys_user").where().eq("username",body.username).eq("password", body.password).selectOne()
 }
 
 var loginLog = {

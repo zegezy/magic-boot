@@ -336,7 +336,7 @@ function handleUpdate(row) {
   for (var t in temp.value) {
     temp.value[t] = row[t]
   }
-  temp.value.name = temp.value.name.replaceAll(/<font.*?>(.*?)<\/font>/g,'$1')
+  proxy.$treeTable.clearFont(temp.value, ['name', 'code'])
   dialogTitle.value = '修改'
   officeFormDialog.value.show()
   nextTick(() => {

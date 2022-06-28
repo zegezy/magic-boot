@@ -1,5 +1,6 @@
 import request from '@/scripts/request'
 import common from '@/scripts/common'
+import { sha256 } from 'js-sha256'
 
 const viewModules = import.meta.glob("../views/**/**.vue")
 const layoutModules = import.meta.glob("../layout/**.vue")
@@ -11,7 +12,7 @@ export const filterAsyncRouter = (routers, level) => {
       var setIframe = () => {
         router.component = loadView(`/common/iframe`)
         router.props = { url: router.url }
-        router.path = "/" + common.uuid()
+        router.path = "/" + sha256(router.url)
       }
       if(router.url.startsWith('http')){
         if(router.openMode == '0'){

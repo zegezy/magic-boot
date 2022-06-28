@@ -1,5 +1,7 @@
 import global from './global'
 import request from '@/scripts/request'
+import { sha256 } from 'js-sha256'
+
 const TokenKey = 'magic_boot_token'
 
 export function getToken() {
@@ -41,7 +43,11 @@ export function login(data){
     request({
       url: '/system/security/login',
       method: 'post',
-      data
+      data: {
+        username: data.username,
+        password: sha256(data.password),
+        code: data.code
+      }
     }).then(res => {
       var token = res.data
       setToken(token)
