@@ -14,11 +14,15 @@ export const filterAsyncRouter = (routers, level) => {
         router.props = { url: router.url }
         router.path = "/" + sha256(router.url)
       }
-      if(router.url.startsWith('http')){
+      var setLayout = () => {
+        router.path = "/" + common.uuid()
+        router.component = level > 0 ? layoutModules[`../layout/none.vue`] : loadLayoutView()
+      }
+      if(router.url && router.url.startsWith('http')){
         if(router.openMode == '0'){
           setIframe()
         }
-      } else if(router.url.startsWith('/') && router.url.indexOf('.htm') != -1) {
+      } else if(router.url && router.url.startsWith('/') && router.url.indexOf('.htm') != -1) {
         if(router.openMode == '0'){
           setIframe()
         }else{
@@ -30,16 +34,30 @@ export const filterAsyncRouter = (routers, level) => {
       } else if (router.component) {
         const component = router.component
         if (component === 'Layout') {
-          router.path = "/" + common.uuid()
-          router.component = level > 0 ? layoutModules[`../layout/none.vue`] : loadLayoutView(component)
+          if (router.children && router.children.length > 0) {
+            const children = filterAsyncRouter(router.children, level + 1);
+            if(!children.some(it => it.isShow == 0)){
+              router.children = children
+              setLayout()
+            }else{
+              router.children = undefined
+              router.alwaysShow = false
+              router.redirect = ''
+              router.path = router.path.startsWith('/') ? router.path : '/' + router.path
+              router.component = loadView(router.path) || layoutModules[`../layout/empty.vue`]
+            }
+          }else{
+            setLayout()
+          }
         } else {
           router.path = router.path.startsWith('/') ? router.path : '/' + router.path
           router.component = loadView(component) || layoutModules[`../layout/empty.vue`]
         }
       }
-      if (router.children && router.children.length) {
-        router.children = filterAsyncRouter(router.children, level + 1)
-      }
+      return true
+    } else if (router.componentName) {
+      router.component = loadView(`/common/show-component`)
+      router.props = { name: router.componentName }
       return true
     }
     return false
@@ -47,7 +65,7 @@ export const filterAsyncRouter = (routers, level) => {
   return accessedRouters
 }
 
-export const loadLayoutView = (view) => {
+export const loadLayoutView = () => {
   return layoutModules[`../layout/layout.vue`]
 }
 

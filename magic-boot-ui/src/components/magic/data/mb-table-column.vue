@@ -40,8 +40,8 @@
       <a v-else-if="col.type == 'downloadAll'" @click="$common.downloadMore(scope.row[col.field])" href="javascript:;">下载</a>
       <el-image
         v-else-if="col.type === 'image'"
-        :src="scope.row[col.field].startsWith('http') ? scope.row[col.field] : $global.baseApi + scope.row[col.field]"
-        :preview-src-list="[scope.row[col.field].startsWith('http') ? scope.row[col.field] : $global.baseApi + scope.row[col.field]]"
+        :src="scope.row[col.field] && scope.row[col.field].startsWith('http') ? scope.row[col.field] : $global.baseApi + scope.row[col.field]"
+        :preview-src-list="[scope.row[col.field] && scope.row[col.field].startsWith('http') ? scope.row[col.field] : $global.baseApi + scope.row[col.field]]"
       />
       <span v-else-if="col.type === 'html'" v-html="scope.row[col.field]"></span>
       <span v-else-if="col.click">
