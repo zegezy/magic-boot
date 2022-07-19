@@ -46,7 +46,8 @@ export function login(data){
       data: {
         username: data.username,
         password: sha256(data.password),
-        code: data.code
+        code: data.code,
+        uuid: data.uuid
       }
     }).then(res => {
       var token = res.data
