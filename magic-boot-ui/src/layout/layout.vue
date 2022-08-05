@@ -7,18 +7,20 @@
       <div class="header-right">
         <div class="avatar">
           <el-dropdown>
-            <el-col>
-              <el-avatar v-if="$global.user.info.headPortrait" :size="40" fit="contain" :src="$global.baseApi + $global.user.info.headPortrait"></el-avatar>
-              <el-avatar v-else :size="40" fit="contain">
-                {{ $global.user.info.name.substring(0,1) }}
-              </el-avatar>
-            </el-col>
-            <el-col style="line-height: 40px;">
-              <span class="username">{{ $global.user.info.username }}</span>
-              <el-icon class="el-icon--right" color="white">
-                <arrow-down />
-              </el-icon>
-            </el-col>
+            <el-row :gutter="24">
+              <el-col :span="6">
+                <el-avatar v-if="$global.user.info.headPortrait" :size="40" fit="contain" :src="$global.baseApi + $global.user.info.headPortrait"></el-avatar>
+                <el-avatar v-else :size="40" fit="contain">
+                  {{ $global.user.info.name.substring(0,1) }}
+                </el-avatar>
+              </el-col>
+              <el-col :span="18" style="line-height: 40px;">
+                <span class="username">{{ $global.user.info.username }}</span>
+                <el-icon class="el-icon--right" color="white">
+                  <arrow-down />
+                </el-icon>
+              </el-col>
+            </el-row>
             <template #dropdown>
               <el-dropdown-menu>
                 <router-link to="/user-center">
