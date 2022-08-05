@@ -186,12 +186,13 @@ function save(d) {
     if (valid) {
       d.loading()
       if(temp.value.pid == temp.value.id){
-        this.$notify({
+        proxy.$notify({
           title: '失败',
           message: '上级菜单不能选当前菜单',
           type: 'error',
           duration: 2000
         })
+        d.hideLoading()
         return
       }
       if(proxy.$treeTable.isChildren(proxy.$treeTable.queryChildren(props.menuData, temp.value.id), temp.value.pid)){
@@ -201,6 +202,7 @@ function save(d) {
           type: 'error',
           duration: 2000
         })
+        d.hideLoading()
         return
       }
       if(menuType.value == 'menu'){

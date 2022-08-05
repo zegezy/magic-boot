@@ -28,7 +28,7 @@
 
     <mb-dialog ref="menuFormDialog" width="1050px" :title="dialogTitle" @confirm-click="menuFormRef.save($event)">
       <template #content>
-        <menu-form ref="menuFormRef" :title="dialogTitle" :menu-tree="menuTree" :menu-data="menuData" @reload-table="reloadTable" />
+        <menu-form ref="menuFormRef" :menu-tree="menuTree" :menu-data="menuData" @reload-table="reloadTable" />
       </template>
     </mb-dialog>
 

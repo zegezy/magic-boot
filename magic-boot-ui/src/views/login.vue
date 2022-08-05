@@ -3,22 +3,24 @@
     <div class="magic-login-box">
 <!--      <div class="magic-login-logo"></div>-->
       <div class="magic-login-text">{{ $global.title }}</div>
-      <div class="magic-login-row">
-        <input ref="username" class="magic-input" v-model="loginForm.username" placeholder="用户名" name="username" type="text" tabindex="1" auto-complete="on" />
-        <mb-icon icon="user"/>
-      </div>
-      <div class="magic-login-row">
-        <input class="magic-input" ref="password" v-model="loginForm.password" type="password" placeholder="密码" name="password" tabindex="2" auto-complete="on" @keyup.enter.native="handleLogin" />
-        <mb-icon icon="password"/>
-      </div>
-      <div class="magic-login-row">
-        <input class="magic-input code" ref="code" v-model="loginForm.code" placeholder="验证码" name="code" tabindex="3" @keyup.enter.native="handleLogin" />
-        <mb-icon icon="verification-code"/>
-        <img class="code-img" :src="codeImg" @click="refreshCode">
-      </div>
-      <div class="magic-login-row">
-        <button :loading="loading" class="magic-button" type="primary" size="medium" @click.native.prevent="handleLogin">登录</button>
-      </div>
+      <form>
+        <div class="magic-login-row">
+          <input ref="username" class="magic-input" v-model="loginForm.username" placeholder="用户名" name="username" type="text" tabindex="1" autocomplete="on" />
+          <mb-icon icon="user"/>
+        </div>
+        <div class="magic-login-row">
+          <input class="magic-input" ref="password" v-model="loginForm.password" type="password" placeholder="密码" name="password" tabindex="2" autocomplete="on" @keyup.enter.native="handleLogin" />
+          <mb-icon icon="password"/>
+        </div>
+        <div class="magic-login-row">
+          <input class="magic-input code" ref="code" v-model="loginForm.code" placeholder="验证码" name="code" tabindex="3" @keyup.enter.native="handleLogin" />
+          <mb-icon icon="verification-code"/>
+          <img class="code-img" :src="codeImg" @click="refreshCode">
+        </div>
+        <div class="magic-login-row">
+          <el-button :loading="loading" class="magic-button" type="primary" @click.native.prevent="handleLogin">登录</el-button>
+        </div>
+      </form>
     </div>
     <div class="magic-login-copyright">Copyright © 2020-{{new Date().getYear() + 1900}} <a href="https://ssssssss.org.cn" target="_blank">ssssssss.org.cn</a> All rights reserved.</div>
   </div>
@@ -61,9 +63,12 @@
       return
     }else{
       loading.value = true
-      login(loginForm).then((res) => {
-        proxy.$router.push({ path: '/home' })
-        loading.value = false
+      login(loginForm).then((token) => {
+        if(token){
+          proxy.$router.push({ path: '/home' })
+        }else{
+          loading.value = false
+        }
       }).catch(() => {
         refreshCode()
         loading.value = false

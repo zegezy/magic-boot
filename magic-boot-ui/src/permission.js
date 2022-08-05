@@ -29,6 +29,7 @@ router.beforeEach(async(to, from, next) => {
       if (loadInfo) {
         next()
       } else {
+        loadInfo = true
         try {
           // get user info
           // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
@@ -42,7 +43,6 @@ router.beforeEach(async(to, from, next) => {
               router.addRoute(it)
             })
           })
-          loadInfo = true
           // dynamically add accessible routes
           // hack method to ensure that addRoutes is complete
           // set the replace: true, so the navigation will not leave a history record
