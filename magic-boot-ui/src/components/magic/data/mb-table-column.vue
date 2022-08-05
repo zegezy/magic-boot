@@ -19,8 +19,8 @@
         <el-switch
             v-if="col.if === undefined ? true : col.if(scope.row)"
             v-model="scope.row[col.field]"
-            :active-value="col.activeValue || 1"
-            :inactive-value="col.inactiveValue || 0"
+            :active-value="(col.activeValue || 1) + ''"
+            :inactive-value="(col.inactiveValue || 0) + ''"
             @change="col.change(scope.row)"
         />
       </div>
@@ -40,6 +40,7 @@
       <a v-else-if="col.type == 'downloadAll'" @click="$common.downloadMore(scope.row[col.field])" href="javascript:;">下载</a>
       <el-image
         v-else-if="col.type === 'image'"
+        preview-teleported
         :src="scope.row[col.field] && scope.row[col.field].startsWith('http') ? scope.row[col.field] : $global.baseApi + scope.row[col.field]"
         :preview-src-list="[scope.row[col.field] && scope.row[col.field].startsWith('http') ? scope.row[col.field] : $global.baseApi + scope.row[col.field]]"
       />

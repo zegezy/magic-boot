@@ -108,7 +108,7 @@ function setValue(value){
   if(props.multiple && props.join){
     selectValue.value = value ? value.split(',') : []
   }else{
-    selectValue.value = value ? value.toString() : ''
+    selectValue.value = value || value === 0 ? value.toString() : ''
   }
 }
 

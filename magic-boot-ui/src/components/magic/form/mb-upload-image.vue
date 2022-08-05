@@ -43,9 +43,12 @@
           :show-file-list="false"
           :multiple="multiple"
           :limit="limit"
-          :on-success="handleAvatarSuccess"
+          :on-success="onSuccess"
+          :on-error="onError"
+          :before-upload="beforeUpload"
           :on-exceed="onExceed"
           :file-list="fileList"
+          :disabled="isUploading"
         >
           <el-icon class="uploadIcon">
             <ElIconPlus />
@@ -238,7 +241,13 @@ export default {
     handleDownload(file) {
       console.log(file)
     },
-    handleAvatarSuccess(res, file, fileList) {
+    beforeUpload(){
+      this.isUploading = true
+    },
+    onError(){
+      this.isUploading = true
+    },
+    onSuccess(res, file, fileList) {
       console.log(res)
       this.fileList = fileList
       if (res.data) {
