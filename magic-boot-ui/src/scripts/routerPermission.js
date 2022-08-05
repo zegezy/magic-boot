@@ -36,7 +36,7 @@ export const filterAsyncRouter = (routers, level) => {
         if (component === 'Layout') {
           if (router.children && router.children.length > 0) {
             const children = filterAsyncRouter(router.children, level + 1);
-            if(!children.some(it => it.isShow == 0)){
+            if(children.some(it => it.isShow == 1)){
               router.children = children
               setLayout()
             }else{
