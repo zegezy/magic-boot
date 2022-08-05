@@ -13,6 +13,7 @@
             v-model="formData[col.name]"
             :item-label="col.label"
             v-bind="col.props"
+            @change="col.change"
           />
         </el-form-item>
       </el-col>
@@ -21,10 +22,10 @@
 </template>
 
 <script setup>
-  import {ref, reactive, getCurrentInstance } from 'vue'
+  import { ref, reactive, getCurrentInstance, watch } from 'vue'
   const { proxy } = getCurrentInstance()
   const rules = reactive(getRules())
-  const formData = ref(initFormData())
+  const formData = ref({})
   const dataForm = ref()
   const props = defineProps({
     form: {
@@ -41,6 +42,9 @@
     }
   })
   const emit = defineEmits(['reload'])
+  watch(() => props.detail.formData, (value) => {
+    Object.assign(formData.value, value)
+  },{ deep: true })
 
   props.form.props = props.form.props || {}
   proxy.$common.setDefaultValue(props.form.props, 'labelPosition', 'right')
@@ -106,13 +110,20 @@
   }
 
   function getDetail(id) {
-    formData.value[props.primaryField] = id
+    formData.value = props.detail.formData || {}
+    var detailData = initFormData()
+    detailData[props.primaryField] = id
     proxy.$get(props.detail.request.url, { [props.primaryField]: id }).then(res => {
       const { data } = res
-      for (var t in formData.value) {
-        if (data[t] && (!props.detail.excludeAssign || props.detail.excludeAssign.indexOf(t) === -1)) {
-          formData.value[t] = data[t]
+      for (var t in detailData) {
+        if ((data[t] || data[t] === 0) && (!props.detail.excludeAssign || props.detail.excludeAssign.indexOf(t) === -1)) {
+          detailData[t] = data[t]
         }
+      }
+      if(formData.value){
+        formData.value = Object.assign(detailData, formData.value)
+      } else {
+        formData.value = detailData
       }
     })
   }
