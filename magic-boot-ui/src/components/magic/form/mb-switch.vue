@@ -4,12 +4,13 @@
       :active-value="_activeValue"
       :inactive-value="_inactiveValue"
       v-bind="props.props"
+      @change="change"
   />
 </template>
 
 <script setup>
 import {ref, watch} from 'vue'
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'change'])
 const selectValue = ref('')
 const props = defineProps({
   modelValue: Boolean | String | Number,
@@ -20,15 +21,15 @@ const props = defineProps({
 const _activeValue = ref(true)
 const _inactiveValue = ref(false)
 
+function change(){
+  emit('update:modelValue', selectValue.value)
+  emit('change', selectValue.value)
+}
+
 function setActive(value){
   if(typeof(value) == 'boolean'){
-    if(props.activeValue == undefined && props.inactiveValue == undefined){
-      _activeValue.value = true
-      _inactiveValue.value = false
-    }else{
-      _activeValue.value = props.activeValue
-      _inactiveValue.value = props.inactiveValue
-    }
+    _activeValue.value = true
+    _inactiveValue.value = false
   }else{
     if(value || value == 0){
       if(props.activeValue == undefined && props.inactiveValue == undefined){

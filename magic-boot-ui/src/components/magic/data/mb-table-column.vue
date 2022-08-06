@@ -16,12 +16,10 @@
       </span>
       <slot v-else-if="col.type == 'dynamic'" :name="col.field" :row="scope.row" :index="scope.$index" />
       <div v-else-if="col.type == 'switch'">
-        <el-switch
-            v-if="col.if === undefined ? true : col.if(scope.row)"
-            v-model="scope.row[col.field]"
-            :active-value="(col.activeValue || 1) + ''"
-            :inactive-value="(col.inactiveValue || 0) + ''"
-            @change="col.change(scope.row)"
+        <mb-switch
+          v-if="col.if === undefined ? true : col.if(scope.row)"
+          v-model="scope.row[col.field]"
+          @change="col.change(scope.row)"
         />
       </div>
       <div v-else-if="col.type == 'btns'">
