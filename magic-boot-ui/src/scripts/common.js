@@ -229,4 +229,8 @@ common.exportExcel = (options) => {
   writeFile(wb, `${options.fileName}.${options.suffix || 'xlsx'}`);
 }
 
+common.objectAssign = (target, source) => {
+  return Object.assign({}, JSON.parse(JSON.stringify(target)), JSON.parse(JSON.stringify(source)))
+}
+
 export default common

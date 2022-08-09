@@ -25,6 +25,7 @@
 
 <script setup>
   import { ref, reactive, getCurrentInstance, watch } from 'vue'
+  import common from '@/scripts/common'
   const { proxy } = getCurrentInstance()
   const rules = reactive(getRules())
   const formData = ref(initFormData())
@@ -51,7 +52,7 @@
   watch(() => [props.detail && props.detail.formData, props.add && props.add.formData], (value) => {
     value.forEach(it => {
       if(it){
-        Object.assign(formData.value, it)
+        formData.value = common.objectAssign(formData.value, it)
       }
     })
   },{ deep: true })
@@ -61,7 +62,7 @@
   proxy.$common.setDefaultValue(props.form.props, 'labelWidth', '120px')
 
   if(props.add && props.add.formData){
-    Object.assign(formData.value, props.add.formData)
+    formData.value = common.objectAssign(formData.value, props.add.formData)
   }
 
   function getRules(){
@@ -122,7 +123,7 @@
           }
         }
         if(formData.value){
-          formData.value = Object.assign(_formData, formData.value)
+          formData.value = common.objectAssign(_formData, formData.value)
         } else {
           formData.value = _formData
         }
