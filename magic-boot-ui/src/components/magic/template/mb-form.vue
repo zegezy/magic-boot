@@ -8,12 +8,14 @@
     <el-row v-for="(row,i) in form.rows" :key="i" :gutter="row.gutter">
       <el-col v-for="(col,j) in row.cols" :key="j" :span="col.span" v-bind="col.colProps">
         <el-form-item :label="col.label" :label-width="col.labelWidth" :prop="col.name" v-bind="col.formItemProps">
+          <slot v-if="col.component == 'dynamic'" :name="col.name" :form-data="formData" :col="col"></slot>
           <component
-            :is="!col.component ? 'mb-input' : col.component.startsWith('el-') || $global.dynamicComponentNames.indexOf(col.component) != -1 ? col.component : 'mb-' + col.component"
-            v-model="formData[col.name]"
-            :item-label="col.label"
-            v-bind="col.props"
-            @change="col.change"
+              v-else
+              :is="!col.component ? 'mb-input' : col.component.startsWith('el-') || $global.dynamicComponentNames.indexOf(col.component) != -1 ? col.component : 'mb-' + col.component"
+              v-model="formData[col.name]"
+              :item-label="col.label"
+              v-bind="col.props"
+              @change="col.change"
           />
         </el-form-item>
       </el-col>
@@ -25,7 +27,7 @@
   import { ref, reactive, getCurrentInstance, watch } from 'vue'
   const { proxy } = getCurrentInstance()
   const rules = reactive(getRules())
-  const formData = ref({})
+  const formData = ref(initFormData())
   const dataForm = ref()
   const props = defineProps({
     form: {
@@ -36,29 +38,30 @@
       type: Object,
       default: () => {}
     },
+    add: {
+      type: Object,
+      default: () => {}
+    },
     primaryField: {
       type: String,
       default: 'id'
     }
   })
   const emit = defineEmits(['reload'])
-  watch(() => props.detail.formData, (value) => {
-    Object.assign(formData.value, value)
+  watch(() => [props.detail && props.detail.formData, props.add && props.add.formData], (value) => {
+    value.forEach(it => {
+      if(it){
+        Object.assign(formData.value, it)
+      }
+    })
   },{ deep: true })
 
   props.form.props = props.form.props || {}
   proxy.$common.setDefaultValue(props.form.props, 'labelPosition', 'right')
   proxy.$common.setDefaultValue(props.form.props, 'labelWidth', '120px')
 
-  if(props.detail && props.detail.formData){
-    if(props.detail.handlerFormData){
-      props.detail.handlerFormData(props.detail.formData)
-    }
-    formData.value = props.detail.formData
-  }
-
-  if(props.detail && props.detail.request){
-
+  if(props.add && props.add.formData){
+    Object.assign(formData.value, props.add.formData)
   }
 
   function getRules(){
@@ -99,9 +102,6 @@
             type: 'success',
             duration: 2000
           })
-          if(props.detail && props.detail.formData){
-            props.detail.formData = {}
-          }
           d.hide()
           emit('reload')
         }).catch(() => d.hideLoading())
@@ -110,22 +110,27 @@
   }
 
   function getDetail(id) {
+    if(props.detail.handlerFormData && props.detail.formData){
+      props.detail.handlerFormData(props.detail.formData)
+    }
     formData.value = props.detail.formData || {}
-    var detailData = initFormData()
-    detailData[props.primaryField] = id
-    proxy.$get(props.detail.request.url, { [props.primaryField]: id }).then(res => {
-      const { data } = res
-      for (var t in detailData) {
-        if ((data[t] || data[t] === 0) && (!props.detail.excludeAssign || props.detail.excludeAssign.indexOf(t) === -1)) {
-          detailData[t] = data[t]
+    if(props.detail && props.detail.request){
+      var _formData = initFormData()
+      _formData[props.primaryField] = id
+      proxy.$get(props.detail.request.url, { [props.primaryField]: id }).then(res => {
+        const { data } = res
+        for (var t in _formData) {
+          if ((data[t] || data[t] === 0) && (!props.detail.excludeAssign || props.detail.excludeAssign.indexOf(t) === -1)) {
+            _formData[t] = data[t]
+          }
         }
-      }
-      if(formData.value){
-        formData.value = Object.assign(detailData, formData.value)
-      } else {
-        formData.value = detailData
-      }
-    })
+        if(formData.value){
+          formData.value = Object.assign(_formData, formData.value)
+        } else {
+          formData.value = _formData
+        }
+      })
+    }
   }
 
   defineExpose({ save, getDetail, getFormData })
