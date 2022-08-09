@@ -110,9 +110,6 @@
   }
 
   function getDetail(id) {
-    if(props.detail.handlerFormData && props.detail.formData){
-      props.detail.handlerFormData(props.detail.formData)
-    }
     formData.value = props.detail.formData || {}
     if(props.detail && props.detail.request){
       var _formData = initFormData()
@@ -129,7 +126,14 @@
         } else {
           formData.value = _formData
         }
+        if(props.detail.handlerFormData){
+          props.detail.handlerFormData(formData.value)
+        }
       })
+    }else{
+      if(props.detail.handlerFormData){
+        props.detail.handlerFormData(formData.value)
+      }
     }
   }
 
