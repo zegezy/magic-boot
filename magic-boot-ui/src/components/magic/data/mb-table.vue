@@ -32,7 +32,7 @@
       </template>
 
     </el-table>
-    <mb-pagination v-show="total > 0 && page" :total="total || 0" v-model:page="listCurrent" v-model:limit="limit" @pagination="handlerPagination" />
+    <mb-pagination v-show="total > 0 && page" :total="total || 0" v-model:page="listCurrent" v-model:limit="_limit" @pagination="handlerPagination" />
   </div>
 </template>
 
@@ -102,6 +102,7 @@ const list = ref([])
 const listLoading = ref(false)
 const tableKey = ref(0)
 let newWhere = reactive({})
+const _limit = ref(props.limit)
 
 function renderWhere(){
   newWhere = reactive(proxy.$common.renderWhere(props.where))
@@ -112,7 +113,7 @@ function getList() {
   listLoading.value = true
   if (props.page) {
     newWhere.current = listCurrent.value
-    newWhere.size = props.limit
+    newWhere.size = _limit.value
   } else {
     newWhere.size = 99999999
   }
@@ -214,7 +215,7 @@ function handlerData() {
   var currPageData = []
   if(props.page){
     props.data.forEach((it, i) => {
-      if (i >= ((listCurrent.value - 1) * props.limit) && i < (listCurrent.value * props.limit) && currPageData.length < props.limit) {
+      if (i >= ((listCurrent.value - 1) * _limit.value) && i < (listCurrent.value * _limit.value) && currPageData.length < _limit.value) {
         currPageData.push(it)
       }
     })
@@ -244,7 +245,7 @@ function keyup(){
           handlerPagination()
         }
       } else if (e && e.keyCode == 39) {
-        if(listCurrent.value != parseInt((total.value + props.limit - 1) / props.limit)){
+        if(listCurrent.value != parseInt((total.value + _limit.value - 1) / _limit.value)){
           listCurrent.value += 1
           handlerPagination()
         }
