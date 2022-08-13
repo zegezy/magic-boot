@@ -573,7 +573,7 @@ var menus = db.select("""
                 select role_id from sys_user_role where user_id = #{userId}
             )
         )
-    } and sm.is_del = '0' and (sm.is_show = 1 or (sm.component_name is not null and sm.component_name != '')) order by sm.sort
+    } and sm.is_del = '0' and sm.is_show = 1 order by sm.sort
 """)
 
 for(menu in menus){

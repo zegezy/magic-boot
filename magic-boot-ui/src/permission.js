@@ -6,7 +6,7 @@ import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/scripts/auth' // get token from cookie
 import global from '@/scripts/global'
 import common from '@/scripts/common'
-import { generateRoutes } from '@/scripts/routerPermission'
+import { generateRoutes, generateHiddenRoutes } from '@/scripts/routerPermission'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
@@ -39,6 +39,11 @@ router.beforeEach(async(to, from, next) => {
           // generate accessible routes map based on roles
           await generateRoutes().then(accessRoutes => {
             global.user.permissionRoutes.push(...accessRoutes)
+            accessRoutes.forEach(it => {
+              router.addRoute(it)
+            })
+          })
+          await generateHiddenRoutes().then(accessRoutes => {
             accessRoutes.forEach(it => {
               router.addRoute(it)
             })
