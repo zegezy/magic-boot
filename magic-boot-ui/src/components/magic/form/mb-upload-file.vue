@@ -17,7 +17,7 @@
     :file-list="fileList"
   >
     <el-button type="primary" icon="ElIconUploadFilled" :loading="uploadLoading" :disabled="!multiple && fileList.length == 1">{{ label }}</el-button>
-    <div slot="tip" v-if="showTip" class="el-upload__tip">支持上传{{ getSettingSuffixs().replaceAll(',', '，') }}文件，且不超过{{ maxFileSize }}MB</div>
+    <div slot="tip" v-if="showTip" class="el-upload__tip">支持上传{{ getSettingSuffixs().replace(/,/g, '，') }}文件，且不超过{{ maxFileSize }}MB</div>
   </el-upload>
 </template>
 
@@ -246,13 +246,13 @@ export default {
       if (accepts) {
         for (var i = 0; i < accepts.length; i++) {
           if (!this.validAccept(fileName, accepts[i])) {
-            this.$message.error('上传文件格式只能为：' + this.getSettingSuffixs().replaceAll(',', '，'))
+            this.$message.error('上传文件格式只能为：' + this.getSettingSuffixs().replace(/,/g, '，'))
             return false
           }
         }
       } else {
         if (!this.validAccept(fileName, 'null')) {
-          this.$message.error('上传文件格式只能为：' + this.getAllSuffixs().replaceAll(',', '，'))
+          this.$message.error('上传文件格式只能为：' + this.getAllSuffixs().replace(/,/g, '，'))
           return false
         }
       }

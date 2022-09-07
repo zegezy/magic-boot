@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch, onMounted, getCurrentInstance } from 'vue'
+import { ref, reactive, watch, onMounted, getCurrentInstance, onBeforeUnmount } from 'vue'
 import common from "../../../scripts/common";
 
 const { proxy } = getCurrentInstance()

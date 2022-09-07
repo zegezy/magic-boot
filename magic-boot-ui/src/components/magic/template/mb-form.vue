@@ -24,11 +24,11 @@
 </template>
 
 <script setup>
-  import { ref, reactive, getCurrentInstance, watch } from 'vue'
+  import { ref, reactive, watch } from 'vue'
   import common from '@/scripts/common'
-  const { proxy } = getCurrentInstance()
+  import { ElNotification } from 'element-plus'
   const rules = reactive(getRules())
-  const formData = ref(initFormData())
+  const formData = ref({})
   const dataForm = ref()
   const props = defineProps({
     form: {
@@ -58,8 +58,8 @@
   },{ deep: true })
 
   props.form.props = props.form.props || {}
-  proxy.$common.setDefaultValue(props.form.props, 'labelPosition', 'right')
-  proxy.$common.setDefaultValue(props.form.props, 'labelWidth', '120px')
+  common.setDefaultValue(props.form.props, 'labelPosition', 'right')
+  common.setDefaultValue(props.form.props, 'labelWidth', '')
 
   if(props.add && props.add.formData){
     formData.value = common.objectAssign(formData.value, props.add.formData)
@@ -77,7 +77,7 @@
     return _rules
   }
 
-  function initFormData() {
+  function getData() {
     var data = {}
     props.form.rows.forEach(row => {
       row.cols.forEach(col => {
@@ -85,6 +85,10 @@
       })
     })
     return data
+  }
+
+  function initFormData(){
+    formData.value = getData()
   }
 
   function getFormData(){
@@ -95,9 +99,9 @@
     dataForm.value.validate((valid) => {
       if (valid) {
         d.loading()
-        proxy.$post(props.form.request.url, formData.value).then(res => {
+        common.$post(props.form.request.url, formData.value).then(res => {
           d.hideLoading()
-          proxy.$notify({
+          ElNotification({
             title: '成功',
             message: (!formData.value[props.primaryField] ? '创建' : '修改') + '成功',
             type: 'success',
@@ -113,9 +117,9 @@
   function getDetail(id) {
     formData.value = props.detail.formData || {}
     if(props.detail && props.detail.request){
-      var _formData = initFormData()
+      var _formData = getData()
       _formData[props.primaryField] = id
-      proxy.$get(props.detail.request.url, { [props.primaryField]: id }).then(res => {
+      common.$get(props.detail.request.url, { [props.primaryField]: id }).then(res => {
         const { data } = res
         for (var t in _formData) {
           if ((data[t] || data[t] === 0) && (!props.detail.excludeAssign || props.detail.excludeAssign.indexOf(t) === -1)) {
@@ -124,7 +128,7 @@
         }
         if(formData.value){
           formData.value = common.objectAssign(_formData, formData.value)
-        } else {
+        }else{
           formData.value = _formData
         }
         if(props.detail.handlerFormData){
@@ -138,6 +142,6 @@
     }
   }
 
-  defineExpose({ save, getDetail, getFormData })
+  defineExpose({ save, getDetail, getFormData, initFormData })
 
 </script>
