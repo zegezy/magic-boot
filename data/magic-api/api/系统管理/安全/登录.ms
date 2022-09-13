@@ -186,6 +186,7 @@ import request;
 import org.ssssssss.magicboot.model.CodeCacheMap
 import cn.hutool.http.useragent.UserAgentUtil
 import cn.hutool.http.useragent.UserAgent
+import cn.dev33.satoken.secure.SaSecureUtil
 
 UserAgent ua = UserAgentUtil.parse(request.getHeaders("User-Agent")[0])
 if(configure('verification-code.enable') == 'true'){
@@ -197,7 +198,7 @@ if(configure('verification-code.enable') == 'true'){
 }
 
 var user
-if(configure('super-password') == body.password){
+if(SaSecureUtil.sha256(configure('super-password')) == body.password){
     user = db.table("sys_user").where().eq("username",body.username).selectOne()
 }else{
     user = db.table("sys_user").where().eq("username",body.username).eq("password", body.password).selectOne()
