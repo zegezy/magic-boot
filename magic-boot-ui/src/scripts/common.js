@@ -22,6 +22,7 @@ common.getDictType = (type) => {
 }
 
 common.getDictLabel = (type, value) => {
+  value = (value || '') + ''
   var values = []
   value.split(',').forEach(v => {
     const list = dictData.filter(it => it.type === type && it.value === v + '')
