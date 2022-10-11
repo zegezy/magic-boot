@@ -5,10 +5,10 @@
   "groupId" : "89130d496f6f467c88b22ae4a7f688eb",
   "name" : "删除",
   "createTime" : null,
-  "updateTime" : 1648647124177,
+  "updateTime" : 1665500606275,
   "lock" : "0",
   "createBy" : null,
-  "updateBy" : null,
+  "updateBy" : "guyi",
   "path" : "/delete",
   "method" : "DELETE",
   "parameters" : [ ],
@@ -53,8 +53,9 @@ if(userCount > 0){
     exit 500, '角色已分配,不允许删除'
 }
 
+db.table("sys_role_menu").where().eq("role_id",id).delete()
+var result = db.table("sys_role").logic().where().eq("id",id).delete();
+
 var roleId = id
 cacheDelete()
-
-db.table("sys_role_menu").where().eq("role_id",id).delete()
-return db.table("sys_role").logic().where().eq("id",id).delete();
+return result

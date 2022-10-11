@@ -5,10 +5,10 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "删除",
   "createTime" : null,
-  "updateTime" : 1648647114911,
+  "updateTime" : 1665500654624,
   "lock" : "0",
   "createBy" : null,
-  "updateBy" : null,
+  "updateBy" : "guyi",
   "path" : "/delete",
   "method" : "DELETE",
   "parameters" : [ {
@@ -131,8 +131,11 @@
 }
 ================================
 import '@get:/system/menu/cache/delete' as cacheDelete;
+
+db.table('sys_role_menu').where().eq("menu_id",id).delete();
+var result = db.table("sys_menu").logic().where().eq("id",id).delete();
+
 var menuId = id
 cacheDelete();
 
-db.table('sys_role_menu').where().eq("menu_id",id).delete();
-return db.table("sys_menu").logic().where().eq("id",id).delete();
+return result

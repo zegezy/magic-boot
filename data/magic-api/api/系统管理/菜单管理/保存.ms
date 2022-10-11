@@ -5,10 +5,10 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "保存",
   "createTime" : null,
-  "updateTime" : 1648647102120,
+  "updateTime" : 1665500740432,
   "lock" : "0",
   "createBy" : null,
-  "updateBy" : null,
+  "updateBy" : "guyi",
   "path" : "/save",
   "method" : "POST",
   "parameters" : [ ],
@@ -74,9 +74,11 @@ if(data.permission){
     }
 }
 
+var result = db.table("sys_menu").primary("id").withBlank().saveOrUpdate(data);
+
 SqlCache.delete('permissions:1')
 if(data.id){
     var menuId = data.id
     cacheDelete();
 }
-return db.table("sys_menu").primary("id").withBlank().saveOrUpdate(data);
+return result

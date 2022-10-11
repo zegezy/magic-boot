@@ -5,10 +5,10 @@
   "groupId" : "89130d496f6f467c88b22ae4a7f688eb",
   "name" : "保存",
   "createTime" : null,
-  "updateTime" : 1648647133039,
+  "updateTime" : 1665500810912,
   "lock" : "0",
   "createBy" : null,
-  "updateBy" : null,
+  "updateBy" : "guyi",
   "path" : "/save",
   "method" : "POST",
   "parameters" : [ ],
@@ -63,8 +63,6 @@ var role = {
     id
 }
 if(id){
-    var roleId = id
-    cacheDelete()
     db.table("sys_role_menu").where().eq("role_id",id).delete()
 }
 id = db.table("sys_role").primary("id").saveOrUpdate(role);
@@ -76,4 +74,9 @@ if(offices && permission == 1){
     for(officeId in offices.split(',')){
         db.table("sys_role_office").column("office_id",officeId).column("role_id", id).insert();
     }
+}
+if(id){
+    // 先删除数据库 后删除缓存 不然拦截器会请求查询数据库 查到的还是老数据
+    var roleId = id
+    cacheDelete()
 }
