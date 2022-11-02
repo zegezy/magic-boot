@@ -89,6 +89,7 @@ export default {
       this.confirmLoading = false
     },
     show(callback) {
+      this.hideLoading()
       this.dialogVisible = true
       if(callback){
         var callbackInterval = setInterval(() => {
