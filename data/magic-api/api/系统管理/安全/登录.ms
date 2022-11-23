@@ -220,6 +220,10 @@ if(!user){
     exit 0,'用户名或密码错误'
 }
 
+if(user.isLogin == '1'){
+    exit 0, '此账号禁止登录'
+}
+
 StpUtil.login(user.id)
 var token = StpUtil.getTokenValueByLoginId(user.id)
 loginLog.token = token
