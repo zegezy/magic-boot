@@ -24,6 +24,13 @@
 ================================
 import cn.dev33.satoken.secure.SaSecureUtil;
 
+var oldPassword = db.selectValue("""
+    select password from sys_user where id = #{id}
+""")
+if(oldPassword != SaSecureUtil.sha256(password)){
+    exit 0, '原密码不正确！'
+}
+
 var data = {
     id,
     phone,
