@@ -1,17 +1,17 @@
 package org.ssssssss.magicboot.extension;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.ssssssss.magicapi.core.context.RequestContext;
+import org.ssssssss.magicapi.core.servlet.MagicHttpServletRequest;
 import org.ssssssss.magicapi.modules.servlet.ResponseModule;
 import org.ssssssss.script.annotation.Comment;
 import org.ssssssss.script.functions.ExtensionMethod;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
@@ -32,8 +32,8 @@ public class ResponseFunctionExtension implements ExtensionMethod {
 
     @Comment("转发")
 	public ResponseModule.NullValue dispatcher(ResponseModule responseModule, String url) throws ServletException, IOException {
-		HttpServletRequest request = RequestContext.getHttpServletRequest();
-		request.getRequestDispatcher(url).forward(request, getResponse());
+		MagicHttpServletRequest request = RequestContext.getHttpServletRequest();
+//		request.getRequestDispatcher(url).forward(request, getResponse());
 		return responseModule.end();
 	}
 

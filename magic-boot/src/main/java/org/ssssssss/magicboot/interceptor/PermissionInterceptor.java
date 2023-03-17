@@ -1,7 +1,10 @@
 package org.ssssssss.magicboot.interceptor;
 
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.extra.servlet.ServletUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
@@ -14,12 +17,12 @@ import org.ssssssss.magicapi.core.model.ApiInfo;
 import org.ssssssss.magicapi.core.model.Options;
 import org.ssssssss.magicapi.core.service.MagicAPIService;
 import org.ssssssss.magicapi.core.service.MagicResourceService;
+import org.ssssssss.magicapi.core.servlet.MagicHttpServletRequest;
+import org.ssssssss.magicapi.core.servlet.MagicHttpServletResponse;
 import org.ssssssss.magicapi.utils.PathUtils;
 import org.ssssssss.magicboot.model.StatusCode;
 import org.ssssssss.script.MagicScriptContext;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -38,11 +41,12 @@ public class PermissionInterceptor implements RequestInterceptor, HandlerInterce
     @Autowired
     private JdbcTemplate template;
 
+
     /*
      * 当返回对象时，直接将此对象返回到页面，返回null时，继续执行后续操作
      */
     @Override
-    public Object preHandle(ApiInfo info, MagicScriptContext context, HttpServletRequest request, HttpServletResponse response) {
+    public Object preHandle(ApiInfo info, MagicScriptContext context, MagicHttpServletRequest request, MagicHttpServletResponse response) throws Exception {
         String requireLogin = Objects.toString(info.getOptionValue(Options.REQUIRE_LOGIN), "");
         if(requireLogin.equals("false")){
             return null;
@@ -60,11 +64,12 @@ public class PermissionInterceptor implements RequestInterceptor, HandlerInterce
         return null;
     }
 
+
     @Override
     public Object postHandle(RequestEntity requestEntity, Object returnValue) throws Exception {
         if(StpUtil.isLogin()){
             try {
-                HttpServletRequest request = requestEntity.getRequest();
+                MagicHttpServletRequest request = requestEntity.getRequest();
                 ApiInfo info = requestEntity.getApiInfo();
                 template.update("insert into sys_oper_log(api_name, api_path, api_method, cost_time, create_by, create_date, user_agent, user_ip) values(?,?,?,?,?,?,?,?)",
 //                    PathUtils.replaceSlash(groupServiceProvider.getFullName(info.getGroupId()) + "/" + info.getName()).replace("/","-"),
@@ -75,7 +80,7 @@ public class PermissionInterceptor implements RequestInterceptor, HandlerInterce
                         StpUtil.getLoginId(),
                         new Date(requestEntity.getRequestTime()),
                         request.getHeader("User-Agent"),
-                        ServletUtil.getClientIP(request));
+                        request.getRemoteAddr());
             } catch (Exception ignored){
                 ignored.printStackTrace();
             }
