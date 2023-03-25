@@ -5,7 +5,7 @@
   "groupId" : "0295f2b4af9145f5a0ea29fa4b797214",
   "name" : "保存",
   "createTime" : null,
-  "updateTime" : 1653129238531,
+  "updateTime" : 1679725946724,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -218,4 +218,4 @@ import org.ssssssss.magicapi.modules.db.cache.SqlCache
 
 SqlCache.delete(`configure:${configureKey}${configureCondition}`)
 SqlCache.delete(`configure:${configureKey}`)
-return db.table('sys_configure').primary('id').saveOrUpdate(data)
+return db.table('sys_configure').primary('id').withBlank().saveOrUpdate(data)
