@@ -19,6 +19,7 @@
         <hutool-all.version>5.7.22</hutool-all.version>
         <sa-token.version>1.26.0</sa-token.version>
         <poi.version>4.1.2</poi.version>
+        <aliyun-core.version>4.6.0</aliyun-core.version>
     </properties>
     <dependencies>
         <dependency>
@@ -67,6 +68,11 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>${aliyun-core.version}</version>
         </dependency>
     </dependencies>
 

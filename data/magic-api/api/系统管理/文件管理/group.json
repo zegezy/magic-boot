@@ -5,6 +5,10 @@
   "type" : "api",
   "parentId" : "acff5ad7aae64de2acb03e1d16a58ce2",
   "path" : "/file",
+  "createTime" : null,
+  "updateTime" : 1680235020046,
+  "createBy" : null,
+  "updateBy" : null,
   "paths" : [ ],
   "options" : [ ]
 }
