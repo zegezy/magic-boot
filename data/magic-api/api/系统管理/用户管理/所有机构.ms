@@ -5,7 +5,7 @@
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "所有机构",
   "createTime" : null,
-  "updateTime" : 1651892081106,
+  "updateTime" : 1680361919209,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -16,7 +16,7 @@
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1651892073882,\n    \"executeTime\": null\n}",
+  "responseBody" : "{\n    \"code\": 500,\n    \"message\": \"系统内部出现错误\",\n    \"data\": null,\n    \"timestamp\": 1680361909126,\n    \"executeTime\": 175\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -32,7 +32,7 @@
     "expression" : "",
     "children" : [ {
       "name" : "code",
-      "value" : "402",
+      "value" : "500",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -44,7 +44,7 @@
       "children" : [ ]
     }, {
       "name" : "message",
-      "value" : "凭证已过期",
+      "value" : "系统内部出现错误",
       "description" : "",
       "required" : false,
       "dataType" : "String",
@@ -68,7 +68,7 @@
       "children" : [ ]
     }, {
       "name" : "timestamp",
-      "value" : "1651892073882",
+      "value" : "1680361909126",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -80,7 +80,7 @@
       "children" : [ ]
     }, {
       "name" : "executeTime",
-      "value" : "null",
+      "value" : "175",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -94,8 +94,8 @@
   }
 }
 ================================
-var toTree = (list,pid) => select t.*,toTree(list,t.value) children from list t where t.pid = pid
-var list = toTree(db.select('select id value,name label,pid from sys_office where is_del = 0 order by sort'),'0')
+var toTree = (list,pid) => select t.*,toTree(list,t.key) children from list t where t.pid = pid
+var list = toTree(db.select('select id "key",name label,pid from sys_office where is_del = 0 order by sort'),'0')
 
 return {
     list: list,

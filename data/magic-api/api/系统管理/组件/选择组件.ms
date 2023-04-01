@@ -5,7 +5,7 @@
   "groupId" : "6f106ebdee21489db34b956f7770ff03",
   "name" : "选择组件",
   "createTime" : null,
-  "updateTime" : 1655521303906,
+  "updateTime" : 1680361687356,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -16,7 +16,7 @@
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 500,\n    \"message\": \"系统内部出现错误\",\n    \"data\": null,\n    \"timestamp\": 1655521300755,\n    \"executeTime\": 17\n}",
+  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [{\n        \"value\": \"55ff62aa20144b7bb5c6dfb5d76c8139\",\n        \"label\": \"数据管理(/data)\",\n        \"children\": [{\n            \"value\": \"eb5dbed949de4f50ba4bf59f483252a5\",\n            \"label\": \"测试生成(/test)\",\n            \"children\": [{\n                \"value\": \"data-test-list\",\n                \"label\": \"列表(/list)\"\n            }]\n        }]\n    }],\n    \"timestamp\": 1680361660407,\n    \"executeTime\": 17\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -32,7 +32,7 @@
     "expression" : "",
     "children" : [ {
       "name" : "code",
-      "value" : "500",
+      "value" : "200",
       "description" : "",
       "required" : false,
       "dataType" : "Integer",
@@ -44,7 +44,7 @@
       "children" : [ ]
     }, {
       "name" : "message",
-      "value" : "系统内部出现错误",
+      "value" : "success",
       "description" : "",
       "required" : false,
       "dataType" : "String",
@@ -56,7 +56,7 @@
       "children" : [ ]
     }, {
       "name" : "data",
-      "value" : "null",
+      "value" : "",
       "description" : "",
       "required" : false,
       "dataType" : "Object",
@@ -65,10 +65,142 @@
       "validateType" : "",
       "error" : "",
       "expression" : "",
-      "children" : [ ]
+      "children" : [ {
+        "name" : "",
+        "value" : "",
+        "description" : "",
+        "required" : false,
+        "dataType" : "Object",
+        "type" : null,
+        "defaultValue" : null,
+        "validateType" : "",
+        "error" : "",
+        "expression" : "",
+        "children" : [ {
+          "name" : "value",
+          "value" : "55ff62aa20144b7bb5c6dfb5d76c8139",
+          "description" : "",
+          "required" : false,
+          "dataType" : "String",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        }, {
+          "name" : "label",
+          "value" : "数据管理(/data)",
+          "description" : "",
+          "required" : false,
+          "dataType" : "String",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ ]
+        }, {
+          "name" : "children",
+          "value" : "",
+          "description" : "",
+          "required" : false,
+          "dataType" : "Array",
+          "type" : null,
+          "defaultValue" : null,
+          "validateType" : "",
+          "error" : "",
+          "expression" : "",
+          "children" : [ {
+            "name" : "",
+            "value" : "",
+            "description" : "",
+            "required" : false,
+            "dataType" : "Object",
+            "type" : null,
+            "defaultValue" : null,
+            "validateType" : "",
+            "error" : "",
+            "expression" : "",
+            "children" : [ {
+              "name" : "value",
+              "value" : "eb5dbed949de4f50ba4bf59f483252a5",
+              "description" : "",
+              "required" : false,
+              "dataType" : "String",
+              "type" : null,
+              "defaultValue" : null,
+              "validateType" : "",
+              "error" : "",
+              "expression" : "",
+              "children" : [ ]
+            }, {
+              "name" : "label",
+              "value" : "测试生成(/test)",
+              "description" : "",
+              "required" : false,
+              "dataType" : "String",
+              "type" : null,
+              "defaultValue" : null,
+              "validateType" : "",
+              "error" : "",
+              "expression" : "",
+              "children" : [ ]
+            }, {
+              "name" : "children",
+              "value" : "",
+              "description" : "",
+              "required" : false,
+              "dataType" : "Array",
+              "type" : null,
+              "defaultValue" : null,
+              "validateType" : "",
+              "error" : "",
+              "expression" : "",
+              "children" : [ {
+                "name" : "",
+                "value" : "",
+                "description" : "",
+                "required" : false,
+                "dataType" : "Object",
+                "type" : null,
+                "defaultValue" : null,
+                "validateType" : "",
+                "error" : "",
+                "expression" : "",
+                "children" : [ {
+                  "name" : "value",
+                  "value" : "data-test-list",
+                  "description" : "",
+                  "required" : false,
+                  "dataType" : "String",
+                  "type" : null,
+                  "defaultValue" : null,
+                  "validateType" : "",
+                  "error" : "",
+                  "expression" : "",
+                  "children" : [ ]
+                }, {
+                  "name" : "label",
+                  "value" : "列表(/list)",
+                  "description" : "",
+                  "required" : false,
+                  "dataType" : "String",
+                  "type" : null,
+                  "defaultValue" : null,
+                  "validateType" : "",
+                  "error" : "",
+                  "expression" : "",
+                  "children" : [ ]
+                } ]
+              } ]
+            } ]
+          } ]
+        } ]
+      } ]
     }, {
       "name" : "timestamp",
-      "value" : "1655521300755",
+      "value" : "1680361660407",
       "description" : "",
       "required" : false,
       "dataType" : "Long",
@@ -98,7 +230,7 @@ import org.ssssssss.magicapi.utils.PathUtils
 import org.ssssssss.magicapi.core.service.MagicResourceService
 var getFiles = (groupId) => {
     return MagicResourceService.listFiles(groupId).map(file => { 
-        value: PathUtils.replaceSlash(String.format("%s/%s", MagicResourceService.getGroupPath(file.groupId), file.path)).replace(/^\//,'').replace(/\/\//, '/').replace('/', '-'),
+        key: PathUtils.replaceSlash(String.format("%s/%s", MagicResourceService.getGroupPath(file.groupId), file.path)).replace(/^\//,'').replace(/\/\//, '/').replace('/', '-'),
         label: `${file.name}(${file.path})`
     })
 }
@@ -106,7 +238,7 @@ var toTree = (children) => {
     var treeData = []
     children.forEach(it => {
         var chi = {}
-        chi.value = it.node.id
+        chi.key = it.node.id
         chi.label = `${it.node.name}(${it.node.path})`
         if(it.children.length > 0){
             chi.children = toTree(it.children)
