@@ -17,7 +17,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost/magic-boot?useSSL=false&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost/magic-boot?useSSL=false&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF8&autoReconnect=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
     username: root
     password: root
     druid:
@@ -108,8 +108,11 @@ sa-token:
   is-log: false
 
 oss:
+  enable: false
   endpoint: ""
   accessKeyId: ""
   accessKeySecret: ""
   roleArn: ""
   roleSessionName: ""
+  bucket: ""
+  bucketDomain: ""
