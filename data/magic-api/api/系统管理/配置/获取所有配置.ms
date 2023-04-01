@@ -5,7 +5,7 @@
   "groupId" : "5c36bdc1de454d6e9d1a464d87c96091",
   "name" : "获取所有配置",
   "createTime" : null,
-  "updateTime" : 1646552461778,
+  "updateTime" : 1680319729597,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -94,8 +94,9 @@
   }
 }
 ================================
-import 'org.ssssssss.magicboot.utils.WebUtils'
+import env
 
 return {
-    filePrefix: WebUtils.getUeditorPrefix()
+    ossBucket: env.get('oss.bucket'),
+    bucketDomain: env.get('oss.bucketDomain')
 }
