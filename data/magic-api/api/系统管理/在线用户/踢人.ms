@@ -5,7 +5,7 @@
   "groupId" : "d95a58e77d314370862ffc4cdfdb8283",
   "name" : "踢人",
   "createTime" : null,
-  "updateTime" : 1652170543213,
+  "updateTime" : 1680332529466,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -35,4 +35,6 @@
 }
 ================================
 import cn.dev33.satoken.stp.StpUtil
-return StpUtil.logoutByTokenValue(token);
+// 先踢下线
+StpUtil.logoutByTokenValue(StpUtil.getTokenValueByLoginId(id)) 
+return StpUtil.disable(id, time.asLong());
