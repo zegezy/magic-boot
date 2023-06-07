@@ -5,7 +5,7 @@
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "列表",
   "createTime" : null,
-  "updateTime" : 1646552467748,
+  "updateTime" : 1681528279822,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -128,6 +128,7 @@ return db.page("""
         su.phone,
         su.create_date,
         su.office_id,
+        su.head_portrait,
         so.name office_name,
         (select group_concat(sr.name) from sys_role sr left join sys_user_role sur on sr.id = sur.role_id where sr.is_del = 0 and sur.user_id = su.id) roles
     from sys_user su
