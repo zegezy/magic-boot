@@ -1,8 +1,6 @@
 ##
 
-<p align="center">
-    <img src="https://magicboot.oss-cn-beijing.aliyuncs.com/magic-boot.png" />
-</p>
+新前端项目地址：[ **https://gitee.com/ssssssss-team/magic-boot-naive** ](https://gitee.com/ssssssss-team/magic-boot-naive)  
 
 ## 简介
 
