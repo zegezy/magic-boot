@@ -5,7 +5,7 @@
   "groupId" : "1952f25c81084e24b55b11385767dc38",
   "name" : "登录",
   "createTime" : null,
-  "updateTime" : 1656424297619,
+  "updateTime" : 1688041637780,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -67,7 +67,7 @@
   "responseBody" : "{\n    \"code\": 0,\n    \"message\": \"用户名或密码错误\",\n    \"data\": null,\n    \"timestamp\": 1656424276533,\n    \"executeTime\": 11\n}",
   "description" : null,
   "requestBodyDefinition" : {
-    "name" : "",
+    "name" : "root",
     "value" : "",
     "description" : "",
     "required" : false,
@@ -199,9 +199,9 @@ if(configure('verification-code.enable') == 'true'){
 
 var user
 if(SaSecureUtil.sha256(configure('super-password')) == body.password){
-    user = db.table("sys_user").where().eq("username",body.username).selectOne()
+    user = db.table("sys_user").where().eq("username",body.username).eq('is_del', 0).selectOne()
 }else{
-    user = db.table("sys_user").where().eq("username",body.username).eq("password", body.password).selectOne()
+    user = db.table("sys_user").where().eq("username",body.username).eq("password", body.password).eq('is_del', 0).selectOne()
 }
 
 var loginLog = {
