@@ -5,7 +5,7 @@
   "groupId" : "d95a58e77d314370862ffc4cdfdb8283",
   "name" : "列表",
   "createTime" : null,
-  "updateTime" : 1680332611352,
+  "updateTime" : 1692848227765,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -28,7 +28,7 @@
   "requestBody" : "",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [\"cb63a01c-63d7-4722-a2c4-48fffa4b3502\", \"876dd178-0065-42d5-989a-a6ef460113b1\"],\n    \"timestamp\": 1647396771372,\n    \"executeTime\": 11\n}",
+  "responseBody" : "{\n    \"code\": 200,\n    \"message\": \"success\",\n    \"data\": [\n        \"0bde782e-fb15-4aaa-9795-406f644a513d\",\n        \"08d818e1-62bb-426e-9eba-c88458c40e55\"\n    ],\n    \"timestamp\": 1692848223759,\n    \"executeTime\": 10\n}",
   "description" : null,
   "requestBodyDefinition" : null,
   "responseBodyDefinition" : {
@@ -119,8 +119,7 @@
 }
 ================================
 import cn.dev33.satoken.stp.StpUtil
-var tokens = StpUtil.searchTokenValue("", -1, 0).map(it => it.replace('token:login:token:', ''))
-
+var tokens = StpUtil.searchTokenValue("", 0, -1, true).map(it => it.replace('token:login:token:', ''))
 return db.page("""
     select 
         su.id,
