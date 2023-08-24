@@ -1,7 +1,6 @@
 package org.ssssssss.magicboot.interceptor;
 
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.extra.servlet.ServletUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
@@ -20,7 +19,6 @@ import org.ssssssss.magicapi.utils.PathUtils;
 import org.ssssssss.magicboot.model.StatusCode;
 import org.ssssssss.script.MagicScriptContext;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -65,7 +63,7 @@ public class PermissionInterceptor implements RequestInterceptor, HandlerInterce
     public Object postHandle(RequestEntity requestEntity, Object returnValue) throws Exception {
         if(StpUtil.isLogin()){
             try {
-                HttpServletRequest request = requestEntity.getRequest().getRequest();
+                MagicHttpServletRequest request = requestEntity.getRequest();
                 ApiInfo info = requestEntity.getApiInfo();
                 template.update("insert into sys_oper_log(api_name, api_path, api_method, cost_time, create_by, create_date, user_agent, user_ip) values(?,?,?,?,?,?,?,?)",
 //                    PathUtils.replaceSlash(groupServiceProvider.getFullName(info.getGroupId()) + "/" + info.getName()).replace("/","-"),
@@ -76,7 +74,7 @@ public class PermissionInterceptor implements RequestInterceptor, HandlerInterce
                         StpUtil.getLoginId(),
                         new Date(requestEntity.getRequestTime()),
                         request.getHeader("User-Agent"),
-                        ServletUtil.getClientIP(request));
+                        request.getRemoteAddr());
             } catch (Exception ignored){
                 ignored.printStackTrace();
             }

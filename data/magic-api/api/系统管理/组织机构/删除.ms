@@ -5,7 +5,7 @@
   "groupId" : "8295fc13678d4144bf7363c465247a50",
   "name" : "删除",
   "createTime" : null,
-  "updateTime" : 1647615807925,
+  "updateTime" : 1679552802807,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -126,9 +126,9 @@ var userCount = db.selectInt("select count(1) from sys_user where is_del = 0 and
 if(userCount > 0){
     exit 500, '机构存在用户,不允许删除'
 }
-var root = db.selectValue("select pid from sys_office where is_del = 0 and id = #{id}")
-if(root == '0'){
-    exit 500, '不能删除根节点'
-}
+// var root = db.selectValue("select pid from sys_office where is_del = 0 and id = #{id}")
+// if(root == '0'){
+//     exit 500, '不能删除根节点'
+// }
 // db.table('sys_user_office').where().eq("office_id",id).delete();
 return db.table("sys_office").logic().where().eq("id",id).delete();

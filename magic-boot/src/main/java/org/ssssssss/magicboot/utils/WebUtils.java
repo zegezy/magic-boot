@@ -1,10 +1,10 @@
 package org.ssssssss.magicboot.utils;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.ssssssss.magicboot.model.Global;
 
-import javax.servlet.http.HttpServletRequest;
 
 public class WebUtils {
 
