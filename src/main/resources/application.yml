@@ -46,6 +46,7 @@ spring:
       connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       # 配置监控服务器
       stat-view-servlet:
+        enabled: true
         login-username: admin
         login-password: 123456
         reset-enable: false
