@@ -18,7 +18,7 @@
 	<properties>
 		<java.version>17</java.version>
 		<magic-api.version>2.1.1</magic-api.version>
-		<druid.version>1.2.16</druid.version>
+		<druid.version>1.2.20</druid.version>
 		<hutool-all.version>5.8.15</hutool-all.version>
 		<sa-token.version>1.35.0.RC</sa-token.version>
 		<poi.version>4.1.2</poi.version>
@@ -46,7 +46,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.alibaba</groupId>
-			<artifactId>druid-spring-boot-starter</artifactId>
+			<artifactId>druid-spring-boot-3-starter</artifactId>
 			<version>${druid.version}</version>
 		</dependency>
 		<dependency>
