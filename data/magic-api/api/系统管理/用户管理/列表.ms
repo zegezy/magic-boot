@@ -5,7 +5,7 @@
   "groupId" : "4f0230049d7e4f39b1e0897cc0f46f9a",
   "name" : "列表",
   "createTime" : null,
-  "updateTime" : 1681528279822,
+  "updateTime" : 1703681585765,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -140,5 +140,6 @@ return db.page("""
     ?{username, and su.username like concat('%',#{username},'%')}
     ?{name, and su.name like concat('%',#{name},'%')}
     ?{isLogin, and su.is_login = #{isLogin}}
-    order by ${orderBy || 'su.create_date desc'}
+    ?{orderByColumn, order by su.${orderByColumn} ${direction == 0 ? 'asc' : direction == 1 ? 'desc' : ''}}
+    ?{!orderByColumn, order by su.create_date desc}
 """)
