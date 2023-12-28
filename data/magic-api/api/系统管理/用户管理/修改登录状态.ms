@@ -34,4 +34,9 @@
   "responseBodyDefinition" : null
 }
 ================================
+import cn.dev33.satoken.stp.StpUtil
+
+if(isLogin == '1'){
+    StpUtil.logout(id);
+}
 return db.table("sys_user").column("isLogin", isLogin).where().eq("id",id).update()
