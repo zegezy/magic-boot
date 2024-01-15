@@ -5,7 +5,7 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "当前用户菜单",
   "createTime" : null,
-  "updateTime" : 1685784587489,
+  "updateTime" : 1705136208184,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -644,6 +644,7 @@ nodes.each((key, node) => {
     if(node.pid == '0'){
         if(node.component != 'Layout'){
             node = {
+                icon: node.icon,
                 isShow: 1,
                 component: 'Layout',
                 redirect: node.path,
