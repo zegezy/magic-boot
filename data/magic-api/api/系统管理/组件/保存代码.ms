@@ -5,7 +5,7 @@
   "groupId" : "6f106ebdee21489db34b956f7770ff03",
   "name" : "保存代码",
   "createTime" : null,
-  "updateTime" : 1709621424466,
+  "updateTime" : 1709773549985,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -22,10 +22,20 @@
   "responseBodyDefinition" : null
 }
 ================================
+import 'cn.dev33.satoken.stp.StpUtil';
+
+var currentUserId = StpUtil.getLoginId()
 
 if(db.selectInt("select count(1) from sys_dynamic_component where id = #{id} and is_del = 0") == 0){
     exit 0, '文件不存在'
 }
+
+db.table("sys_dynamic_component_history").insert({
+    id: uuid(),
+    componentId: id,
+    sourceCode,
+    createBy: currentUserId
+})
 
 return db.table("sys_dynamic_component").where().eq("id",id).update({
     sourceCode,
