@@ -5,7 +5,7 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "当前用户菜单",
   "createTime" : null,
-  "updateTime" : 1709642066002,
+  "updateTime" : 1709717134895,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -565,11 +565,11 @@ var notLayoutMenus = db.select("""
             -- 查询下级是否还有菜单（不包含按钮权限）
             (
                 select count(1) from sys_menu where is_del = 0 and pid = sm.id and 
-                ((component_name is not null and component_name != '') or (url is not null and url != ''))
+                ((component_id is not null and component_id != '') or (url is not null and url != ''))
             ) sub_count,
             sm.keep_alive
-        from sys_menu sm left join sys_dynamic_component sdc on sdc.id = sm.component_name
-        where sm.is_del = 0 and ((sm.component_name is not null and sm.component_name != '') or (
+        from sys_menu sm left join sys_dynamic_component sdc on sdc.id = sm.component_id
+        where sm.is_del = 0 and ((sm.component_id is not null and sm.component_id != '') or (
             sm.url is not null and sm.url != ''
             -- 排除不需要加载路由的菜单
             and sm.url not like 'http%'
@@ -607,7 +607,7 @@ var menus = db.select("""
         sm.keep_alive,
         sdc.name as component_name,
         sm.open_mode
-    from sys_menu sm left join sys_dynamic_component sdc on sdc.id = sm.component_name
+    from sys_menu sm left join sys_dynamic_component sdc on sdc.id = sm.component_id
     where 1=1
     ?{userId != '1',
         and sm.id in (

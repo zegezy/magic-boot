@@ -5,7 +5,7 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "获取菜单tree",
   "createTime" : null,
-  "updateTime" : 1656386304094,
+  "updateTime" : 1709801228981,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -28,7 +28,7 @@
   "requestBody" : "{\n\n}",
   "headers" : [ ],
   "paths" : [ ],
-  "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1634309660370,\n    \"executeTime\": null\n}",
+  "responseBody" : "{\n    \"code\": 402,\n    \"message\": \"凭证已过期\",\n    \"data\": null,\n    \"timestamp\": 1709773777522,\n    \"executeTime\": null\n}",
   "description" : null,
   "requestBodyDefinition" : {
     "name" : "",
@@ -119,7 +119,24 @@
 }
 ================================
 var toTree = (list,pid) => select t.*,toTree(list,t.id) children from list t where t.pid = pid
-var list = toTree(db.select('select id,name,pid,is_show,url,sort,permission,desc_ribe,icon,keep_alive,component_name,open_mode from sys_menu where is_del = 0 order by sort'),'0')
+var list = toTree(db.select("""
+    select 
+        sm.id,
+        sm.name,
+        sm.pid,
+        sm.is_show, 
+        sm.url,
+        sm.sort,
+        sm.permission,
+        sm.desc_ribe,
+        sm.icon,
+        sm.keep_alive,
+        sdc.name component_name,
+        sm.component_id,
+        sm.open_mode 
+    from sys_menu sm left join sys_dynamic_component sdc on sm.component_id = sdc.id
+    where sm.is_del = 0 order by sm.sort
+"""),'0')
 
 return {
     list: list,
