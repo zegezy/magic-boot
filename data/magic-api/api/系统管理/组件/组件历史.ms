@@ -5,7 +5,7 @@
   "groupId" : "6f106ebdee21489db34b956f7770ff03",
   "name" : "组件历史",
   "createTime" : null,
-  "updateTime" : 1709803968033,
+  "updateTime" : 1709965399273,
   "lock" : null,
   "createBy" : null,
   "updateBy" : null,
@@ -26,7 +26,8 @@ return db.page("""
     select 
         id,
         create_date,
-        (select username from sys_user where id = sdch.create_by) createBy
+        (select username from sys_user where id = sdch.create_by) create_by
     from sys_dynamic_component_history sdch
     where component_id = #{componentId}
+    order by create_date desc
 """)
