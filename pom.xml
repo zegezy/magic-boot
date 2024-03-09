@@ -65,11 +65,6 @@
 			<version>${magic-api.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.ssssssss</groupId>
-			<artifactId>magic-api-plugin-component</artifactId>
-			<version>${magic-api.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>${poi.version}</version>
