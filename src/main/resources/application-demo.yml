@@ -1,4 +1,11 @@
+server:
+  port: 8089
+
 magic-api:
   web: /magic/web
   resource:
     readonly: true
+    location: /home/magicboot/data/magic-api
+
+upload:
+  dir: /home/magicboot/upload/
