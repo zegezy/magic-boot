@@ -5,7 +5,7 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "当前用户菜单",
   "createTime" : null,
-  "updateTime" : 1709717134895,
+  "updateTime" : 1710120493352,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -564,7 +564,7 @@ var notLayoutMenus = db.select("""
             sm.url as path,
             -- 查询下级是否还有菜单（不包含按钮权限）
             (
-                select count(1) from sys_menu where is_del = 0 and pid = sm.id and 
+                select count(1) from sys_menu where is_del = 0 and is_show = 1 and pid = sm.id and 
                 ((component_id is not null and component_id != '') or (url is not null and url != ''))
             ) sub_count,
             sm.keep_alive
