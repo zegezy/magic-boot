@@ -10,7 +10,7 @@ QQ群（[ **576433387** ](https://jq.qq.com/?_wv=1027&k=KD6DPvB0)）
 
 | 代码 | 效果 |
 |----|----|
-| ![](https://magicboot.oss-cn-beijing.aliyuncs.com/code.png)  | ![](https://magicboot.oss-cn-beijing.aliyuncs.com/1.png)  |
+| ![](https://magicboot.oss-cn-beijing.aliyuncs.com/code.png)  | ![](https://magicboot.oss-cn-beijing.aliyuncs.com/system/1.png)  |
 
 
 ## 功能
