@@ -1,6 +1,7 @@
 ##
 
-前端项目地址：[ **https://gitee.com/ssssssss-team/magic-boot-naive** ](https://gitee.com/ssssssss-team/magic-boot-naive)  
+后端：[ **https://gitee.com/ssssssss-team/magic-boot** ](https://gitee.com/ssssssss-team/magic-boot)  
+前端：[ **https://gitee.com/ssssssss-team/magic-boot-naive** ](https://gitee.com/ssssssss-team/magic-boot-naive)  
 
 ## 简介
 
