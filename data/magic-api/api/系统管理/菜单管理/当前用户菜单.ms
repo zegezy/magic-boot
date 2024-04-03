@@ -5,7 +5,7 @@
   "groupId" : "67b2ce258e24491194b74992958c74aa",
   "name" : "当前用户菜单",
   "createTime" : null,
-  "updateTime" : 1710120493352,
+  "updateTime" : 1712022801179,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -622,6 +622,7 @@ for(menu in menus){
     menu.component = (menu.url || "Layout");
     menu.path = (menu.component == 'Layout' ? "/" : menu.component);
     menu.meta = {}
+    menu.meta.componentName = menu.componentName
     menu.meta.title = menu.title
     menu.meta.icon = menu.icon
     menu.meta.keepAlive = (menu.keepAlive == '1' ? true : false)
