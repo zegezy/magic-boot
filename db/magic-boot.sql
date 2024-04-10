@@ -117,6 +117,8 @@ CREATE TABLE `sys_dynamic_component`  (
   `source_code` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '源码',
   `compile_js` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '编译js',
   `compile_css` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '编译css',
+  `type` int NULL DEFAULT NULL COMMENT '0：分组，1：vue组件',
+  `remark` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `is_del` int NULL DEFAULT 0 COMMENT '删除标识：0未删除，1已删除',
   `create_by` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
   `create_date` datetime NULL DEFAULT NULL COMMENT '创建时间',
