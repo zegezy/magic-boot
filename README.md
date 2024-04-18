@@ -1,7 +1,15 @@
 ##
 
-后端：[ **https://gitee.com/ssssssss-team/magic-boot** ](https://gitee.com/ssssssss-team/magic-boot)  
-前端：[ **https://gitee.com/ssssssss-team/magic-boot-naive** ](https://gitee.com/ssssssss-team/magic-boot-naive)  
+后端：  
+<span style="margin-right: 5px">
+    <img src="https://gitee.com/ssssssss-team/magic-boot/badge/star.svg?theme=white">
+</span>
+<img src="https://img.shields.io/github/stars/zegezy/magic-boot.svg?style=social">  
+前端：  
+<span style="margin-right: 5px">
+    <img src="https://gitee.com/ssssssss-team/magic-boot-naive/badge/star.svg?theme=white">
+</span>
+<img src="https://img.shields.io/github/stars/zegezy/magic-boot-naive.svg?style=social">  
 
 ## 简介
 
