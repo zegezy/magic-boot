@@ -2,14 +2,14 @@
 
 后端：  
 <span style="margin-right: 5px">
-    <img src="https://gitee.com/ssssssss-team/magic-boot/badge/star.svg?theme=white">
+    <a href="https://gitee.com/ssssssss-team/magic-boot" target="_blank"><img src="https://gitee.com/ssssssss-team/magic-boot/badge/star.svg?theme=white"></a>
 </span>
-<img src="https://img.shields.io/github/stars/zegezy/magic-boot.svg?style=social">  
+<a href="https://github.com/zegezy/magic-boot" target="_blank"><img src="https://img.shields.io/github/stars/zegezy/magic-boot.svg?style=social"></a>  
 前端：  
 <span style="margin-right: 5px">
-    <img src="https://gitee.com/ssssssss-team/magic-boot-naive/badge/star.svg?theme=white">
+    <a href="https://gitee.com/ssssssss-team/magic-boot-naive" target="_blank"><img src="https://gitee.com/ssssssss-team/magic-boot-naive/badge/star.svg?theme=white"></a>
 </span>
-<img src="https://img.shields.io/github/stars/zegezy/magic-boot-naive.svg?style=social">  
+<a href="https://github.com/zegezy/magic-boot-naive" target="_blank"><img src="https://img.shields.io/github/stars/zegezy/magic-boot-naive.svg?style=social"></a>  
 
 ## 简介
 
