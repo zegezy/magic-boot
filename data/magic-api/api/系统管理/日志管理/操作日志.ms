@@ -5,7 +5,7 @@
   "groupId" : "9ec6f9ec92d24a369952bb13eddc134f",
   "name" : "操作日志",
   "createTime" : null,
-  "updateTime" : 1649001507013,
+  "updateTime" : 1713861312162,
   "lock" : "0",
   "createBy" : null,
   "updateBy" : null,
@@ -260,5 +260,5 @@ return db.page("""
     ?{createDate && createDate.split(',')[1], and sol.create_date <= #{createDate.split(',')[1]}}
     ?{costTime && costTime.split(',')[0], and sol.cost_time >= #{costTime.split(',')[0]}}
     ?{costTime && costTime.split(',')[1], and sol.cost_time <= #{costTime.split(',')[1]}}
-    order by create_date desc
+    order by sol.create_date desc
 """)

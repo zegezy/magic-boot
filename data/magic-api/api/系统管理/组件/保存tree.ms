@@ -65,4 +65,4 @@ if(id){
 }
 data.type = type
 data.remark = remark
-return db.table("sys_dynamic_component").primary("id").saveOrUpdate(data)
+return db.table("sys_dynamic_component").primary("id").withBlank().saveOrUpdate(data)
