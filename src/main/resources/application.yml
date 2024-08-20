@@ -6,7 +6,8 @@ server:
 
 spring:
   profiles:
-    active: dev
+    active: xbs
+    includes: workflow
   servlet:
     multipart:
       max-file-size: 200MB

@@ -1,0 +1,16 @@
+camunda:
+  bpm:
+    generic-properties:
+      properties:
+        enforceHistoryTimeToLive: false
+    admin-user:
+      id: admin
+      password: 123456
+      first-name: Admin
+      last-name: MB
+      email: workflow@magicboot.net
+    filter:
+      create: All tasks
+    database:
+      type: mysql
+    auto-deployment-enabled: false

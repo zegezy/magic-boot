@@ -24,6 +24,7 @@
 		<poi.version>4.1.2</poi.version>
 		<mysql.connector.version>8.0.32</mysql.connector.version>
 		<aliyun-core.version>4.6.0</aliyun-core.version>
+		<camunda.spring-boot.version>7.21.0</camunda.spring-boot.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -73,6 +74,21 @@
 			<groupId>com.aliyun</groupId>
 			<artifactId>aliyun-java-sdk-core</artifactId>
 			<version>${aliyun-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.camunda.bpm.springboot</groupId>
+			<artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
+			<version>${camunda.spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.camunda.bpm.springboot</groupId>
+			<artifactId>camunda-bpm-spring-boot-starter</artifactId>
+			<version>${camunda.spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.camunda.bpm.springboot</groupId>
+			<artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
+			<version>${camunda.spring-boot.version}</version>
 		</dependency>
 	</dependencies>
 
