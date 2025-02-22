@@ -3,8 +3,8 @@ package org.ssssssss.magicboot.interceptor;
 import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.mysql.cj.jdbc.JdbcConnection;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,7 +12,11 @@ import org.springframework.stereotype.Component;
 import org.ssssssss.magicapi.core.context.MagicUser;
 import org.ssssssss.magicapi.core.exception.MagicLoginException;
 import org.ssssssss.magicapi.core.interceptor.AuthorizationInterceptor;
+import org.ssssssss.magicboot.data.entity.SysTenant;
+import org.ssssssss.magicboot.data.service.SysTenantService;
 import org.ssssssss.magicboot.enums.TenantDbType;
+import org.ssssssss.magicboot.enums.TenantStatus;
+import org.ssssssss.magicboot.utils.DruidTenantDataSourceUtil;
 
 import java.util.Map;
 
@@ -31,6 +35,12 @@ public class MagicApiAuthorizationInterceptor implements AuthorizationIntercepto
     @Resource
     private JdbcTemplate jdbcTemplate;
 
+    @Resource
+    private SysTenantService sysTenantService;
+
+    @Resource
+    private DruidTenantDataSourceUtil druidTenantDataSourceUtil;
+
     @Override
     public boolean requireLogin() {
         return true;
@@ -39,25 +49,21 @@ public class MagicApiAuthorizationInterceptor implements AuthorizationIntercepto
     @Override
     public MagicUser login(String username, String password) throws MagicLoginException {
         // 根据当前域名查询租户
-        Map<String, Object> tenantInfo = jdbcTemplate.queryForMap("""
-                    select st.*
-                    from sys_tenant_platform stp
-                             left join sys_tenant st on (st.id = stp.tenant_id)
-                    where stp.identifier = ? limit 1
-                """, httpServletRequest.getServerName());
+        SysTenant tenantInfo = sysTenantService.getTenantByDomain(httpServletRequest.getServerName());
 
-        if (MapUtil.isEmpty(tenantInfo)) {
+        if (ObjectUtil.isEmpty(tenantInfo)) {
             throw new MagicLoginException("很抱歉,租户不存在,请检查当前域名是否正确");
         } else {
+            if (TenantStatus.EXPIRED.getCode().equals(tenantInfo.getStatus())) {
+                throw new MagicLoginException("很抱歉,租户已禁用");
+            }
             return handleTenantLogin(tenantInfo, username, password);
         }
     }
 
     @Override
     public MagicUser getUserByToken(String token) throws MagicLoginException {
-
         String loginId = (String) StpUtil.getLoginIdByToken(token);
-
         if (StpUtil.isLogin(loginId)) {
             return new MagicUser(loginId, loginId, token);
         } else {
@@ -77,33 +83,43 @@ public class MagicApiAuthorizationInterceptor implements AuthorizationIntercepto
      * @param tenantInfo
      * @return
      */
-    public MagicUser handleTenantLogin(Map<String, Object> tenantInfo, String username, String password) {
-        TenantDbType dbType = TenantDbType.valueOf(tenantInfo.get("db_type").toString());
-        DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUrl((String) tenantInfo.get("db_jdbc_url"));
-        dataSource.setUsername((String) tenantInfo.get("db_user"));
-        dataSource.setPassword((String) tenantInfo.get("db_password"));
-        dataSource.setDriverClassName(dbType.getDriverClassName());
-
-        JdbcTemplate template = new JdbcTemplate(dataSource);
+    public MagicUser handleTenantLogin(SysTenant tenantInfo, String username, String password) throws MagicLoginException {
+        TenantDbType dbType = TenantDbType.valueOf(tenantInfo.getDbType());
+        
+        DruidDataSource tenantDataSource = null;
         try {
-            Map<String, Object> userInfo = template.queryForMap("""
-                        select * from sys_user where username = ? and password = ? limit 1;
-                    """, username, SaSecureUtil.sha256(password));
+            // 使用工具类创建数据源
+            tenantDataSource = druidTenantDataSourceUtil.createTenantDataSource(
+                dbType.getDriverClassName(),
+                tenantInfo.getDbJdbcUrl(),
+                tenantInfo.getDbUser(),
+                tenantInfo.getDbPassword()
+            );
+            
+            // 使用临时JdbcTemplate查询用户
+            JdbcTemplate tenantJdbcTemplate = new JdbcTemplate(tenantDataSource);
+            Map<String, Object> userInfo = tenantJdbcTemplate.queryForMap(
+                "select * from sys_user where username = ? and password = ? and is_del = 0 limit 1",
+                username, 
+                SaSecureUtil.sha256(password)
+            );
+
             if (MapUtil.isNotEmpty(userInfo)) {
-                StpUtil.login(tenantInfo.get("id") + ":" + userInfo.get("id"));
+                StpUtil.login(tenantInfo.getId() + ":" + userInfo.get("id"));
                 MagicUser user = new MagicUser();
                 user.setToken(StpUtil.getTokenValue());
-                user.setUsername(tenantInfo.get("id") + ":" + username);
-                user.setId(tenantInfo.get("id") + "_" + userInfo.get("id").toString());
-
+                user.setUsername(tenantInfo.getId() + ":" + username);
+                user.setId(tenantInfo.getId() + "_" + userInfo.get("id").toString());
                 return user;
             } else {
                 throw new MagicLoginException("很抱歉,用户名或密码错误");
             }
         } catch (Exception e) {
             e.printStackTrace();
+            throw new MagicLoginException("登录失败: " + e.getMessage());
+        } finally {
+            // 使用工具类关闭数据源
+            druidTenantDataSourceUtil.closeDataSource(tenantDataSource);
         }
-        return null;
     }
 }

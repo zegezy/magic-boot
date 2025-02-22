@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ssssssss.magicboot.data.mapper.SysTenantMapper">
+
+    <resultMap id="BaseResultMap" type="org.ssssssss.magicboot.data.entity.SysTenant">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="code" column="code" jdbcType="VARCHAR"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="logo" column="logo" jdbcType="VARCHAR"/>
+            <result property="favicon" column="favicon" jdbcType="VARCHAR"/>
+            <result property="loginBackground" column="login_background" jdbcType="VARCHAR"/>
+            <result property="systemName" column="system_name" jdbcType="VARCHAR"/>
+            <result property="copyright" column="copyright" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="expireTime" column="expire_time" jdbcType="TIMESTAMP"/>
+            <result property="maxUser" column="max_user" jdbcType="INTEGER"/>
+            <result property="contactName" column="contact_name" jdbcType="VARCHAR"/>
+            <result property="contactPhone" column="contact_phone" jdbcType="VARCHAR"/>
+            <result property="contactEmail" column="contact_email" jdbcType="VARCHAR"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+            <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+            <result property="isDel" column="is_del" jdbcType="INTEGER"/>
+            <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+            <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+            <result property="dbType" column="db_type" jdbcType="VARCHAR"/>
+            <result property="dbJdbcUrl" column="db_jdbc_url" jdbcType="VARCHAR"/>
+            <result property="dbHost" column="db_host" jdbcType="VARCHAR"/>
+            <result property="dbPort" column="db_port" jdbcType="INTEGER"/>
+            <result property="dbUser" column="db_user" jdbcType="VARCHAR"/>
+            <result property="dbPassword" column="db_password" jdbcType="VARCHAR"/>
+            <result property="dbName" column="db_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,code,name,
+        logo,favicon,login_background,
+        system_name,copyright,status,
+        expire_time,max_user,contact_name,
+        contact_phone,contact_email,remark,
+        create_date,update_date,is_del,
+        create_by,update_by,db_type,
+        db_jdbc_url,db_host,db_port,
+        db_user,db_password,db_name
+    </sql>
+    <select id="getTenantByDomain" resultType="org.ssssssss.magicboot.data.entity.SysTenant">
+        select st.*
+        from sys_tenant_platform stp
+                 left join sys_tenant st on (st.id = stp.tenant_id)
+        where stp.identifier = #{domain} limit 1
+    </select>
+</mapper>
