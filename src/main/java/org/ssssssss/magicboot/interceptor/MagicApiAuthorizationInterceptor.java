@@ -5,6 +5,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.druid.pool.DruidDataSource;
+import io.micrometer.common.util.StringUtils;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -64,7 +65,7 @@ public class MagicApiAuthorizationInterceptor implements AuthorizationIntercepto
     @Override
     public MagicUser getUserByToken(String token) throws MagicLoginException {
         String loginId = (String) StpUtil.getLoginIdByToken(token);
-        if (StpUtil.isLogin(loginId)) {
+        if (StringUtils.isNotBlank(loginId) && StpUtil.isLogin(loginId)) {
             return new MagicUser(loginId, loginId, token);
         } else {
             throw new MagicLoginException("很抱歉,Token无效");
