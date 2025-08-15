@@ -2,14 +2,14 @@
 
 后端：  
 <span style="margin-right: 5px">
-    <a href="https://gitee.com/ssssssss-team/magic-boot" target="_blank"><img src="https://gitee.com/ssssssss-team/magic-boot/badge/star.svg?theme=white"></a>
+<a href="https://gitee.com/ssssssss-team/magic-boot" target="_blank"><img src="https://gitee.com/ssssssss-team/magic-boot/badge/star.svg?theme=white"></a>
 </span>
 <a href="https://github.com/zegezy/magic-boot" target="_blank"><img src="https://img.shields.io/github/stars/zegezy/magic-boot.svg?style=social"></a>  
 前端：  
 <span style="margin-right: 5px">
-    <a href="https://gitee.com/ssssssss-team/magic-boot-naive" target="_blank"><img src="https://gitee.com/ssssssss-team/magic-boot-naive/badge/star.svg?theme=white"></a>
+<a href="https://gitee.com/ssssssss-team/magic-boot-naive" target="_blank"><img src="https://gitee.com/ssssssss-team/magic-boot-naive/badge/star.svg?theme=white"></a>
 </span>
-<a href="https://github.com/zegezy/magic-boot-naive" target="_blank"><img src="https://img.shields.io/github/stars/zegezy/magic-boot-naive.svg?style=social"></a>  
+<a href="https://github.com/zegezy/magic-boot-naive" target="_blank"><img src="https://img.shields.io/github/stars/zegezy/magic-boot-naive.svg?style=social"></a>
 
 ## 简介
 
@@ -22,10 +22,10 @@
 
 ## 交流群
 
-| 微信群                                                                          | QQ群                                                                              |
-|------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| <img src="https://assets.magicboot.net/ljz-wx.png" alt="作者微信" width="200px"> | <img src="https://assets.magicboot.net/mb-qq-group.png" alt="QQ群" width="200px"> |
-| 备注：加群，邀您加入群聊                                                                 | <a href="https://qm.qq.com/q/KZJ6zBrXqM" target="_blank">点击加入QQ群：576433387</a>   |
+| 微信群                                                                          | QQ群                                                                              | QQ群2                                                                              |
+|------------------------------------------------------------------------------|----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| <img src="https://assets.magicboot.net/ljz-wx.png" alt="作者微信" width="200px"> | <img src="https://assets.magicboot.net/mb-qq-group.png" alt="QQ群" width="200px"> | <img src="https://assets.magicboot.net/mb-qq-group2.png" alt="QQ群" width="200px"> |
+| 备注：加群，邀您加入群聊                                                                 | <a href="https://qm.qq.com/q/KZJ6zBrXqM" target="_blank">点击加入QQ群：576433387</a>   | <a href="https://qm.qq.com/q/VihhshAOkM" target="_blank">点击加入QQ群：786086742</a>    |
 
 ## 功能
 - 菜单管理：树结构，配置菜单、权限按钮、选择关联组件等，支持全局模糊搜索
@@ -41,8 +41,8 @@
 
 ## 在线体验
 - 演示地址：  
-前台：[ **https://preview.magicboot.net/** ](https://preview.magicboot.net/)  
-后台：[ **https://api.magicboot.net:8443/magic/web/index.html** ](https://api.magicboot.net:8443/magic/web/index.html)  
+  前台：[ **https://preview.magicboot.net/** ](https://preview.magicboot.net/)  
+  后台：[ **https://api.magicboot.net:8443/magic/web/index.html** ](https://api.magicboot.net:8443/magic/web/index.html)
 - 文档地址：[ **https://magicboot.net/** ](https://magicboot.net/)
 - 账号：system/123456
 
